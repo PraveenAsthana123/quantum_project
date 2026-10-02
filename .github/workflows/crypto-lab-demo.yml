@@ -1,0 +1,34 @@
+name: Crypto Lab Smoke Tests
+
+on:
+  push:
+    paths:
+      - 'qc-crypto-lab/**'
+      - 'qc-security-lab/**'
+  workflow_dispatch:
+
+jobs:
+  run-scenarios:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install numpy scipy pandas matplotlib qiskit qiskit-aer || true
+      - name: Run M1-S4 Shor's Algorithm
+        run: python3 qc-crypto-lab/module1-foundations/src/shors_algorithm.py
+        timeout-minutes: 2
+      - name: Run M1-S5 Grover's Algorithm
+        run: python3 qc-crypto-lab/module1-foundations/src/grovers_algorithm.py
+        timeout-minutes: 2
+      - name: Run M2-S1 BB84 QKD
+        run: python3 qc-security-lab/src/qkd_bb84.py
+        timeout-minutes: 2
+      - name: Run M3-S1 Intercept-Resend Attack
+        run: python3 qc-crypto-lab/module3-attacks/src/intercept_resend_attack.py
+        timeout-minutes: 2
+      - name: Run M4 PQC Benchmarks
+        run: python3 qc-security-lab/src/pqc_benchmark.py
+        timeout-minutes: 5

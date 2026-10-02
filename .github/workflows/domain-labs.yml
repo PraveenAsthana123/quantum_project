@@ -1,0 +1,131 @@
+name: Domain Labs CI
+
+on:
+  push:
+    paths:
+      - 'qc-banking-lab/**'
+      - 'qc-healthcare-lab/**'
+      - 'qc-finance-lab/**'
+      - 'qc-logistics-lab/**'
+  pull_request:
+    paths:
+      - 'qc-banking-lab/**'
+      - 'qc-healthcare-lab/**'
+      - 'qc-finance-lab/**'
+      - 'qc-logistics-lab/**'
+  schedule:
+    - cron: '0 2 * * 0'  # weekly Sunday 2am UTC
+
+jobs:
+  test-banking:
+    name: Banking Lab Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-banking-${{ hashFiles('qc-banking-lab/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-banking-
+
+      - name: Install banking lab dependencies
+        run: pip install -r qc-banking-lab/requirements.txt
+
+      - name: Run banking lab tests
+        run: |
+          cd qc-banking-lab
+          python3 -m pytest tests/ -v --tb=short --timeout=120
+
+  test-healthcare:
+    name: Healthcare Lab Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-healthcare-${{ hashFiles('qc-healthcare-lab/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-healthcare-
+
+      - name: Install healthcare lab dependencies
+        run: pip install -r qc-healthcare-lab/requirements.txt
+
+      - name: Run healthcare lab tests
+        run: |
+          cd qc-healthcare-lab
+          python3 -m pytest tests/ -v --tb=short --timeout=120
+
+  test-finance:
+    name: Finance Lab Tests
+    runs-on: ubuntu-latest
+    # Only run if the qc-finance-lab directory exists and has tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check if finance lab tests exist
+        id: check_finance
+        run: |
+          if [ -f "qc-finance-lab/requirements.txt" ] && [ -d "qc-finance-lab/tests" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Finance lab tests not yet present — skipping"
+          fi
+
+      - name: Install finance lab dependencies
+        if: steps.check_finance.outputs.exists == 'true'
+        run: pip install -r qc-finance-lab/requirements.txt
+
+      - name: Run finance lab tests
+        if: steps.check_finance.outputs.exists == 'true'
+        run: |
+          cd qc-finance-lab
+          python3 -m pytest tests/ -v --tb=short --timeout=120
+
+  test-logistics:
+    name: Logistics Lab Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Check if logistics lab tests exist
+        id: check_logistics
+        run: |
+          if [ -f "qc-logistics-lab/requirements.txt" ] && [ -d "qc-logistics-lab/tests" ]; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Logistics lab tests not yet present — skipping"
+          fi
+
+      - name: Install logistics lab dependencies
+        if: steps.check_logistics.outputs.exists == 'true'
+        run: pip install -r qc-logistics-lab/requirements.txt
+
+      - name: Run logistics lab tests
+        if: steps.check_logistics.outputs.exists == 'true'
+        run: |
+          cd qc-logistics-lab
+          python3 -m pytest tests/ -v --tb=short --timeout=120

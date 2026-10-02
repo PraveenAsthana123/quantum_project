@@ -1,0 +1,55 @@
+version: '3.9'
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    ports: ["8001:8001"]
+    environment:
+      - DATABASE_URL=postgresql://quantum:quantum@db:5432/quantum
+      - QUANTUM_DB_PATH=/data/quantum_portal.db
+      - REDIS_URL=redis://cache:6379
+      - ATTACK_DB_PATH=/data/attack_logs.db
+    volumes:
+      - quantum_sqlite_data:/data
+      - ./datasets:/data/datasets:ro
+      - ./qc-attack-lab/results:/data/attack_results
+    depends_on: [db, cache]
+    restart: unless-stopped
+
+  portal:
+    build:
+      context: ./quantum-portal-web
+      dockerfile: Dockerfile
+    ports: ["3030:3030"]
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8001
+    depends_on: [api]
+    restart: unless-stopped
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: quantum
+      POSTGRES_USER: quantum
+      POSTGRES_PASSWORD: quantum_pqc_2026
+    volumes:
+      - quantum_pgdata:/var/lib/postgresql/data
+      - ./api/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    ports: ["5432:5432"]
+
+  cache:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+
+  trivy:
+    image: aquasec/trivy:latest
+    volumes:
+      - ./:/src:ro
+      - ./qc-classical-security-lab/results/real-scans:/results
+    command: fs /src --format json --output /results/trivy-full-scan.json
+    profiles: ["scan"]
+
+volumes:
+  quantum_pgdata:
+  quantum_sqlite_data:

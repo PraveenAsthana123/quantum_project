@@ -1,0 +1,59 @@
+# Node
+quantum-portal-web/node_modules/
+quantum-portal-web/.next/
+quantum-portal-web/.turbo/
+quantum-portal-web/tsconfig.tsbuildinfo
+node_modules/
+.next/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+venvs/
+
+# Data (large files)
+datasets/
+datasets/creditcardfraud/
+datasets/qm9/
+datasets/secom/
+datasets/wm811k/
+datasets/generated/
+data/*.csv
+
+# Logs & runtime
+logs/
+*.log
+api/runs.db
+api/__pycache__/
+
+# Databases & runtime state
+*.db
+*.sqlite
+api/chromadb/
+api/chromadb_backup_*/
+.portal.pid
+.cache/
+
+# Secrets / local config
+.env
+.env.local
+*.key
+*.pem
+.mcp.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Continuity
+SESSION_HANDOFF.md
+.continuity/*
+# Continuity decision memory — travels with the repo (runtime state stays ignored)
+!.continuity/decisions.jsonl
+!.continuity/decisions.json
+!.continuity/.gitattributes
+!.continuity/SESSION_NOTES.md
+!.continuity/INSTRUCTIONS.md
