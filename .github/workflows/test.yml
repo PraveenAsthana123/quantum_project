@@ -32,30 +32,30 @@ jobs:
       - name: Run security + crypto labs
         run: |
           pytest \
-            qc-security-lab/tests/ \
-            qc-attack-lab/tests/ \
-            pqc-control-tower/tests/ \
-            qc-cryptography-module/ \
-            qc-classical-security-lab/tests/ \
-            qc-pqc-migration-lab/tests/ \
+            labs/security/qc-security-lab/tests/ \
+            labs/security/qc-attack-lab/tests/ \
+            pqc/labs/pqc-control-tower/tests/ \
+            labs/security/qc-cryptography-module/ \
+            pqc/labs/qc-classical-security-lab/tests/ \
+            pqc/labs/qc-pqc-migration-lab/tests/ \
             --cov=. --cov-report=xml --cov-report=term-missing \
             -v --tb=short
 
-      - name: Run new labs
+      - name: Run new PQC labs
         run: |
           pytest \
-            qc-finops-lab/tests/ \
-            qc-agent-pqc-lab/tests/ \
-            qc-blockchain-pqc-lab/tests/ \
+            pqc/labs/qc-finops-lab/tests/ \
+            pqc/labs/qc-agent-pqc-lab/tests/ \
+            pqc/labs/qc-blockchain-pqc-lab/tests/ \
             -v --tb=short
 
       - name: Run domain labs
         run: |
           pytest \
-            qc-banking-lab/tests/ \
-            qc-finance-lab/tests/ \
-            qc-healthcare-lab/tests/ \
-            qc-logistics-lab/tests/ \
+            labs/domain/qc-banking-lab/tests/ \
+            labs/domain/qc-finance-lab/tests/ \
+            labs/domain/qc-healthcare-lab/tests/ \
+            labs/domain/qc-logistics-lab/tests/ \
             -v --tb=short
 
       - name: Run API integration + data pipeline + benchmarks
@@ -64,7 +64,7 @@ jobs:
 
       - name: Crypto KAT (QP-20)
         run: |
-          pytest qc-cryptography-module/tests/test_known_answers.py -v --tb=short
+          pytest labs/security/qc-cryptography-module/tests/test_known_answers.py -v --tb=short
 
       - name: API syntax check (QP-21)
         run: |
@@ -74,11 +74,11 @@ jobs:
 
       - name: Demo script syntax check
         run: |
-          for f in qc-banking-lab/src/demo.py qc-finance-lab/src/demo.py \
-                   qc-healthcare-lab/src/demo.py qc-logistics-lab/src/demo.py \
-                   qc-finops-lab/src/demo.py qc-agent-pqc-lab/src/demo.py \
-                   qc-blockchain-pqc-lab/src/demo.py qc-classical-security-lab/src/demo.py \
-                   qc-attack-lab/src/demo.py; do
+          for f in labs/domain/qc-banking-lab/src/demo.py labs/domain/qc-finance-lab/src/demo.py \
+                   labs/domain/qc-healthcare-lab/src/demo.py labs/domain/qc-logistics-lab/src/demo.py \
+                   pqc/labs/qc-finops-lab/src/demo.py pqc/labs/qc-agent-pqc-lab/src/demo.py \
+                   pqc/labs/qc-blockchain-pqc-lab/src/demo.py pqc/labs/qc-classical-security-lab/src/demo.py \
+                   labs/security/qc-attack-lab/src/demo.py; do
             python3 -c "import ast; ast.parse(open('$f').read()); print('$f: syntax OK')"
           done
 
