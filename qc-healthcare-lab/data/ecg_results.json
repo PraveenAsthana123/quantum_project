@@ -1,0 +1,127 @@
+{
+  "task": "ECG-anomaly-detection",
+  "dataset": "MIT-BIH-Arrhythmia",
+  "n_features_raw": 187,
+  "n_features_quantum": 4,
+  "train_samples": 800,
+  "test_samples": 200,
+  "label_map": {
+    "0": "normal",
+    "1": "abnormal"
+  },
+  "classical": {
+    "model": "Classical-RBF-SVM",
+    "accuracy": 0.815,
+    "f1": 0.8042328042328042,
+    "roc_auc": 0.8864,
+    "train_time_s": 0.0785,
+    "predict_time_s": 0.0031,
+    "classification_report": {
+      "0": {
+        "precision": 0.7837837837837838,
+        "recall": 0.87,
+        "f1-score": 0.8246445497630331,
+        "support": 100.0
+      },
+      "1": {
+        "precision": 0.8539325842696629,
+        "recall": 0.76,
+        "f1-score": 0.8042328042328042,
+        "support": 100.0
+      },
+      "accuracy": 0.815,
+      "macro avg": {
+        "precision": 0.8188581840267233,
+        "recall": 0.815,
+        "f1-score": 0.8144386769979186,
+        "support": 200.0
+      },
+      "weighted avg": {
+        "precision": 0.8188581840267233,
+        "recall": 0.815,
+        "f1-score": 0.8144386769979186,
+        "support": 200.0
+      }
+    }
+  },
+  "quantum": {
+    "model": "VQC-PennyLane-fallback",
+    "n_qubits": 4,
+    "n_layers": 2,
+    "epochs": 40,
+    "accuracy": 0.76,
+    "f1": 0.7446808510638298,
+    "roc_auc": 0.7995,
+    "train_time_s": 2.7744,
+    "predict_time_s": 1.2622,
+    "loss_history": [
+      0.972827,
+      0.957185,
+      1.066114,
+      0.966463,
+      0.940574,
+      1.004864,
+      1.017963,
+      0.978321,
+      0.953714,
+      0.973188,
+      0.925561,
+      0.930223,
+      0.902411,
+      0.82075,
+      0.841424,
+      0.863001,
+      0.988604,
+      0.953121,
+      0.897337,
+      0.976187,
+      0.971878,
+      1.0953,
+      0.927261,
+      0.932438,
+      0.910243,
+      0.988795,
+      0.982682,
+      0.88547,
+      0.844114,
+      0.951082,
+      0.821108,
+      0.825546,
+      0.910819,
+      0.866892,
+      0.911608,
+      0.870726,
+      0.966185,
+      0.836587,
+      0.872339,
+      0.88755
+    ],
+    "classification_report": {
+      "0": {
+        "precision": 0.7321428571428571,
+        "recall": 0.82,
+        "f1-score": 0.7735849056603774,
+        "support": 100.0
+      },
+      "1": {
+        "precision": 0.7954545454545454,
+        "recall": 0.7,
+        "f1-score": 0.7446808510638298,
+        "support": 100.0
+      },
+      "accuracy": 0.76,
+      "macro avg": {
+        "precision": 0.7637987012987013,
+        "recall": 0.76,
+        "f1-score": 0.7591328783621036,
+        "support": 200.0
+      },
+      "weighted avg": {
+        "precision": 0.7637987012987013,
+        "recall": 0.76,
+        "f1-score": 0.7591328783621036,
+        "support": 200.0
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+# NAME|TYPE|SOURCE/HANDLE|PURPOSE
+qm9|kaggle|zaharch/quantum-machine-9-aka-qm9|quantum chemistry QML
+wm811k|kaggle|qingyi/wm811k-wafer-map|semiconductor fabrication defect classification
+secom|uci|https://archive.ics.uci.edu/ml/machine-learning-databases/secom/|semiconductor process analytics
+qdataset|github|https://github.com/eperrier/QDataSet.git|quantum control noise tomography QML
+qml-benchmarks|github|https://github.com/XanaduAI/qml-benchmarks.git|quantum versus classical QML benchmarks
+matbench|package|matbench|materials benchmark datasets
+materials-project|api|mp-api|materials data; API key required for remote queries

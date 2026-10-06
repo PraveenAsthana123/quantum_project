@@ -1,0 +1,109 @@
+{
+  "n_qubits": 5,
+  "true_probabilities": [
+    0.05,
+    0.48,
+    0.5,
+    0.52,
+    0.95
+  ],
+  "fixed_shots": 100,
+  "adaptive_shots": 640,
+  "accuracy": 0.985,
+  "shot_reduction_pct": -28.0,
+  "fixed_accuracy": 0.964,
+  "adaptive_accuracy": 0.985,
+  "total_fixed_shots": 500,
+  "total_adaptive_shots": 640,
+  "per_qubit_fixed": [
+    {
+      "n_shots": 100,
+      "p_estimated": 0.04,
+      "p_true": 0.05,
+      "accuracy": 0.99,
+      "confidence": 0.46
+    },
+    {
+      "n_shots": 100,
+      "p_estimated": 0.41,
+      "p_true": 0.48,
+      "accuracy": 0.93,
+      "confidence": 0.09
+    },
+    {
+      "n_shots": 100,
+      "p_estimated": 0.55,
+      "p_true": 0.5,
+      "accuracy": 0.95,
+      "confidence": 0.05
+    },
+    {
+      "n_shots": 100,
+      "p_estimated": 0.54,
+      "p_true": 0.52,
+      "accuracy": 0.98,
+      "confidence": 0.04
+    },
+    {
+      "n_shots": 100,
+      "p_estimated": 0.92,
+      "p_true": 0.95,
+      "accuracy": 0.97,
+      "confidence": 0.42
+    }
+  ],
+  "per_qubit_adaptive": [
+    {
+      "n_shots": 20,
+      "n_rounds": 1,
+      "p_estimated": 0.05,
+      "p_true": 0.05,
+      "accuracy": 1.0,
+      "confidence": 0.45,
+      "converged": true
+    },
+    {
+      "n_shots": 200,
+      "n_rounds": 10,
+      "p_estimated": 0.455,
+      "p_true": 0.48,
+      "accuracy": 0.975,
+      "confidence": 0.045,
+      "converged": false
+    },
+    {
+      "n_shots": 200,
+      "n_rounds": 10,
+      "p_estimated": 0.48,
+      "p_true": 0.5,
+      "accuracy": 0.98,
+      "confidence": 0.02,
+      "converged": false
+    },
+    {
+      "n_shots": 200,
+      "n_rounds": 10,
+      "p_estimated": 0.49,
+      "p_true": 0.52,
+      "accuracy": 0.97,
+      "confidence": 0.01,
+      "converged": false
+    },
+    {
+      "n_shots": 20,
+      "n_rounds": 1,
+      "p_estimated": 0.95,
+      "p_true": 0.95,
+      "accuracy": 1.0,
+      "confidence": 0.45,
+      "converged": true
+    }
+  ],
+  "adaptive_parameters": {
+    "n_init": 20,
+    "n_extra": 20,
+    "n_max": 200,
+    "confidence_threshold": 0.15
+  },
+  "strategy_description": "Adaptive readout allocates more shots to qubits with ambiguous (near 50%) outcomes. Qubits with strong 0/1 bias are resolved quickly, saving shots without sacrificing accuracy."
+}

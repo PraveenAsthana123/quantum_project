@@ -1,0 +1,14 @@
+{
+  "full_energy": -1.075732,
+  "forged_energy": 1.083594,
+  "error": 2.159325,
+  "speedup_factor": 4.0,
+  "n_schmidt_components": 2,
+  "schmidt_values": [
+    0.989375,
+    0.145389
+  ],
+  "optimal_theta": -1.363515,
+  "hamiltonian": "H2 STO-3G Jordan-Wigner 4-qubit",
+  "method": "Schmidt decomposition + partial trace Hamiltonians"
+}

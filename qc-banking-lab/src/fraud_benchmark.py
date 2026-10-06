@@ -527,6 +527,112 @@ output = {
     },
 }
 
+# ══════════════════════════════════════════════════════════════════════════════
+# 6. MULTI-SEED EVALUATION  (QP-10 — 3 seeds, classical models only;
+#    quantum VQC skipped per-seed due to O(n) simulator cost)
+# ══════════════════════════════════════════════════════════════════════════════
+section("6 · Multi-Seed Evaluation (classical baselines, seeds=[42, 123, 7])")
+
+MULTI_SEEDS = [42, 123, 7]
+
+
+def _run_classical_seed(seed: int):
+    """Return LR / XGB / RF metrics for a given random seed."""
+    X_tr, X_te, y_tr, y_te = train_test_split(
+        X, y, test_size=0.20, stratify=y, random_state=seed
+    )
+    sm_s = SMOTE(sampling_strategy=0.5, random_state=seed)
+    X_tr_sm, y_tr_sm = sm_s.fit_resample(X_tr, y_tr)
+    sc_s = RobustScaler()
+    X_tr_sc = sc_s.fit_transform(X_tr_sm)
+    X_te_sc = sc_s.transform(X_te)
+
+    seed_rows = []
+
+    # Logistic Regression
+    lr_s = LogisticRegression(C=1.0, class_weight="balanced", max_iter=1000,
+                               random_state=seed, solver="lbfgs")
+    lr_s.fit(X_tr_sc, y_tr_sm)
+    p = lr_s.predict_proba(X_te_sc)[:, 1]
+    pr = lr_s.predict(X_te_sc)
+    seed_rows.append({
+        "model": "Logistic Regression", "seed": seed,
+        "accuracy": float(round((pr == y_te).mean(), 6)),
+        "f1":       float(round(f1_score(y_te, pr, zero_division=0), 6)),
+        "auc":      float(round(roc_auc_score(y_te, p), 6)),
+    })
+
+    # XGBoost
+    fc = int(y_tr_sm.sum())
+    nc = int((y_tr_sm == 0).sum())
+    xgb_s = xgb.XGBClassifier(
+        n_estimators=200, scale_pos_weight=nc / max(fc, 1),
+        random_state=seed, eval_metric="logloss",
+        tree_method="hist", use_label_encoder=False, verbosity=0,
+    )
+    xgb_s.fit(X_tr_sc, y_tr_sm)
+    p = xgb_s.predict_proba(X_te_sc)[:, 1]
+    pr = xgb_s.predict(X_te_sc)
+    seed_rows.append({
+        "model": "XGBoost", "seed": seed,
+        "accuracy": float(round((pr == y_te).mean(), 6)),
+        "f1":       float(round(f1_score(y_te, pr, zero_division=0), 6)),
+        "auc":      float(round(roc_auc_score(y_te, p), 6)),
+    })
+
+    # Random Forest
+    rf_s = RandomForestClassifier(n_estimators=200, class_weight="balanced",
+                                   random_state=seed, n_jobs=-1)
+    rf_s.fit(X_tr_sc, y_tr_sm)
+    p = rf_s.predict_proba(X_te_sc)[:, 1]
+    pr = rf_s.predict(X_te_sc)
+    seed_rows.append({
+        "model": "Random Forest", "seed": seed,
+        "accuracy": float(round((pr == y_te).mean(), 6)),
+        "f1":       float(round(f1_score(y_te, pr, zero_division=0), 6)),
+        "auc":      float(round(roc_auc_score(y_te, p), 6)),
+    })
+
+    return seed_rows
+
+
+# Collect per-seed results
+all_seed_rows = []
+for _seed in MULTI_SEEDS:
+    print(f"  Running seed={_seed} …")
+    all_seed_rows.extend(_run_classical_seed(_seed))
+
+# Aggregate per model
+multi_seed_summary = []
+for _model_name in ["Logistic Regression", "XGBoost", "Random Forest"]:
+    rows_m = [r for r in all_seed_rows if r["model"] == _model_name]
+    accs = [r["accuracy"] for r in rows_m]
+    f1s  = [r["f1"]       for r in rows_m]
+    aucs = [r["auc"]      for r in rows_m]
+    entry = {
+        "model":         _model_name,
+        "seeds":         MULTI_SEEDS,
+        "n_seeds":       len(rows_m),
+        "accuracy_mean": round(mean(accs), 6),
+        "accuracy_std":  round(stdev(accs) if len(accs) > 1 else 0.0, 6),
+        "f1_mean":       round(mean(f1s),  6),
+        "f1_std":        round(stdev(f1s)  if len(f1s)  > 1 else 0.0, 6),
+        "auc_mean":      round(mean(aucs), 6),
+        "auc_std":       round(stdev(aucs) if len(aucs) > 1 else 0.0, 6),
+        "train_samples": int(len(X) * 0.80),
+        "test_samples":  int(len(X) * 0.20),
+        "prevalence_pct": round(float(y.mean()) * 100, 3),
+        "per_seed_results": rows_m,
+    }
+    multi_seed_summary.append(entry)
+    print(f"\n  [{_model_name}]")
+    print(f"    AUC  {entry['auc_mean']:.4f} ± {entry['auc_std']:.4f}")
+    print(f"    F1   {entry['f1_mean']:.4f} ± {entry['f1_std']:.4f}")
+    print(f"    Acc  {entry['accuracy_mean']:.4f} ± {entry['accuracy_std']:.4f}")
+
+output["multi_seed_evaluation"] = True
+output["multi_seed_summary"] = multi_seed_summary
+
 with open(RESULTS_FILE, "w") as f:
     json.dump(output, f, indent=2)
 

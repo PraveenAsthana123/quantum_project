@@ -1,0 +1,69 @@
+{
+  "n_modes": 4,
+  "squeezing_parameters": [
+    0.6,
+    0.7,
+    0.5,
+    0.8
+  ],
+  "photon_number_dist": {
+    "[2, 0, 0, 0]": 0.01724383,
+    "[0, 2, 0, 0]": 0.05697195,
+    "[1, 1, 0, 0]": 0.01374365,
+    "[0, 0, 2, 0]": 0.05661174,
+    "[0, 0, 0, 2]": 0.02129964,
+    "[1, 0, 1, 0]": 0.04991057
+  },
+  "simulation": {
+    "backend": "numpy_hafnian",
+    "runtime_s": 0.000850677490234375,
+    "n_patterns_computed": 15,
+    "total_probability": 0.737107,
+    "top_patterns": [
+      {
+        "pattern": "[0, 0, 0, 0]",
+        "probability": 0.44562674
+      },
+      {
+        "pattern": "[1, 0, 0, 1]",
+        "probability": 0.06431259
+      },
+      {
+        "pattern": "[0, 2, 0, 0]",
+        "probability": 0.05697195
+      },
+      {
+        "pattern": "[0, 0, 2, 0]",
+        "probability": 0.05661174
+      },
+      {
+        "pattern": "[1, 0, 1, 0]",
+        "probability": 0.04991057
+      },
+      {
+        "pattern": "[0, 0, 0, 2]",
+        "probability": 0.02129964
+      },
+      {
+        "pattern": "[2, 0, 0, 0]",
+        "probability": 0.01724383
+      },
+      {
+        "pattern": "[1, 1, 0, 0]",
+        "probability": 0.01374365
+      },
+      {
+        "pattern": "[0, 0, 1, 1]",
+        "probability": 0.00553713
+      },
+      {
+        "pattern": "[0, 1, 0, 1]",
+        "probability": 0.00386785
+      }
+    ]
+  },
+  "classical_runtime_estimate": 0.41943040000000004,
+  "quantum_runtime_estimate": 8.000000000000001e-07,
+  "speedup": 524288.0,
+  "advantage_regime": "GBS achieves exponential speedup for >20 photons"
+}

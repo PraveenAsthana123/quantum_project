@@ -1,0 +1,148 @@
+{
+  "gate_time_ns": 20.0,
+  "ideal_fidelity": 1.0,
+  "noisy_fidelity": 1.0,
+  "T2_us": 20.0,
+  "J_MHz": 50.0,
+  "qubit_freq_GHz": 10.0,
+  "gate_type": "Rzz(pi) via ZZ exchange (dispersive limit, CZ-equivalent up to local rotations)",
+  "gate_time_formula": "t_CZ = 2*pi / (J_zz in rad/ns) = 1000/J_MHz [ns]",
+  "rzz_theta_rad": 3.1416,
+  "fidelity_sweep": [
+    {
+      "gate_time_ns": 10.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 11.25,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 12.5,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 13.75,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 15.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 16.25,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 17.5,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 18.75,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 20.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 21.25,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 22.5,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 23.75,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 25.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 26.25,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 27.5,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 28.75,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 30.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 31.25,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 32.5,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 33.75,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 35.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 36.25,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 37.5,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 38.75,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    },
+    {
+      "gate_time_ns": 40.0,
+      "ideal_fidelity": 1.0,
+      "noisy_fidelity": 1.0
+    }
+  ],
+  "best_noisy_fidelity": {
+    "gate_time_ns": 10.0,
+    "ideal_fidelity": 1.0,
+    "noisy_fidelity": 1.0
+  },
+  "best_ideal_fidelity": {
+    "gate_time_ns": 10.0,
+    "ideal_fidelity": 1.0,
+    "noisy_fidelity": 1.0
+  }
+}

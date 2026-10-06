@@ -1,0 +1,49 @@
+{
+  "fiber_length_km": 1000.0,
+  "thermal_noise_fs": 26895.0,
+  "doppler_noise_fs": 0.0163,
+  "turbulence_noise_fs": 4891.25,
+  "total_uncancelled_fs": 27336.1547,
+  "cancellation_efficiency": 0.9999,
+  "final_accuracy_fs": 2.7336,
+  "record_accuracy_fs": 19.0,
+  "servo_gain": 10000.0,
+  "bandwidth_Hz": 10000.0,
+  "record_comparison": {
+    "record_fs": 19.0,
+    "record_distance_km": 920.0,
+    "simulated_fs": 2.73,
+    "simulated_distance_km": 1000.0,
+    "within_order": true
+  },
+  "distance_sweep": [
+    {
+      "distance_km": 100,
+      "final_accuracy_fs": 0.2734
+    },
+    {
+      "distance_km": 250,
+      "final_accuracy_fs": 0.6834
+    },
+    {
+      "distance_km": 500,
+      "final_accuracy_fs": 1.3668
+    },
+    {
+      "distance_km": 920,
+      "final_accuracy_fs": 2.5149
+    },
+    {
+      "distance_km": 1000,
+      "final_accuracy_fs": 2.7336
+    },
+    {
+      "distance_km": 1500,
+      "final_accuracy_fs": 4.1004
+    },
+    {
+      "distance_km": 2000,
+      "final_accuracy_fs": 5.4672
+    }
+  ]
+}

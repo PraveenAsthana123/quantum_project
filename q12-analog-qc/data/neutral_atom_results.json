@@ -1,0 +1,46 @@
+{
+  "n_atoms": 6,
+  "spacing_um": 5.0,
+  "blockade_radius_um": 7.0,
+  "C6_coefficient": 862690.0,
+  "interaction_graph_edges": [
+    [
+      0,
+      1,
+      55.2122
+    ],
+    [
+      1,
+      2,
+      55.2122
+    ],
+    [
+      2,
+      3,
+      55.2122
+    ],
+    [
+      3,
+      4,
+      55.2122
+    ],
+    [
+      4,
+      5,
+      55.2122
+    ]
+  ],
+  "qaoa_energy": 4.342227,
+  "qaoa_best_bitstring": "010101",
+  "qaoa_params": [
+    5.525472998598417,
+    2.5520943056067833,
+    4.8971803980680955,
+    4.397332097972991
+  ],
+  "classical_optimal": 5.0,
+  "classical_bitstring": "010101",
+  "approximation_ratio": 0.8684,
+  "n_edges_in_graph": 5,
+  "physics_note": "Rydberg blockade prevents two adjacent atoms from being simultaneously excited, implementing a hard-core constraint that maps directly to Maximum Independent Set / Max-Cut problems."
+}

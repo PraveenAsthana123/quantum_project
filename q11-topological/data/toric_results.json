@@ -1,0 +1,91 @@
+{
+  "lattice_size": 4,
+  "n_qubits": 32,
+  "n_vertices": 16,
+  "n_plaquettes": 16,
+  "ground_state_degeneracy": 4,
+  "anyon_types": [
+    "e (electric)",
+    "m (magnetic)",
+    "em (fermion)"
+  ],
+  "braiding_phase": -1.0,
+  "braiding_phase_description": "Braiding an electric (e) anyon around a magnetic (m) anyon acquires a phase of -1 (\u03c0). This is the defining feature of Z\u2082 topological order in the Kitaev toric code.",
+  "logical_operators": {
+    "logical_X1": {
+      "type": "X string",
+      "path": "horizontal loop at row 0, 4 edges",
+      "direction": "x-cycle"
+    },
+    "logical_X2": {
+      "type": "X string",
+      "path": "vertical loop at col 0, 4 edges",
+      "direction": "y-cycle"
+    },
+    "logical_Z1": {
+      "type": "Z string",
+      "path": "horizontal loop on dual lattice, row 0",
+      "direction": "x-cycle (dual)"
+    },
+    "logical_Z2": {
+      "type": "Z string",
+      "path": "vertical loop on dual lattice, col 0",
+      "direction": "y-cycle (dual)"
+    },
+    "commutation": "[X\u0304_i, Z\u0304_j] = -\u03b4_{ij}  (anticommute for same cycle)",
+    "n_logical_qubits": 2
+  },
+  "anyon_pair_example": {
+    "e_anyon_pair": {
+      "type": "electric (e)",
+      "created_by": "Z on horizontal edge",
+      "locations": [
+        {
+          "plaquette": [
+            0,
+            0
+          ]
+        },
+        {
+          "plaquette": [
+            0,
+            1
+          ]
+        }
+      ],
+      "edge_acted_on": 0
+    },
+    "m_anyon_pair": {
+      "type": "magnetic (m)",
+      "created_by": "X on vertical edge",
+      "locations": [
+        {
+          "vertex": [
+            0,
+            0
+          ]
+        },
+        {
+          "vertex": [
+            1,
+            0
+          ]
+        }
+      ],
+      "edge_acted_on": 16
+    }
+  },
+  "star_edges_example": [
+    0,
+    3,
+    16,
+    28
+  ],
+  "plaquette_edges_example": [
+    0,
+    4,
+    16,
+    17
+  ],
+  "topology": "Z2 topological order on torus"
+}

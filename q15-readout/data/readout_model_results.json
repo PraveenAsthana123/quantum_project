@@ -1,0 +1,76 @@
+{
+  "n_qubits": 3,
+  "confusion_matrix": {
+    "p01": 0.03,
+    "p10": 0.01,
+    "single_qubit": [
+      [
+        0.99,
+        0.03
+      ],
+      [
+        0.01,
+        0.97
+      ]
+    ],
+    "n_qubit_shape": [
+      8,
+      8
+    ],
+    "condition_number": 1.1467
+  },
+  "error_rates": {
+    "p01": 0.03,
+    "p10": 0.01,
+    "mean_error_rate": 0.058808,
+    "max_error_rate": 0.087327,
+    "min_error_rate": 0.029701,
+    "error_rates_by_state": [
+      0.029701,
+      0.049303,
+      0.049303,
+      0.068509,
+      0.049303,
+      0.068509,
+      0.068509,
+      0.087327
+    ]
+  },
+  "ghz_state": {
+    "ideal_probs": [
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5
+    ],
+    "noisy_probs": [
+      0.485163,
+      0.005337,
+      0.005337,
+      0.014163,
+      0.005337,
+      0.014163,
+      0.014163,
+      0.456337
+    ],
+    "corrected_probs": [
+      0.5,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.5
+    ]
+  },
+  "fidelity_ideal": 1.0,
+  "fidelity_noisy": 0.9415,
+  "corrected_fidelity": 1.0,
+  "fidelity_improvement": 0.0585,
+  "n_shots": 10000
+}

@@ -1,0 +1,13 @@
+{
+  "free_fall_time_ms": 100.0,
+  "pulse_separation_T_ms": 50.0,
+  "gravity_ms2": 9.80665,
+  "sensitivity_ug": 0.002532,
+  "shot_noise_limit_ug": 0.002532,
+  "heisenberg_limit_ug": 2.53e-06,
+  "sql_enhancement": 394.98,
+  "classical_sensitivity_ug": 1.0,
+  "n_atoms": 1000000,
+  "phase_shift_rad": 394980.764055,
+  "vibration_noise_ug": 0.00102
+}

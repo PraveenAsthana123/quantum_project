@@ -1,0 +1,13 @@
+{
+  "circuit": "CNOT on |11> \u2192 |10>, \u27e8ZZ\u27e9 = -1",
+  "observable": "ZZ",
+  "noise_model": "single-qubit depolarizing",
+  "depolarizing_p": 0.05,
+  "ideal_value": -1.0,
+  "noisy_value": -0.9025,
+  "pec_value": -0.91378125,
+  "overhead_gamma": 1.0125,
+  "variance_overhead": 1.025156,
+  "num_samples": 8000,
+  "reference": "/mnt/deepa/quantum/github/mitiq/mitiq/pec/pec.py"
+}

@@ -1,0 +1,36 @@
+services:
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: quantum-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: quantum-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - quantum-grafana-data:/var/lib/grafana
+
+  loki:
+    image: grafana/loki:latest
+    container_name: quantum-loki
+    restart: unless-stopped
+    command: -config.file=/etc/loki/local-config.yaml
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./loki/loki-config.yml:/etc/loki/local-config.yaml:ro
+      - quantum-loki-data:/loki
+
+volumes:
+  quantum-grafana-data:
+  quantum-loki-data:

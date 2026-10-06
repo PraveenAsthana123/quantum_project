@@ -1,0 +1,10 @@
+# Q05 — IR / Interoperability
+qiskit>=1.3.0
+pennylane>=0.40.0
+pennylane-qiskit>=0.40.0     # qml.from_qiskit translation
+
+# QIR export (optional — falls back to QASM3 + template if absent)
+# pyqir>=0.8.0               # uncomment if pyqir wheel available
+
+# Numerics
+numpy>=1.26.0

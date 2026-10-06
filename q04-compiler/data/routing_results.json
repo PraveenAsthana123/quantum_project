@@ -1,0 +1,63 @@
+{
+  "n_qubits": 5,
+  "coupling_map": "linear 0-1-2-3-4",
+  "coupling_map_edges": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      2
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      4,
+      3
+    ]
+  ],
+  "logical_cx_count": 14,
+  "physical_cx_count": 38,
+  "swaps_added": 8,
+  "logical_depth": 19,
+  "physical_depth": 30,
+  "logical_ops": {
+    "rz": 20,
+    "cx": 14,
+    "h": 5
+  },
+  "physical_ops": {
+    "cx": 38,
+    "rz": 20,
+    "h": 5
+  },
+  "layout": {
+    "Qubit(QuantumRegister(5, 'q'), 0)": 1,
+    "Qubit(QuantumRegister(5, 'q'), 1)": 0,
+    "Qubit(QuantumRegister(5, 'q'), 2)": 3,
+    "Qubit(QuantumRegister(5, 'q'), 3)": 4,
+    "Qubit(QuantumRegister(5, 'q'), 4)": 2
+  },
+  "routing_method": "SABRE",
+  "layout_method": "SABRE",
+  "reference": "/mnt/deepa/quantum/github/compiler/mqt-qmap"
+}

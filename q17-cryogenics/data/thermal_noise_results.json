@@ -1,0 +1,505 @@
+{
+  "frequencies_GHz": [
+    3.0,
+    4.0,
+    5.0,
+    6.0,
+    7.0,
+    8.0
+  ],
+  "temperatures_mK": [
+    10,
+    20,
+    50,
+    100,
+    150,
+    200,
+    300,
+    500,
+    1000
+  ],
+  "gamma_0_MHz": 0.01,
+  "thermal_occupations": [
+    {
+      "freq_GHz": 3.0,
+      "T_10mK": 5.5866e-07,
+      "T_20mK": 0.00074799,
+      "T_50mK": 0.059502,
+      "T_100mK": 0.31058,
+      "T_150mK": 0.62062,
+      "T_200mK": 0.94859,
+      "T_300mK": 1.6235,
+      "T_500mK": 2.9967,
+      "T_1000mK": 6.4575
+    },
+    {
+      "freq_GHz": 4.0,
+      "T_10mK": 4.6011e-09,
+      "T_20mK": 6.7836e-05,
+      "T_50mK": 0.021979,
+      "T_100mK": 0.17185,
+      "T_150mK": 0.38522,
+      "T_200mK": 0.62062,
+      "T_300mK": 1.1157,
+      "T_500mK": 2.1365,
+      "T_1000mK": 4.7251
+    },
+    {
+      "freq_GHz": 5.0,
+      "T_10mK": 3.7894e-11,
+      "T_20mK": 6.1559e-06,
+      "T_50mK": 0.0083044,
+      "T_100mK": 0.09981,
+      "T_150mK": 0.25305,
+      "T_200mK": 0.43113,
+      "T_300mK": 0.81615,
+      "T_500mK": 1.6235,
+      "T_1000mK": 3.6873
+    },
+    {
+      "freq_GHz": 6.0,
+      "T_10mK": 3.121e-13,
+      "T_20mK": 5.5866e-07,
+      "T_50mK": 0.003164,
+      "T_100mK": 0.059502,
+      "T_150mK": 0.17185,
+      "T_200mK": 0.31058,
+      "T_300mK": 0.62062,
+      "T_500mK": 1.2841,
+      "T_1000mK": 2.9967
+    },
+    {
+      "freq_GHz": 7.0,
+      "T_10mK": 2.5704e-15,
+      "T_20mK": 5.0699e-08,
+      "T_50mK": 0.0012093,
+      "T_100mK": 0.036005,
+      "T_150mK": 0.11919,
+      "T_200mK": 0.22914,
+      "T_300mK": 0.48442,
+      "T_500mK": 1.0439,
+      "T_1000mK": 2.5046
+    },
+    {
+      "freq_GHz": 8.0,
+      "T_10mK": 2.117e-17,
+      "T_20mK": 4.6011e-09,
+      "T_50mK": 0.00046275,
+      "T_100mK": 0.021979,
+      "T_150mK": 0.083818,
+      "T_200mK": 0.17185,
+      "T_300mK": 0.38522,
+      "T_500mK": 0.86566,
+      "T_1000mK": 2.1365
+    }
+  ],
+  "t1_limited_us": [
+    {
+      "freq_GHz": 3.0,
+      "T_10mK_us": 100.0,
+      "T_20mK_us": 99.851,
+      "T_50mK_us": 89.365,
+      "T_100mK_us": 61.684,
+      "T_150mK_us": 44.618,
+      "T_200mK_us": 34.516,
+      "T_300mK_us": 23.546,
+      "T_500mK_us": 14.299,
+      "T_1000mK_us": 7.186
+    },
+    {
+      "freq_GHz": 4.0,
+      "T_10mK_us": 100.0,
+      "T_20mK_us": 99.986,
+      "T_50mK_us": 95.789,
+      "T_100mK_us": 74.421,
+      "T_150mK_us": 56.483,
+      "T_200mK_us": 44.618,
+      "T_300mK_us": 30.946,
+      "T_500mK_us": 18.965,
+      "T_1000mK_us": 9.569
+    },
+    {
+      "freq_GHz": 5.0,
+      "T_10mK_us": 100.0,
+      "T_20mK_us": 99.999,
+      "T_50mK_us": 98.366,
+      "T_100mK_us": 83.36,
+      "T_150mK_us": 66.397,
+      "T_200mK_us": 53.698,
+      "T_300mK_us": 37.989,
+      "T_500mK_us": 23.546,
+      "T_1000mK_us": 11.941
+    },
+    {
+      "freq_GHz": 6.0,
+      "T_10mK_us": 100.0,
+      "T_20mK_us": 100.0,
+      "T_50mK_us": 99.371,
+      "T_100mK_us": 89.365,
+      "T_150mK_us": 74.421,
+      "T_200mK_us": 61.684,
+      "T_300mK_us": 44.618,
+      "T_500mK_us": 28.025,
+      "T_1000mK_us": 14.299
+    },
+    {
+      "freq_GHz": 7.0,
+      "T_10mK_us": 100.0,
+      "T_20mK_us": 100.0,
+      "T_50mK_us": 99.759,
+      "T_100mK_us": 93.283,
+      "T_150mK_us": 80.751,
+      "T_200mK_us": 68.574,
+      "T_300mK_us": 50.791,
+      "T_500mK_us": 32.385,
+      "T_1000mK_us": 16.641
+    },
+    {
+      "freq_GHz": 8.0,
+      "T_10mK_us": 100.0,
+      "T_20mK_us": 100.0,
+      "T_50mK_us": 99.908,
+      "T_100mK_us": 95.789,
+      "T_150mK_us": 85.643,
+      "T_200mK_us": 74.421,
+      "T_300mK_us": 56.483,
+      "T_500mK_us": 36.612,
+      "T_1000mK_us": 18.965
+    }
+  ],
+  "full_sweep": [
+    {
+      "temperature_mK": 10,
+      "temperature_K": 0.01,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 5.5866e-07,
+          "t1_thermal_us": 99.9999
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 4.6011e-09,
+          "t1_thermal_us": 100.0
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 3.7894e-11,
+          "t1_thermal_us": 100.0
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 3.121e-13,
+          "t1_thermal_us": 100.0
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 2.5704e-15,
+          "t1_thermal_us": 100.0
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 2.117e-17,
+          "t1_thermal_us": 100.0
+        }
+      ]
+    },
+    {
+      "temperature_mK": 20,
+      "temperature_K": 0.02,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 0.00074799,
+          "t1_thermal_us": 99.8506
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 6.7836e-05,
+          "t1_thermal_us": 99.9864
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 6.1559e-06,
+          "t1_thermal_us": 99.9988
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 5.5866e-07,
+          "t1_thermal_us": 99.9999
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 5.0699e-08,
+          "t1_thermal_us": 100.0
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 4.6011e-09,
+          "t1_thermal_us": 100.0
+        }
+      ]
+    },
+    {
+      "temperature_mK": 50,
+      "temperature_K": 0.05,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 0.059502,
+          "t1_thermal_us": 89.3652
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 0.021979,
+          "t1_thermal_us": 95.7892
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 0.0083044,
+          "t1_thermal_us": 98.3663
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 0.003164,
+          "t1_thermal_us": 99.3712
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 0.0012093,
+          "t1_thermal_us": 99.7587
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 0.00046275,
+          "t1_thermal_us": 99.9075
+        }
+      ]
+    },
+    {
+      "temperature_mK": 100,
+      "temperature_K": 0.1,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 0.31058,
+          "t1_thermal_us": 61.6839
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 0.17185,
+          "t1_thermal_us": 74.4209
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 0.09981,
+          "t1_thermal_us": 83.3597
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 0.059502,
+          "t1_thermal_us": 89.3652
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 0.036005,
+          "t1_thermal_us": 93.2827
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 0.021979,
+          "t1_thermal_us": 95.7892
+        }
+      ]
+    },
+    {
+      "temperature_mK": 150,
+      "temperature_K": 0.15,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 0.62062,
+          "t1_thermal_us": 44.6183
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 0.38522,
+          "t1_thermal_us": 56.4831
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 0.25305,
+          "t1_thermal_us": 66.3966
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 0.17185,
+          "t1_thermal_us": 74.4209
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 0.11919,
+          "t1_thermal_us": 80.7507
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 0.083818,
+          "t1_thermal_us": 85.6431
+        }
+      ]
+    },
+    {
+      "temperature_mK": 200,
+      "temperature_K": 0.2,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 0.94859,
+          "t1_thermal_us": 34.5164
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 0.62062,
+          "t1_thermal_us": 44.6183
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 0.43113,
+          "t1_thermal_us": 53.6982
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 0.31058,
+          "t1_thermal_us": 61.6839
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 0.22914,
+          "t1_thermal_us": 68.5739
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 0.17185,
+          "t1_thermal_us": 74.4209
+        }
+      ]
+    },
+    {
+      "temperature_mK": 300,
+      "temperature_K": 0.3,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 1.6235,
+          "t1_thermal_us": 23.546
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 1.1157,
+          "t1_thermal_us": 30.9461
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 0.81615,
+          "t1_thermal_us": 37.9895
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 0.62062,
+          "t1_thermal_us": 44.6183
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 0.48442,
+          "t1_thermal_us": 50.7912
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 0.38522,
+          "t1_thermal_us": 56.4831
+        }
+      ]
+    },
+    {
+      "temperature_mK": 500,
+      "temperature_K": 0.5,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 2.9967,
+          "t1_thermal_us": 14.2991
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 2.1365,
+          "t1_thermal_us": 18.9646
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 1.6235,
+          "t1_thermal_us": 23.546
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 1.2841,
+          "t1_thermal_us": 28.0251
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 1.0439,
+          "t1_thermal_us": 32.3854
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 0.86566,
+          "t1_thermal_us": 36.6124
+        }
+      ]
+    },
+    {
+      "temperature_mK": 1000,
+      "temperature_K": 1.0,
+      "data_by_freq": [
+        {
+          "freq_GHz": 3.0,
+          "nth": 6.4575,
+          "t1_thermal_us": 7.1865
+        },
+        {
+          "freq_GHz": 4.0,
+          "nth": 4.7251,
+          "t1_thermal_us": 9.5691
+        },
+        {
+          "freq_GHz": 5.0,
+          "nth": 3.6873,
+          "t1_thermal_us": 11.9409
+        },
+        {
+          "freq_GHz": 6.0,
+          "nth": 2.9967,
+          "t1_thermal_us": 14.2991
+        },
+        {
+          "freq_GHz": 7.0,
+          "nth": 2.5046,
+          "t1_thermal_us": 16.6411
+        },
+        {
+          "freq_GHz": 8.0,
+          "nth": 2.1365,
+          "t1_thermal_us": 18.9646
+        }
+      ]
+    }
+  ],
+  "thermal_dominance_thresholds_mK": {
+    "3.0GHz": 31.2,
+    "4.0GHz": 41.6,
+    "5.0GHz": 51.99,
+    "6.0GHz": 62.39,
+    "7.0GHz": 72.79,
+    "8.0GHz": 83.19
+  },
+  "note": "Above ~100 mK, thermal photon number n\u209c\u2095 > 0.01 for typical GHz qubits, limiting T1 and causing significant thermal excitation errors. \u0393\u2081 = (2n\u209c\u2095+1)\u00b7\u03b3\u2080 with \u03b3\u2080 = 0.01 MHz."
+}

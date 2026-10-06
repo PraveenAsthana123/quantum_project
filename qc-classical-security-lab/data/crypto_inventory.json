@@ -1,0 +1,114 @@
+{
+  "assets": [
+    {
+      "asset_id": "CA-0001",
+      "layer": "L01-PKI",
+      "algorithm": "ECDSA-P256",
+      "quantum_vulnerable": true,
+      "system": "identity-service",
+      "discovery_date": "2026-07-26",
+      "key_size_bits": 256
+    },
+    {
+      "asset_id": "CA-0002",
+      "layer": "L01-PKI",
+      "algorithm": "ML-KEM-768",
+      "quantum_vulnerable": false,
+      "system": "data-warehouse",
+      "discovery_date": "2026-05-24",
+      "key_size_bits": 768
+    },
+    {
+      "asset_id": "CA-0003",
+      "layer": "L01-PKI",
+      "algorithm": "ECDSA-P256",
+      "quantum_vulnerable": true,
+      "system": "firmware-updater",
+      "discovery_date": "2026-08-31",
+      "key_size_bits": 256
+    },
+    {
+      "asset_id": "CA-0004",
+      "layer": "L02-TLS",
+      "algorithm": "AES-128",
+      "quantum_vulnerable": true,
+      "system": "auth-service",
+      "discovery_date": "2026-06-01",
+      "key_size_bits": 128
+    },
+    {
+      "asset_id": "CA-0005",
+      "layer": "L02-TLS",
+      "algorithm": "ECDSA-P256",
+      "quantum_vulnerable": true,
+      "system": "banking-core",
+      "discovery_date": "2026-01-05",
+      "key_size_bits": 256
+    },
+    {
+      "asset_id": "CA-0006",
+      "layer": "L02-TLS",
+      "algorithm": "AES-128",
+      "quantum_vulnerable": true,
+      "system": "identity-service",
+      "discovery_date": "2026-01-21",
+      "key_size_bits": 128
+    },
+    {
+      "asset_id": "CA-0007",
+      "layer": "L03-VPN",
+      "algorithm": "ML-DSA-65",
+      "quantum_vulnerable": false,
+      "system": "api-platform",
+      "discovery_date": "2026-10-04",
+      "key_size_bits": 1952
+    },
+    {
+      "asset_id": "CA-0008",
+      "layer": "L03-VPN",
+      "algorithm": "ML-KEM-768",
+      "quantum_vulnerable": false,
+      "system": "banking-core",
+      "discovery_date": "2026-05-12",
+      "key_size_bits": 768
+    },
+    {
+      "asset_id": "CA-0009",
+      "layer": "L03-VPN",
+      "algorithm": "ML-KEM-768",
+      "quantum_vulnerable": false,
+      "system": "identity-service",
+      "discovery_date": "2026-07-04",
+      "key_size_bits": 768
+    },
+    {
+      "asset_id": "CA-0010",
+      "layer": "L04-SSH",
+      "algorithm": "RSA-2048",
+      "quantum_vulnerable": true,
+      "system": "mobile-backend",
+      "discovery_date": "2026-06-12",
+      "key_size_bits": 2048
+    },
+    {
+      "asset_id": "CA-0011",
+      "layer": "L04-SSH",
+      "algorithm": "ML-KEM-768",
+      "quantum_vulnerable": false,
+      "system": "payment-gateway",
+      "discovery_date": "2026-07-14",
+      "key_size_bits": 768
+    },
+    {
+      "asset_id": "CA-0012",
+      "layer": "L04-SSH",
+      "algorithm": "DH-2048",
+      "quantum_vulnerable": true,
+      "system": "banking-core",
+      "discovery_date": "2026-02-16",
+      "key_size_bits": 2048
+    }
+  ],
+  "count": 12,
+  "generated_at": "2026-10-06T21:04:30.170145Z"
+}

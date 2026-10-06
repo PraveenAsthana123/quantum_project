@@ -1,0 +1,204 @@
+{
+  "dataset": "Kaggle Credit Card Fraud (284,807 rows)",
+  "fraud_ratio": "0.17%",
+  "total_samples": 284807,
+  "test_samples": 56962,
+  "fraud_in_test": 98,
+  "models": [
+    {
+      "name": "Logistic Regression",
+      "auc": 0.9031,
+      "f1": 0.0846,
+      "precision": 0.0447,
+      "recall": 0.8061,
+      "runtime_ms": 1354.8
+    },
+    {
+      "name": "XGBoost",
+      "auc": 0.9782,
+      "f1": 0.8235,
+      "precision": 0.7925,
+      "recall": 0.8571,
+      "runtime_ms": 65727.0
+    },
+    {
+      "name": "Random Forest",
+      "auc": 0.9817,
+      "f1": 0.8438,
+      "precision": 0.8617,
+      "recall": 0.8265,
+      "runtime_ms": 96486.6
+    },
+    {
+      "name": "Quantum VQC (4-qubit, 2-layer)",
+      "n_qubits": 4,
+      "n_layers": 2,
+      "circuit_depth": 3,
+      "shots": 0,
+      "auc": 0.7813,
+      "f1": 0.2957,
+      "precision": 1.0,
+      "recall": 0.1735,
+      "runtime_ms": 4995.5,
+      "training_samples": 500,
+      "test_samples": 198
+    },
+    {
+      "name": "Quantum Kernel SVM",
+      "n_qubits": 4,
+      "auc": 0.853,
+      "f1": 0.8927,
+      "precision": 1.0,
+      "recall": 0.8061,
+      "runtime_ms": 322085.5,
+      "training_samples": 200,
+      "test_samples": 198
+    }
+  ],
+  "winner": "Random Forest (AUC: 0.9817)",
+  "quantum_gap": "classical leads quantum on tabular fraud \u2014 expected for NISQ era; VQC and kernel SVM operate on small sub-samples due to O(n\u00b2) kernel cost",
+  "when_quantum_wins": "quantum kernels may outperform on datasets with non-linear structure that classical SVMs miss, or when hardware noise drops below fault-tolerance thresholds; quantum advantage on tabular finance data is an open research question",
+  "vqc_notes": {
+    "n_qubits": 4,
+    "n_layers": 2,
+    "encoding": "AngleEmbedding (RY gates)",
+    "entanglement": "BasicEntanglerLayers with CNOT ring",
+    "optimizer": "COBYLA (gradient-free)",
+    "epochs": 50,
+    "circuit_depth": 3,
+    "train_samples": 500
+  },
+  "qksvm_notes": {
+    "n_qubits": 4,
+    "feature_map": "ZZFeatureMap-style (Hadamard + RZ + CNOT-RZ-CNOT)",
+    "kernel": "fidelity kernel |<\u03c6(x1)|\u03c6(x2)>|\u00b2",
+    "train_samples": 200,
+    "test_samples": 198
+  },
+  "multi_seed_evaluation": true,
+  "multi_seed_summary": [
+    {
+      "model": "Logistic Regression",
+      "seeds": [
+        42,
+        123,
+        7
+      ],
+      "n_seeds": 3,
+      "accuracy_mean": 0.975393,
+      "accuracy_std": 0.002131,
+      "f1_mean": 0.112236,
+      "f1_std": 0.005684,
+      "auc_mean": 0.972337,
+      "auc_std": 0.011593,
+      "train_samples": 227845,
+      "test_samples": 56961,
+      "prevalence_pct": 0.173,
+      "per_seed_results": [
+        {
+          "model": "Logistic Regression",
+          "seed": 42,
+          "accuracy": 0.973719,
+          "f1": 0.107335,
+          "auc": 0.97049
+        },
+        {
+          "model": "Logistic Regression",
+          "seed": 123,
+          "accuracy": 0.977792,
+          "f1": 0.118467,
+          "auc": 0.961779
+        },
+        {
+          "model": "Logistic Regression",
+          "seed": 7,
+          "accuracy": 0.974667,
+          "f1": 0.110906,
+          "auc": 0.984743
+        }
+      ]
+    },
+    {
+      "model": "XGBoost",
+      "seeds": [
+        42,
+        123,
+        7
+      ],
+      "n_seeds": 3,
+      "accuracy_mean": 0.999444,
+      "accuracy_std": 0.000117,
+      "f1_mean": 0.83949,
+      "f1_std": 0.031962,
+      "auc_mean": 0.973662,
+      "auc_std": 0.012407,
+      "train_samples": 227845,
+      "test_samples": 56961,
+      "prevalence_pct": 0.173,
+      "per_seed_results": [
+        {
+          "model": "XGBoost",
+          "seed": 42,
+          "accuracy": 0.999368,
+          "f1": 0.823529,
+          "auc": 0.97817
+        },
+        {
+          "model": "XGBoost",
+          "seed": 123,
+          "accuracy": 0.999386,
+          "f1": 0.818653,
+          "auc": 0.959631
+        },
+        {
+          "model": "XGBoost",
+          "seed": 7,
+          "accuracy": 0.999579,
+          "f1": 0.876289,
+          "auc": 0.983185
+        }
+      ]
+    },
+    {
+      "model": "Random Forest",
+      "seeds": [
+        42,
+        123,
+        7
+      ],
+      "n_seeds": 3,
+      "accuracy_mean": 0.999444,
+      "accuracy_std": 0.0001,
+      "f1_mean": 0.832922,
+      "f1_std": 0.031084,
+      "auc_mean": 0.975828,
+      "auc_std": 0.012677,
+      "train_samples": 227845,
+      "test_samples": 56961,
+      "prevalence_pct": 0.173,
+      "per_seed_results": [
+        {
+          "model": "Random Forest",
+          "seed": 42,
+          "accuracy": 0.999473,
+          "f1": 0.84375,
+          "auc": 0.981679
+        },
+        {
+          "model": "Random Forest",
+          "seed": 123,
+          "accuracy": 0.999333,
+          "f1": 0.797872,
+          "auc": 0.961282
+        },
+        {
+          "model": "Random Forest",
+          "seed": 7,
+          "accuracy": 0.999526,
+          "f1": 0.857143,
+          "auc": 0.984522
+        }
+      ]
+    }
+  ]
+}

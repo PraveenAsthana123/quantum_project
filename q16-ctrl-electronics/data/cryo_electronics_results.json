@@ -1,0 +1,213 @@
+{
+  "temperature_stages": [
+    "300K",
+    "77K",
+    "4K",
+    "700mK",
+    "100mK",
+    "20mK"
+  ],
+  "attenuation_dB": [
+    0.0,
+    20.0,
+    30.0,
+    50.0,
+    60.0,
+    80.0
+  ],
+  "noise_temperature_K": [
+    300.0,
+    77.0,
+    4.0,
+    0.7,
+    0.1,
+    0.02
+  ],
+  "thermal_photons": [
+    1249.7,
+    320.38,
+    16.174,
+    2.4456,
+    0.09981,
+    6.1559e-06
+  ],
+  "snr_dB": [
+    63.83,
+    49.73,
+    52.58,
+    40.15,
+    38.6,
+    25.59
+  ],
+  "thermal_photon_sweep": [
+    {
+      "temperature_mK": 20.0,
+      "nth_at_3.0GHz": 0.00074799,
+      "nth_at_4.0GHz": 6.7836e-05,
+      "nth_at_5.0GHz": 6.1559e-06,
+      "nth_at_6.0GHz": 5.5866e-07,
+      "nth_at_7.0GHz": 5.0699e-08,
+      "nth_at_8.0GHz": 4.6011e-09
+    },
+    {
+      "temperature_mK": 50.0,
+      "nth_at_3.0GHz": 0.059502,
+      "nth_at_4.0GHz": 0.021979,
+      "nth_at_5.0GHz": 0.0083044,
+      "nth_at_6.0GHz": 0.003164,
+      "nth_at_7.0GHz": 0.0012093,
+      "nth_at_8.0GHz": 0.00046275
+    },
+    {
+      "temperature_mK": 100.0,
+      "nth_at_3.0GHz": 0.31058,
+      "nth_at_4.0GHz": 0.17185,
+      "nth_at_5.0GHz": 0.09981,
+      "nth_at_6.0GHz": 0.059502,
+      "nth_at_7.0GHz": 0.036005,
+      "nth_at_8.0GHz": 0.021979
+    },
+    {
+      "temperature_mK": 200.0,
+      "nth_at_3.0GHz": 0.94859,
+      "nth_at_4.0GHz": 0.62062,
+      "nth_at_5.0GHz": 0.43113,
+      "nth_at_6.0GHz": 0.31058,
+      "nth_at_7.0GHz": 0.22914,
+      "nth_at_8.0GHz": 0.17185
+    },
+    {
+      "temperature_mK": 500.0,
+      "nth_at_3.0GHz": 2.9967,
+      "nth_at_4.0GHz": 2.1365,
+      "nth_at_5.0GHz": 1.6235,
+      "nth_at_6.0GHz": 1.2841,
+      "nth_at_7.0GHz": 1.0439,
+      "nth_at_8.0GHz": 0.86566
+    },
+    {
+      "temperature_mK": 1000.0,
+      "nth_at_3.0GHz": 6.4575,
+      "nth_at_4.0GHz": 4.7251,
+      "nth_at_5.0GHz": 3.6873,
+      "nth_at_6.0GHz": 2.9967,
+      "nth_at_7.0GHz": 2.5046,
+      "nth_at_8.0GHz": 2.1365
+    }
+  ],
+  "chain_details": {
+    "qubit_frequency_GHz": 5.0,
+    "input_power_dBm": -20.0,
+    "bandwidth_Hz": 1000000000.0,
+    "temperature_stages": [
+      "300K",
+      "77K",
+      "4K",
+      "700mK",
+      "100mK",
+      "20mK"
+    ],
+    "temperatures_K": [
+      300.0,
+      77.0,
+      4.0,
+      0.7,
+      0.1,
+      0.02
+    ],
+    "attenuation_dB": [
+      0.0,
+      20.0,
+      30.0,
+      50.0,
+      60.0,
+      80.0
+    ],
+    "noise_temperature_K": [
+      300.0,
+      77.0,
+      4.0,
+      0.7,
+      0.1,
+      0.02
+    ],
+    "thermal_photons": [
+      1249.7,
+      320.38,
+      16.174,
+      2.4456,
+      0.09981,
+      6.1559e-06
+    ],
+    "snr_dB": [
+      63.83,
+      49.73,
+      52.58,
+      40.15,
+      38.6,
+      25.59
+    ],
+    "stage_details": [
+      {
+        "stage": "300K",
+        "temperature_K": 300.0,
+        "cumulative_attenuation_dB": 0.0,
+        "signal_power_dBm": -20.0,
+        "noise_power_W": 4.142e-12,
+        "noise_temperature_K": 300.0,
+        "thermal_photons_nth": 1249.7,
+        "snr_dB": 63.83
+      },
+      {
+        "stage": "77K",
+        "temperature_K": 77.0,
+        "cumulative_attenuation_dB": 20.0,
+        "signal_power_dBm": -40.0,
+        "noise_power_W": 1.063e-12,
+        "noise_temperature_K": 77.0,
+        "thermal_photons_nth": 320.38,
+        "snr_dB": 49.73
+      },
+      {
+        "stage": "4K",
+        "temperature_K": 4.0,
+        "cumulative_attenuation_dB": 30.0,
+        "signal_power_dBm": -50.0,
+        "noise_power_W": 5.523e-14,
+        "noise_temperature_K": 4.0,
+        "thermal_photons_nth": 16.174,
+        "snr_dB": 52.58
+      },
+      {
+        "stage": "700mK",
+        "temperature_K": 0.7,
+        "cumulative_attenuation_dB": 50.0,
+        "signal_power_dBm": -70.0,
+        "noise_power_W": 9.665e-15,
+        "noise_temperature_K": 0.7,
+        "thermal_photons_nth": 2.4456,
+        "snr_dB": 40.15
+      },
+      {
+        "stage": "100mK",
+        "temperature_K": 0.1,
+        "cumulative_attenuation_dB": 60.0,
+        "signal_power_dBm": -80.0,
+        "noise_power_W": 1.381e-15,
+        "noise_temperature_K": 0.1,
+        "thermal_photons_nth": 0.09981,
+        "snr_dB": 38.6
+      },
+      {
+        "stage": "20mK",
+        "temperature_K": 0.02,
+        "cumulative_attenuation_dB": 80.0,
+        "signal_power_dBm": -100.0,
+        "noise_power_W": 2.761e-16,
+        "noise_temperature_K": 0.02,
+        "thermal_photons_nth": 6.1559e-06,
+        "snr_dB": 25.59
+      }
+    ]
+  }
+}

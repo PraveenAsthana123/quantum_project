@@ -1,0 +1,70 @@
+{
+  "materials": [
+    "indium_solder",
+    "gold_wire",
+    "sapphire_substrate",
+    "copper_clamp",
+    "silver_epoxy"
+  ],
+  "thermal_conductances_uW_per_K": [
+    98.0,
+    405.0,
+    0.15,
+    10000.0
+  ],
+  "total_conductance_uW_per_K": 0.149713,
+  "qubit_temp_mK": {
+    "1.0nW": 26.6794,
+    "5.0nW": 53.3972,
+    "10.0nW": 86.7944,
+    "50.0nW": 353.972,
+    "100.0nW": 687.944
+  },
+  "heat_load_nW": [
+    1.0,
+    5.0,
+    10.0,
+    50.0,
+    100.0,
+    500.0
+  ],
+  "component_chain": [
+    {
+      "component": "sapphire_substrate",
+      "material": "sapphire_substrate",
+      "thermal_conductance_uW_per_K": 98.0,
+      "thermal_resistance_K_per_uW": 0.010204,
+      "cross_section_mm2": 49.0,
+      "length_mm": 0.5,
+      "description": "Chip substrate thermal resistance"
+    },
+    {
+      "component": "indium_bumps",
+      "material": "indium_solder",
+      "thermal_conductance_uW_per_K": 405.0,
+      "thermal_resistance_K_per_uW": 0.002469,
+      "cross_section_mm2": 0.05,
+      "length_mm": 0.01,
+      "description": "Flip-chip indium bump thermal path"
+    },
+    {
+      "component": "gold_wire_bonds",
+      "material": "gold_wire",
+      "thermal_conductance_uW_per_K": 0.15,
+      "thermal_resistance_K_per_uW": 6.666667,
+      "cross_section_mm2": 0.0005,
+      "length_mm": 1.0,
+      "description": "Gold wire bond thermal anchor"
+    },
+    {
+      "component": "copper_clamp",
+      "material": "copper_clamp",
+      "thermal_conductance_uW_per_K": 10000.0,
+      "thermal_resistance_K_per_uW": 0.0001,
+      "cross_section_mm2": 100.0,
+      "length_mm": 5.0,
+      "description": "OFHC copper clamp to mixing chamber plate"
+    }
+  ],
+  "cold_plate_temp_mK": 20.0
+}

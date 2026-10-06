@@ -1,0 +1,99 @@
+{
+  "n_sites": 2,
+  "u_t_ratios": [
+    0.0,
+    1.0,
+    2.0,
+    4.0,
+    8.0,
+    16.0
+  ],
+  "ground_state_energies": [
+    -2.0,
+    -1.56155281,
+    -1.23606798,
+    -1.0,
+    -1.0,
+    -1.0
+  ],
+  "double_occupancy": [
+    0.25,
+    0.189366,
+    0.138197,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "magnetic_order": [
+    -0.5,
+    -0.621268,
+    -0.723607,
+    0.0,
+    0.0,
+    0.0
+  ],
+  "n_qubits": 4,
+  "model": "H = -t \u03a3 c\u1d62\u2020c\u2c7c + U \u03a3 n\u1d62\u2191n\u1d62\u2193 (Jordan-Wigner transform)",
+  "sweep_results": [
+    {
+      "u_t_ratio": 0.0,
+      "U": 0.0,
+      "t": 1.0,
+      "ground_state_energy": -2.0,
+      "ground_state_energy_per_site": -1.0,
+      "double_occupancy": 0.25,
+      "magnetic_order": -0.5,
+      "phase": "metallic"
+    },
+    {
+      "u_t_ratio": 1.0,
+      "U": 1.0,
+      "t": 1.0,
+      "ground_state_energy": -1.56155281,
+      "ground_state_energy_per_site": -0.78077641,
+      "double_occupancy": 0.189366,
+      "magnetic_order": -0.621268,
+      "phase": "metallic"
+    },
+    {
+      "u_t_ratio": 2.0,
+      "U": 2.0,
+      "t": 1.0,
+      "ground_state_energy": -1.23606798,
+      "ground_state_energy_per_site": -0.61803399,
+      "double_occupancy": 0.138197,
+      "magnetic_order": -0.723607,
+      "phase": "metallic"
+    },
+    {
+      "u_t_ratio": 4.0,
+      "U": 4.0,
+      "t": 1.0,
+      "ground_state_energy": -1.0,
+      "ground_state_energy_per_site": -0.5,
+      "double_occupancy": 0.0,
+      "magnetic_order": 0.0,
+      "phase": "Mott insulator"
+    },
+    {
+      "u_t_ratio": 8.0,
+      "U": 8.0,
+      "t": 1.0,
+      "ground_state_energy": -1.0,
+      "ground_state_energy_per_site": -0.5,
+      "double_occupancy": 0.0,
+      "magnetic_order": 0.0,
+      "phase": "Mott insulator"
+    },
+    {
+      "u_t_ratio": 16.0,
+      "U": 16.0,
+      "t": 1.0,
+      "ground_state_energy": -1.0,
+      "ground_state_energy_per_site": -0.5,
+      "double_occupancy": 0.0,
+      "magnetic_order": 0.0,
+      "phase": "Mott insulator"
+    }
+  ]
+}

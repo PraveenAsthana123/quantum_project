@@ -1,0 +1,4 @@
+# Q17 Cryogenics Requirements
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.6.0

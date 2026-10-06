@@ -1,0 +1,196 @@
+{
+  "generated_at": "2026-10-01T16:38:22.916559",
+  "lab": "qc-finance-lab",
+  "source_files": {
+    "classical_results": "data/classical_results.json",
+    "options_results": "data/options_results.json",
+    "risk_results": "data/risk_results.json"
+  },
+  "classical_baseline": {
+    "markowitz_max_sharpe": {
+      "expected_annual_return": 0.312123,
+      "annual_volatility": 0.302015,
+      "sharpe_ratio": 0.901023,
+      "weights": {
+        "AAPL": 0.540987,
+        "MSFT": 0.0,
+        "GOOGL": 0.0,
+        "AMZN": 0.459013,
+        "GS": 0.0,
+        "JPM": 0.0,
+        "KO": 0.0,
+        "JNJ": 0.0
+      }
+    },
+    "markowitz_min_variance": {
+      "expected_annual_return": 0.091032,
+      "annual_volatility": 0.144653,
+      "sharpe_ratio": 0.352787
+    },
+    "sma_backtest_AAPL": {
+      "period": "2012-01-01 \u2013 2017-12-31",
+      "strategy_sharpe": 0.144492,
+      "strategy_ann_ret": 0.06532,
+      "buy_hold_sharpe": 0.615449,
+      "buy_hold_ann_ret": 0.193247,
+      "alpha": -0.127927,
+      "n_trades": 23
+    },
+    "bitcoin_stats": {
+      "date_range": {
+        "start": "2012-01-01",
+        "end": "2026-09-22"
+      },
+      "n_days": 5379,
+      "total_return": 17112.172,
+      "annual_volatility": 0.768889,
+      "max_drawdown": -0.848579,
+      "sharpe_ratio": 22255.669118,
+      "price_range": {
+        "min": 4.23,
+        "max": 124728.0
+      }
+    }
+  },
+  "options_pricing": {
+    "parameters": {
+      "S0": 100.0,
+      "K": 105.0,
+      "T": 0.5,
+      "r": 0.05,
+      "sigma": 0.2
+    },
+    "black_scholes": {
+      "price": 4.58168,
+      "delta": 0.46116,
+      "gamma": 0.028076,
+      "vega": 28.075684,
+      "theta": -0.021074
+    },
+    "monte_carlo": {
+      "price": 4.576595,
+      "std_error": 0.025996,
+      "ci_95": [
+        4.525644,
+        4.627547
+      ],
+      "n_paths": 100000
+    },
+    "quantum_qae": {
+      "method": "IterativeQAE-Qiskit",
+      "price": 0.001793,
+      "n_qubits": 3,
+      "elapsed_s": 5.298
+    },
+    "comparison": {
+      "black_scholes_price": 4.58168,
+      "monte_carlo_price": 4.576595,
+      "qae_price": 0.001793,
+      "mc_vs_bs_error": 0.005085,
+      "qae_vs_bs_error": 4.579887,
+      "mc_speedup_note": "Classical MC O(1/sqrt(N)); QAE achieves O(1/N) in theory"
+    },
+    "put_call_parity_satisfied": "True",
+    "accuracy_notes": {
+      "mc_vs_bs_abs_error": 0.005085,
+      "qae_vs_bs_abs_error": 4.579887,
+      "mc_error_pct": 0.111,
+      "qae_error_pct": 99.9609
+    }
+  },
+  "risk_analysis": {
+    "portfolio": {
+      "tickers": [
+        "AAPL",
+        "MSFT",
+        "GOOGL",
+        "AMZN",
+        "GS"
+      ],
+      "weights": [
+        0.25,
+        0.25,
+        0.2,
+        0.15,
+        0.15
+      ],
+      "value_usd": 1000000.0
+    },
+    "var_comparison": {
+      "historical_95": 23499.75,
+      "historical_99": 41209.75,
+      "parametric_95": 24426.78,
+      "parametric_99": 34892.53,
+      "monte_carlo_95": 24571.77,
+      "monte_carlo_99": 35063.22,
+      "quantum_qae_95": 25031.24,
+      "quantum_qae_99": 43057.86
+    },
+    "cvar_95_historical": 35608.7,
+    "stress_test_highlights": {
+      "1987_Black_Monday": {
+        "shock_pct": -0.205,
+        "portfolio_loss_usd": 205000.0
+      },
+      "2008_Lehman_collapse": {
+        "shock_pct": -0.047,
+        "portfolio_loss_usd": 47000.0
+      },
+      "2008_GFC_worst_week": {
+        "shock_pct": -0.18,
+        "portfolio_loss_usd": 180000.0
+      },
+      "2020_COVID_crash": {
+        "shock_pct": -0.12,
+        "portfolio_loss_usd": 120000.0
+      },
+      "2_sigma_event": {
+        "shock_pct": -0.030714,
+        "portfolio_loss_usd": 30714.1
+      },
+      "3_sigma_event": {
+        "shock_pct": -0.046071,
+        "portfolio_loss_usd": 46071.16
+      }
+    },
+    "rolling_var_by_year": {
+      "2009": {
+        "var_95": 30331.73,
+        "worst_day": 77023.42
+      },
+      "2010": {
+        "var_95": 21940.16,
+        "worst_day": 44864.61
+      },
+      "2011": {
+        "var_95": 24831.21,
+        "worst_day": 52392.08
+      },
+      "2012": {
+        "var_95": 16291.2,
+        "worst_day": 34773.28
+      },
+      "2013": {
+        "var_95": 12769.46,
+        "worst_day": 34697.19
+      },
+      "2014": {
+        "var_95": 14907.68,
+        "worst_day": 26732.69
+      },
+      "2015": {
+        "var_95": 19309.0,
+        "worst_day": 52972.61
+      },
+      "2016": {
+        "var_95": 18742.67,
+        "worst_day": 40756.69
+      },
+      "2017": {
+        "var_95": 10959.9,
+        "worst_day": 31205.71
+      }
+    },
+    "quantum_advantage_note": "Classical Monte Carlo VaR: O(1/sqrt(N)) convergence. Quantum QAE achieves O(1/N) \u2014 quadratic speedup in number of oracle queries."
+  }
+}

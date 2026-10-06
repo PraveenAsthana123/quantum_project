@@ -1,0 +1,19 @@
+{
+  "circuit": "3-qubit GHZ + measurement",
+  "circuit_qubits": 3,
+  "circuit_gates": {
+    "measure": 3,
+    "cx": 2,
+    "h": 1
+  },
+  "ir_format": "QASM3 + manual QIR LLVM template",
+  "pyqir_available": false,
+  "exported_successfully": true,
+  "file_size_bytes": 1223,
+  "qasm3_size_bytes": 88,
+  "qasm3_as_text_ir": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nqubit[3] q;\nh q[0];\ncx q[0], q[1];\ncx q[1], q[2];\n",
+  "qir_spec_reference": "/mnt/deepa/quantum/github/compiler/qir-spec",
+  "pyqir_reference": "/mnt/deepa/quantum/github/compiler/pyqir",
+  "qir_llvm_template_saved": "/mnt/deepa/quantum/q05-ir-interop/data/circuit_concept.ll",
+  "note": "pyqir not installed \u2014 QASM3 + manual QIR LLVM template shown as concept"
+}

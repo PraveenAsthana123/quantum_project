@@ -1,0 +1,3822 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:2f0bda76-7e97-48f5-b448-1a84f2d875c0",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-01T17:15:35Z",
+    "tools": [
+      {
+        "vendor": "qc-classical-security-lab",
+        "name": "oss_registry",
+        "version": "1.0.0"
+      }
+    ],
+    "component": {
+      "type": "application",
+      "name": "qc-classical-security-lab",
+      "version": "1.0.0",
+      "description": "29-layer classical security stack \u2014 OSS registry and SBOM for quantum-readiness analysis"
+    }
+  },
+  "components": [
+    {
+      "type": "library",
+      "bom-ref": "tpm2-tools-5.6",
+      "name": "tpm2-tools",
+      "version": "5.6",
+      "purl": "pkg:generic/tpm2-tools@5.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/tpm2-software/tpm2-tools"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "PRNG"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L01"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "openssl-3.2",
+      "name": "OpenSSL",
+      "version": "3.2",
+      "purl": "pkg:generic/openssl@3.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/openssl/openssl"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA/AES"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "3"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L04"
+        },
+        {
+          "name": "security_layer",
+          "value": "L05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        },
+        {
+          "name": "security_layer",
+          "value": "L17"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "strongswan-5.9",
+      "name": "strongSwan",
+      "version": "5.9",
+      "purl": "pkg:generic/strongswan@5.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/strongswan/strongswan"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L03"
+        },
+        {
+          "name": "security_layer",
+          "value": "L13"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "wpa_supplicant-2.10",
+      "name": "wpa_supplicant",
+      "version": "2.10",
+      "purl": "pkg:generic/wpa_supplicant@2.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://w1.fi/wpa_supplicant"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "AES-128+RSA EAP-TLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L02"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "iproute2-6.6",
+      "name": "iproute2",
+      "version": "6.6",
+      "purl": "pkg:generic/iproute2@6.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/iproute2/iproute2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "MACsec AES-128"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L02"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "hostapd-2.10",
+      "name": "hostapd",
+      "version": "2.10",
+      "purl": "pkg:generic/hostapd@2.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://w1.fi/hostapd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "WPA3/SAE"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L02"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "libreswan-4.12",
+      "name": "Libreswan",
+      "version": "4.12",
+      "purl": "pkg:generic/libreswan@4.12",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/libreswan/libreswan"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "IKEv2+DH+RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L03"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "wireguard-tools-1.0",
+      "name": "WireGuard-tools",
+      "version": "1.0",
+      "purl": "pkg:generic/wireguard-tools@1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://git.zx2c4.com/wireguard-tools"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "Curve25519+ChaCha20"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2022-06-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L03"
+        },
+        {
+          "name": "security_layer",
+          "value": "L13"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "nginx-1.25",
+      "name": "nginx",
+      "version": "1.25",
+      "purl": "pkg:generic/nginx@1.25",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/nginx/nginx"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS1.3+RSA/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L04"
+        },
+        {
+          "name": "security_layer",
+          "value": "L07"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "certbot-2.8",
+      "name": "Certbot",
+      "version": "2.8",
+      "purl": "pkg:generic/certbot@2.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/certbot/certbot"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-2048+ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L04"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "gnutls-3.8",
+      "name": "GnuTLS",
+      "version": "3.8",
+      "purl": "pkg:generic/gnutls@3.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://gitlab.com/gnutls/gnutls"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA/TLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-30"
+        },
+        {
+          "name": "security_layer",
+          "value": "L04"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "redis-7.2",
+      "name": "Redis",
+      "version": "7.2",
+      "purl": "pkg:generic/redis@7.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/redis/redis"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "HMAC session keys"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L05"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "certstrap-1.3",
+      "name": "certstrap",
+      "version": "1.3",
+      "purl": "pkg:generic/certstrap@1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/square/certstrap"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-2048/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-08-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "cfssl-1.6",
+      "name": "cfssl",
+      "version": "1.6",
+      "purl": "pkg:generic/cfssl@1.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/cloudflare/cfssl"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-2048/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-09-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "mkcert-1.4",
+      "name": "mkcert",
+      "version": "1.4",
+      "purl": "pkg:generic/mkcert@1.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/FiloSottile/mkcert"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-2048"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-06-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "ejbca-community-7.11",
+      "name": "EJBCA Community",
+      "version": "7.11",
+      "purl": "pkg:generic/ejbca-community@7.11",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/Keyfactor/ejbca-ce"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Java"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA PKI"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        },
+        {
+          "name": "security_layer",
+          "value": "L28"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "step-ca-0.26",
+      "name": "step-ca",
+      "version": "0.26",
+      "purl": "pkg:generic/step-ca@0.26",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/smallstep/certificates"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA CA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "hashicorp-vault-1.15",
+      "name": "HashiCorp Vault",
+      "version": "1.15",
+      "purl": "pkg:generic/hashicorp-vault@1.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/hashicorp/vault"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA PKI secrets"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L06"
+        },
+        {
+          "name": "security_layer",
+          "value": "L14"
+        },
+        {
+          "name": "security_layer",
+          "value": "L23"
+        },
+        {
+          "name": "security_layer",
+          "value": "L26"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "apache-httpd-2.4",
+      "name": "Apache httpd",
+      "version": "2.4",
+      "purl": "pkg:generic/apache-httpd@2.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/httpd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "4"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-18"
+        },
+        {
+          "name": "security_layer",
+          "value": "L07"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "caddy-2.7",
+      "name": "Caddy",
+      "version": "2.7",
+      "purl": "pkg:generic/caddy@2.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/caddyserver/caddy"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/ECDSA auto"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L07"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "haproxy-2.8",
+      "name": "HAProxy",
+      "version": "2.8",
+      "purl": "pkg:generic/haproxy@2.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/haproxy/haproxy"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-10-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L07"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "python-jose-3.3",
+      "name": "python-jose",
+      "version": "3.3",
+      "purl": "pkg:generic/python-jose@3.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/mpdavis/python-jose"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "JWT RS256/ES256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2022-04-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L08"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "node-jsonwebtoken-9.0",
+      "name": "node-jsonwebtoken",
+      "version": "9.0",
+      "purl": "pkg:generic/node-jsonwebtoken@9.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/auth0/node-jsonwebtoken"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "JavaScript"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "JWT RS256/HS256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-07-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L08"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "keycloak-23",
+      "name": "Keycloak",
+      "version": "23",
+      "purl": "pkg:generic/keycloak@23",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/keycloak/keycloak"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Java"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "OIDC RS256/JWT"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "3"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L08"
+        },
+        {
+          "name": "security_layer",
+          "value": "L15"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "dex-2.38",
+      "name": "Dex",
+      "version": "2.38",
+      "purl": "pkg:generic/dex@2.38",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dexidp/dex"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "OIDC RS256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L08"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bind9-9.18",
+      "name": "BIND9",
+      "version": "9.18",
+      "purl": "pkg:generic/bind9@9.18",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/isc-projects/bind9"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "DNSSEC RSA/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "5"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-12"
+        },
+        {
+          "name": "security_layer",
+          "value": "L09"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "unbound-1.19",
+      "name": "Unbound",
+      "version": "1.19",
+      "purl": "pkg:generic/unbound@1.19",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/NLnetLabs/unbound"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "DNSSEC validation"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-08"
+        },
+        {
+          "name": "security_layer",
+          "value": "L09"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "powerdns-4.8",
+      "name": "PowerDNS",
+      "version": "4.8",
+      "purl": "pkg:generic/powerdns@4.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/PowerDNS/pdns"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C++"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "DNSSEC RSA/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L09"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "coredns-1.11",
+      "name": "CoreDNS",
+      "version": "1.11",
+      "purl": "pkg:generic/coredns@1.11",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/coredns/coredns"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "DNS/TLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L09"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "openssh-9.5",
+      "name": "OpenSSH",
+      "version": "9.5",
+      "purl": "pkg:generic/openssh@9.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/openssh/openssh-portable"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-4096+ECDH (hybrid PQ available in 9.0+)"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-10-04"
+        },
+        {
+          "name": "security_layer",
+          "value": "L10"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "paramiko-3.4",
+      "name": "Paramiko",
+      "version": "3.4",
+      "purl": "pkg:generic/paramiko@3.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/paramiko/paramiko"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA SSH"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L10"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "teleport-14",
+      "name": "Teleport",
+      "version": "14",
+      "purl": "pkg:generic/teleport@14",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/gravitational/teleport"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L10"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "gnupg-2.4",
+      "name": "GnuPG",
+      "version": "2.4",
+      "purl": "pkg:generic/gnupg@2.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-3.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/gpg/gnupg"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-4096/DSA PGP"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-30"
+        },
+        {
+          "name": "security_layer",
+          "value": "L11"
+        },
+        {
+          "name": "security_layer",
+          "value": "L12"
+        },
+        {
+          "name": "security_layer",
+          "value": "L23"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "postfix-3.8",
+      "name": "Postfix",
+      "version": "3.8",
+      "purl": "pkg:generic/postfix@3.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "IPL"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/vdukhovni/postfix"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-10-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L11"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "dovecot-2.3",
+      "name": "Dovecot",
+      "version": "2.3",
+      "purl": "pkg:generic/dovecot@2.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dovecot/core"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-09-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L11"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "cosign-2.2",
+      "name": "cosign",
+      "version": "2.2",
+      "purl": "pkg:generic/cosign@2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/sigstore/cosign"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECDSA OCI signing"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-12"
+        },
+        {
+          "name": "security_layer",
+          "value": "L12"
+        },
+        {
+          "name": "security_layer",
+          "value": "L29"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "in-toto-2.0",
+      "name": "in-toto",
+      "version": "2.0",
+      "purl": "pkg:generic/in-toto@2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/in-toto/in-toto"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA supply-chain attestation"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-10-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L12"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "rekor-1.3",
+      "name": "Rekor",
+      "version": "1.3",
+      "purl": "pkg:generic/rekor@1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/sigstore/rekor"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECDSA transparency log"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-25"
+        },
+        {
+          "name": "security_layer",
+          "value": "L12"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "openvpn-2.6",
+      "name": "OpenVPN",
+      "version": "2.6",
+      "purl": "pkg:generic/openvpn@2.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/OpenVPN/openvpn"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS+RSA/ECDSA+DH"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-18"
+        },
+        {
+          "name": "security_layer",
+          "value": "L13"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "tailscale-1.56",
+      "name": "Tailscale",
+      "version": "1.56",
+      "purl": "pkg:generic/tailscale@1.56",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/tailscale/tailscale"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "WireGuard+Noise protocol"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L13"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "softhsm2-2.6",
+      "name": "SoftHSM2",
+      "version": "2.6",
+      "purl": "pkg:generic/softhsm2@2.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/opendnssec/SoftHSMv2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C++"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "PKCS11+RSA-4096"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-05-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L14"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "opensc-0.24",
+      "name": "OpenSC",
+      "version": "0.24",
+      "purl": "pkg:generic/opensc@0.24",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/OpenSC/OpenSC"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "PKCS11/RSA smart-card"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L14"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "openldap-2.6",
+      "name": "OpenLDAP",
+      "version": "2.6",
+      "purl": "pkg:generic/openldap@2.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "OpenLDAP"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/openldap/openldap"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "LDAP/TLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-09-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L15"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "freeipa-4.11",
+      "name": "FreeIPA",
+      "version": "4.11",
+      "purl": "pkg:generic/freeipa@4.11",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-3.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/freeipa/freeipa"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "Kerberos+RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L15"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "authentik-2024.1",
+      "name": "Authentik",
+      "version": "2024.1",
+      "purl": "pkg:generic/authentik@2024.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/goauthentik/authentik"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "OIDC RS256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L15"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "kong-3.5",
+      "name": "Kong",
+      "version": "3.5",
+      "purl": "pkg:generic/kong@3.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/Kong/kong"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Lua"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "OAuth2+JWT RS256+mTLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L16"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "traefik-3.0",
+      "name": "Traefik",
+      "version": "3.0",
+      "purl": "pkg:generic/traefik@3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/traefik/traefik"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS+ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-22"
+        },
+        {
+          "name": "security_layer",
+          "value": "L16"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "oauth2-proxy-7.6",
+      "name": "OAuth2-Proxy",
+      "version": "7.6",
+      "purl": "pkg:generic/oauth2-proxy@7.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/oauth2-proxy/oauth2-proxy"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "OAuth2/RS256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L16"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "postgresql-16",
+      "name": "PostgreSQL",
+      "version": "16",
+      "purl": "pkg:generic/postgresql@16",
+      "licenses": [
+        {
+          "license": {
+            "id": "PostgreSQL"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/postgres/postgres"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TDE+TLS/RSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-09"
+        },
+        {
+          "name": "security_layer",
+          "value": "L17"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pgcrypto-1.3",
+      "name": "pgcrypto",
+      "version": "1.3",
+      "purl": "pkg:generic/pgcrypto@1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "PostgreSQL"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/postgres/postgres"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "AES-256 TDE"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-09"
+        },
+        {
+          "name": "security_layer",
+          "value": "L17"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "bitcoin-core-26.0",
+      "name": "Bitcoin Core",
+      "version": "26.0",
+      "purl": "pkg:generic/bitcoin-core@26.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/bitcoin/bitcoin"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C++"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECDSA secp256k1"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-06"
+        },
+        {
+          "name": "security_layer",
+          "value": "L18"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "go-ethereum-1.13",
+      "name": "go-ethereum",
+      "version": "1.13",
+      "purl": "pkg:generic/go-ethereum@1.13",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-3.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/ethereum/go-ethereum"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECDSA+SHA-256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L18"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "hyperledger-fabric-2.5",
+      "name": "Hyperledger Fabric",
+      "version": "2.5",
+      "purl": "pkg:generic/hyperledger-fabric@2.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/hyperledger/fabric"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECDSA P-256"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L18"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "containerd-1.7",
+      "name": "containerd",
+      "version": "1.7",
+      "purl": "pkg:generic/containerd@1.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/containerd/containerd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS+ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L19"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "istio-1.20",
+      "name": "Istio",
+      "version": "1.20",
+      "purl": "pkg:generic/istio@1.20",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/istio/istio"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "mTLS ECDSA+SPIFFE"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-14"
+        },
+        {
+          "name": "security_layer",
+          "value": "L19"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "spire-1.8",
+      "name": "SPIRE",
+      "version": "1.8",
+      "purl": "pkg:generic/spire@1.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spiffe/spire"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECDSA SVIDs"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L19"
+        },
+        {
+          "name": "security_layer",
+          "value": "L25"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "cert-manager-1.13",
+      "name": "cert-manager",
+      "version": "1.13",
+      "purl": "pkg:generic/cert-manager@1.13",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/cert-manager/cert-manager"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/ECDSA cert automation"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L19"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "mosquitto-2.0",
+      "name": "Mosquitto",
+      "version": "2.0",
+      "purl": "pkg:generic/mosquitto@2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "EPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/eclipse/mosquitto"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS+RSA MQTT broker"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-09-05"
+        },
+        {
+          "name": "security_layer",
+          "value": "L20"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "mbedtls-3.5",
+      "name": "mbedTLS",
+      "version": "3.5",
+      "purl": "pkg:generic/mbedtls@3.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/Mbed-TLS/mbedtls"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECC+RSA+DTLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-21"
+        },
+        {
+          "name": "security_layer",
+          "value": "L20"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "wolfssl-5.7",
+      "name": "wolfSSL",
+      "version": "5.7",
+      "purl": "pkg:generic/wolfssl@5.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/wolfSSL/wolfssl"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "ECC/RSA IoT TLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-12"
+        },
+        {
+          "name": "security_layer",
+          "value": "L20"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "okhttp-4.12",
+      "name": "OkHttp",
+      "version": "4.12",
+      "purl": "pkg:generic/okhttp@4.12",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/square/okhttp"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Kotlin"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS+cert pinning+ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-14"
+        },
+        {
+          "name": "security_layer",
+          "value": "L21"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "trustkit-android-2.0",
+      "name": "TrustKit-Android",
+      "version": "2.0",
+      "purl": "pkg:generic/trustkit-android@2.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/datatheorem/TrustKit-Android"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Java"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "cert pinning ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2022-11-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L21"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "uefi-ovmf-(edk2)-202311",
+      "name": "UEFI OVMF (edk2)",
+      "version": "202311",
+      "purl": "pkg:generic/uefi-ovmf-(edk2)@202311",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/tianocore/edk2"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-2048 secure boot"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-11-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L22"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "keylime-7.6",
+      "name": "Keylime",
+      "version": "7.6",
+      "purl": "pkg:generic/keylime@7.6",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/keylime/keylime"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TPM+RSA attestation"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L22"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "fwupd-1.9",
+      "name": "fwupd",
+      "version": "1.9",
+      "purl": "pkg:generic/fwupd@1.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/fwupd/fwupd"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA firmware signing"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L22"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "trivy-0.48",
+      "name": "Trivy",
+      "version": "0.48",
+      "purl": "pkg:generic/trivy@0.48",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aquasecurity/trivy"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "SBOM/vuln scan (no crypto)"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-18"
+        },
+        {
+          "name": "security_layer",
+          "value": "L23"
+        },
+        {
+          "name": "security_layer",
+          "value": "L29"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "syft-1.0",
+      "name": "Syft",
+      "version": "1.0",
+      "purl": "pkg:generic/syft@1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/anchore/syft"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "SBOM generation (no crypto)"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L23"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "wazuh-4.7",
+      "name": "Wazuh",
+      "version": "4.7",
+      "purl": "pkg:generic/wazuh@4.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "GPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/wazuh/wazuh"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C/Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS agent auth ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L24"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "elasticsearch-8.11",
+      "name": "Elasticsearch",
+      "version": "8.11",
+      "purl": "pkg:generic/elasticsearch@8.11",
+      "licenses": [
+        {
+          "license": {
+            "id": "SSPL"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/elastic/elasticsearch"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Java"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA cluster comms"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-14"
+        },
+        {
+          "name": "security_layer",
+          "value": "L24"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "fluent-bit-3.0",
+      "name": "Fluent Bit",
+      "version": "3.0",
+      "purl": "pkg:generic/fluent-bit@3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/fluent/fluent-bit"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA log shipping"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L24"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "vector-0.34",
+      "name": "Vector",
+      "version": "0.34",
+      "purl": "pkg:generic/vector@0.34",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/vectordotdev/vector"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Rust"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "TLS/RSA log pipeline"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L24"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "pomerium-0.25",
+      "name": "Pomerium",
+      "version": "0.25",
+      "purl": "pkg:generic/pomerium@0.25",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pomerium/pomerium"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "OIDC RS256+mTLS"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L25"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "cilium-1.15",
+      "name": "Cilium",
+      "version": "1.15",
+      "purl": "pkg:generic/cilium@1.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/cilium/cilium"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "mTLS+ECDSA eBPF policy"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-12"
+        },
+        {
+          "name": "security_layer",
+          "value": "L25"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "sealed-secrets-0.25",
+      "name": "Sealed Secrets",
+      "version": "0.25",
+      "purl": "pkg:generic/sealed-secrets@0.25",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/bitnami-labs/sealed-secrets"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA-4096 k8s secret encryption"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-08"
+        },
+        {
+          "name": "security_layer",
+          "value": "L26"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "sops-3.8",
+      "name": "SOPS",
+      "version": "3.8",
+      "purl": "pkg:generic/sops@3.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/getsops/sops"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Go"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "RSA/AES secret encryption"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L26"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "openscap-1.3",
+      "name": "OpenSCAP",
+      "version": "1.3",
+      "purl": "pkg:generic/openscap@1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/OpenSCAP/openscap"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "FIPS 140-2 scanning"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-10-15"
+        },
+        {
+          "name": "security_layer",
+          "value": "L27"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "inspec-5.22",
+      "name": "Inspec",
+      "version": "5.22",
+      "purl": "pkg:generic/inspec@5.22",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/inspec/inspec"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Ruby"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "compliance checks (no crypto primitives)"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L27"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "falco-0.37",
+      "name": "Falco",
+      "version": "0.37",
+      "purl": "pkg:generic/falco@0.37",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/falcosecurity/falco"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C++"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "runtime security (no crypto primitives)"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L27"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "opentimestamps-0.7",
+      "name": "OpenTimestamps",
+      "version": "0.7",
+      "purl": "pkg:generic/opentimestamps@0.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-3.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/opentimestamps/opentimestamps-client"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "SHA-256 blockchain anchoring"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "false"
+        },
+        {
+          "name": "cve_count",
+          "value": "0"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-05-01"
+        },
+        {
+          "name": "security_layer",
+          "value": "L28"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "onnx-runtime-1.17",
+      "name": "ONNX Runtime",
+      "version": "1.17",
+      "purl": "pkg:generic/onnx-runtime@1.17",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/microsoft/onnxruntime"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "C++"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "model serving TLS/ECDSA"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "1"
+        },
+        {
+          "name": "last_updated",
+          "value": "2024-01-10"
+        },
+        {
+          "name": "security_layer",
+          "value": "L29"
+        }
+      ]
+    },
+    {
+      "type": "library",
+      "bom-ref": "mlflow-2.9",
+      "name": "MLflow",
+      "version": "2.9",
+      "purl": "pkg:generic/mlflow@2.9",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/mlflow/mlflow"
+        }
+      ],
+      "properties": [
+        {
+          "name": "language",
+          "value": "Python"
+        },
+        {
+          "name": "crypto_algorithm",
+          "value": "JWT RS256 API"
+        },
+        {
+          "name": "quantum_vulnerable",
+          "value": "true"
+        },
+        {
+          "name": "cve_count",
+          "value": "2"
+        },
+        {
+          "name": "last_updated",
+          "value": "2023-12-20"
+        },
+        {
+          "name": "security_layer",
+          "value": "L29"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "circuit": "3-qubit GHZ",
+  "n_qubits": 3,
+  "n_shots": 8192,
+  "calibration_matrix_shape": [
+    8,
+    8
+  ],
+  "calibration_matrix_condition_number": 1.3485,
+  "per_qubit_readout_errors": [
+    {
+      "qubit": 0,
+      "p_1_given_0": 0.057506,
+      "p_0_given_1": 0.045889
+    },
+    {
+      "qubit": 1,
+      "p_1_given_0": 0.066541,
+      "p_0_given_1": 0.019008
+    },
+    {
+      "qubit": 2,
+      "p_1_given_0": 0.03801,
+      "p_0_given_1": 0.044942
+    }
+  ],
+  "raw_counts": {
+    "000": 3386,
+    "001": 137,
+    "010": 249,
+    "011": 201,
+    "100": 240,
+    "101": 91,
+    "110": 187,
+    "111": 3701
+  },
+  "corrected_counts": {
+    "000": 3996,
+    "011": 15,
+    "100": 34,
+    "101": 12,
+    "111": 4135
+  },
+  "error_rate_before": 0.1348877,
+  "error_rate_after": 0.01220711,
+  "error_reduction_pct": 90.95
+}

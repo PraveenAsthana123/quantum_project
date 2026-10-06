@@ -1,0 +1,70 @@
+{
+  "n_qubits": 50,
+  "coax_lines": 200,
+  "dc_lines": 50,
+  "sma_connectors": 1000,
+  "total_heat_load_mW": 0.021,
+  "recommended_stages": [
+    "77K",
+    "4K",
+    "1K",
+    "100mK",
+    "20mK"
+  ],
+  "wiring_details": {
+    "n_qubits": 50,
+    "control_coax_lines": 100,
+    "readout_coax_lines": 100,
+    "total_coax_lines": 200,
+    "dc_lines": 50,
+    "sma_connectors": 1000
+  },
+  "heat_loads_by_stage": [
+    {
+      "stage": "77K",
+      "temperature_K": 77.0,
+      "coax_heat_load_mW": 0.5,
+      "dc_heat_load_mW": 0.05,
+      "readout_heat_load_mW": 0.5,
+      "total_heat_load_mW": 1.05,
+      "total_heat_load_uW": 1050.0
+    },
+    {
+      "stage": "4K",
+      "temperature_K": 4.0,
+      "coax_heat_load_mW": 0.1,
+      "dc_heat_load_mW": 0.01,
+      "readout_heat_load_mW": 0.1,
+      "total_heat_load_mW": 0.21,
+      "total_heat_load_uW": 210.0
+    },
+    {
+      "stage": "1K",
+      "temperature_K": 0.9,
+      "coax_heat_load_mW": 0.03,
+      "dc_heat_load_mW": 0.003,
+      "readout_heat_load_mW": 0.03,
+      "total_heat_load_mW": 0.063,
+      "total_heat_load_uW": 63.0
+    },
+    {
+      "stage": "100mK",
+      "temperature_K": 0.1,
+      "coax_heat_load_mW": 0.015,
+      "dc_heat_load_mW": 0.0015,
+      "readout_heat_load_mW": 0.015,
+      "total_heat_load_mW": 0.0315,
+      "total_heat_load_uW": 31.5
+    },
+    {
+      "stage": "20mK",
+      "temperature_K": 0.02,
+      "coax_heat_load_mW": 0.01,
+      "dc_heat_load_mW": 0.001,
+      "readout_heat_load_mW": 0.01,
+      "total_heat_load_mW": 0.021,
+      "total_heat_load_uW": 21.0
+    }
+  ],
+  "recommendation": "WARNING: Wiring heat load (21.0 \u03bcW) exceeds typical mixing chamber cooling power (20.0 \u03bcW).\nRecommendations:\n  1. Use NbTi/NbTiN superconducting coax below 4K (near-zero thermal conduction)\n  2. Install in-line attenuators at 4K, 1K, 20mK stages\n  3. Use cryogenic switches/multiplexers to reduce physical line count\n  4. Consider larger DR system (e.g., Bluefors XLD with 40+ \u03bcW capacity)"
+}

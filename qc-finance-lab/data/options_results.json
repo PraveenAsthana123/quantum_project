@@ -1,0 +1,150 @@
+{
+  "generated_at": "2026-10-04T03:15:03.249372",
+  "option_params": {
+    "S0": 100.0,
+    "K": 105.0,
+    "T": 0.5,
+    "r": 0.05,
+    "sigma": 0.2
+  },
+  "black_scholes": {
+    "price": 4.58168,
+    "d1": -0.097511,
+    "d2": -0.238933,
+    "delta": 0.46116,
+    "gamma": 0.028076,
+    "vega": 28.075684,
+    "theta": -0.021074,
+    "rho": 20.767171,
+    "elapsed_s": 0.003165
+  },
+  "monte_carlo": {
+    "price": 4.576595,
+    "std_error": 0.025996,
+    "ci_95": [
+      4.525644,
+      4.627547
+    ],
+    "n_paths": 100000,
+    "elapsed_s": 0.011
+  },
+  "quantum_qae": {
+    "method": "QAE-unavailable",
+    "error": "PennyLane also not available: No module named 'pennylane'",
+    "elapsed_s": 0.0
+  },
+  "put_call_parity": {
+    "call_price": 4.58168,
+    "put_price": 6.989221,
+    "S - K*exp(-rT)": -2.407541,
+    "parity_satisfied": "True",
+    "parity_diff": 0.0
+  },
+  "implied_vol_surface": {
+    "spot": 100.0,
+    "expiry_T": 0.5,
+    "rate": 0.05,
+    "model": "synthetic-Heston-skew",
+    "surface": [
+      {
+        "strike": 70.0,
+        "moneyness": -0.3567,
+        "implied_vol": 0.217061,
+        "bs_price": 31.754724,
+        "delta": 0.994818
+      },
+      {
+        "strike": 75.0,
+        "moneyness": -0.2877,
+        "implied_vol": 0.212769,
+        "bs_price": 26.93991,
+        "delta": 0.984362
+      },
+      {
+        "strike": 80.0,
+        "moneyness": -0.2231,
+        "implied_vol": 0.209184,
+        "bs_price": 22.226985,
+        "delta": 0.960075
+      },
+      {
+        "strike": 85.0,
+        "moneyness": -0.1625,
+        "implied_vol": 0.206196,
+        "bs_price": 17.719984,
+        "delta": 0.912929
+      },
+      {
+        "strike": 90.0,
+        "moneyness": -0.1054,
+        "implied_vol": 0.203716,
+        "bs_price": 13.563068,
+        "delta": 0.835715
+      },
+      {
+        "strike": 95.0,
+        "moneyness": -0.0513,
+        "implied_vol": 0.20167,
+        "bs_price": 9.911905,
+        "delta": 0.727845
+      },
+      {
+        "strike": 100.0,
+        "moneyness": 0.0,
+        "implied_vol": 0.2,
+        "bs_price": 6.888729,
+        "delta": 0.597734
+      },
+      {
+        "strike": 105.0,
+        "moneyness": 0.0488,
+        "implied_vol": 0.198655,
+        "bs_price": 4.54393,
+        "delta": 0.460519
+      },
+      {
+        "strike": 110.0,
+        "moneyness": 0.0953,
+        "implied_vol": 0.197595,
+        "bs_price": 2.844613,
+        "delta": 0.332377
+      },
+      {
+        "strike": 115.0,
+        "moneyness": 0.1398,
+        "implied_vol": 0.196784,
+        "bs_price": 1.693014,
+        "delta": 0.225071
+      },
+      {
+        "strike": 120.0,
+        "moneyness": 0.1823,
+        "implied_vol": 0.196192,
+        "bs_price": 0.960925,
+        "delta": 0.143516
+      },
+      {
+        "strike": 125.0,
+        "moneyness": 0.2231,
+        "implied_vol": 0.195795,
+        "bs_price": 0.522254,
+        "delta": 0.086607
+      },
+      {
+        "strike": 130.0,
+        "moneyness": 0.2624,
+        "implied_vol": 0.195571,
+        "bs_price": 0.273071,
+        "delta": 0.04975
+      }
+    ]
+  },
+  "comparison": {
+    "black_scholes_price": 4.58168,
+    "monte_carlo_price": 4.576595,
+    "qae_price": null,
+    "mc_vs_bs_error": 0.005085,
+    "qae_vs_bs_error": null,
+    "mc_speedup_note": "Classical MC O(1/sqrt(N)); QAE achieves O(1/N) in theory"
+  }
+}

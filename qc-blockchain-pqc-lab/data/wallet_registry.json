@@ -1,0 +1,106 @@
+{
+  "wallets": [
+    {
+      "wallet_id": "WALLET-3E958A61",
+      "owner": "user-001",
+      "algorithm": "ECDSA-P256",
+      "address": "bc122cb9f6c669c4fb9b446f88678b2",
+      "public_key_bytes": 64,
+      "quantum_safe": false,
+      "created_at": "2026-01-01T00:00:00Z",
+      "balance_btc": 2.597495
+    },
+    {
+      "wallet_id": "WALLET-80FDEF79",
+      "owner": "user-002",
+      "algorithm": "ML-DSA-65",
+      "address": "pq1f4ab2ca7bcb643c6b21fa5644102",
+      "public_key_bytes": 1952,
+      "quantum_safe": true,
+      "created_at": "2026-01-04T00:00:00Z",
+      "balance_btc": 6.855727
+    },
+    {
+      "wallet_id": "WALLET-28677810",
+      "owner": "user-003",
+      "algorithm": "SLH-DSA-128f",
+      "address": "pq11c74f53296c54368abe4542c41c0",
+      "public_key_bytes": 32,
+      "quantum_safe": true,
+      "created_at": "2026-01-07T00:00:00Z",
+      "balance_btc": 6.843978
+    },
+    {
+      "wallet_id": "WALLET-D4E9698E",
+      "owner": "user-004",
+      "algorithm": "FALCON-512",
+      "address": "pq1b0fd919e01e84830b4a7f4a3030a",
+      "public_key_bytes": 897,
+      "quantum_safe": true,
+      "created_at": "2026-01-10T00:00:00Z",
+      "balance_btc": 8.494868
+    },
+    {
+      "wallet_id": "WALLET-955C98E5",
+      "owner": "user-005",
+      "algorithm": "ECDSA-P256",
+      "address": "bc1ff2cbb6af26b4f5caa275e4f2022",
+      "public_key_bytes": 64,
+      "quantum_safe": false,
+      "created_at": "2026-01-13T00:00:00Z",
+      "balance_btc": 1.865384
+    },
+    {
+      "wallet_id": "WALLET-6F442997",
+      "owner": "user-006",
+      "algorithm": "ML-DSA-65",
+      "address": "pq15c87ba841c844d41ae9a999671f7",
+      "public_key_bytes": 1952,
+      "quantum_safe": true,
+      "created_at": "2026-01-16T00:00:00Z",
+      "balance_btc": 2.313281
+    },
+    {
+      "wallet_id": "WALLET-AFC1B9EE",
+      "owner": "user-007",
+      "algorithm": "SLH-DSA-128f",
+      "address": "pq1dadadc94bda84ce9b4cd7f6994cc",
+      "public_key_bytes": 32,
+      "quantum_safe": true,
+      "created_at": "2026-01-19T00:00:00Z",
+      "balance_btc": 1.480128
+    },
+    {
+      "wallet_id": "WALLET-C53AD375",
+      "owner": "user-008",
+      "algorithm": "FALCON-512",
+      "address": "pq1496afe564cd747068b2b3a293d9b",
+      "public_key_bytes": 897,
+      "quantum_safe": true,
+      "created_at": "2026-01-22T00:00:00Z",
+      "balance_btc": 2.259378
+    },
+    {
+      "wallet_id": "WALLET-FA02264F",
+      "owner": "user-009",
+      "algorithm": "ECDSA-P256",
+      "address": "bc150fc35db83ca456c89bea8a3fbca",
+      "public_key_bytes": 64,
+      "quantum_safe": false,
+      "created_at": "2026-01-25T00:00:00Z",
+      "balance_btc": 7.342896
+    },
+    {
+      "wallet_id": "WALLET-71D703CC",
+      "owner": "user-010",
+      "algorithm": "ML-DSA-65",
+      "address": "pq1693caa8a2f22449ebf5b287dfb6c",
+      "public_key_bytes": 1952,
+      "quantum_safe": true,
+      "created_at": "2026-01-28T00:00:00Z",
+      "balance_btc": 1.310828
+    }
+  ],
+  "count": 10,
+  "generated_at": "2026-10-06T21:03:10.988106Z"
+}

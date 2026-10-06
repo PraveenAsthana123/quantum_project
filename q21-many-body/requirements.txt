@@ -1,0 +1,9 @@
+# Q21 Many-Body Physics Requirements
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.6.0
+# Optional: for production-grade many-body simulations
+qiskit>=0.45.0
+qiskit-aer>=0.13.0
+netket>=3.9.0    # from github/manybody/netket
+tenpy>=0.10.0    # from github/manybody/tenpy

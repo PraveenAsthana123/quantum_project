@@ -1,0 +1,307 @@
+{
+  "anyon_type": "Fibonacci anyon \u03c4",
+  "fusion_rules": {
+    "tau_x_tau": "1 + tau",
+    "tau_x_1": "tau",
+    "1_x_1": "1"
+  },
+  "golden_ratio_phi": 1.618033988749895,
+  "F_matrix": {
+    "name": "F^{\u03c4\u03c4}_{\u03c4\u03c4}",
+    "real": [
+      [
+        0.6180339887498948,
+        0.7861513777574233
+      ],
+      [
+        0.7861513777574233,
+        -0.6180339887498948
+      ]
+    ],
+    "imag": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "is_unitary": true
+  },
+  "R_matrix_diagonal": {
+    "R_tau_1": {
+      "value": "(-0.8090169943749473+0.5877852522924732j)",
+      "angle_deg": 144.0
+    },
+    "R_tau_tau": {
+      "value": "(-0.30901699437494734-0.9510565162951536j)",
+      "angle_deg": -108.0
+    }
+  },
+  "sigma1": {
+    "real": [
+      [
+        -0.49999999999999983,
+        -0.24293413587832283
+      ],
+      [
+        -0.2429341358783228,
+        -0.6180339887498948
+      ]
+    ],
+    "imag": [
+      [
+        -0.3632712640026805,
+        0.7476743906106104
+      ],
+      [
+        0.7476743906106104,
+        1.4608835625347104e-16
+      ]
+    ],
+    "is_unitary": true
+  },
+  "sigma2": {
+    "real": [
+      [
+        -0.8090169943749473,
+        0.0
+      ],
+      [
+        0.0,
+        -0.30901699437494734
+      ]
+    ],
+    "imag": [
+      [
+        0.5877852522924732,
+        0.0
+      ],
+      [
+        0.0,
+        -0.9510565162951536
+      ]
+    ]
+  },
+  "braid_sequence": [
+    1,
+    2,
+    1
+  ],
+  "resulting_gate": {
+    "real": [
+      [
+        -0.4999999999999999,
+        -0.6360098247570345
+      ],
+      [
+        -0.6360098247570345,
+        0.49999999999999994
+      ]
+    ],
+    "imag": [
+      [
+        0.36327126400268056,
+        0.4620881859152224
+      ],
+      [
+        0.4620881859152225,
+        -0.3632712640026806
+      ]
+    ]
+  },
+  "gate_fidelity": 0.985868,
+  "all_demonstrations": [
+    {
+      "name": "\u03c3\u2081",
+      "braid_sequence": [
+        1
+      ],
+      "description": "Single exchange of anyons 1,2",
+      "gate_real": [
+        [
+          -0.49999999999999983,
+          -0.24293413587832283
+        ],
+        [
+          -0.2429341358783228,
+          -0.6180339887498948
+        ]
+      ],
+      "gate_imag": [
+        [
+          -0.3632712640026805,
+          0.7476743906106104
+        ],
+        [
+          0.7476743906106104,
+          1.4608835625347104e-16
+        ]
+      ],
+      "nearest_clifford": "X",
+      "fidelity_to_nearest_clifford": 0.618034,
+      "is_unitary": true
+    },
+    {
+      "name": "\u03c3\u2082",
+      "braid_sequence": [
+        2
+      ],
+      "description": "Single exchange of anyons 2,3",
+      "gate_real": [
+        [
+          -0.8090169943749473,
+          0.0
+        ],
+        [
+          0.0,
+          -0.30901699437494734
+        ]
+      ],
+      "gate_imag": [
+        [
+          0.5877852522924732,
+          0.0
+        ],
+        [
+          0.0,
+          -0.9510565162951536
+        ]
+      ],
+      "nearest_clifford": "S",
+      "fidelity_to_nearest_clifford": 0.975528,
+      "is_unitary": true
+    },
+    {
+      "name": "\u03c3\u2081\u00b2",
+      "braid_sequence": [
+        1,
+        1
+      ],
+      "description": "Double exchange (Dehn twist in channel 1)",
+      "gate_real": [
+        [
+          -0.38196601125010554,
+          0.5432172418791004
+        ],
+        [
+          0.5432172418791004,
+          -0.11803398874989507
+        ]
+      ],
+      "gate_imag": [
+        [
+          -5.3763884035293076e-17,
+          -0.7476743906106103
+        ],
+        [
+          -0.7476743906106103,
+          -0.3632712640026806
+        ]
+      ],
+      "nearest_clifford": "X",
+      "fidelity_to_nearest_clifford": 0.854102,
+      "is_unitary": true
+    },
+    {
+      "name": "\u03c3\u2081\u03c3\u2082",
+      "braid_sequence": [
+        1,
+        2
+      ],
+      "description": "Two successive exchanges",
+      "gate_real": [
+        [
+          0.6180339887498948,
+          -0.24293413587832302
+        ],
+        [
+          0.7861513777574234,
+          0.19098300562505263
+        ]
+      ],
+      "gate_imag": [
+        [
+          5.551115123125783e-17,
+          -0.7476743906106103
+        ],
+        [
+          0.0,
+          0.5877852522924731
+        ]
+      ],
+      "nearest_clifford": "Y",
+      "fidelity_to_nearest_clifford": 0.404508,
+      "is_unitary": true
+    },
+    {
+      "name": "\u03c3\u2081\u03c3\u2082\u03c3\u2081",
+      "braid_sequence": [
+        1,
+        2,
+        1
+      ],
+      "description": "Braid relation: \u03c3\u2081\u03c3\u2082\u03c3\u2081 = \u03c3\u2082\u03c3\u2081\u03c3\u2082",
+      "gate_real": [
+        [
+          -0.4999999999999999,
+          -0.6360098247570345
+        ],
+        [
+          -0.6360098247570345,
+          0.49999999999999994
+        ]
+      ],
+      "gate_imag": [
+        [
+          0.36327126400268056,
+          0.4620881859152224
+        ],
+        [
+          0.4620881859152225,
+          -0.3632712640026806
+        ]
+      ],
+      "nearest_clifford": "H",
+      "fidelity_to_nearest_clifford": 0.985868,
+      "is_unitary": true
+    },
+    {
+      "name": "Approx NOT via \u03c3\u2081\u00b3\u03c3\u2082\u207b\u00b9",
+      "braid_sequence": [
+        1,
+        1,
+        1,
+        -2
+      ],
+      "description": "Approximate NOT gate from Fibonacci braiding",
+      "gate_real": [
+        [
+          -0.07294901687515759,
+          0.3002831060007772
+        ],
+        [
+          -0.09279258287793384,
+          -0.9270509831248424
+        ]
+      ],
+      "gate_imag": [
+        [
+          -0.9510565162951539,
+          2.7755575615628914e-17
+        ],
+        [
+          -0.2855862046953875,
+          0.22451398828979297
+        ]
+      ],
+      "nearest_clifford": "Sdg",
+      "fidelity_to_nearest_clifford": 0.903943,
+      "is_unitary": true
+    }
+  ],
+  "universality": "Fibonacci anyons are computationally universal: any single-qubit gate can be approximated to arbitrary precision by a sufficiently long braid sequence.",
+  "hexagon_equation_max_error": 1.1755705045849463
+}

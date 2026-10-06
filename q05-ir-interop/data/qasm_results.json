@@ -1,0 +1,23 @@
+{
+  "circuit_qubits": 4,
+  "circuit_depth": 6,
+  "circuit_gates": {
+    "cx": 4,
+    "h": 3,
+    "rz": 2,
+    "rx": 1,
+    "t": 1,
+    "s": 1,
+    "tdg": 1
+  },
+  "circuit_gate_count": 13,
+  "qasm3_string_length": 205,
+  "qasm2_string_length": 197,
+  "roundtrip_verified": false,
+  "gate_count_match": false,
+  "reimported_gates": {},
+  "qasm3_file": "/mnt/deepa/quantum/q05-ir-interop/data/circuit.qasm3",
+  "qasm2_file": "/mnt/deepa/quantum/q05-ir-interop/data/circuit.qasm2",
+  "qasm3_snippet": "OPENQASM 3.0;\ninclude \"stdgates.inc\";\nqubit[4] q;\nh q[0];\nh q[2];\ncx q[0], q[1];\ncx q[2], q[3];\nrz(1.57) q[1];\nrx(0.785) q[3];\ncx q[1], q[2];\nt q[0];\ns q[2];\ntdg q[3];\ncx q[0], q[3];\nh q[1];\nrz(0.5) q[2];\n",
+  "reference": "/mnt/deepa/quantum/github/compiler/qir-spec"
+}

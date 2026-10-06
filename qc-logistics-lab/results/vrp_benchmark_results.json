@@ -1,0 +1,113 @@
+{
+  "problem": "Capacitated Vehicle Routing Problem (CVRP)",
+  "data_source": "/mnt/deepa/quantum/data/routing/distance.csv",
+  "cities_small_instance": 6,
+  "vehicles": 2,
+  "vehicle_capacity": 50,
+  "cities_medium_instance": 8,
+  "classical_reference_distance": 461,
+  "classical_method_label": "OR-Tools (exact CVRP)",
+  "methods": [
+    {
+      "name": "OR-Tools (exact CVRP)",
+      "total_distance": 461,
+      "gap_to_optimal": "0% (reference)",
+      "runtime_ms": 9999.96,
+      "routes": [
+        [
+          0,
+          4,
+          5,
+          3,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0
+        ]
+      ],
+      "note": "exact solver"
+    },
+    {
+      "name": "Simulated Annealing",
+      "total_distance": 464,
+      "gap_to_optimal": "0.7%",
+      "runtime_ms": 7.97,
+      "routes": [
+        [
+          0,
+          4,
+          5,
+          3,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0
+        ]
+      ],
+      "config": {
+        "T0": 1000.0,
+        "cooling": 0.995,
+        "iterations": 1000
+      }
+    },
+    {
+      "name": "QAOA p=1 (TSP on 3 cities)",
+      "n_qubits": 9,
+      "circuit_depth": 9,
+      "total_distance": 100.83,
+      "gap_to_optimal_tsp": "0.0%",
+      "approximation_ratio": 1.0,
+      "best_route": [
+        1,
+        2,
+        0
+      ],
+      "opt_energy": -192.2424,
+      "feasible_state_prob": 0.002601,
+      "decode_method": "statevector argmax over feasible states",
+      "runtime_ms": 1141.5,
+      "n_optimizer_evals": 25,
+      "note": "TSP QUBO, N=3 cities (9 qubits), COBYLA optimizer, statevector decode"
+    },
+    {
+      "name": "QAOA p=2 (TSP on 3 cities)",
+      "n_qubits": 9,
+      "circuit_depth": 18,
+      "total_distance": 100.83,
+      "gap_to_optimal_tsp": "0.0%",
+      "approximation_ratio": 1.0,
+      "best_route": [
+        1,
+        0,
+        2
+      ],
+      "opt_energy": -16.7951,
+      "feasible_state_prob": 0.007024,
+      "decode_method": "statevector argmax over feasible states",
+      "runtime_ms": 2259.61,
+      "n_optimizer_evals": 43,
+      "note": "TSP QUBO, N=3 cities (9 qubits), COBYLA optimizer, statevector decode"
+    }
+  ],
+  "quantum_assessment": "QAOA p=1 approximation ratio (optimal/QAOA): 1.000 for N=3-city TSP (9 qubits) on PennyLane default.qubit simulator. QAOA p=2 ratio: 1.000. Current NISQ QAOA is a research proof-of-concept; classical solvers dominate at all practical problem sizes. Ratio = 1 means QAOA found optimal.",
+  "when_quantum_wins": "Theoretical quantum advantage for VRP/TSP is expected only at N>1000 cities where classical branch-and-bound becomes exponentially slow. NISQ-era QAOA (p\u226410, noisy hardware) does NOT yet surpass classical heuristics. Fault-tolerant quantum computers with millions of logical qubits would be needed to demonstrate a practical advantage on real logistics instances.",
+  "hardware_notes": {
+    "simulator": "PennyLane default.qubit (statevector, noise-free)",
+    "real_qubits_needed_for_N6": 36,
+    "real_qubits_needed_for_N8": 64,
+    "current_best_hardware": "IBM Eagle (127 qubits), IBM Condor (1121 qubits)",
+    "feasibility_note": "N=4 (16 qubits) is on the edge of NISQ hardware. N=6 (36 qubits) would require high-quality error mitigation. N=8 (64 qubits) is borderline IBM Heron."
+  },
+  "tech_stack": {
+    "quantum": "PennyLane 0.45.1",
+    "classical": "scipy COBYLA, custom SA, OR-Tools (if installed)",
+    "data": "custom 62-city routing dataset"
+  },
+  "run_timestamp": "2026-10-02T04:34:25Z"
+}

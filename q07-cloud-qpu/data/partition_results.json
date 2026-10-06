@@ -1,0 +1,70 @@
+{
+  "original_qubits": 10,
+  "partition_sizes": [
+    5,
+    5
+  ],
+  "cut_gates": 2,
+  "cut_details": [
+    {
+      "gate_index": 10,
+      "gate_name": "cx",
+      "qubits": [
+        4,
+        5
+      ],
+      "control_qubit": 4,
+      "target_qubit": 5,
+      "crosses_partition_at": "qubit4->qubit5"
+    },
+    {
+      "gate_index": 11,
+      "gate_name": "cx",
+      "qubits": [
+        2,
+        7
+      ],
+      "control_qubit": 2,
+      "target_qubit": 7,
+      "crosses_partition_at": "qubit4->qubit5"
+    }
+  ],
+  "classical_overhead": {
+    "total_classical_bits": 2,
+    "communication_rounds": 1,
+    "latency_us": 1.0,
+    "qpd_overhead_factor": 81,
+    "classical_feedforward_overhead": 1.0
+  },
+  "reconstruction_accuracy": 0.8925,
+  "subcircuit_a_depth": 6,
+  "subcircuit_b_depth": 6,
+  "subcircuit_a_gates": {
+    "cx": 4,
+    "measure": 2,
+    "h": 1
+  },
+  "subcircuit_b_gates": {
+    "measure": 5,
+    "cx": 4,
+    "x": 2,
+    "h": 1,
+    "barrier": 1
+  },
+  "interface_spec": {
+    "cut_1": {
+      "sender_qubit": "A[4] (physical q4)",
+      "receiver_qubit": "B[0] (physical q5)",
+      "classical_bits": 1,
+      "operation": "MEASURE_AND_CORRECT"
+    },
+    "cut_2": {
+      "sender_qubit": "A[2] (physical q2)",
+      "receiver_qubit": "B[2] (physical q7)",
+      "classical_bits": 1,
+      "operation": "MEASURE_AND_CORRECT"
+    },
+    "total_classical_bits": 2,
+    "communication_rounds": 1
+  }
+}

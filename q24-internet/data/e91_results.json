@@ -1,0 +1,25 @@
+{
+  "bell_pairs": 10000,
+  "chsh_value": 2.2924,
+  "chsh_theoretical": 2.389,
+  "chsh_threshold": 2.8284,
+  "eve_detected": false,
+  "key_bits": 1115,
+  "final_key_bits": 508,
+  "key_rate_bps": 50800000.0,
+  "qber_measured_pct": 4.664,
+  "eve_present_simulated": false,
+  "comparison_vs_bb84": {
+    "qber": 0.02,
+    "e91_sifting_fraction": 0.1111111111111111,
+    "e91_secret_key_fraction": 0.0797,
+    "bb84_sifting_fraction": 0.5,
+    "bb84_secret_key_fraction": 0.4293,
+    "bb84_advantage_factor": 5.39
+  },
+  "with_eve": {
+    "chsh_value": 1.711,
+    "eve_detected": true,
+    "qber_measured_pct": 15.846
+  }
+}

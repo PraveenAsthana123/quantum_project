@@ -1,0 +1,53 @@
+{
+  "comb_teeth": 10,
+  "finesse": 10.0,
+  "storage_time_us": 1.0,
+  "multimode_capacity": 10,
+  "efficiency": 0.6566,
+  "efficiency_ideal": 0.6632,
+  "t2_us": 100.0,
+  "finesse_sweep": [
+    {
+      "finesse": 2,
+      "efficiency_ideal": 0.092,
+      "efficiency_with_decoherence": 0.0911,
+      "storage_time_us": 1.0
+    },
+    {
+      "finesse": 3,
+      "efficiency_ideal": 0.2282,
+      "efficiency_with_decoherence": 0.2259,
+      "storage_time_us": 1.0
+    },
+    {
+      "finesse": 5,
+      "efficiency_ideal": 0.429,
+      "efficiency_with_decoherence": 0.4247,
+      "storage_time_us": 1.0
+    },
+    {
+      "finesse": 7,
+      "efficiency_ideal": 0.5521,
+      "efficiency_with_decoherence": 0.5466,
+      "storage_time_us": 1.0
+    },
+    {
+      "finesse": 10,
+      "efficiency_ideal": 0.6632,
+      "efficiency_with_decoherence": 0.6566,
+      "storage_time_us": 1.0
+    },
+    {
+      "finesse": 15,
+      "efficiency_ideal": 0.7624,
+      "efficiency_with_decoherence": 0.7548,
+      "storage_time_us": 1.0
+    },
+    {
+      "finesse": 20,
+      "efficiency_ideal": 0.8166,
+      "efficiency_with_decoherence": 0.8085,
+      "storage_time_us": 1.0
+    }
+  ]
+}

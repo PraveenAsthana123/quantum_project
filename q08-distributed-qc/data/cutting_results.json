@@ -1,0 +1,56 @@
+{
+  "original_qubits": 6,
+  "subcircuit_qubits": 3,
+  "cuts": 2,
+  "overhead_factor": 81,
+  "reconstructed_value": -0.0002,
+  "exact_value": 0.0009,
+  "error": 0.0011,
+  "n_qpd_terms": 6,
+  "shots_per_term": 2048,
+  "total_shots_used": 24576,
+  "term_contributions": [
+    {
+      "term_idx": 0,
+      "coefficient": 0.5,
+      "exp_a": 0.0117,
+      "exp_b": -0.0186,
+      "contribution": -0.0001
+    },
+    {
+      "term_idx": 1,
+      "coefficient": 0.5,
+      "exp_a": -0.0254,
+      "exp_b": 0.0049,
+      "contribution": -0.0001
+    },
+    {
+      "term_idx": 2,
+      "coefficient": 0.5,
+      "exp_a": 0.0146,
+      "exp_b": -0.0264,
+      "contribution": -0.0002
+    },
+    {
+      "term_idx": 3,
+      "coefficient": 0.5,
+      "exp_a": 0.0049,
+      "exp_b": -0.0088,
+      "contribution": -0.0
+    },
+    {
+      "term_idx": 4,
+      "coefficient": -0.5,
+      "exp_a": 0.0146,
+      "exp_b": -0.0244,
+      "contribution": 0.0002
+    },
+    {
+      "term_idx": 5,
+      "coefficient": 0.5,
+      "exp_a": -0.0049,
+      "exp_b": -0.001,
+      "contribution": 0.0
+    }
+  ]
+}

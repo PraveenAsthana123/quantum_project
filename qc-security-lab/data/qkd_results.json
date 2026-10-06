@@ -1,0 +1,43 @@
+{
+  "protocol": "BB84",
+  "backend": "Qiskit Aer simulator",
+  "n_qubits": 256,
+  "qber_threshold": 0.11,
+  "scenarios": [
+    {
+      "scenario": "BB84 no eavesdropper",
+      "n_qubits_sent": 256,
+      "sifted_key_bits": 122,
+      "sift_efficiency": 0.4766,
+      "qber": 0.0,
+      "qber_threshold": 0.11,
+      "eve_detected": false,
+      "matching_bits": 122,
+      "key_agreement_rate": 1.0,
+      "shared_secret_hex_sample": "2e7a67ec",
+      "runtime_s": 0.064,
+      "with_eve": false
+    },
+    {
+      "scenario": "BB84 with eavesdropper (Eve)",
+      "n_qubits_sent": 256,
+      "sifted_key_bits": 117,
+      "sift_efficiency": 0.457,
+      "qber": 0.1966,
+      "qber_threshold": 0.11,
+      "eve_detected": true,
+      "matching_bits": 94,
+      "key_agreement_rate": 0.8034,
+      "shared_secret_hex_sample": "ab1c746d",
+      "runtime_s": 0.068,
+      "with_eve": true
+    }
+  ],
+  "total_runtime_s": 0.133,
+  "security_notes": [
+    "BB84 is information-theoretically secure against any eavesdropper.",
+    "Eve's intercept-resend attack introduces ~25% QBER (detectable above 11% threshold).",
+    "After sifting, remaining errors require privacy amplification (not simulated here).",
+    "Practical QKD systems additionally run error correction before key use."
+  ]
+}

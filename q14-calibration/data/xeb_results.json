@@ -1,0 +1,43 @@
+{
+  "n_qubits": 3,
+  "depths": [
+    1,
+    2,
+    4,
+    6,
+    8,
+    12,
+    16,
+    24,
+    32
+  ],
+  "xeb_scores": [
+    0.944552,
+    1.083648,
+    0.758554,
+    1.512381,
+    0.774,
+    1.224916,
+    0.833465,
+    0.568597,
+    0.931337
+  ],
+  "fidelity_per_cycle": [
+    0.995,
+    0.990025,
+    0.98015,
+    0.970373,
+    0.960693,
+    0.941623,
+    0.922931,
+    0.886654,
+    0.851802
+  ],
+  "theoretical_error_per_cycle": 0.005,
+  "fitted_fidelity_per_cycle": 0.99396408,
+  "extracted_error_per_cycle": 0.00603592,
+  "extrapolated_fidelity_d50": 0.73881305,
+  "fit_success": true,
+  "xeb_formula": "F_XEB = 2^n * <p_ideal(x)>_x - 1",
+  "xeb_description": "XEB benchmarks quantum processors by comparing the output distribution of a random circuit to its classically-computed ideal distribution. F_XEB \u2192 1 for ideal hardware, \u2192 0 for fully depolarized hardware."
+}

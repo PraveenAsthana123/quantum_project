@@ -1,0 +1,251 @@
+{
+  "generated_at": "2026-10-01T22:04:50.854980",
+  "portfolio": {
+    "tickers": [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "GS"
+    ],
+    "weights": [
+      0.25,
+      0.25,
+      0.2,
+      0.15,
+      0.15
+    ],
+    "value_usd": 1000000.0
+  },
+  "data_load_time_s": 0.186,
+  "historical_var": {
+    "method": "Historical-Simulation",
+    "n_observations": 3019,
+    "portfolio_value": 1000000.0,
+    "holding_period_days": 1,
+    "confidence_levels": {
+      "90pct": {
+        "var": 15072.29,
+        "cvar": 27174.89
+      },
+      "95pct": {
+        "var": 23499.75,
+        "cvar": 35608.7
+      },
+      "99pct": {
+        "var": 41209.75,
+        "cvar": 57111.21
+      }
+    },
+    "var_95": 23499.75,
+    "cvar_95": 35608.7,
+    "var_99": 41209.75,
+    "elapsed_s": 0.034
+  },
+  "parametric_var": {
+    "method": "Parametric-Normal",
+    "mu_daily": 833.32,
+    "std_daily": 15357.05,
+    "confidence_levels": {
+      "90pct": {
+        "var": 18847.54,
+        "cvar": 26118.05
+      },
+      "95pct": {
+        "var": 24426.78,
+        "cvar": 30843.87
+      },
+      "99pct": {
+        "var": 34892.53,
+        "cvar": 40096.51
+      }
+    },
+    "t_dist_fitted": {
+      "df": 2.7696,
+      "var_95": 21181.37,
+      "cvar_95": 36839.43
+    },
+    "var_95": 24426.78,
+    "cvar_95": 30843.87,
+    "var_99": 34892.53,
+    "elapsed_s": 0.498
+  },
+  "monte_carlo_var": {
+    "method": "Monte-Carlo-Cholesky",
+    "n_simulations": 50000,
+    "confidence_levels": {
+      "90pct": {
+        "var": 18931.69,
+        "cvar": 26253.5
+      },
+      "95pct": {
+        "var": 24571.77,
+        "cvar": 30994.14
+      },
+      "99pct": {
+        "var": 35063.22,
+        "cvar": 39882.12
+      }
+    },
+    "var_95": 24571.77,
+    "cvar_95": 30994.14,
+    "var_99": 35063.22,
+    "elapsed_s": 0.043
+  },
+  "quantum_qae_var": {
+    "method": "Quantum-QAE-VaR",
+    "n_qubits": 4,
+    "n_buckets": 16,
+    "loss_range": [
+      -164248.36,
+      124177.69
+    ],
+    "confidence_levels": {
+      "95pct": {
+        "var": 25031.24,
+        "p_tail_qae": 0.092763,
+        "num_oracle_queries": 6144
+      },
+      "99pct": {
+        "var": 43057.86,
+        "p_tail_qae": 0.018152,
+        "num_oracle_queries": 7168
+      }
+    },
+    "elapsed_s": 5.558,
+    "var_95": 25031.24,
+    "cvar_95": null,
+    "var_99": 43057.86,
+    "quantum_advantage_note": "Classical Monte Carlo VaR: O(1/sqrt(N)) convergence. Quantum QAE achieves O(1/N) \u2014 quadratic speedup in number of oracle queries."
+  },
+  "stress_tests": {
+    "portfolio_value": 1000000.0,
+    "scenarios": {
+      "1987_Black_Monday": {
+        "description": "Black Monday Oct 19 1987 \u2014 S&P500 fell -20.5% in one day",
+        "shock_pct": -0.205,
+        "portfolio_loss_usd": 205000.0,
+        "pct_of_portfolio": 20.5
+      },
+      "2008_Lehman_collapse": {
+        "description": "Lehman Brothers collapse Sep 15 2008 \u2014 S&P500 -4.7% same day",
+        "shock_pct": -0.047,
+        "portfolio_loss_usd": 47000.0,
+        "pct_of_portfolio": 4.7
+      },
+      "2008_GFC_worst_week": {
+        "description": "GFC worst week Oct 6-10 2008 \u2014 S&P500 -18%",
+        "shock_pct": -0.18,
+        "portfolio_loss_usd": 180000.0,
+        "pct_of_portfolio": 18.0
+      },
+      "2020_COVID_crash": {
+        "description": "COVID crash Mar 16 2020 \u2014 S&P500 -12%",
+        "shock_pct": -0.12,
+        "portfolio_loss_usd": 120000.0,
+        "pct_of_portfolio": 12.0
+      },
+      "2_sigma_event": {
+        "description": "2-sigma 1-day portfolio loss",
+        "shock_pct": -0.030714,
+        "portfolio_loss_usd": 30714.1,
+        "pct_of_portfolio": 3.07
+      },
+      "3_sigma_event": {
+        "description": "3-sigma 1-day portfolio loss (black-swan)",
+        "shock_pct": -0.046071,
+        "portfolio_loss_usd": 46071.16,
+        "pct_of_portfolio": 4.61
+      }
+    },
+    "actual_worst_days": {
+      "2008_GFC_actual": {
+        "description": "Actual worst day in dataset (2008_GFC_actual)",
+        "date": "2008-09-29",
+        "shock_pct": -0.124178,
+        "portfolio_loss_usd": 124177.69
+      },
+      "2011_US_downgrade_actual": {
+        "description": "Actual worst day in dataset (2011_US_downgrade_actual)",
+        "date": "2011-08-08",
+        "shock_pct": -0.052392,
+        "portfolio_loss_usd": 52392.08
+      }
+    }
+  },
+  "rolling_var": {
+    "method": "Rolling-Historical-VaR",
+    "window_description": "Annual windows (full historical simulation per year)",
+    "confidence_level": 0.95,
+    "yearly": {
+      "2009": {
+        "var_95": 30331.73,
+        "cvar_95": 40234.08,
+        "n_days": 252,
+        "worst_day": 77023.42
+      },
+      "2010": {
+        "var_95": 21940.16,
+        "cvar_95": 32163.86,
+        "n_days": 252,
+        "worst_day": 44864.61
+      },
+      "2011": {
+        "var_95": 24831.21,
+        "cvar_95": 34671.13,
+        "n_days": 252,
+        "worst_day": 52392.08
+      },
+      "2012": {
+        "var_95": 16291.2,
+        "cvar_95": 22243.12,
+        "n_days": 250,
+        "worst_day": 34773.28
+      },
+      "2013": {
+        "var_95": 12769.46,
+        "cvar_95": 20576.3,
+        "n_days": 252,
+        "worst_day": 34697.19
+      },
+      "2014": {
+        "var_95": 14907.68,
+        "cvar_95": 20995.92,
+        "n_days": 252,
+        "worst_day": 26732.69
+      },
+      "2015": {
+        "var_95": 19309.0,
+        "cvar_95": 28771.8,
+        "n_days": 252,
+        "worst_day": 52972.61
+      },
+      "2016": {
+        "var_95": 18742.67,
+        "cvar_95": 27885.32,
+        "n_days": 252,
+        "worst_day": 40756.69
+      },
+      "2017": {
+        "var_95": 10959.9,
+        "cvar_95": 17534.8,
+        "n_days": 251,
+        "worst_day": 31205.71
+      }
+    }
+  },
+  "comparison": {
+    "var_95_historical": 23499.75,
+    "var_95_parametric": 24426.78,
+    "var_95_mc": 24571.77,
+    "var_95_qae": 25031.24,
+    "var_99_historical": 41209.75,
+    "var_99_parametric": 34892.53,
+    "var_99_mc": 35063.22,
+    "var_99_qae": 43057.86,
+    "method_note": "Historical simulation is non-parametric and captures fat tails. Parametric assumes normality. MC uses multivariate normal with Cholesky. QAE achieves quadratic speedup over classical MC for tail estimation."
+  },
+  "var_95": 23499.75,
+  "cvar_95": 35608.7,
+  "var_99": 41209.75
+}

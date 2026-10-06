@@ -1,0 +1,49 @@
+{
+  "cuts": 1,
+  "overhead": 4,
+  "samples_needed": 4000,
+  "estimated_time_factor": 4.0,
+  "n_qpd_terms": 4,
+  "reconstructed_expectation": 0.0137,
+  "shots_per_term": 2048,
+  "total_shots": 16384,
+  "term_details": [
+    {
+      "term": 0,
+      "coefficient": 0.5,
+      "prep_op": "I",
+      "meas_basis": "Z",
+      "exp_left": 0.0117,
+      "exp_right": 1.0,
+      "contribution": 0.0059
+    },
+    {
+      "term": 1,
+      "coefficient": 0.5,
+      "prep_op": "X",
+      "meas_basis": "X",
+      "exp_left": 0.0254,
+      "exp_right": 1.0,
+      "contribution": 0.0127
+    },
+    {
+      "term": 2,
+      "coefficient": -0.5,
+      "prep_op": "Y",
+      "meas_basis": "Y",
+      "exp_left": 0.0146,
+      "exp_right": 1.0,
+      "contribution": -0.0073
+    },
+    {
+      "term": 3,
+      "coefficient": 0.5,
+      "prep_op": "Z",
+      "meas_basis": "Z",
+      "exp_left": 0.0049,
+      "exp_right": 1.0,
+      "contribution": 0.0024
+    }
+  ],
+  "overhead_formula": "4^k where k = number of wire cuts"
+}

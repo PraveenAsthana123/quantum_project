@@ -1,0 +1,24 @@
+# Quantum Security Lab dependencies
+# Install: pip install -r requirements.txt
+
+# ── Data & ML ─────────────────────────────────────────────────────────────────
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+xgboost>=2.0          # optional — skipped gracefully if absent
+
+# ── Quantum frameworks ────────────────────────────────────────────────────────
+pennylane>=0.36
+jax>=0.4.20
+jaxlib>=0.4.20
+qiskit>=1.0
+qiskit-aer>=0.14
+
+# ── PQC / cryptography ────────────────────────────────────────────────────────
+# liboqs-python — real NIST FIPS 203/204/206 implementations
+# Install via: pip install liboqs-python
+# (requires liboqs shared library; see https://github.com/open-quantum-safe/liboqs-python)
+liboqs-python          # optional — benchmarks fall back to pure-python stubs if absent
+
+# Classical crypto reference (for RSA/ECDSA comparison benchmarks)
+cryptography>=42.0     # optional — classical_baseline and pqc_benchmark degrade gracefully

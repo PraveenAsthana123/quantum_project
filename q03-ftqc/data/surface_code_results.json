@@ -1,0 +1,27 @@
+{
+  "code": "rotated_surface_code_memory_z",
+  "code_distance": 3,
+  "error_rate": 0.01,
+  "logical_error_rate": 0.02325,
+  "threshold_estimate": 0.01,
+  "n_physical_qubits": 17,
+  "n_data_qubits": 9,
+  "n_logical_qubits": 1,
+  "n_shots_primary": 20000,
+  "decoder": "MWPM (pymatching)",
+  "threshold_sweep": {
+    "d=3": {
+      "p=0.005": 0.006667,
+      "p=0.01": 0.021667,
+      "p=0.015": 0.036,
+      "p=0.02": 0.076333
+    },
+    "d=5": {
+      "p=0.005": 0.004333,
+      "p=0.01": 0.029,
+      "p=0.015": 0.086333,
+      "p=0.02": 0.141333
+    }
+  },
+  "library": "stim"
+}

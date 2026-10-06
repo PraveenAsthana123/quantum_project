@@ -1,0 +1,68 @@
+{
+  "adc_latency_ns": 100,
+  "processing_latency_ns": 200,
+  "dac_latency_ns": 100,
+  "propagation_latency_ns": 100,
+  "total_latency_ns": 500,
+  "feedback_fidelity": 0.606531,
+  "adc_snr_db": 24.08,
+  "assignment_fidelity": 1.0,
+  "below_1us_pct": 100.0,
+  "monte_carlo_mean_ns": 499.53,
+  "monte_carlo_std_ns": 12.69,
+  "latency_trials": [
+    {
+      "trial": 1,
+      "adc_latency_ns": 100.63,
+      "processing_latency_ns": 211.84,
+      "dac_latency_ns": 102.1,
+      "propagation_latency_ns": 99.22,
+      "total_latency_ns": 513.79
+    },
+    {
+      "trial": 2,
+      "adc_latency_ns": 99.34,
+      "processing_latency_ns": 203.04,
+      "dac_latency_ns": 97.49,
+      "propagation_latency_ns": 99.45,
+      "total_latency_ns": 499.32
+    },
+    {
+      "trial": 3,
+      "adc_latency_ns": 103.2,
+      "processing_latency_ns": 201.92,
+      "dac_latency_ns": 95.71,
+      "propagation_latency_ns": 97.52,
+      "total_latency_ns": 498.35
+    },
+    {
+      "trial": 4,
+      "adc_latency_ns": 100.52,
+      "processing_latency_ns": 202.66,
+      "dac_latency_ns": 92.0,
+      "propagation_latency_ns": 98.39,
+      "total_latency_ns": 493.57
+    },
+    {
+      "trial": 5,
+      "adc_latency_ns": 97.32,
+      "processing_latency_ns": 186.34,
+      "dac_latency_ns": 91.6,
+      "propagation_latency_ns": 100.11,
+      "total_latency_ns": 475.37
+    },
+    {
+      "trial": "summary",
+      "adc_latency_ns": 100,
+      "processing_latency_ns": 200,
+      "dac_latency_ns": 100,
+      "propagation_latency_ns": 100,
+      "total_latency_ns": 500,
+      "mean_total_ns": 499.53,
+      "std_total_ns": 12.69,
+      "p99_total_ns": 528.15,
+      "below_1us_pct": 100.0,
+      "feedback_fidelity": 0.606531
+    }
+  ]
+}

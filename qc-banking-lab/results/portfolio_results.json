@@ -1,0 +1,53 @@
+{
+  "dataset": "NSE Nifty-50 historical prices",
+  "tickers": [
+    "RELIANCE",
+    "TCS",
+    "INFY",
+    "HDFCBANK",
+    "WIPRO"
+  ],
+  "data_window": "2016-03-29 to 2021-04-30",
+  "n_trading_days": 1260,
+  "risk_free_rate": 0.065,
+  "budget_K": 2,
+  "classical_markowitz": {
+    "method": "Scipy SLSQP \u2014 Sharpe maximization",
+    "weights": {
+      "RELIANCE": 1.0,
+      "TCS": 0.0,
+      "INFY": 0.0,
+      "HDFCBANK": 0.0,
+      "WIPRO": 0.0
+    },
+    "annual_return": 0.1311,
+    "annual_risk": 0.4374,
+    "sharpe_ratio": 0.151,
+    "runtime_ms": 21.0
+  },
+  "quantum_qaoa": {
+    "method": "QAOA p=2 via PennyLane \u2014 QUBO binary selection",
+    "n_qubits": 5,
+    "n_layers": 2,
+    "qubo_lambda_risk": 0.5,
+    "qubo_lambda_budget": 5.0,
+    "selected_stocks": [
+      "WIPRO"
+    ],
+    "weights": {
+      "RELIANCE": 0.0,
+      "TCS": 0.0,
+      "INFY": 0.0,
+      "HDFCBANK": 0.0,
+      "WIPRO": 1.0
+    },
+    "annual_return": -0.0231,
+    "annual_risk": 0.4301,
+    "sharpe_ratio": -0.205,
+    "runtime_ms": 1070.73
+  },
+  "analysis": {
+    "winner_by_sharpe": "Markowitz",
+    "quantum_notes": "QAOA solves a binary (combinatorial) portfolio-selection QUBO: which K stocks to hold. Markowitz solves a continuous QP: how much of each stock to hold. Both formulations are valid; they answer different sub-problems. QAOA advantage grows with N (combinatorial explosion) but requires deep fault-tolerant circuits for N>20."
+  }
+}

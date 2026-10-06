@@ -1,0 +1,28 @@
+[
+  {
+    "N": 15,
+    "a": 7,
+    "factors": [
+      3,
+      5
+    ],
+    "period": 4,
+    "n_qubits": 11,
+    "classical_time_ms": 0.001699,
+    "quantum_sim_time_ms": 0.001026,
+    "quantum_speedup": "O((log N)^3) vs O(exp((log N)^(1/3))) (Shor vs GNFS)"
+  },
+  {
+    "N": 21,
+    "a": 11,
+    "factors": [
+      3,
+      7
+    ],
+    "period": 6,
+    "n_qubits": 13,
+    "classical_time_ms": 0.000982,
+    "quantum_sim_time_ms": 0.000767,
+    "quantum_speedup": "O((log N)^3) vs O(exp((log N)^(1/3))) (Shor vs GNFS)"
+  }
+]

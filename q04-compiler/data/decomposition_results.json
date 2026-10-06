@@ -1,0 +1,29 @@
+{
+  "n_qubits": 5,
+  "original_gates": {
+    "t": 18,
+    "cx": 18,
+    "tdg": 15,
+    "h": 10,
+    "s": 1
+  },
+  "original_depth": 19,
+  "decomposed_gates": {
+    "rz": 32,
+    "sx": 16,
+    "cx": 15
+  },
+  "decomposed_depth": 25,
+  "cx_count_before": 18,
+  "cx_count_after": 15,
+  "total_gates_before": 62,
+  "total_gates_after": 63,
+  "basis_set": [
+    "cx",
+    "rz",
+    "sx",
+    "x"
+  ],
+  "optimization_level": 3,
+  "reference": "/mnt/deepa/quantum/github/compiler/bqskit"
+}

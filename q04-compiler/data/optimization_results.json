@@ -1,0 +1,37 @@
+{
+  "n_qubits": 5,
+  "gates_before": {
+    "cx": 9,
+    "h": 7,
+    "t": 3,
+    "rz": 2,
+    "tdg": 1
+  },
+  "gates_after": {
+    "cx": 5,
+    "h": 3,
+    "rz": 3,
+    "tdg": 1,
+    "t": 1
+  },
+  "total_gates_before": 22,
+  "total_gates_after": 13,
+  "depth_before": 9,
+  "depth_after": 5,
+  "cancelled_gates": 9,
+  "optimization_passes": [
+    "RemoveResetInZeroState",
+    "CommutationAnalysis",
+    "CommutativeCancellation",
+    "InverseCancellation",
+    "Optimize1qGates",
+    "CXCancellation",
+    "Optimize1qGates"
+  ],
+  "redundancies_injected": {
+    "HH_pairs": 3,
+    "CXCX_pairs": 2,
+    "T_Tdagger_pairs": 1
+  },
+  "reference": "/mnt/deepa/quantum/github/compiler/pyzx"
+}

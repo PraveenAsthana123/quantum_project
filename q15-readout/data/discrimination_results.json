@@ -1,0 +1,187 @@
+{
+  "method": "comparison: threshold, ML, Bayesian, Helstrom",
+  "error_probability": 0.006,
+  "snr_dB": 7.96,
+  "iq_separation": 1.97975,
+  "helstrom_bound": 0.003105,
+  "methods_compared": {
+    "threshold": 0.006,
+    "maximum_likelihood": 0.006,
+    "bayesian_map": 0.006,
+    "helstrom_optimal": 0.003105
+  },
+  "iq_blob_stats": {
+    "mean_state0": [
+      0.9857673761122813,
+      -0.006185696363756085
+    ],
+    "mean_state1": [
+      -0.9939692150493925,
+      0.000989416407338306
+    ],
+    "std_state0": [
+      0.39974552720800344,
+      0.40618233237639195
+    ],
+    "std_state1": [
+      0.38909164487157494,
+      0.4092392509427441
+    ],
+    "iq_separation": 1.97975,
+    "snr_linear": 4.9362,
+    "snr_dB": 13.87
+  },
+  "all_sigma_results": [
+    {
+      "sigma": 0.2,
+      "snr_dB": 13.98,
+      "method": "comparison",
+      "error_threshold": 0.0,
+      "error_ml": 0.0,
+      "error_bayesian": 0.0,
+      "error_helstrom_bound": 0.0,
+      "iq_statistics": {
+        "mean_state0": [
+          0.9928836880561415,
+          -0.0030928481818780426
+        ],
+        "mean_state1": [
+          -0.996984607524695,
+          0.000494708203669153
+        ],
+        "std_state0": [
+          0.19987276360400175,
+          0.20309116618819598
+        ],
+        "std_state1": [
+          0.19454582243578755,
+          0.20461962547137205
+        ],
+        "iq_separation": 1.989872,
+        "snr_linear": 9.9229,
+        "snr_dB": 19.93
+      }
+    },
+    {
+      "sigma": 0.3,
+      "snr_dB": 10.46,
+      "method": "comparison",
+      "error_threshold": 0.0,
+      "error_ml": 0.0,
+      "error_bayesian": 0.0,
+      "error_helstrom_bound": 0.000215,
+      "iq_statistics": {
+        "mean_state0": [
+          0.9893255320842086,
+          -0.004639272272817058
+        ],
+        "mean_state1": [
+          -0.9954769112870434,
+          0.0007420623055037337
+        ],
+        "std_state0": [
+          0.2998091454060029,
+          0.30463674928229395
+        ],
+        "std_state1": [
+          0.29181873365368094,
+          0.3069294382070577
+        ],
+        "iq_separation": 1.98481,
+        "snr_linear": 6.5985,
+        "snr_dB": 16.39
+      }
+    },
+    {
+      "sigma": 0.4,
+      "snr_dB": 7.96,
+      "method": "comparison",
+      "error_threshold": 0.006,
+      "error_ml": 0.006,
+      "error_bayesian": 0.006,
+      "error_helstrom_bound": 0.003105,
+      "iq_statistics": {
+        "mean_state0": [
+          0.9857673761122813,
+          -0.006185696363756085
+        ],
+        "mean_state1": [
+          -0.9939692150493925,
+          0.000989416407338306
+        ],
+        "std_state0": [
+          0.39974552720800344,
+          0.40618233237639195
+        ],
+        "std_state1": [
+          0.38909164487157494,
+          0.4092392509427441
+        ],
+        "iq_separation": 1.97975,
+        "snr_linear": 4.9362,
+        "snr_dB": 13.87
+      }
+    },
+    {
+      "sigma": 0.5,
+      "snr_dB": 6.02,
+      "method": "comparison",
+      "error_threshold": 0.022333,
+      "error_ml": 0.022333,
+      "error_bayesian": 0.022333,
+      "error_helstrom_bound": 0.011375,
+      "iq_statistics": {
+        "mean_state0": [
+          0.9822092201403505,
+          -0.00773212045469512
+        ],
+        "mean_state1": [
+          -0.9924615188117402,
+          0.0012367705091728635
+        ],
+        "std_state0": [
+          0.4996819090100045,
+          0.5077279154704906
+        ],
+        "std_state1": [
+          0.4863645560894683,
+          0.5115490636784302
+        ],
+        "iq_separation": 1.974691,
+        "snr_linear": 3.9389,
+        "snr_dB": 11.91
+      }
+    },
+    {
+      "sigma": 0.6,
+      "snr_dB": 4.44,
+      "method": "comparison",
+      "error_threshold": 0.053667,
+      "error_ml": 0.053667,
+      "error_bayesian": 0.053667,
+      "error_helstrom_bound": 0.023895,
+      "iq_statistics": {
+        "mean_state0": [
+          0.9786510641684202,
+          -0.009278544545634116
+        ],
+        "mean_state1": [
+          -0.9909538225740874,
+          0.0014841246110074674
+        ],
+        "std_state0": [
+          0.5996182908120056,
+          0.6092734985645879
+        ],
+        "std_state1": [
+          0.583637467307362,
+          0.6138588764141154
+        ],
+        "iq_separation": 1.969634,
+        "snr_linear": 3.274,
+        "snr_dB": 10.3
+      }
+    }
+  ],
+  "notes": "For equal-variance Gaussian blobs, ML == Bayesian (with equal priors) and both achieve the Helstrom bound. The threshold method achieves the Helstrom bound only when the threshold is optimally placed."
+}

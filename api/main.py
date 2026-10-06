@@ -34,6 +34,7 @@ from rag import init_rag, ingest_project_docs, query_rag, query_rag_async, get_c
 from data_gen import generate_all_datasets_sync
 from ollama_client import OllamaClient
 from security_routes import router as security_router
+from control_tower_routes import router as tower_router
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -84,6 +85,19 @@ def _safe_log(data: dict) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# QP-23: Simple in-memory metrics counters (Prometheus-compatible)
+# ---------------------------------------------------------------------------
+
+_metrics: Dict[str, int] = {
+    "requests_total": 0,
+    "runs_triggered": 0,
+    "runs_succeeded": 0,
+    "runs_failed": 0,
+    "runs_unsupported": 0,
+    "api_errors_total": 0,
+}
+
+# ---------------------------------------------------------------------------
 # Startup status tracking
 # ---------------------------------------------------------------------------
 
@@ -132,6 +146,7 @@ class OperationLoggingMiddleware(BaseHTTPMiddleware):
         if request.url.path in self._SKIP:
             return await call_next(request)
 
+        _metrics["requests_total"] += 1
         t0 = time.time()
         log_id = str(uuid.uuid4())[:12]
         timestamp = datetime.now(timezone.utc).isoformat()
@@ -195,6 +210,9 @@ app.add_middleware(OperationLoggingMiddleware)
 
 # Security routes
 app.include_router(security_router)
+
+# Control Tower routes
+app.include_router(tower_router)
 
 
 # ---------------------------------------------------------------------------
@@ -301,13 +319,590 @@ CAPABILITY_REGISTRY: Dict[str, Dict] = {
         "evidence_state": "educational_simulation",
         "description": "24 QC scenario run: BB84 through QOTP",
     },
-    # q05-vqe was previously wrongly mapped to portfolio — now honest
     "q05-vqe": {
-        "script": None,
+        "script": "/mnt/deepa/quantum/q01-algorithms/src/vqe.py",
         "action": "vqe",
-        "backend": "unsupported",
-        "evidence_state": "unavailable",
-        "description": "VQE not yet implemented — no script available",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Variational Quantum Eigensolver: H2 ground state energy minimisation",
+    },
+    # ── Domain lab additional use cases ──
+    "qc-quantum-risk": {
+        "script": "/mnt/deepa/quantum/qc-finance-lab/src/quantum_risk.py",
+        "action": "risk_analysis",
+        "backend": "pennylane-cpu",
+        "evidence_state": "historical_measured",
+        "description": "Quantum risk pricing vs classical VaR",
+    },
+    "qc-disease-classification": {
+        "script": "/mnt/deepa/quantum/qc-healthcare-lab/src/quantum_disease.py",
+        "action": "disease_classification",
+        "backend": "pennylane-cpu",
+        "evidence_state": "historical_measured",
+        "description": "Quantum VQC disease classification on heart/diabetes datasets",
+    },
+    "qc-supply-chain": {
+        "script": "/mnt/deepa/quantum/qc-logistics-lab/src/supply_chain_quantum.py",
+        "action": "supply_chain",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum supply chain optimization",
+    },
+    "qc-quantum-ids": {
+        "script": "/mnt/deepa/quantum/qc-security-lab/src/quantum_ids.py",
+        "action": "intrusion_detection",
+        "backend": "pennylane-jax",
+        "evidence_state": "historical_measured",
+        "description": "VQC intrusion detection on NSL-KDD 22k rows",
+    },
+    # ── qc-crypto-lab modules ──
+    "qc-crypto-bb84": {
+        "script": "/mnt/deepa/quantum/qc-security-lab/src/qkd_bb84.py",
+        "action": "qkd_bb84",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "BB84 QKD protocol with eavesdropper detection",
+    },
+    "qc-crypto-e91": {
+        "script": "/mnt/deepa/quantum/qc-security-lab/src/e91_qkd.py",
+        "action": "qkd_e91",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "E91 entanglement-based QKD with CHSH test",
+    },
+    "qc-crypto-intercept-resend": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/intercept_resend_attack.py",
+        "action": "intercept_resend",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "BB84 intercept-resend attack showing 25% QBER",
+    },
+    "qc-crypto-pqc-benchmark": {
+        "script": "/mnt/deepa/quantum/qc-security-lab/src/pqc_benchmark.py",
+        "action": "pqc_benchmark",
+        "backend": "liboqs",
+        "evidence_state": "measured_simulator",
+        "description": "ML-KEM / ML-DSA / SLH-DSA / Falcon benchmark",
+    },
+    # ── Classical security lab ──
+    "qc-classical-tls": {
+        "script": "/mnt/deepa/quantum/qc-classical-security-lab/src/classical_tls.py",
+        "action": "classical_tls",
+        "backend": "python-crypto",
+        "evidence_state": "educational_simulation",
+        "description": "TLS 1.3 handshake simulation with quantum threat analysis",
+    },
+    "qc-classical-pki": {
+        "script": "/mnt/deepa/quantum/qc-classical-security-lab/src/classical_pki.py",
+        "action": "classical_pki",
+        "backend": "python-crypto",
+        "evidence_state": "educational_simulation",
+        "description": "Classical PKI certificate chain vs quantum threat",
+    },
+    "qc-classical-ssh": {
+        "script": "/mnt/deepa/quantum/qc-classical-security-lab/src/classical_ssh.py",
+        "action": "classical_ssh",
+        "backend": "python-crypto",
+        "evidence_state": "educational_simulation",
+        "description": "SSH key exchange simulation with migration analysis",
+    },
+    # ── Quantum attack lab ──
+    "qc-shor-rsa": {
+        "script": "/mnt/deepa/quantum/qc-quantum-attack-lab/src/shors_rsa_attack.py",
+        "action": "shor_rsa",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Shor's algorithm RSA threat simulation with resource estimates",
+    },
+    "qc-shor-ecc": {
+        "script": "/mnt/deepa/quantum/qc-quantum-attack-lab/src/shors_ecc_attack.py",
+        "action": "shor_ecc",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Shor's algorithm ECDSA threat simulation",
+    },
+    "qc-grover-aes": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/grover_aes_attack.py",
+        "action": "grover_aes",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Grover attack on AES reducing key space from 2^128 to 2^64",
+    },
+    "qc-hndl-attack": {
+        "script": "/mnt/deepa/quantum/qc-quantum-attack-lab/src/hndl_attack.py",
+        "action": "hndl",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Harvest Now Decrypt Later attack timeline simulation",
+    },
+    # ── PQC migration lab ──
+    "qc-pqc-tls": {
+        "script": "/mnt/deepa/quantum/qc-pqc-migration-lab/src/pqc_tls.py",
+        "action": "pqc_tls",
+        "backend": "liboqs",
+        "evidence_state": "educational_simulation",
+        "description": "PQC-hybrid TLS handshake with ML-KEM + ECDHE",
+    },
+    "qc-pqc-pki": {
+        "script": "/mnt/deepa/quantum/qc-pqc-migration-lab/src/pqc_pki.py",
+        "action": "pqc_pki",
+        "backend": "liboqs",
+        "evidence_state": "educational_simulation",
+        "description": "Post-quantum PKI certificate chain with ML-DSA",
+    },
+    "qc-pqc-migration": {
+        "script": "/mnt/deepa/quantum/qc-pqc-migration-lab/src/migration_pipeline.py",
+        "action": "migration_pipeline",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Crypto agility migration pipeline classical → hybrid → PQC",
+    },
+    # ── q01-q28 quantum research projects ──
+    "q01": {
+        "script": "/mnt/deepa/quantum/q01-algorithms/src/grover.py",
+        "action": "algorithms",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "Grover, QAOA, VQE, Shor algorithm demonstrations",
+    },
+    "q02": {
+        "script": "/mnt/deepa/quantum/q02-error-mitigation/src/zne.py",
+        "action": "error_mitigation",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "ZNE, PEC, M3 error mitigation techniques",
+    },
+    "q03": {
+        "script": "/mnt/deepa/quantum/q03-ftqc/src/surface_code.py",
+        "action": "fault_tolerant_qc",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Surface code, Steane code, magic state distillation",
+    },
+    "q04": {
+        "script": "/mnt/deepa/quantum/q04-compiler/src/gate_decomposition.py",
+        "action": "compiler",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum compiler: gate decomposition, routing, peephole",
+    },
+    "q05": {
+        "script": "/mnt/deepa/quantum/q05-ir-interop/src/ir_translation.py",
+        "action": "ir_interop",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "IR interoperability: OpenQASM3, QIR export",
+    },
+    "q06": {
+        "script": "/mnt/deepa/quantum/q06-transpilation/src/sabre_transpile.py",
+        "action": "transpilation",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "SABRE transpilation, noise-adaptive routing",
+    },
+    "q07": {
+        "script": "/mnt/deepa/quantum/q07-cloud-qpu/src/job_manager.py",
+        "action": "cloud_qpu",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Cloud QPU job management, backend selection",
+    },
+    "q08": {
+        "script": "/mnt/deepa/quantum/q08-distributed-qc/src/circuit_cutting.py",
+        "action": "distributed_qc",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Distributed QC: circuit cutting, entanglement forging",
+    },
+    "q09": {
+        "script": "/mnt/deepa/quantum/q09-circuit-cutting/src/cutting_benchmark.py",
+        "action": "circuit_cutting",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Circuit cutting benchmark vs monolithic execution",
+    },
+    "q10": {
+        "script": "/mnt/deepa/quantum/q10-silicon-spin/src/spin_qubit_model.py",
+        "action": "silicon_spin",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Silicon spin qubit model, Rabi oscillation, exchange gate",
+    },
+    "q11": {
+        "script": "/mnt/deepa/quantum/q11-topological/src/toric_code.py",
+        "action": "topological_qc",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Toric code, Majorana chain, anyon braiding",
+    },
+    "q12": {
+        "script": "/mnt/deepa/quantum/q12-analog-qc/src/neutral_atom_qaoa.py",
+        "action": "analog_qc",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Neutral atom QAOA, Gaussian boson sampling, CV teleportation",
+    },
+    "q13": {
+        "script": "/mnt/deepa/quantum/q13-control/src/optimal_control.py",
+        "action": "quantum_control",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Optimal control, pulse design, feedback control",
+    },
+    "q14": {
+        "script": "/mnt/deepa/quantum/q14-calibration/src/randomized_benchmarking.py",
+        "action": "calibration",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Randomized benchmarking, process tomography, XEB",
+    },
+    "q15": {
+        "script": "/mnt/deepa/quantum/q15-readout/src/state_discrimination.py",
+        "action": "readout",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Readout error model, adaptive readout, state discrimination",
+    },
+    "q16": {
+        "script": "/mnt/deepa/quantum/q16-ctrl-electronics/src/fpga_timing.py",
+        "action": "ctrl_electronics",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "FPGA timing, AWG pulse sequences, cryo electronics",
+    },
+    "q17": {
+        "script": "/mnt/deepa/quantum/q17-cryogenics/src/cryostat_design.py",
+        "action": "cryogenics",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Cryostat thermal model, dilution refrigerator simulation",
+    },
+    "q18": {
+        "script": "/mnt/deepa/quantum/q18-fabrication/src/process_yield.py",
+        "action": "fabrication",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Qubit fabrication process simulation",
+    },
+    "q19": {
+        "script": "/mnt/deepa/quantum/q19-packaging/src/flip_chip_bond.py",
+        "action": "packaging",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum chip packaging and interconnect model",
+    },
+    "q20": {
+        "script": "/mnt/deepa/quantum/q20-chemistry/src/h2_vqe.py",
+        "action": "quantum_chemistry",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "H2/LiH VQE, excited states via VQD",
+    },
+    "q21": {
+        "script": "/mnt/deepa/quantum/q21-many-body/src/vqe_spin_chain.py",
+        "action": "many_body",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "Many-body physics: TFIM, Hubbard model VQE",
+    },
+    "q22": {
+        "script": "/mnt/deepa/quantum/q22-repeaters/src/repeater_chain.py",
+        "action": "quantum_repeaters",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum repeater chain fidelity vs distance",
+    },
+    "q23": {
+        "script": "/mnt/deepa/quantum/q23-memory/src/memory_benchmark.py",
+        "action": "quantum_memory",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum memory coherence time benchmark",
+    },
+    "q24": {
+        "script": "/mnt/deepa/quantum/q24-internet/src/quantum_network_stack.py",
+        "action": "quantum_internet",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum internet entanglement distribution protocol",
+    },
+    "q25": {
+        "script": "/mnt/deepa/quantum/q25-sensing/src/ramsey_spectroscopy.py",
+        "action": "quantum_sensing",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum sensing: Ramsey spectroscopy, phase estimation",
+    },
+    "q26": {
+        "script": "/mnt/deepa/quantum/q26-metrology/src/quantum_fisher_information.py",
+        "action": "quantum_metrology",
+        "backend": "pennylane-cpu",
+        "evidence_state": "educational_simulation",
+        "description": "Heisenberg vs shot-noise limit metrology",
+    },
+    "q27": {
+        "script": "/mnt/deepa/quantum/q27-clocks/src/atomic_clock_model.py",
+        "action": "quantum_clocks",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum-enhanced atomic clock stability model",
+    },
+    "q28": {
+        "script": "/mnt/deepa/quantum/q28-qml/src/qsvm.py",
+        "action": "qml",
+        "backend": "pennylane-cpu",
+        "evidence_state": "historical_measured",
+        "description": "QSVM, VQC on wine/MNIST — real measured results",
+    },
+    # ── qc-crypto-lab module1-foundations ──
+    "qc-m1-qubit": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module1-foundations/src/qubit_demo.py",
+        "action": "qubit_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Qubit superposition, Bloch sphere, measurement entropy — QKD foundation",
+    },
+    "qc-m1-entanglement": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module1-foundations/src/entanglement_demo.py",
+        "action": "entanglement_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Bell pairs, correlated measurements, CHSH S>2 quantum security check",
+    },
+    "qc-m1-nocloning": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module1-foundations/src/no_cloning_demo.py",
+        "action": "no_cloning_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "No-cloning theorem proof — shows why QKD eavesdrop is detectable",
+    },
+    "qc-m1-comparison": {
+        "script": "/mnt/deepa/quantum/pqc-control-tower/src/pqc_benchmark.py",
+        "action": "pqc_benchmark",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Classical vs Quantum crypto comparison: RSA/AES/ECDSA vs ML-KEM/ML-DSA/BB84",
+    },
+    "qc-m1-qft": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module1-foundations/src/quantum_fourier_transform.py",
+        "action": "qft",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum Fourier Transform: matrix, period finding, QFT vs DFT",
+    },
+    "qc-m1-qpe": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module1-foundations/src/quantum_phase_estimation.py",
+        "action": "qpe",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum Phase Estimation: estimate φ in U|ψ⟩=e^(2πiφ)|ψ⟩",
+    },
+    "qc-m1-walk": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module1-foundations/src/quantum_walk.py",
+        "action": "quantum_walk",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum Walk: Hadamard coin, T=200 steps, O(√N) graph search speedup",
+    },
+    "qc-m4-comparison": {
+        "script": "/mnt/deepa/quantum/pqc-control-tower/src/pqc_benchmark.py",
+        "action": "pqc_comparison",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "PQC Algorithm Comparison Dashboard: all 8 NIST finalists side-by-side",
+    },
+    "qc-m4-cbom": {
+        "script": "/mnt/deepa/quantum/pqc-control-tower/src/crypto_inventory.py",
+        "action": "crypto_inventory",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Cryptographic Inventory & CBOM: scan certs/keys, classify quantum-vulnerable",
+    },
+    "qc-m5-migration": {
+        "script": "/mnt/deepa/quantum/pqc-control-tower/src/migration_planner.py",
+        "action": "migration_roadmap",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "PQC Migration Roadmap Generator: prioritised P1/P2/P3 migration plan",
+    },
+    "qc-m5-ids": {
+        "script": "/mnt/deepa/quantum/qc-security-lab/src/quantum_ids.py",
+        "action": "quantum_ids",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum IDS: VQC classifier on NSL-KDD network traffic, AUC=0.8429",
+    },
+    # ── qc-crypto-lab module2-qkd ──
+    "qc-m2-bb84-privacy": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module2-qkd/src/bb84_privacy_amplification.py",
+        "action": "bb84_privacy_amplification",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "BB84 privacy amplification — hash compression eliminates Eve's partial info",
+    },
+    "qc-m2-b92": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module2-qkd/src/b92_protocol.py",
+        "action": "b92_protocol",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "B92 2-state QKD protocol — fewer states, less sifting overhead than BB84",
+    },
+    "qc-m2-cvqkd": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module2-qkd/src/cv_qkd.py",
+        "action": "cv_qkd",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Continuous-variable QKD — Gaussian state encoding and homodyne detection",
+    },
+    "qc-m2-fiber-qkd": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module2-qkd/src/fiber_qkd_channel.py",
+        "action": "fiber_qkd_channel",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Fiber-optic QKD channel model — photon loss vs distance, 100–200 km range",
+    },
+    "qc-m2-security-proof": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module2-qkd/src/qkd_security_proof.py",
+        "action": "qkd_security_proof",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "QKD info-theoretic security proof — unconditional security vs RSA computational",
+    },
+    # ── qc-crypto-lab module3-attacks ──
+    "qc-m3-pns": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/pns_attack.py",
+        "action": "pns_attack",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Photon Number Splitting attack — multi-photon pulse exploit and decoy state defence",
+    },
+    "qc-m3-trojan": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/trojan_horse_attack.py",
+        "action": "trojan_horse_attack",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Trojan horse attack — bright-light injection side-information leakage model",
+    },
+    "qc-m3-sidechannel": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/side_channel_analysis.py",
+        "action": "side_channel_analysis",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Side-channel analysis — timing/power attack on RSA vs constant-time hardened version",
+    },
+    "qc-m3-qrng": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/qrng.py",
+        "action": "qrng",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum Random Number Generator — superposition measurement vs PRNG bias",
+    },
+    "qc-m3-mdiqkd": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module3-attacks/src/mdi_qkd.py",
+        "action": "mdi_qkd",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "MDI-QKD — measurement-device-independent relay immune to detector side-channels",
+    },
+    # ── qc-crypto-lab module4-pqc ──
+    "qc-m4-lwe": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module4-pqc/src/lwe_demo.py",
+        "action": "lwe_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Learning With Errors hardness — why quantum computers cannot solve LWE",
+    },
+    "qc-m4-ntru": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module4-pqc/src/ntru_demo.py",
+        "action": "ntru_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "NTRU lattice encryption — historical lattice crypto, relationship to ML-KEM",
+    },
+    "qc-m4-mceliece": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module4-pqc/src/mceliece_demo.py",
+        "action": "mceliece_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "McEliece code-based crypto — error-correcting hardness, quantum-resistant since 1978",
+    },
+    "qc-m4-bike-hqc": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module4-pqc/src/bike_hqc_demo.py",
+        "action": "bike_hqc_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "BIKE / HQC NIST alternates — compact code-based KEMs vs ML-KEM size/speed",
+    },
+    "qc-m4-rainbow": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module4-pqc/src/rainbow_demo.py",
+        "action": "rainbow_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Rainbow multivariate signatures — broken in 2022, lessons from NIST competition",
+    },
+    "qc-m4-hybrid-tls": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module4-pqc/src/hybrid_pqc_tls.py",
+        "action": "hybrid_pqc_tls",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Hybrid Classical-PQC TLS — X25519+ML-KEM-768 dual encapsulation handshake",
+    },
+    # ── qc-crypto-lab module5-applications ──
+    "qc-m5-qds": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/quantum_digital_signatures.py",
+        "action": "quantum_digital_signatures",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum Digital Signatures — one-time quantum sigs with non-repudiation",
+    },
+    "qc-m5-quantum-auth": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/quantum_authentication.py",
+        "action": "quantum_authentication",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum authentication — identity verification via shared quantum states",
+    },
+    "qc-m5-blockchain": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/quantum_resistant_blockchain.py",
+        "action": "quantum_resistant_blockchain",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum-resistant blockchain — Merkle tree with SPHINCS+ / ML-DSA transaction signing",
+    },
+    "qc-m5-relay": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/trusted_relay_network.py",
+        "action": "trusted_relay_network",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Trusted relay QKD network — multi-hop Alice→Relay→Bob key relay protocol",
+    },
+    "qc-m5-micius": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/micius_case_study.py",
+        "action": "micius_case_study",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Micius satellite QKD case study — 1,200 km ground-to-satellite, QBER < 4%",
+    },
+    "qc-m5-secure-cloud": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/quantum_secure_cloud.py",
+        "action": "quantum_secure_cloud",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum secure cloud computing — ML-KEM encrypt-before-upload pattern",
+    },
+    "qc-m5-smpc": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/smpc_demo.py",
+        "action": "smpc_demo",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Secure Multi-Party Computation — multiple parties compute on encrypted data",
+    },
+    "qc-m5-internet-stack": {
+        "script": "/mnt/deepa/quantum/qc-crypto-lab/module5-applications/src/quantum_internet_stack.py",
+        "action": "quantum_internet_stack",
+        "backend": "python-simulation",
+        "evidence_state": "educational_simulation",
+        "description": "Quantum internet stack — physical QKD → link → network → transport layer model",
     },
 }
 
@@ -982,6 +1577,64 @@ async def health():
     return HealthResponse(status="ok", timestamp=_now(), version="2.0.0")
 
 
+@app.get("/metrics", tags=["monitoring"], include_in_schema=False)
+async def prometheus_metrics():
+    """Prometheus-format metrics for monitoring."""
+    from fastapi.responses import PlainTextResponse
+    lines = [
+        "# HELP quantum_requests_total Total HTTP requests handled (excludes /health)",
+        "# TYPE quantum_requests_total counter",
+        f"quantum_requests_total {_metrics['requests_total']}",
+        "# HELP quantum_runs_triggered Total simulation/run triggers",
+        "# TYPE quantum_runs_triggered counter",
+        f"quantum_runs_triggered {_metrics['runs_triggered']}",
+        "# HELP quantum_runs_succeeded Total runs that completed successfully",
+        "# TYPE quantum_runs_succeeded counter",
+        f"quantum_runs_succeeded {_metrics['runs_succeeded']}",
+        "# HELP quantum_runs_failed Total runs that failed or timed out",
+        "# TYPE quantum_runs_failed counter",
+        f"quantum_runs_failed {_metrics['runs_failed']}",
+        "# HELP quantum_runs_unsupported Total trigger calls for projects without a runnable script",
+        "# TYPE quantum_runs_unsupported counter",
+        f"quantum_runs_unsupported {_metrics['runs_unsupported']}",
+        "# HELP quantum_api_errors_total Total unhandled API-level errors",
+        "# TYPE quantum_api_errors_total counter",
+        f"quantum_api_errors_total {_metrics['api_errors_total']}",
+    ]
+    return PlainTextResponse("\n".join(lines) + "\n")
+
+
+@app.get("/health/detailed", tags=["health"])
+async def detailed_health():
+    """Detailed health check including disk, metrics, and config state."""
+    import shutil
+    try:
+        disk = shutil.disk_usage("/mnt/deepa/quantum")
+        disk_free_gb = round(disk.free / 1e9, 1)
+    except Exception:
+        disk_free_gb = -1.0
+    db_ok = True
+    try:
+        await db.fetch_one("SELECT 1")
+    except Exception:
+        db_ok = False
+    return {
+        "status": "ok" if db_ok else "degraded",
+        "timestamp": _now(),
+        "metrics": dict(_metrics),
+        "disk_free_gb": disk_free_gb,
+        "db_ok": db_ok,
+        "demo_mode": _DEMO_MODE,
+        "api_version": "2.0.0",
+        "startup": _startup_status,
+    }
+
+
+@app.get("/auth/status", tags=["auth"])
+async def auth_status(role: str = Depends(_check_auth)):
+    return {"mode": "demo" if _DEMO_MODE else "protected", "role": role, "key_required": not _DEMO_MODE}
+
+
 @app.get("/startup-status", tags=["health"])
 async def startup_status_endpoint():
     """Return current background startup task status."""
@@ -1275,8 +1928,54 @@ async def get_project_runs(project_id: str, limit: int = 10):
     return {"project_id": project_id, "runs": rows, "count": len(rows)}
 
 
-@app.post("/projects/{project_id}/runs/trigger", response_model=TriggerResponse, tags=["runs"])
-async def trigger_run(project_id: str, req: Optional[TriggerRequest] = None):
+# QP-19: async background worker — real state machine (queued→running→succeeded/failed/timed_out)
+async def _run_script_async(run_id: str, project_id: str, script: str, cap: dict, exp_id: str) -> None:
+    """Run script in background, update DB with real states."""
+    try:
+        await db.update_run_status(run_id, "running", output="")
+        proc = await asyncio.create_subprocess_exec(
+            sys.executable, script,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+        try:
+            stdout, stderr = await asyncio.wait_for(proc.communicate(), timeout=180.0)
+        except asyncio.TimeoutError:
+            proc.kill()
+            await proc.communicate()
+            await db.update_run_status(run_id, "timed_out", output="Script exceeded 180s timeout")
+            return
+
+        full_output = stdout.decode() if stdout else ""
+        output = full_output[-2000:] if full_output else (stderr.decode()[-500:] if stderr else "")
+        status = "succeeded" if proc.returncode == 0 else "failed"
+        if status == "succeeded":
+            _metrics["runs_succeeded"] += 1
+        else:
+            _metrics["runs_failed"] += 1
+
+        # Artifact backing — hash + persist to disk
+        output_hash = hashlib.sha256(full_output.encode()).hexdigest()[:16]
+        artifacts_dir = os.path.join(os.path.dirname(__file__), "artifacts")
+        os.makedirs(artifacts_dir, exist_ok=True)
+        with open(os.path.join(artifacts_dir, f"{run_id}.txt"), "w") as f:
+            f.write(full_output)
+
+        metrics = json.dumps({
+            "returncode": proc.returncode,
+            "output_hash": output_hash,
+            "evidence_state": cap.get("evidence_state"),
+            "backend": cap.get("backend"),
+            "script": os.path.basename(script),
+        })
+        await db.update_run_status(run_id, status, output=output, metrics=metrics)
+    except Exception as e:
+        _metrics["api_errors_total"] += 1
+        await db.update_run_status(run_id, "failed", output=str(e))
+
+
+async def _do_trigger_run(project_id: str, req: Optional[TriggerRequest]) -> TriggerResponse:
+    """Core trigger logic — called by both per-project and global trigger routes."""
     _project_or_404(project_id)
     cap = CAPABILITY_REGISTRY.get(project_id, {})
     script = cap.get("script")
@@ -1284,9 +1983,12 @@ async def trigger_run(project_id: str, req: Optional[TriggerRequest] = None):
     ts = _now()
     exp_id = (req.exp_id if req else None) or ""
 
+    _metrics["runs_triggered"] += 1
+
     if not script or not os.path.exists(script):
         # Honest: return unsupported — never fabricate accuracy or success
         evidence_state = cap.get("evidence_state", "unavailable")
+        _metrics["runs_unsupported"] += 1
         return TriggerResponse(
             run_id=run_id, project_id=project_id,
             status="unsupported",
@@ -1298,61 +2000,22 @@ async def trigger_run(project_id: str, req: Optional[TriggerRequest] = None):
             ),
         )
 
-    try:
-        t0 = time.time()
-        await db.insert_run(run_id, project_id, ts, "running",
-                            output="", exp_id=exp_id, stage="executing")
-        proc = subprocess.run(
-            [sys.executable, script],
-            capture_output=True, text=True, timeout=120
-        )
-        duration_ms = int((time.time() - t0) * 1000)
-        output = proc.stdout[-2000:] if proc.stdout else proc.stderr[-1000:]
-        accuracy = None
-        for line in proc.stdout.splitlines():
-            if "accuracy" in line.lower():
-                m = re.search(r"(\d+\.\d+)", line)
-                if m:
-                    accuracy = float(m.group(1))
-                    if accuracy > 1:
-                        accuracy /= 100
-                    break
-        status_str = "success" if proc.returncode == 0 else "error"
+    # QP-19: insert queued record immediately, fire background task
+    await db.insert_run(run_id, project_id, ts, "queued", output="", exp_id=exp_id)
+    asyncio.create_task(_run_script_async(run_id, project_id, script, cap, exp_id))
+    return TriggerResponse(run_id=run_id, project_id=project_id, status="queued",
+                           message="Run queued — poll GET /runs/{run_id} for status")
 
-        # QP-07: artifact backing — hash output and persist to disk
-        full_output = proc.stdout or ""
-        output_hash = hashlib.sha256(full_output.encode()).hexdigest()[:16]
-        artifacts_dir = os.path.join(os.path.dirname(__file__), "artifacts")
-        os.makedirs(artifacts_dir, exist_ok=True)
-        artifact_path = os.path.join(artifacts_dir, f"{run_id}.txt")
-        with open(artifact_path, "w") as af:
-            af.write(full_output)
 
-        await db.insert_run(run_id, project_id, ts, status_str,
-                            accuracy=accuracy, duration_ms=duration_ms, output=output,
-                            exp_id=exp_id, stage="completed",
-                            metrics=json.dumps({
-                                "returncode": proc.returncode,
-                                "output_hash": output_hash,
-                                "artifact_path": artifact_path,
-                                "evidence_state": cap.get("evidence_state", "measured_simulator"),
-                                "backend": cap.get("backend", "unknown"),
-                                "script": os.path.basename(script),
-                                "run_date": ts,
-                                "dataset_available": os.path.exists(cap.get("script", "") or ""),
-                            }))
-        return TriggerResponse(run_id=run_id, project_id=project_id,
-                               status=status_str, message=output[:400])
-    except subprocess.TimeoutExpired:
-        await db.insert_run(run_id, project_id, ts, "timeout",
-                            output="Script timed out after 120s", exp_id=exp_id)
-        return TriggerResponse(run_id=run_id, project_id=project_id,
-                               status="timeout", message="Script timed out after 120s")
-    except Exception as e:
-        await db.insert_run(run_id, project_id, ts, "error",
-                            output=str(e), error=str(e), exp_id=exp_id)
-        return TriggerResponse(run_id=run_id, project_id=project_id,
-                               status="error", message=str(e))
+@app.post("/projects/{project_id}/runs/trigger", response_model=TriggerResponse, tags=["runs"])
+async def trigger_run(
+    project_id: str,
+    request: Request,
+    req: Optional[TriggerRequest] = None,
+    role: str = Depends(_check_auth),
+):
+    _rate_limit(request.client.host if request.client else "unknown", "runs_trigger", max_calls=5, window_s=60)
+    return await _do_trigger_run(project_id, req)
 
 
 # --- Streaming Run (SSE) ---
@@ -1742,9 +2405,17 @@ async def get_circuit(project_id: str):
     )
 
 
+MAX_SHOTS = 8192
+MAX_QUBITS = 30
+
+
 @app.post("/circuits/simulate", tags=["circuits"])
 async def simulate_circuit(req: SimulationRequest):
     """Generic circuit simulation — returns synthetic probabilities."""
+    if req.shots > MAX_SHOTS:
+        raise HTTPException(400, f"shots exceeds maximum {MAX_SHOTS}")
+    if req.n_qubits > MAX_QUBITS:
+        raise HTTPException(400, f"qubits exceeds maximum {MAX_QUBITS}")
     import numpy as np
     rng = np.random.default_rng()
     n_q = min(req.n_qubits, 10)
@@ -1759,8 +2430,14 @@ async def simulate_circuit(req: SimulationRequest):
 
 
 @app.post("/projects/{project_id}/simulate", tags=["circuits"])
-async def simulate_project_circuit(project_id: str, req: SimulationRequest):
+async def simulate_project_circuit(
+    project_id: str,
+    req: SimulationRequest,
+    request: Request,
+    role: str = Depends(_check_auth),
+):
     """Simulate a circuit for a specific project — delegates to /circuits/simulate logic."""
+    _rate_limit(request.client.host if request.client else "unknown", "simulate", max_calls=3, window_s=60)
     _project_or_404(project_id)
     import numpy as np
     rng = np.random.default_rng()
@@ -1796,7 +2473,8 @@ async def rag_ingest(project_id: str, background_tasks: BackgroundTasks):
 
 
 @app.post("/rag/{project_id}/query", tags=["rag"])
-async def rag_query(project_id: str, req: RAGQueryRequest):
+async def rag_query(project_id: str, req: RAGQueryRequest, request: Request):
+    _rate_limit(request.client.host if request.client else "unknown", "rag_query", max_calls=20, window_s=60)
     _project_or_404(project_id)
     results = await query_rag_async(project_id, req.query, n_results=req.n_results)
     return {
@@ -1858,8 +2536,9 @@ async def list_runs(limit: int = 50):
 
 
 @app.post("/runs/trigger", response_model=TriggerResponse, tags=["runs"])
-async def trigger_run_global(req: TriggerRequest):
-    return await trigger_run(req.project_id, req)
+async def trigger_run_global(req: TriggerRequest, request: Request, role: str = Depends(_check_auth)):
+    _rate_limit(request.client.host if request.client else "unknown", "runs_trigger", max_calls=5, window_s=60)
+    return await _do_trigger_run(req.project_id, req)
 
 
 # QP-07: Fetch a single run by ID
@@ -2019,7 +2698,7 @@ async def get_logs_for_project(project_id: str, limit: int = 100):
 
 
 @app.delete("/logs/clear", tags=["logs"])
-async def clear_logs(older_than_days: int = 7):
+async def clear_logs(older_than_days: int = 7, role: str = Depends(_check_auth)):
     """Delete operation logs older than N days."""
     count = await db.clear_operation_logs(older_than_days=older_than_days)
     return {"deleted": count, "older_than_days": older_than_days, "timestamp": _now()}
@@ -2183,11 +2862,12 @@ async def ollama_models():
 
 
 @app.post("/ollama/chat", tags=["ollama"])
-async def ollama_chat(req: OllamaChatRequest):
+async def ollama_chat(req: OllamaChatRequest, request: Request):
     """Send a chat request to Ollama.
 
     Body: {model, messages: [{role, content}], project_id?, stream: false}
     """
+    _rate_limit(request.client.host if request.client else "unknown", "ollama_chat", max_calls=10, window_s=60)
     result = await OllamaClient.chat(
         model=req.model,
         messages=req.messages,

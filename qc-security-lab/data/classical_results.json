@@ -1,0 +1,92 @@
+[
+  {
+    "model": "RandomForest",
+    "accuracy": 0.99775,
+    "f1": 0.997587778075583,
+    "roc_auc": 0.9999821723427249,
+    "confusion_matrix": [
+      [
+        2130,
+        2
+      ],
+      [
+        7,
+        1861
+      ]
+    ],
+    "predict_time_s": 0.0252,
+    "classification_report": {
+      "normal": {
+        "precision": 0.9967243799719232,
+        "recall": 0.99906191369606,
+        "f1-score": 0.9978917779339423,
+        "support": 2132.0
+      },
+      "attack": {
+        "precision": 0.9989264626945786,
+        "recall": 0.9962526766595289,
+        "f1-score": 0.997587778075583,
+        "support": 1868.0
+      },
+      "accuracy": 0.99775,
+      "macro avg": {
+        "precision": 0.9978254213332509,
+        "recall": 0.9976572951777944,
+        "f1-score": 0.9977397780047627,
+        "support": 4000.0
+      },
+      "weighted avg": {
+        "precision": 0.9977527526034032,
+        "recall": 0.99775,
+        "f1-score": 0.9977498100000884,
+        "support": 4000.0
+      }
+    },
+    "train_time_s": 0.2929
+  },
+  {
+    "model": "XGBoost",
+    "accuracy": 0.9975,
+    "f1": 0.9973219068023568,
+    "roc_auc": 0.9999497812471124,
+    "confusion_matrix": [
+      [
+        2128,
+        4
+      ],
+      [
+        6,
+        1862
+      ]
+    ],
+    "predict_time_s": 0.0126,
+    "classification_report": {
+      "normal": {
+        "precision": 0.9971883786316776,
+        "recall": 0.99812382739212,
+        "f1-score": 0.9976558837318331,
+        "support": 2132.0
+      },
+      "attack": {
+        "precision": 0.9978563772775991,
+        "recall": 0.9967880085653105,
+        "f1-score": 0.9973219068023568,
+        "support": 1868.0
+      },
+      "accuracy": 0.9975,
+      "macro avg": {
+        "precision": 0.9975223779546384,
+        "recall": 0.9974559179787152,
+        "f1-score": 0.9974888952670949,
+        "support": 4000.0
+      },
+      "weighted avg": {
+        "precision": 0.9975003339993229,
+        "recall": 0.9975,
+        "f1-score": 0.9974999165057676,
+        "support": 4000.0
+      }
+    },
+    "train_time_s": 24.2609
+  }
+]

@@ -1,0 +1,49 @@
+{
+  "initial_fidelity": 0.8,
+  "rounds": 3,
+  "output_fidelities": [
+    0.8,
+    0.83815,
+    0.873585,
+    0.90454
+  ],
+  "pairs_consumed": [
+    2.6,
+    6.44,
+    15.24
+  ],
+  "success_probabilities": [
+    0.768889,
+    0.807485,
+    0.845651
+  ],
+  "final_fidelity": 0.90454,
+  "total_pairs_for_one_output": 15.24,
+  "fidelity_sweep": [
+    {
+      "initial_fidelity": 0.7,
+      "final_fidelity": 0.811938,
+      "improvement": 0.111938
+    },
+    {
+      "initial_fidelity": 0.75,
+      "final_fidelity": 0.863459,
+      "improvement": 0.113459
+    },
+    {
+      "initial_fidelity": 0.8,
+      "final_fidelity": 0.90454,
+      "improvement": 0.10454
+    },
+    {
+      "initial_fidelity": 0.85,
+      "final_fidelity": 0.937091,
+      "improvement": 0.087091
+    },
+    {
+      "initial_fidelity": 0.9,
+      "final_fidelity": 0.962905,
+      "improvement": 0.062905
+    }
+  ]
+}

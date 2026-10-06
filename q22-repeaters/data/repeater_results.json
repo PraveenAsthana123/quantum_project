@@ -1,0 +1,106 @@
+{
+  "scenarios": [
+    {
+      "total_distance_km": 1000,
+      "n_segments": 4,
+      "nesting_levels": 3,
+      "segment_length_km": 250.0,
+      "segment_rate_Hz": 0.7225,
+      "end_rate_Hz": 0.0025,
+      "fidelity": 0.3333,
+      "without_repeater_rate_Hz": 0.0,
+      "rate_improvement_factor": 328710937500.0,
+      "memory_t2_us": 500.0,
+      "purification_rounds": 1,
+      "level_rates_Hz": [
+        0.220764,
+        0.049672,
+        0.011176,
+        0.002515
+      ],
+      "level_fidelities": [
+        0.4545,
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    },
+    {
+      "total_distance_km": 500,
+      "n_segments": 4,
+      "nesting_levels": 3,
+      "segment_length_km": 125.0,
+      "segment_rate_Hz": 228.4746,
+      "end_rate_Hz": 0.7984,
+      "fidelity": 0.3333,
+      "without_repeater_rate_Hz": 7.7e-05,
+      "rate_improvement_factor": 10436.65,
+      "memory_t2_us": 500.0,
+      "purification_rounds": 1,
+      "level_rates_Hz": [
+        70.093073,
+        15.770941,
+        3.548462,
+        0.798404
+      ],
+      "level_fidelities": [
+        0.4607,
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    },
+    {
+      "total_distance_km": 2000,
+      "n_segments": 8,
+      "nesting_levels": 4,
+      "segment_length_km": 250.0,
+      "segment_rate_Hz": 0.7225,
+      "end_rate_Hz": 0.0006,
+      "fidelity": 0.3333,
+      "without_repeater_rate_Hz": 0.0,
+      "rate_improvement_factor": 5.657937011718753e+26,
+      "memory_t2_us": 500.0,
+      "purification_rounds": 1,
+      "level_rates_Hz": [
+        0.220764,
+        0.049672,
+        0.011176,
+        0.002515,
+        0.000566
+      ],
+      "level_fidelities": [
+        0.4545,
+        0.3333,
+        0.3333,
+        0.3333,
+        0.3333
+      ]
+    }
+  ],
+  "primary": {
+    "total_distance_km": 1000,
+    "n_segments": 4,
+    "nesting_levels": 3,
+    "segment_length_km": 250.0,
+    "segment_rate_Hz": 0.7225,
+    "end_rate_Hz": 0.0025,
+    "fidelity": 0.3333,
+    "without_repeater_rate_Hz": 0.0,
+    "rate_improvement_factor": 328710937500.0,
+    "memory_t2_us": 500.0,
+    "purification_rounds": 1,
+    "level_rates_Hz": [
+      0.220764,
+      0.049672,
+      0.011176,
+      0.002515
+    ],
+    "level_fidelities": [
+      0.4545,
+      0.3333,
+      0.3333,
+      0.3333
+    ]
+  }
+}

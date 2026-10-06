@@ -1,0 +1,31 @@
+# Quantum Finance Lab — Python dependencies
+# Install: pip install -r requirements.txt
+
+# Core scientific stack
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+matplotlib>=3.7
+scikit-learn>=1.3
+
+# Quantum computing
+qiskit>=1.0
+qiskit-aer>=0.13          # local statevector/noise simulator
+qiskit-algorithms>=0.3    # QAOA, QAE, VQE optimisers
+qiskit-optimization>=0.6  # QuadraticProgram, QUBO tools
+qiskit-finance>=0.4       # LogNormalDistribution, LinearAmplitudeFunction
+
+pennylane>=0.35            # VQC, AmplitudeEmbedding, draw
+pennylane-lightning>=0.35  # optional fast CPU backend
+
+# Finance & optimisation
+pyportfolioopt>=1.5        # efficient-frontier helpers (optional)
+statsmodels>=0.14          # time-series, GARCH (optional)
+
+# Optional speedups / extras
+jax>=0.4.20                # JAX-based PennyLane backend (used in banking lab)
+jaxlib>=0.4.20
+xgboost>=2.0               # gradient boosting baseline (optional)
+
+# Utilities
+tqdm>=4.65

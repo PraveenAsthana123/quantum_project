@@ -1,0 +1,29 @@
+{
+  "default_fidelity": 0.987702,
+  "noise_aware_fidelity": 0.984562,
+  "improvement_pct": -0.32,
+  "layout_default": {
+    "Qubit(QuantumRegister(5, 'q'), 0)": 0,
+    "Qubit(QuantumRegister(5, 'q'), 1)": 1,
+    "Qubit(QuantumRegister(5, 'q'), 2)": 2,
+    "Qubit(QuantumRegister(5, 'q'), 3)": 3,
+    "Qubit(QuantumRegister(5, 'q'), 4)": 4,
+    "Qubit(QuantumRegister(2, 'ancilla'), 0)": 5,
+    "Qubit(QuantumRegister(2, 'ancilla'), 1)": 6
+  },
+  "layout_adaptive": {
+    "Qubit(QuantumRegister(5, 'q'), 0)": 0,
+    "Qubit(QuantumRegister(5, 'q'), 1)": 1,
+    "Qubit(QuantumRegister(5, 'q'), 2)": 3,
+    "Qubit(QuantumRegister(5, 'q'), 3)": 5,
+    "Qubit(QuantumRegister(5, 'q'), 4)": 6,
+    "Qubit(QuantumRegister(2, 'ancilla'), 0)": 2,
+    "Qubit(QuantumRegister(2, 'ancilla'), 1)": 4
+  },
+  "depth_default": 11,
+  "depth_adaptive": 8,
+  "cx_count_default": 7,
+  "cx_count_adaptive": 4,
+  "optimization_level_default": 1,
+  "optimization_level_adaptive": 3
+}

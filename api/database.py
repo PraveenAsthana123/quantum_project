@@ -224,6 +224,14 @@ async def get_runs_for_project(project_id: str, limit: int = 10) -> List[Dict[st
     )
 
 
+async def update_run_status(run_id: str, status: str, output: str = "", metrics: str = "") -> None:
+    """QP-19: Update run status, output, and metrics in place (used by background worker)."""
+    await execute(
+        "UPDATE runs SET status=?, output=?, metrics=? WHERE run_id=?",
+        (status, output, metrics, run_id),
+    )
+
+
 # ---------------------------------------------------------------------------
 # Hybrid Pipelines
 # ---------------------------------------------------------------------------

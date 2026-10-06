@@ -1,0 +1,91 @@
+{
+  "bump_diameter_um": [
+    10.0,
+    20.0,
+    30.0,
+    50.0,
+    100.0
+  ],
+  "bump_pitch_um": [
+    50.0,
+    80.0,
+    100.0,
+    150.0,
+    250.0
+  ],
+  "parasitic_inductance_pH": [
+    0.5,
+    0.8,
+    1.0,
+    1.5,
+    2.0
+  ],
+  "parasitic_capacitance_fF": [
+    0.5424,
+    1.356,
+    2.4409,
+    4.5201,
+    13.5604
+  ],
+  "freq_shift_MHz": [
+    -5299.5233,
+    -8928.5445,
+    -11934.5357,
+    -18303.337,
+    -31287.9888
+  ],
+  "t1_limit_us": [
+    2067779258006893.8,
+    2067779258006893.8,
+    2067779258006893.8,
+    2067779258006893.8,
+    2067779258006893.8
+  ],
+  "sweep_details": [
+    {
+      "bump_diameter_um": 10.0,
+      "bump_pitch_um": 50.0,
+      "bump_height_um": 5.0,
+      "parasitic_inductance_pH": 0.5,
+      "parasitic_capacitance_fF": 0.5424,
+      "freq_shift_MHz": -5299.5233,
+      "t1_limit_us": 2067779258006893.8
+    },
+    {
+      "bump_diameter_um": 20.0,
+      "bump_pitch_um": 80.0,
+      "bump_height_um": 8.0,
+      "parasitic_inductance_pH": 0.8,
+      "parasitic_capacitance_fF": 1.356,
+      "freq_shift_MHz": -8928.5445,
+      "t1_limit_us": 2067779258006893.8
+    },
+    {
+      "bump_diameter_um": 30.0,
+      "bump_pitch_um": 100.0,
+      "bump_height_um": 10.0,
+      "parasitic_inductance_pH": 1.0,
+      "parasitic_capacitance_fF": 2.4409,
+      "freq_shift_MHz": -11934.5357,
+      "t1_limit_us": 2067779258006893.8
+    },
+    {
+      "bump_diameter_um": 50.0,
+      "bump_pitch_um": 150.0,
+      "bump_height_um": 15.0,
+      "parasitic_inductance_pH": 1.5,
+      "parasitic_capacitance_fF": 4.5201,
+      "freq_shift_MHz": -18303.337,
+      "t1_limit_us": 2067779258006893.8
+    },
+    {
+      "bump_diameter_um": 100.0,
+      "bump_pitch_um": 250.0,
+      "bump_height_um": 20.0,
+      "parasitic_inductance_pH": 2.0,
+      "parasitic_capacitance_fF": 13.5604,
+      "freq_shift_MHz": -31287.9888,
+      "t1_limit_us": 2067779258006893.8
+    }
+  ]
+}

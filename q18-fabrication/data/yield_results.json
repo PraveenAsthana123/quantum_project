@@ -1,0 +1,375 @@
+{
+  "chip_sizes_mm2": [
+    1.0,
+    5.0,
+    10.0,
+    25.0,
+    50.0,
+    100.0,
+    150.0,
+    200.0
+  ],
+  "defect_densities": [
+    0.1,
+    0.5,
+    1.0,
+    2.0,
+    5.0,
+    10.0
+  ],
+  "yields_pct": [
+    [
+      99.90005830833589,
+      99.50145521370717,
+      99.00580841919397,
+      97.53607104778791,
+      95.14276138126218,
+      90.55917006062722,
+      86.23230147378777,
+      82.14634969918899
+    ],
+    [
+      99.50145521370722,
+      97.53607104778791,
+      95.14276138126218,
+      88.36465857416992,
+      78.2865497117179,
+      61.927248698470194,
+      49.492809718471186,
+      39.9576400893728
+    ],
+    [
+      99.00580841919403,
+      95.14276138126218,
+      90.55917006062722,
+      78.2865497117179,
+      61.927248698470194,
+      39.9576400893728,
+      26.82341102537797,
+      18.691126810387722
+    ],
+    [
+      98.02313470315174,
+      90.55917006062722,
+      82.14634969918899,
+      61.927248698470194,
+      39.9576400893728,
+      18.691126810387722,
+      10.032273504899317,
+      6.023151155315213
+    ],
+    [
+      95.14276138126218,
+      78.2865497117179,
+      61.927248698470194,
+      32.58082591382518,
+      13.481087196020605,
+      3.946278023726366,
+      1.7758117993991556,
+      0.9999092022016286
+    ],
+    [
+      90.55917006062722,
+      61.927248698470194,
+      39.9576400893728,
+      13.481087196020605,
+      3.946278023726366,
+      0.9999092022016286,
+      0.44444417253131213,
+      0.2499999989694232
+    ]
+  ],
+  "optimal_chip_size_mm2": {
+    "D_0.1": 200.0,
+    "D_0.5": 147.675,
+    "D_1.0": 73.838,
+    "D_2.0": 36.919,
+    "D_5.0": 14.768,
+    "D_10.0": 7.384
+  },
+  "yield_surface": [
+    {
+      "defect_density_per_cm2": 0.1,
+      "murphy_yields_pct": [
+        99.9,
+        99.5,
+        99.01,
+        97.54,
+        95.14,
+        90.56,
+        86.23,
+        82.15
+      ],
+      "poisson_yields_pct": [
+        99.9,
+        99.5,
+        99.0,
+        97.53,
+        95.12,
+        90.48,
+        86.07,
+        81.87
+      ]
+    },
+    {
+      "defect_density_per_cm2": 0.5,
+      "murphy_yields_pct": [
+        99.5,
+        97.54,
+        95.14,
+        88.36,
+        78.29,
+        61.93,
+        49.49,
+        39.96
+      ],
+      "poisson_yields_pct": [
+        99.5,
+        97.53,
+        95.12,
+        88.25,
+        77.88,
+        60.65,
+        47.24,
+        36.79
+      ]
+    },
+    {
+      "defect_density_per_cm2": 1.0,
+      "murphy_yields_pct": [
+        99.01,
+        95.14,
+        90.56,
+        78.29,
+        61.93,
+        39.96,
+        26.82,
+        18.69
+      ],
+      "poisson_yields_pct": [
+        99.0,
+        95.12,
+        90.48,
+        77.88,
+        60.65,
+        36.79,
+        22.31,
+        13.53
+      ]
+    },
+    {
+      "defect_density_per_cm2": 2.0,
+      "murphy_yields_pct": [
+        98.02,
+        90.56,
+        82.15,
+        61.93,
+        39.96,
+        18.69,
+        10.03,
+        6.02
+      ],
+      "poisson_yields_pct": [
+        98.02,
+        90.48,
+        81.87,
+        60.65,
+        36.79,
+        13.53,
+        4.98,
+        1.83
+      ]
+    },
+    {
+      "defect_density_per_cm2": 5.0,
+      "murphy_yields_pct": [
+        95.14,
+        78.29,
+        61.93,
+        32.58,
+        13.48,
+        3.95,
+        1.78,
+        1.0
+      ],
+      "poisson_yields_pct": [
+        95.12,
+        77.88,
+        60.65,
+        28.65,
+        8.21,
+        0.67,
+        0.06,
+        0.0
+      ]
+    },
+    {
+      "defect_density_per_cm2": 10.0,
+      "murphy_yields_pct": [
+        90.56,
+        61.93,
+        39.96,
+        13.48,
+        3.95,
+        1.0,
+        0.44,
+        0.25
+      ],
+      "poisson_yields_pct": [
+        90.48,
+        60.65,
+        36.79,
+        8.21,
+        0.67,
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ],
+  "quantum_analysis": {
+    "quantum_yield_matrix": [
+      {
+        "config": "5_qubit",
+        "chip_area_mm2": 5.0,
+        "defect_density": 0.1,
+        "fab": "advanced_fab_D01",
+        "yield_pct": 99.5
+      },
+      {
+        "config": "5_qubit",
+        "chip_area_mm2": 5.0,
+        "defect_density": 0.5,
+        "fab": "mature_fab_D05",
+        "yield_pct": 97.54
+      },
+      {
+        "config": "5_qubit",
+        "chip_area_mm2": 5.0,
+        "defect_density": 2.0,
+        "fab": "standard_fab_D20",
+        "yield_pct": 90.56
+      },
+      {
+        "config": "5_qubit",
+        "chip_area_mm2": 5.0,
+        "defect_density": 5.0,
+        "fab": "early_process_D50",
+        "yield_pct": 78.29
+      },
+      {
+        "config": "10_qubit",
+        "chip_area_mm2": 10.0,
+        "defect_density": 0.1,
+        "fab": "advanced_fab_D01",
+        "yield_pct": 99.01
+      },
+      {
+        "config": "10_qubit",
+        "chip_area_mm2": 10.0,
+        "defect_density": 0.5,
+        "fab": "mature_fab_D05",
+        "yield_pct": 95.14
+      },
+      {
+        "config": "10_qubit",
+        "chip_area_mm2": 10.0,
+        "defect_density": 2.0,
+        "fab": "standard_fab_D20",
+        "yield_pct": 82.15
+      },
+      {
+        "config": "10_qubit",
+        "chip_area_mm2": 10.0,
+        "defect_density": 5.0,
+        "fab": "early_process_D50",
+        "yield_pct": 61.93
+      },
+      {
+        "config": "27_qubit_falcon",
+        "chip_area_mm2": 27.0,
+        "defect_density": 0.1,
+        "fab": "advanced_fab_D01",
+        "yield_pct": 97.34
+      },
+      {
+        "config": "27_qubit_falcon",
+        "chip_area_mm2": 27.0,
+        "defect_density": 0.5,
+        "fab": "mature_fab_D05",
+        "yield_pct": 87.5
+      },
+      {
+        "config": "27_qubit_falcon",
+        "chip_area_mm2": 27.0,
+        "defect_density": 2.0,
+        "fab": "standard_fab_D20",
+        "yield_pct": 59.7
+      },
+      {
+        "config": "27_qubit_falcon",
+        "chip_area_mm2": 27.0,
+        "defect_density": 5.0,
+        "fab": "early_process_D50",
+        "yield_pct": 30.11
+      },
+      {
+        "config": "65_qubit_hummingbird",
+        "chip_area_mm2": 65.0,
+        "defect_density": 0.1,
+        "fab": "advanced_fab_D01",
+        "yield_pct": 93.74
+      },
+      {
+        "config": "65_qubit_hummingbird",
+        "chip_area_mm2": 65.0,
+        "defect_density": 0.5,
+        "fab": "mature_fab_D05",
+        "yield_pct": 72.89
+      },
+      {
+        "config": "65_qubit_hummingbird",
+        "chip_area_mm2": 65.0,
+        "defect_density": 2.0,
+        "fab": "standard_fab_D20",
+        "yield_pct": 31.31
+      },
+      {
+        "config": "65_qubit_hummingbird",
+        "chip_area_mm2": 65.0,
+        "defect_density": 5.0,
+        "fab": "early_process_D50",
+        "yield_pct": 8.75
+      },
+      {
+        "config": "127_qubit_eagle",
+        "chip_area_mm2": 127.0,
+        "defect_density": 0.1,
+        "fab": "advanced_fab_D01",
+        "yield_pct": 88.19
+      },
+      {
+        "config": "127_qubit_eagle",
+        "chip_area_mm2": 127.0,
+        "defect_density": 0.5,
+        "fab": "mature_fab_D05",
+        "yield_pct": 54.8
+      },
+      {
+        "config": "127_qubit_eagle",
+        "chip_area_mm2": 127.0,
+        "defect_density": 2.0,
+        "fab": "standard_fab_D20",
+        "yield_pct": 13.15
+      },
+      {
+        "config": "127_qubit_eagle",
+        "chip_area_mm2": 127.0,
+        "defect_density": 5.0,
+        "fab": "early_process_D50",
+        "yield_pct": 2.47
+      }
+    ]
+  },
+  "model": "Murphy: Y = [(1-exp(-AD))/(AD)]\u00b2"
+}

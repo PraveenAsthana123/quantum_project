@@ -1,0 +1,65 @@
+{
+  "generated": "2026-10-01",
+  "script": "src/slh_dsa_sphincs.py",
+  "algorithm": "SLH-DSA (SPHINCS+-SHA2-128f)",
+  "standard": "NIST FIPS 205 (2024)",
+  "reference": "Bernstein et al. arXiv:2208.09625",
+  "backend": "Pure Python pedagogical implementation (inner tree height capped at 3)",
+  "parameters": {
+    "n": 16,
+    "h": 66,
+    "d": 22,
+    "log_t": 6,
+    "k": 33,
+    "w": 16,
+    "h_prime": 3,
+    "sig_size_bytes_full_spec": 17088
+  },
+
+  "benchmark_rounds": 2,
+  "timing_ms": {
+    "keygen_avg": 6.3,
+    "sign_avg": 6.0,
+    "verify_avg": 6.5
+  },
+
+  "correctness": {
+    "sign_count": 2,
+    "verify_ok": 2,
+    "total_rounds": 2,
+    "note": "Verify checks auth path length consistency (simplified demo verify)"
+  },
+
+  "signature_sizes": {
+    "SLH-DSA-SHA2-128f": {"sig_bytes": 17088, "pk_bytes": 32, "hash_calls_approx": 49408},
+    "SLH-DSA-SHA2-128s": {"sig_bytes": 7856, "pk_bytes": 32, "hash_calls_approx": 14848},
+    "SLH-DSA-SHA2-192f": {"sig_bytes": 35664, "pk_bytes": 48, "hash_calls_approx": 82048},
+    "SLH-DSA-SHA2-256f": {"sig_bytes": 49856, "pk_bytes": 64, "hash_calls_approx": 114560},
+    "ECDSA-P256": {"sig_bytes": 72, "pk_bytes": 64, "quantum_safe": false},
+    "ML-DSA-44": {"sig_bytes": 2420, "pk_bytes": 1312}
+  },
+
+  "security_properties": {
+    "stateless": true,
+    "security_assumption": "Hash function collision resistance only",
+    "quantum_safe": true,
+    "nist_level_128f": 1,
+    "note": "Only post-quantum signature scheme with security based purely on hash functions"
+  },
+
+  "wots_plus": {
+    "len": 35,
+    "len1": 32,
+    "len2": 3,
+    "winternitz_w": 16,
+    "note": "Each WOTS+ signature covers one leaf; stateless via hypertree"
+  },
+
+  "key_findings": [
+    "SLH-DSA is stateless — unlike XMSS/LMS, no state tracking needed between signatures",
+    "Security based ONLY on hash collision resistance — most conservative PQC assumption",
+    "Large signatures (17088B for 128f) tradeoff for hash-only security foundation",
+    "Keygen 6.3ms, sign 6ms, verify 6.5ms — fast in demo (tree height capped at 3)",
+    "NIST FIPS 205 standardized 2024 — suitable for applications needing minimal security assumptions"
+  ]
+}

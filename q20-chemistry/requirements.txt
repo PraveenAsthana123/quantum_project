@@ -1,0 +1,10 @@
+# Q20 Chemistry Requirements
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.6.0
+# Optional: for real molecular Hamiltonians
+openfermion>=1.5.0
+openfermionpyscf>=0.5.0
+pyscf>=2.0.0
+qiskit>=0.45.0
+qiskit-aer>=0.13.0

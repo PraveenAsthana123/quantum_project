@@ -1,0 +1,91 @@
+{
+  "qubit_sizes": [
+    6,
+    8,
+    10
+  ],
+  "direct_time_ms": [
+    36.44,
+    24.62,
+    27.1
+  ],
+  "cutting_time_ms": [
+    1688.79,
+    2030.31,
+    2138.65
+  ],
+  "memory_mb": [
+    0.001,
+    0.0039,
+    0.0156
+  ],
+  "crossover_qubits": null,
+  "n_cuts_used": 2,
+  "overhead_formula": "9^k for k CNOT gate cuts",
+  "theoretical_direct_memory_exponent": "2^n",
+  "theoretical_cutting_memory_exponent": "2^(n/2)",
+  "detailed_direct": [
+    {
+      "n_qubits": 6,
+      "method": "direct_statevector",
+      "time_ms": 36.44,
+      "memory_mb": 0.001,
+      "shots": 4096
+    },
+    {
+      "n_qubits": 8,
+      "method": "direct_statevector",
+      "time_ms": 24.62,
+      "memory_mb": 0.0039,
+      "shots": 4096
+    },
+    {
+      "n_qubits": 10,
+      "method": "direct_statevector",
+      "time_ms": 27.1,
+      "memory_mb": 0.0156,
+      "shots": 4096
+    }
+  ],
+  "detailed_cutting": [
+    {
+      "n_qubits": 6,
+      "method": "circuit_cutting",
+      "n_cuts": 2,
+      "subcircuit_qubits": 3,
+      "n_terms": 36,
+      "total_subcircuit_runs": 72,
+      "single_run_ms": 23.46,
+      "time_ms": 1688.79,
+      "memory_mb": 0.0001,
+      "overhead_factor": 81,
+      "shots_per_term": 512
+    },
+    {
+      "n_qubits": 8,
+      "method": "circuit_cutting",
+      "n_cuts": 2,
+      "subcircuit_qubits": 4,
+      "n_terms": 36,
+      "total_subcircuit_runs": 72,
+      "single_run_ms": 28.2,
+      "time_ms": 2030.31,
+      "memory_mb": 0.0002,
+      "overhead_factor": 81,
+      "shots_per_term": 512
+    },
+    {
+      "n_qubits": 10,
+      "method": "circuit_cutting",
+      "n_cuts": 2,
+      "subcircuit_qubits": 5,
+      "n_terms": 36,
+      "total_subcircuit_runs": 72,
+      "single_run_ms": 29.7,
+      "time_ms": 2138.65,
+      "memory_mb": 0.0005,
+      "overhead_factor": 81,
+      "shots_per_term": 512
+    }
+  ]
+}

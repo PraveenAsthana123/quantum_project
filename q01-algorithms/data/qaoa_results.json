@@ -1,0 +1,65 @@
+{
+  "graph_nodes": 6,
+  "graph_edges": [
+    [
+      0,
+      2
+    ],
+    [
+      0,
+      3
+    ],
+    [
+      0,
+      4
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      2,
+      4
+    ],
+    [
+      3,
+      4
+    ],
+    [
+      3,
+      5
+    ]
+  ],
+  "n_edges": 9,
+  "qaoa_energy": 5.990648,
+  "classical_optimal": 7,
+  "best_partition": [
+    1,
+    1,
+    0,
+    1,
+    0,
+    0
+  ],
+  "approximation_ratio": 0.855807,
+  "circuit_depth": 31,
+  "p_layers": 2,
+  "opt_gammas": [
+    1.7380236397337903,
+    1.2704963992109852
+  ],
+  "opt_betas": [
+    0.9229030063701316,
+    1.8905029249894607
+  ],
+  "optimizer_iterations": 233,
+  "classical_time_ms": 0.317
+}

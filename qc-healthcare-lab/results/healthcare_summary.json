@@ -1,0 +1,549 @@
+{
+  "generated_at": "2026-10-01",
+  "lab": "qc-healthcare-lab",
+  "classical_baselines": {
+    "all_results": [
+      {
+        "model": "LogisticRegression",
+        "accuracy": 0.7625,
+        "f1": 0.6801346801346801,
+        "roc_auc": 0.8485748383336571,
+        "confusion_matrix": [
+          [
+            204,
+            59
+          ],
+          [
+            36,
+            101
+          ]
+        ],
+        "predict_time_s": 0.0001,
+        "classification_report": {
+          "0": {
+            "precision": 0.85,
+            "recall": 0.7756653992395437,
+            "f1-score": 0.8111332007952287,
+            "support": 263.0
+          },
+          "1": {
+            "precision": 0.63125,
+            "recall": 0.7372262773722628,
+            "f1-score": 0.6801346801346801,
+            "support": 137.0
+          },
+          "accuracy": 0.7625,
+          "macro avg": {
+            "precision": 0.740625,
+            "recall": 0.7564458383059032,
+            "f1-score": 0.7456339404649543,
+            "support": 400.0
+          },
+          "weighted avg": {
+            "precision": 0.775078125,
+            "recall": 0.7625,
+            "f1-score": 0.7662662074689908,
+            "support": 400.0
+          }
+        },
+        "train_time_s": 0.0153,
+        "dataset": "diabetes"
+      },
+      {
+        "model": "RandomForest",
+        "accuracy": 0.985,
+        "f1": 0.9781021897810219,
+        "roc_auc": 0.9986261830090756,
+        "confusion_matrix": [
+          [
+            260,
+            3
+          ],
+          [
+            3,
+            134
+          ]
+        ],
+        "predict_time_s": 0.0389,
+        "classification_report": {
+          "0": {
+            "precision": 0.9885931558935361,
+            "recall": 0.9885931558935361,
+            "f1-score": 0.9885931558935361,
+            "support": 263.0
+          },
+          "1": {
+            "precision": 0.9781021897810219,
+            "recall": 0.9781021897810219,
+            "f1-score": 0.9781021897810219,
+            "support": 137.0
+          },
+          "accuracy": 0.985,
+          "macro avg": {
+            "precision": 0.983347672837279,
+            "recall": 0.983347672837279,
+            "f1-score": 0.983347672837279,
+            "support": 400.0
+          },
+          "weighted avg": {
+            "precision": 0.985,
+            "recall": 0.985,
+            "f1-score": 0.985,
+            "support": 400.0
+          }
+        },
+        "train_time_s": 0.3213,
+        "dataset": "diabetes"
+      },
+      {
+        "model": "XGBoost",
+        "accuracy": 0.985,
+        "f1": 0.9781021897810219,
+        "roc_auc": 0.9865948766340097,
+        "confusion_matrix": [
+          [
+            260,
+            3
+          ],
+          [
+            3,
+            134
+          ]
+        ],
+        "predict_time_s": 0.0128,
+        "classification_report": {
+          "0": {
+            "precision": 0.9885931558935361,
+            "recall": 0.9885931558935361,
+            "f1-score": 0.9885931558935361,
+            "support": 263.0
+          },
+          "1": {
+            "precision": 0.9781021897810219,
+            "recall": 0.9781021897810219,
+            "f1-score": 0.9781021897810219,
+            "support": 137.0
+          },
+          "accuracy": 0.985,
+          "macro avg": {
+            "precision": 0.983347672837279,
+            "recall": 0.983347672837279,
+            "f1-score": 0.983347672837279,
+            "support": 400.0
+          },
+          "weighted avg": {
+            "precision": 0.985,
+            "recall": 0.985,
+            "f1-score": 0.985,
+            "support": 400.0
+          }
+        },
+        "train_time_s": 37.8893,
+        "dataset": "diabetes"
+      },
+      {
+        "model": "LogisticRegression",
+        "accuracy": 0.8532608695652174,
+        "f1": 0.8695652173913043,
+        "roc_auc": 0.8962219033955046,
+        "confusion_matrix": [
+          [
+            67,
+            15
+          ],
+          [
+            12,
+            90
+          ]
+        ],
+        "predict_time_s": 0.0002,
+        "classification_report": {
+          "0": {
+            "precision": 0.8481012658227848,
+            "recall": 0.8170731707317073,
+            "f1-score": 0.8322981366459627,
+            "support": 82.0
+          },
+          "1": {
+            "precision": 0.8571428571428571,
+            "recall": 0.8823529411764706,
+            "f1-score": 0.8695652173913043,
+            "support": 102.0
+          },
+          "accuracy": 0.8532608695652174,
+          "macro avg": {
+            "precision": 0.8526220614828209,
+            "recall": 0.8497130559540889,
+            "f1-score": 0.8509316770186335,
+            "support": 184.0
+          },
+          "weighted avg": {
+            "precision": 0.8531134523154336,
+            "recall": 0.8532608695652174,
+            "f1-score": 0.8529570618417499,
+            "support": 184.0
+          }
+        },
+        "train_time_s": 0.0455,
+        "dataset": "heart_disease"
+      },
+      {
+        "model": "RandomForest",
+        "accuracy": 0.8858695652173914,
+        "f1": 0.8975609756097561,
+        "roc_auc": 0.9231229076996652,
+        "confusion_matrix": [
+          [
+            71,
+            11
+          ],
+          [
+            10,
+            92
+          ]
+        ],
+        "predict_time_s": 0.0251,
+        "classification_report": {
+          "0": {
+            "precision": 0.8765432098765432,
+            "recall": 0.8658536585365854,
+            "f1-score": 0.8711656441717791,
+            "support": 82.0
+          },
+          "1": {
+            "precision": 0.8932038834951457,
+            "recall": 0.9019607843137255,
+            "f1-score": 0.8975609756097561,
+            "support": 102.0
+          },
+          "accuracy": 0.8858695652173914,
+          "macro avg": {
+            "precision": 0.8848735466858444,
+            "recall": 0.8839072214251554,
+            "f1-score": 0.8843633098907676,
+            "support": 184.0
+          },
+          "weighted avg": {
+            "precision": 0.8857790180781597,
+            "recall": 0.8858695652173914,
+            "f1-score": 0.8857978387732663,
+            "support": 184.0
+          }
+        },
+        "train_time_s": 0.2666,
+        "dataset": "heart_disease"
+      },
+      {
+        "model": "XGBoost",
+        "accuracy": 0.44565217391304346,
+        "f1": 0.0,
+        "roc_auc": 0.5,
+        "confusion_matrix": [
+          [
+            82,
+            0
+          ],
+          [
+            102,
+            0
+          ]
+        ],
+        "predict_time_s": 0.0558,
+        "classification_report": {
+          "0": {
+            "precision": 0.44565217391304346,
+            "recall": 1.0,
+            "f1-score": 0.6165413533834586,
+            "support": 82.0
+          },
+          "1": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1-score": 0.0,
+            "support": 102.0
+          },
+          "accuracy": 0.44565217391304346,
+          "macro avg": {
+            "precision": 0.22282608695652173,
+            "recall": 0.5,
+            "f1-score": 0.3082706766917293,
+            "support": 184.0
+          },
+          "weighted avg": {
+            "precision": 0.19860586011342155,
+            "recall": 0.44565217391304346,
+            "f1-score": 0.2747629944426283,
+            "support": 184.0
+          }
+        },
+        "train_time_s": 6.3436,
+        "dataset": "heart_disease"
+      },
+      {
+        "model": "LogisticRegression",
+        "accuracy": 0.8,
+        "f1": 0.6470588235294118,
+        "roc_auc": 0.8549422336328627,
+        "confusion_matrix": [
+          [
+            37,
+            4
+          ],
+          [
+            8,
+            11
+          ]
+        ],
+        "predict_time_s": 0.0002,
+        "classification_report": {
+          "0": {
+            "precision": 0.8222222222222222,
+            "recall": 0.9024390243902439,
+            "f1-score": 0.8604651162790697,
+            "support": 41.0
+          },
+          "1": {
+            "precision": 0.7333333333333333,
+            "recall": 0.5789473684210527,
+            "f1-score": 0.6470588235294118,
+            "support": 19.0
+          },
+          "accuracy": 0.8,
+          "macro avg": {
+            "precision": 0.7777777777777777,
+            "recall": 0.7406931964056482,
+            "f1-score": 0.7537619699042408,
+            "support": 60.0
+          },
+          "weighted avg": {
+            "precision": 0.7940740740740739,
+            "recall": 0.8,
+            "f1-score": 0.7928864569083448,
+            "support": 60.0
+          }
+        },
+        "train_time_s": 0.0246,
+        "dataset": "heart_failure"
+      },
+      {
+        "model": "RandomForest",
+        "accuracy": 0.85,
+        "f1": 0.7272727272727273,
+        "roc_auc": 0.9056482670089859,
+        "confusion_matrix": [
+          [
+            39,
+            2
+          ],
+          [
+            7,
+            12
+          ]
+        ],
+        "predict_time_s": 0.013,
+        "classification_report": {
+          "0": {
+            "precision": 0.8478260869565217,
+            "recall": 0.9512195121951219,
+            "f1-score": 0.896551724137931,
+            "support": 41.0
+          },
+          "1": {
+            "precision": 0.8571428571428571,
+            "recall": 0.631578947368421,
+            "f1-score": 0.7272727272727273,
+            "support": 19.0
+          },
+          "accuracy": 0.85,
+          "macro avg": {
+            "precision": 0.8524844720496894,
+            "recall": 0.7913992297817715,
+            "f1-score": 0.8119122257053292,
+            "support": 60.0
+          },
+          "weighted avg": {
+            "precision": 0.8507763975155279,
+            "recall": 0.85,
+            "f1-score": 0.8429467084639499,
+            "support": 60.0
+          }
+        },
+        "train_time_s": 0.2062,
+        "dataset": "heart_failure"
+      },
+      {
+        "model": "XGBoost",
+        "accuracy": 0.8166666666666667,
+        "f1": 0.6451612903225806,
+        "roc_auc": 0.8459563543003851,
+        "confusion_matrix": [
+          [
+            39,
+            2
+          ],
+          [
+            9,
+            10
+          ]
+        ],
+        "predict_time_s": 0.0108,
+        "classification_report": {
+          "0": {
+            "precision": 0.8125,
+            "recall": 0.9512195121951219,
+            "f1-score": 0.8764044943820225,
+            "support": 41.0
+          },
+          "1": {
+            "precision": 0.8333333333333334,
+            "recall": 0.5263157894736842,
+            "f1-score": 0.6451612903225806,
+            "support": 19.0
+          },
+          "accuracy": 0.8166666666666667,
+          "macro avg": {
+            "precision": 0.8229166666666667,
+            "recall": 0.738767650834403,
+            "f1-score": 0.7607828923523016,
+            "support": 60.0
+          },
+          "weighted avg": {
+            "precision": 0.8190972222222223,
+            "recall": 0.8166666666666667,
+            "f1-score": 0.8031774797631993,
+            "support": 60.0
+          }
+        },
+        "train_time_s": 25.9183,
+        "dataset": "heart_failure"
+      }
+    ],
+    "best_per_dataset": {
+      "diabetes": {
+        "model": "RandomForest",
+        "accuracy": 0.985,
+        "f1": 0.9781021897810219,
+        "roc_auc": 0.9986261830090756
+      },
+      "heart_disease": {
+        "model": "RandomForest",
+        "accuracy": 0.8858695652173914,
+        "f1": 0.8975609756097561,
+        "roc_auc": 0.9231229076996652
+      },
+      "heart_failure": {
+        "model": "RandomForest",
+        "accuracy": 0.85,
+        "f1": 0.7272727272727273,
+        "roc_auc": 0.9056482670089859
+      }
+    }
+  },
+  "quantum_disease_classifier": {
+    "architecture": "VQC-PennyLane: 4-qubit, 2-layer, angle-encoding (RY), ring CNOT, Adam",
+    "results": {
+      "diabetes": {
+        "model": "VQC-PennyLane",
+        "n_qubits": 4,
+        "n_layers": 2,
+        "encoding": "angle-encoding-RY",
+        "epochs": 40,
+        "accuracy": 0.7066666666666667,
+        "f1": 0.7142857142857143,
+        "roc_auc": 0.7857777777777778,
+        "train_time_s": 2.9859,
+        "final_loss": 0.873288
+      },
+      "heart_disease": {
+        "model": "VQC-PennyLane",
+        "n_qubits": 4,
+        "n_layers": 2,
+        "encoding": "angle-encoding-RY",
+        "epochs": 40,
+        "accuracy": 0.64,
+        "f1": 0.5573770491803278,
+        "roc_auc": 0.7715555555555556,
+        "train_time_s": 0.0296,
+        "final_loss": 0.769549
+      }
+    }
+  },
+  "quantum_ecg_anomaly_detection": {
+    "task": "ECG-anomaly-detection",
+    "dataset": "MIT-BIH-Arrhythmia",
+    "n_features_raw": 187,
+    "n_features_quantum": 4,
+    "train_samples": 800,
+    "test_samples": 200,
+    "classical_svm": {
+      "model": "Classical-RBF-SVM",
+      "accuracy": 0.815,
+      "f1": 0.8042328042328042,
+      "roc_auc": 0.8864
+    },
+    "quantum_model": {
+      "model": "VQC-PennyLane-fallback",
+      "accuracy": 0.715,
+      "f1": 0.7348837209302326,
+      "roc_auc": 0.7788,
+      "note": "Qiskit not installed; used PennyLane VQC fallback"
+    }
+  },
+  "comparison": {
+    "diabetes": {
+      "classical_best": {
+        "model": "RandomForest",
+        "accuracy": 0.985,
+        "f1": 0.9781021897810219,
+        "roc_auc": 0.9986261830090756
+      },
+      "quantum_vqc": {
+        "model": "VQC-PennyLane",
+        "n_qubits": 4,
+        "n_layers": 2,
+        "encoding": "angle-encoding-RY",
+        "epochs": 40,
+        "accuracy": 0.7066666666666667,
+        "f1": 0.7142857142857143,
+        "roc_auc": 0.7857777777777778,
+        "train_time_s": 2.9859,
+        "final_loss": 0.873288
+      }
+    },
+    "heart_disease": {
+      "classical_best": {
+        "model": "RandomForest",
+        "accuracy": 0.8858695652173914,
+        "f1": 0.8975609756097561,
+        "roc_auc": 0.9231229076996652
+      },
+      "quantum_vqc": {
+        "model": "VQC-PennyLane",
+        "n_qubits": 4,
+        "n_layers": 2,
+        "encoding": "angle-encoding-RY",
+        "epochs": 40,
+        "accuracy": 0.64,
+        "f1": 0.5573770491803278,
+        "roc_auc": 0.7715555555555556,
+        "train_time_s": 0.0296,
+        "final_loss": 0.769549
+      }
+    },
+    "ecg": {
+      "classical_svm": {
+        "model": "Classical-RBF-SVM",
+        "accuracy": 0.815,
+        "f1": 0.8042328042328042,
+        "roc_auc": 0.8864
+      },
+      "quantum_vqc": {
+        "model": "VQC-PennyLane-fallback",
+        "accuracy": 0.715,
+        "f1": 0.7348837209302326,
+        "roc_auc": 0.7788,
+        "note": "Qiskit not installed; used PennyLane VQC fallback"
+      }
+    }
+  }
+}

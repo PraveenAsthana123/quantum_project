@@ -1,0 +1,144 @@
+{
+  "squeezing_dB": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    15
+  ],
+  "fidelity": [
+    0.5,
+    0.830696,
+    0.960118,
+    0.991605,
+    0.998278,
+    0.999648
+  ],
+  "wigner_function_overlap": [
+    0.021584,
+    0.065016,
+    0.085115,
+    0.029305,
+    0.006699,
+    0.001398
+  ],
+  "protocol_steps": [
+    "Step 1: Prepare two-mode squeezed vacuum (EPR pair) with squeezing r",
+    "Step 2: Mix input state with EPR mode A on 50/50 beamsplitter",
+    "Step 3: Homodyne measure x quadrature of output 1",
+    "Step 4: Homodyne measure p quadrature of output 2",
+    "Step 5: Apply displacement D(m_x + i\u00b7m_p) to EPR mode B (feedforward)",
+    "Result: Mode B now contains a copy of the input state (fidelity \u2192 1 as r \u2192 \u221e)"
+  ],
+  "input_alpha": {
+    "real": 1.0,
+    "imag": 0.5
+  },
+  "classical_limit_fidelity": 0.5,
+  "quantum_advantage_threshold": 0.5,
+  "detailed_results": [
+    {
+      "squeezing_r": 0.0,
+      "squeezing_dB": 0.0,
+      "input_alpha": {
+        "real": 1.0,
+        "imag": 0.5
+      },
+      "fidelity_analytic": 0.5,
+      "wigner_function_overlap": 0.021584,
+      "measurement_x": 1.4142,
+      "measurement_p": -1.4142,
+      "output_displacement": [
+        2.82842712474619,
+        -2.82842712474619
+      ],
+      "output_covariance_trace": 2.0
+    },
+    {
+      "squeezing_r": 0.7952847165717598,
+      "squeezing_dB": 6.908,
+      "input_alpha": {
+        "real": 1.0,
+        "imag": 0.5
+      },
+      "fidelity_analytic": 0.830696,
+      "wigner_function_overlap": 0.065016,
+      "measurement_x": 1.4142,
+      "measurement_p": -1.4142,
+      "output_displacement": [
+        2.82842712474619,
+        -2.82842712474619
+      ],
+      "output_covariance_trace": 5.110351603462861
+    },
+    {
+      "squeezing_r": 1.5905694331435196,
+      "squeezing_dB": 13.816,
+      "input_alpha": {
+        "real": 1.0,
+        "imag": 0.5
+      },
+      "fidelity_analytic": 0.960118,
+      "wigner_function_overlap": 0.085115,
+      "measurement_x": 1.4142,
+      "measurement_p": -1.4142,
+      "output_displacement": [
+        2.82842712474619,
+        -2.82842712474619
+      ],
+      "output_covariance_trace": 24.115693511015426
+    },
+    {
+      "squeezing_r": 2.385854149715279,
+      "squeezing_dB": 20.723,
+      "input_alpha": {
+        "real": 1.0,
+        "imag": 0.5
+      },
+      "fidelity_analytic": 0.991605,
+      "wigner_function_overlap": 0.029305,
+      "measurement_x": 1.4142,
+      "measurement_p": -1.4142,
+      "output_displacement": [
+        2.82842712474619,
+        -2.82842712474619
+      ],
+      "output_covariance_trace": 118.1293213991736
+    },
+    {
+      "squeezing_r": 3.1811388662870392,
+      "squeezing_dB": 27.631,
+      "input_alpha": {
+        "real": 1.0,
+        "imag": 0.5
+      },
+      "fidelity_analytic": 0.998278,
+      "wigner_function_overlap": 0.006699,
+      "measurement_x": 1.4142,
+      "measurement_p": -1.4142,
+      "output_displacement": [
+        2.82842712474619,
+        -2.82842712474619
+      ],
+      "output_covariance_trace": 579.5666735172315
+    },
+    {
+      "squeezing_r": 3.9764235828587986,
+      "squeezing_dB": 34.539,
+      "input_alpha": {
+        "real": 1.0,
+        "imag": 0.5
+      },
+      "fidelity_analytic": 0.999648,
+      "wigner_function_overlap": 0.001398,
+      "measurement_x": 1.4142,
+      "measurement_p": -1.4142,
+      "output_displacement": [
+        2.82842712474619,
+        -2.82842712474619
+      ],
+      "output_covariance_trace": 2843.6601579232442
+    }
+  ]
+}

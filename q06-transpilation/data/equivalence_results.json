@@ -1,0 +1,18 @@
+{
+  "fidelity": 1.0,
+  "equivalent": true,
+  "threshold": 0.999,
+  "original_gates": {
+    "cx": 4,
+    "h": 1
+  },
+  "transpiled_gates": {
+    "cx": 4,
+    "rz": 2,
+    "sx": 1
+  },
+  "original_depth": 5,
+  "transpiled_depth": 7,
+  "n_qubits": 5,
+  "method": "statevector + unitary operator comparison"
+}

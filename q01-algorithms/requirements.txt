@@ -1,0 +1,15 @@
+# Q01 — Quantum Algorithms
+# Core quantum frameworks
+pennylane>=0.40.0
+qiskit>=1.3.0
+qiskit-aer>=0.15.0
+qiskit-algorithms>=0.3.0
+
+# Chemistry / Hamiltonian (optional — falls back to hard-coded H2 if absent)
+openfermion>=1.6.0
+
+# Classical optimization + graph
+scipy>=1.12.0
+numpy>=1.26.0
+networkx>=3.2.0
+matplotlib>=3.8.0

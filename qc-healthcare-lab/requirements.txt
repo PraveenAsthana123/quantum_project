@@ -1,0 +1,11 @@
+pennylane>=0.36.0
+jax>=0.4.23
+jaxlib>=0.4.23
+scikit-learn>=1.4.0
+pandas>=2.0.0
+numpy>=1.26.0
+xgboost>=2.0.0
+matplotlib>=3.8.0
+qiskit>=1.0.0
+qiskit-machine-learning>=0.7.0
+qiskit-algorithms>=0.3.0

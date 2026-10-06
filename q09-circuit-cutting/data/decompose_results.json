@@ -1,0 +1,185 @@
+{
+  "n_qubits": 8,
+  "n_cuts": 3,
+  "subcircuits": [
+    {
+      "name": "A",
+      "n_qubits": 4,
+      "depth": 4,
+      "gates": {
+        "cx": 3,
+        "h": 1
+      }
+    },
+    {
+      "name": "B",
+      "n_qubits": 4,
+      "depth": 1,
+      "gates": {
+        "ry": 4
+      }
+    }
+  ],
+  "coefficients": [
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "I"
+      ],
+      "targ_channels": [
+        "I",
+        "I",
+        "I"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "I"
+      ],
+      "targ_channels": [
+        "I",
+        "I",
+        "Z"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "Z"
+      ],
+      "targ_channels": [
+        "I",
+        "I",
+        "I"
+      ]
+    },
+    {
+      "coefficient": -0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "Z"
+      ],
+      "targ_channels": [
+        "I",
+        "I",
+        "Z"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "X"
+      ],
+      "targ_channels": [
+        "I",
+        "I",
+        "X"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "Y"
+      ],
+      "targ_channels": [
+        "I",
+        "I",
+        "Y"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "I"
+      ],
+      "targ_channels": [
+        "I",
+        "Z",
+        "I"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "I"
+      ],
+      "targ_channels": [
+        "I",
+        "Z",
+        "Z"
+      ]
+    },
+    {
+      "coefficient": 0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "Z"
+      ],
+      "targ_channels": [
+        "I",
+        "Z",
+        "I"
+      ]
+    },
+    {
+      "coefficient": -0.125,
+      "ctrl_channels": [
+        "I",
+        "I",
+        "Z"
+      ],
+      "targ_channels": [
+        "I",
+        "Z",
+        "Z"
+      ]
+    }
+  ],
+  "total_qpd_terms": 216,
+  "reconstruction_overhead": 729,
+  "overhead_formula": "9^3 = 729",
+  "cuts": [
+    {
+      "index": 8,
+      "gate": "cx",
+      "control": 3,
+      "target": 4,
+      "partition_ctrl": "A",
+      "partition_targ": "B"
+    },
+    {
+      "index": 9,
+      "gate": "cx",
+      "control": 2,
+      "target": 5,
+      "partition_ctrl": "A",
+      "partition_targ": "B"
+    },
+    {
+      "index": 10,
+      "gate": "cx",
+      "control": 1,
+      "target": 6,
+      "partition_ctrl": "A",
+      "partition_targ": "B"
+    }
+  ],
+  "l1_norm_per_cut": 3.0
+}

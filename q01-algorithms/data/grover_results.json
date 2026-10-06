@@ -1,0 +1,19 @@
+{
+  "n_qubits": 3,
+  "n_items": 8,
+  "target": 6,
+  "target_binary": "110",
+  "optimal_iterations": 2,
+  "iterations_traced": 5,
+  "probability_per_iteration": {
+    "1": 0.78125,
+    "2": 0.945312,
+    "3": 0.330078,
+    "4": 0.012207,
+    "5": 0.547974
+  },
+  "success_probability": 0.945312,
+  "classical_queries": 4,
+  "quantum_queries": 2,
+  "speedup_factor": 2.0
+}

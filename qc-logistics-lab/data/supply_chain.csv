@@ -1,0 +1,501 @@
+date,origin,destination,distance_km,weight_kg,cost_usd,delivery_days,on_time
+2024-01-01,San Jose,San Antonio,2741.4,2287.5,12846.45,5,True
+2024-01-01,Los Angeles,San Diego,191.0,2419.9,910.17,3,True
+2024-01-01,San Jose,Houston,3060.1,600.8,4221.65,7,True
+2024-01-02,Philadelphia,San Jose,4500.0,3169.4,24901.91,7,True
+2024-01-02,Phoenix,Los Angeles,681.5,4396.6,5557.74,3,True
+2024-01-02,San Jose,Dallas,2830.5,3340.8,17301.13,7,True
+2024-01-03,San Antonio,San Diego,2107.8,1079.5,5605.32,4,True
+2024-01-03,San Diego,Chicago,3440.6,3981.0,24449.06,7,True
+2024-01-03,Dallas,New York,2678.4,3367.5,15155.6,3,True
+2024-01-03,San Diego,New York,4500.0,4358.3,37141.4,8,True
+2024-01-03,New York,Chicago,1515.5,1713.5,6502.05,5,True
+2024-01-04,Philadelphia,Houston,2516.9,1424.8,6561.51,4,True
+2024-01-04,Philadelphia,San Diego,4500.0,3756.7,39665.56,6,True
+2024-01-04,Dallas,San Antonio,421.9,698.6,527.12,1,True
+2024-01-05,Phoenix,Chicago,2878.5,2813.5,15228.07,6,True
+2024-01-05,Los Angeles,Houston,2577.5,4579.6,21852.7,4,True
+2024-01-05,Phoenix,Chicago,2878.5,1970.7,11793.43,4,True
+2024-01-06,San Jose,Los Angeles,543.0,210.1,371.85,1,True
+2024-01-06,Houston,San Jose,3060.1,4822.2,29583.94,5,True
+2024-01-07,Dallas,Los Angeles,2379.8,682.1,3825.51,3,True
+2024-01-07,Philadelphia,Dallas,2527.3,3527.1,18262.26,6,True
+2024-01-08,San Antonio,San Diego,2107.8,4563.1,17158.27,5,True
+2024-01-08,Philadelphia,Chicago,1392.5,1515.8,3761.53,3,True
+2024-01-08,San Diego,Chicago,3440.6,308.5,1739.91,4,True
+2024-01-08,San Antonio,Chicago,1840.9,266.6,1013.28,4,True
+2024-01-09,Philadelphia,Dallas,2527.3,728.1,3490.09,5,True
+2024-01-09,Philadelphia,San Antonio,2841.4,4585.1,26748.0,4,True
+2024-01-10,Philadelphia,San Antonio,2841.4,1610.5,8051.23,7,True
+2024-01-10,Los Angeles,Philadelphia,4500.0,4164.3,43699.26,7,True
+2024-01-10,Philadelphia,Phoenix,4160.9,183.8,1413.37,6,True
+2024-01-10,San Diego,Philadelphia,4500.0,1814.4,14849.8,9,True
+2024-01-10,Dallas,Houston,377.6,1612.2,1284.83,3,True
+2024-01-11,Los Angeles,Philadelphia,4500.0,1037.0,10566.1,8,True
+2024-01-11,Dallas,Chicago,1436.4,1360.5,4909.21,5,True
+2024-01-12,San Diego,Los Angeles,191.0,969.6,509.56,1,True
+2024-01-13,Phoenix,New York,4306.0,2933.9,29834.39,7,True
+2024-01-14,Houston,Dallas,377.6,504.8,566.88,3,True
+2024-01-15,Phoenix,Houston,1898.7,894.4,3221.57,5,True
+2024-01-16,San Jose,Philadelphia,4500.0,4135.7,41155.53,6,True
+2024-01-16,New York,San Antonio,2994.8,811.3,5051.39,7,True
+2024-01-16,Los Angeles,Phoenix,681.5,618.6,952.76,2,True
+2024-01-16,Philadelphia,Phoenix,4160.9,1602.6,13466.54,7,True
+2024-01-16,San Jose,Houston,3060.1,2194.8,11251.68,7,True
+2024-01-17,Los Angeles,San Jose,543.0,4844.1,6335.81,3,True
+2024-01-17,Philadelphia,Los Angeles,4500.0,1909.9,19841.09,9,True
+2024-01-17,San Jose,Chicago,3841.4,12.6,170.19,7,True
+2024-01-18,Los Angeles,San Diego,191.0,508.2,300.66,3,True
+2024-01-18,San Jose,New York,4500.0,742.9,8243.41,7,True
+2024-01-18,San Antonio,San Jose,2741.4,974.1,6077.93,6,True
+2024-01-18,Chicago,Philadelphia,1392.5,706.7,1829.5,3,True
+2024-01-19,Houston,Los Angeles,2577.5,1150.9,7110.06,5,True
+2024-01-19,Dallas,San Antonio,421.9,273.5,240.68,3,True
+2024-01-20,Philadelphia,Chicago,1392.5,4175.2,11055.1,2,True
+2024-01-20,Philadelphia,Phoenix,4160.9,4552.5,46310.07,7,True
+2024-01-20,Phoenix,Philadelphia,4160.9,1718.4,16616.25,7,True
+2024-01-20,Dallas,San Jose,2830.5,1453.7,10193.32,6,True
+2024-01-20,San Jose,Philadelphia,4500.0,3875.4,28479.57,7,True
+2024-01-21,Phoenix,San Antonio,1573.5,1017.3,3989.78,5,True
+2024-01-21,Chicago,Phoenix,2878.5,4794.0,26247.94,6,True
+2024-01-21,New York,Los Angeles,4500.0,4904.3,51920.41,9,True
+2024-01-21,Dallas,Philadelphia,2527.3,2454.2,14701.08,6,True
+2024-01-22,San Diego,Los Angeles,191.0,4372.9,2050.51,2,True
+2024-01-22,San Antonio,San Diego,2107.8,1080.5,5038.34,3,True
+2024-01-22,San Jose,San Diego,730.0,3780.1,4831.94,3,True
+2024-01-22,Houston,Dallas,377.6,4886.2,3141.0,1,True
+2024-01-22,Philadelphia,New York,154.2,4680.3,1829.34,1,True
+2024-01-23,Phoenix,San Jose,1170.8,4004.9,11624.93,1,True
+2024-01-23,Houston,New York,2670.8,825.3,4087.74,6,True
+2024-01-23,Dallas,San Jose,2830.5,3345.0,20239.97,5,True
+2024-01-23,San Jose,Los Angeles,543.0,2369.2,2822.29,1,True
+2024-01-23,San Diego,Phoenix,571.4,4619.7,5322.52,1,True
+2024-01-24,San Antonio,San Jose,2741.4,2049.3,13060.77,5,True
+2024-01-24,Philadelphia,New York,154.2,4279.7,1222.09,2,True
+2024-01-24,San Antonio,Philadelphia,2841.4,3303.2,16151.18,4,True
+2024-01-24,San Jose,San Diego,730.0,3117.3,3796.06,4,True
+2024-01-24,San Jose,San Diego,730.0,3056.3,5117.74,1,True
+2024-01-24,San Jose,Philadelphia,4500.0,2253.7,18099.43,8,True
+2024-01-25,Los Angeles,Houston,2577.5,3759.9,22123.75,4,True
+2024-01-25,Philadelphia,Houston,2516.9,1992.2,8362.76,5,True
+2024-01-25,San Jose,New York,4500.0,2635.0,28635.08,6,True
+2024-01-26,San Jose,New York,4500.0,3040.0,29631.81,6,True
+2024-01-26,Dallas,New York,2678.4,4151.8,18011.19,4,True
+2024-01-26,Phoenix,Houston,1898.7,2205.9,9871.95,5,True
+2024-01-26,San Antonio,New York,2994.8,838.7,4699.58,6,True
+2024-01-26,Phoenix,San Jose,1170.8,1111.8,2332.36,2,True
+2024-01-27,Chicago,Los Angeles,3505.2,700.3,4546.09,5,True
+2024-01-27,New York,San Diego,4500.0,4304.2,45180.94,9,True
+2024-01-27,Phoenix,Dallas,1699.6,1359.0,5706.16,2,True
+2024-01-27,Los Angeles,Dallas,2379.8,772.9,4098.89,3,True
+2024-01-27,Phoenix,San Jose,1170.8,4536.4,11942.82,4,True
+2024-01-28,San Diego,New York,4500.0,3102.1,32075.38,8,True
+2024-01-29,Dallas,Phoenix,1699.6,1937.8,6368.28,2,True
+2024-01-29,Dallas,Chicago,1436.4,3856.2,12060.51,3,True
+2024-01-29,San Diego,San Jose,730.0,971.0,1451.22,3,True
+2024-01-29,San Jose,San Diego,730.0,1871.6,2867.3,1,True
+2024-01-30,Los Angeles,New York,4500.0,4993.1,44709.34,7,True
+2024-01-30,Chicago,San Jose,3841.4,3676.3,31876.09,6,True
+2024-01-31,Phoenix,Houston,1898.7,2012.3,6843.08,2,True
+2024-01-31,San Jose,San Antonio,2741.4,2950.8,16451.9,4,True
+2024-01-31,San Antonio,Houston,345.7,3317.9,2158.04,3,True
+2024-02-01,Houston,Philadelphia,2516.9,3320.6,14992.33,3,True
+2024-02-01,Philadelphia,San Antonio,2841.4,2119.4,10867.2,4,True
+2024-02-01,San Diego,Los Angeles,191.0,1799.8,677.15,2,True
+2024-02-01,San Diego,New York,4500.0,260.0,2475.94,9,True
+2024-02-01,Chicago,Houston,1607.3,2975.4,9578.97,3,True
+2024-02-02,San Diego,San Jose,730.0,1773.2,3086.59,4,True
+2024-02-02,San Jose,San Diego,730.0,1639.5,2362.75,3,True
+2024-02-03,San Antonio,Phoenix,1573.5,4134.8,12730.35,5,True
+2024-02-04,Houston,Phoenix,1898.7,3269.4,14113.98,3,True
+2024-02-04,Dallas,Los Angeles,2379.8,846.8,3755.45,5,True
+2024-02-05,New York,San Antonio,2994.8,1614.4,10039.14,5,True
+2024-02-05,Phoenix,New York,4306.0,4425.4,31203.23,6,True
+2024-02-05,Chicago,Houston,1607.3,643.4,1877.59,2,True
+2024-02-06,Phoenix,New York,4306.0,306.8,2690.07,6,True
+2024-02-06,Philadelphia,Dallas,2527.3,4302.8,19862.41,4,True
+2024-02-06,Houston,Chicago,1607.3,3133.7,8235.63,5,True
+2024-02-06,San Jose,Dallas,2830.5,653.9,3723.13,7,True
+2024-02-07,San Antonio,Dallas,421.9,4620.3,3922.74,4,True
+2024-02-11,Los Angeles,Philadelphia,4500.0,1718.6,18763.98,7,True
+2024-02-11,San Jose,San Diego,730.0,4107.9,5464.16,2,True
+2024-02-12,Dallas,San Jose,2830.5,4144.4,22622.3,4,True
+2024-02-12,San Diego,Los Angeles,191.0,1933.0,967.02,2,True
+2024-02-12,Houston,Phoenix,1898.7,4162.3,16094.8,2,True
+2024-02-12,San Antonio,Dallas,421.9,1283.0,1385.08,1,True
+2024-02-12,Philadelphia,San Antonio,2841.4,3825.7,20830.46,5,True
+2024-02-12,Dallas,Phoenix,1699.6,1899.2,6046.8,4,True
+2024-02-13,Dallas,Houston,377.6,472.9,510.44,1,True
+2024-02-13,San Jose,Los Angeles,543.0,4654.1,5635.92,3,True
+2024-02-13,San Diego,San Jose,730.0,4337.8,7417.21,1,True
+2024-02-14,Phoenix,Houston,1898.7,480.5,1577.34,4,True
+2024-02-14,Philadelphia,Phoenix,4160.9,4891.2,43775.95,8,True
+2024-02-14,Houston,Chicago,1607.3,796.0,3042.27,3,True
+2024-02-15,San Antonio,Los Angeles,2248.1,1993.6,9833.86,4,True
+2024-02-15,San Antonio,Houston,345.7,2089.2,1336.17,1,True
+2024-02-15,San Jose,San Diego,730.0,4878.2,8085.93,1,True
+2024-02-15,Philadelphia,Chicago,1392.5,3509.9,11661.28,5,True
+2024-02-18,San Diego,Dallas,2264.4,3727.5,20690.76,6,True
+2024-02-18,Phoenix,New York,4306.0,2487.1,26103.61,6,True
+2024-02-18,Philadelphia,Phoenix,4160.9,4365.6,40245.16,7,True
+2024-02-19,New York,Houston,2670.8,129.6,988.39,3,True
+2024-02-19,San Jose,Phoenix,1170.8,2179.5,5886.38,2,True
+2024-02-19,Los Angeles,Philadelphia,4500.0,4564.2,38718.99,9,True
+2024-02-20,Houston,Chicago,1607.3,3974.3,12994.26,4,True
+2024-02-20,New York,Philadelphia,154.2,3044.6,1014.44,2,True
+2024-02-21,Houston,Los Angeles,2577.5,778.3,3754.05,3,True
+2024-02-21,San Diego,Philadelphia,4500.0,4466.2,46708.46,8,True
+2024-02-21,Dallas,Phoenix,1699.6,4680.0,14454.82,4,True
+2024-02-21,Chicago,Los Angeles,3505.2,4738.2,32045.14,6,True
+2024-02-22,Philadelphia,Phoenix,4160.9,2722.0,25598.47,8,True
+2024-02-22,Chicago,Los Angeles,3505.2,3065.0,23204.94,6,True
+2024-02-22,Philadelphia,Los Angeles,4500.0,1020.6,9488.22,6,True
+2024-02-22,Houston,Chicago,1607.3,1042.9,4055.95,3,True
+2024-02-22,Philadelphia,Phoenix,4160.9,3055.0,26916.81,7,True
+2024-02-23,Chicago,Dallas,1436.4,2195.6,6974.72,3,True
+2024-02-23,Houston,San Antonio,345.7,1360.8,1020.17,3,True
+2024-02-23,Philadelphia,Chicago,1392.5,2030.9,7093.19,3,True
+2024-02-24,Phoenix,Philadelphia,4160.9,210.9,1625.88,7,True
+2024-02-24,Phoenix,Los Angeles,681.5,3174.8,4564.9,1,True
+2024-02-26,Houston,Dallas,377.6,4395.0,2910.78,2,True
+2024-02-26,Phoenix,Houston,1898.7,1660.3,7190.47,2,True
+2024-02-26,New York,Houston,2670.8,3989.6,23672.73,3,True
+2024-02-26,San Antonio,Chicago,1840.9,2330.4,8630.35,3,True
+2024-02-26,San Jose,Chicago,3841.4,2661.8,23411.29,5,True
+2024-02-27,Chicago,Dallas,1436.4,944.3,2801.66,2,True
+2024-02-27,Philadelphia,Phoenix,4160.9,412.9,4022.94,6,True
+2024-02-27,Dallas,San Antonio,421.9,1687.3,1265.72,4,True
+2024-02-27,San Jose,San Antonio,2741.4,4997.1,27875.56,3,True
+2024-02-28,Houston,San Diego,2442.6,3691.6,19503.57,5,True
+2024-02-28,Chicago,Los Angeles,3505.2,889.7,5836.12,7,True
+2024-02-29,San Antonio,Dallas,421.9,1308.3,1358.42,4,True
+2024-02-29,Phoenix,Chicago,2878.5,4473.6,28928.51,5,True
+2024-03-01,San Antonio,Los Angeles,2248.1,3131.1,17050.38,3,True
+2024-03-01,Los Angeles,New York,4500.0,202.3,2202.16,7,True
+2024-03-02,Dallas,Philadelphia,2527.3,3555.6,19583.49,3,True
+2024-03-05,New York,Dallas,2678.4,4082.1,19304.47,6,True
+2024-03-06,Chicago,Philadelphia,1392.5,4056.7,11965.14,3,True
+2024-03-06,San Jose,Los Angeles,543.0,37.3,114.47,4,True
+2024-03-07,San Antonio,Philadelphia,2841.4,142.6,883.15,4,True
+2024-03-07,San Antonio,Los Angeles,2248.1,3011.8,11518.31,3,True
+2024-03-08,Houston,San Diego,2442.6,4271.4,17784.29,6,True
+2024-03-08,Los Angeles,Houston,2577.5,489.5,2428.07,3,True
+2024-03-09,San Diego,Dallas,2264.4,3792.0,19976.56,5,True
+2024-03-09,New York,Los Angeles,4500.0,2130.6,18287.54,9,True
+2024-03-10,Chicago,San Antonio,1840.9,2249.2,9592.21,3,True
+2024-03-10,Philadelphia,San Antonio,2841.4,4818.3,24653.6,5,True
+2024-03-11,Phoenix,New York,4306.0,211.6,1848.1,7,True
+2024-03-12,Philadelphia,San Jose,4500.0,3393.7,26012.84,9,True
+2024-03-12,Houston,Dallas,377.6,3266.9,2222.44,2,True
+2024-03-14,Los Angeles,Phoenix,681.5,4743.7,5466.46,4,True
+2024-03-14,Chicago,San Antonio,1840.9,3264.8,13128.55,2,True
+2024-03-15,San Antonio,Phoenix,1573.5,2225.3,7398.81,5,True
+2024-03-16,Chicago,New York,1515.5,2836.4,10464.06,5,True
+2024-03-16,San Diego,San Jose,730.0,272.4,489.13,3,True
+2024-03-16,Chicago,New York,1515.5,467.7,1714.55,4,True
+2024-03-16,Chicago,Houston,1607.3,2296.7,9175.8,5,True
+2024-03-16,Chicago,Houston,1607.3,2461.4,9681.65,5,True
+2024-03-17,San Antonio,Houston,345.7,1525.9,1294.24,1,True
+2024-03-18,Chicago,San Antonio,1840.9,890.0,2797.82,2,True
+2024-03-18,Philadelphia,Dallas,2527.3,2727.3,16094.63,4,True
+2024-03-19,San Jose,Phoenix,1170.8,4737.1,11131.75,2,True
+2024-03-19,New York,Chicago,1515.5,3283.8,11610.95,2,True
+2024-03-19,San Diego,New York,4500.0,2099.1,17561.88,9,True
+2024-03-19,Phoenix,Houston,1898.7,2349.1,8102.91,2,True
+2024-03-19,Phoenix,Los Angeles,681.5,1240.9,1624.43,2,True
+2024-03-19,Phoenix,Houston,1898.7,3002.5,10197.5,3,True
+2024-03-20,New York,Houston,2670.8,2687.1,14520.5,3,True
+2024-03-21,Philadelphia,San Jose,4500.0,4032.9,30237.97,9,True
+2024-03-21,New York,Philadelphia,154.2,3261.8,1059.95,1,True
+2024-03-21,San Jose,New York,4500.0,2847.2,31268.39,6,True
+2024-03-22,Houston,Los Angeles,2577.5,1897.8,10617.42,3,True
+2024-03-23,Dallas,New York,2678.4,2690.7,17632.69,5,True
+2024-03-23,San Jose,Chicago,3841.4,4620.1,34920.34,5,True
+2024-03-23,Phoenix,Philadelphia,4160.9,3542.1,35568.36,8,True
+2024-03-23,Dallas,San Jose,2830.5,950.5,5652.07,5,True
+2024-03-23,San Jose,Los Angeles,543.0,4665.2,5015.35,2,True
+2024-03-23,San Antonio,Los Angeles,2248.1,4872.3,26525.39,4,True
+2024-03-24,Philadelphia,Houston,2516.9,3235.0,17201.65,4,True
+2024-03-24,Philadelphia,Phoenix,4160.9,3054.2,27404.74,5,True
+2024-03-24,Chicago,Los Angeles,3505.2,694.7,5227.25,5,True
+2024-03-25,San Jose,Chicago,3841.4,1963.5,14445.1,7,True
+2024-03-25,Phoenix,Chicago,2878.5,3342.6,16676.52,6,True
+2024-03-27,New York,Phoenix,4306.0,2055.8,19656.37,5,True
+2024-03-27,New York,Philadelphia,154.2,1452.5,605.61,2,True
+2024-03-27,Chicago,Houston,1607.3,4664.6,17710.04,3,True
+2024-03-27,Houston,San Diego,2442.6,1889.9,11540.49,6,True
+2024-03-27,Houston,Phoenix,1898.7,4910.9,16437.52,4,True
+2024-03-28,Dallas,Philadelphia,2527.3,15.3,128.89,4,True
+2024-03-29,Houston,Los Angeles,2577.5,2385.7,14655.02,6,True
+2024-03-29,Los Angeles,Phoenix,681.5,4638.2,7061.55,4,True
+2024-03-29,Phoenix,Philadelphia,4160.9,4463.5,34689.72,8,True
+2024-03-30,San Diego,Houston,2442.6,1735.2,10310.8,5,True
+2024-03-30,Los Angeles,Chicago,3505.2,3364.6,26745.94,6,True
+2024-03-31,San Antonio,New York,2994.8,2021.7,11274.45,4,True
+2024-03-31,Phoenix,Los Angeles,681.5,4093.4,4700.39,1,True
+2024-03-31,San Diego,Los Angeles,191.0,3710.7,1642.94,1,True
+2024-04-01,Philadelphia,Houston,2516.9,256.8,1704.46,4,True
+2024-04-01,San Jose,Los Angeles,543.0,485.0,722.4,1,True
+2024-04-01,San Antonio,Phoenix,1573.5,3198.7,11988.69,2,True
+2024-04-01,San Jose,Los Angeles,543.0,4322.0,5469.97,2,True
+2024-04-01,New York,San Diego,4500.0,285.8,3220.32,6,True
+2024-04-02,Los Angeles,San Diego,191.0,3750.6,1521.62,2,True
+2024-04-03,San Antonio,Phoenix,1573.5,2150.8,7233.1,4,True
+2024-04-03,San Antonio,Phoenix,1573.5,2765.4,9957.96,3,True
+2024-04-03,Philadelphia,San Antonio,2841.4,1610.4,10218.3,7,True
+2024-04-03,San Jose,Philadelphia,4500.0,885.0,6882.82,9,True
+2024-04-04,San Jose,Dallas,2830.5,852.7,5033.18,6,True
+2024-04-04,San Diego,Phoenix,571.4,2260.7,3108.45,4,True
+2024-04-04,Chicago,San Jose,3841.4,4263.4,34820.25,8,True
+2024-04-04,Los Angeles,San Diego,191.0,2673.9,1349.27,1,True
+2024-04-04,Dallas,Chicago,1436.4,525.4,1559.49,4,True
+2024-04-04,San Jose,San Diego,730.0,1519.4,2020.76,4,True
+2024-04-06,Philadelphia,Chicago,1392.5,985.5,3153.86,4,True
+2024-04-06,Dallas,San Jose,2830.5,3935.4,23888.24,7,True
+2024-04-06,Houston,New York,2670.8,1609.3,10013.64,6,True
+2024-04-06,San Diego,San Antonio,2107.8,868.1,3880.6,6,True
+2024-04-06,Dallas,San Jose,2830.5,4218.2,22027.71,7,True
+2024-04-07,Phoenix,San Diego,571.4,357.5,506.61,1,True
+2024-04-07,Los Angeles,Dallas,2379.8,439.1,2505.66,6,True
+2024-04-07,San Diego,Chicago,3440.6,2129.6,17932.89,5,True
+2024-04-07,San Jose,Chicago,3841.4,4744.7,45199.65,5,True
+2024-04-08,Chicago,New York,1515.5,4967.8,17143.32,5,True
+2024-04-08,Los Angeles,Phoenix,681.5,2616.0,4341.41,3,True
+2024-04-09,Philadelphia,San Diego,4500.0,462.0,5232.57,6,True
+2024-04-10,San Antonio,New York,2994.8,2549.6,16062.94,7,True
+2024-04-10,San Antonio,San Jose,2741.4,2488.0,16888.45,4,True
+2024-04-10,San Jose,Phoenix,1170.8,4392.0,11881.26,4,True
+2024-04-10,Houston,Los Angeles,2577.5,2933.0,12547.09,5,True
+2024-04-12,Los Angeles,Phoenix,681.5,4750.8,7435.08,1,True
+2024-04-12,San Jose,Dallas,2830.5,2163.3,11297.94,5,True
+2024-04-13,New York,San Jose,4500.0,3746.6,31399.51,9,True
+2024-04-13,San Diego,San Jose,730.0,4634.6,6209.91,1,True
+2024-04-14,Dallas,San Antonio,421.9,3764.1,2764.02,4,True
+2024-04-14,New York,Dallas,2678.4,2119.8,13137.82,4,True
+2024-04-15,Los Angeles,San Antonio,2248.1,319.7,1714.09,6,True
+2024-04-15,Houston,Los Angeles,2577.5,3101.7,18728.48,4,True
+2024-04-16,New York,Chicago,1515.5,3097.4,11776.3,4,True
+2024-04-16,San Antonio,Dallas,421.9,2123.2,1821.1,3,True
+2024-04-16,San Jose,Los Angeles,543.0,649.0,899.33,3,True
+2024-04-17,Philadelphia,Phoenix,4160.9,2888.5,20622.3,7,True
+2024-04-17,Houston,Chicago,1607.3,108.6,500.26,2,True
+2024-04-17,Los Angeles,Phoenix,681.5,1102.1,1356.53,1,True
+2024-04-18,San Diego,Philadelphia,4500.0,3601.7,27875.77,8,True
+2024-04-18,Phoenix,Philadelphia,4160.9,482.3,4352.97,7,True
+2024-04-18,Phoenix,New York,4306.0,1956.4,15634.01,7,True
+2024-04-18,Philadelphia,Phoenix,4160.9,1608.8,12128.54,7,True
+2024-04-19,Dallas,Philadelphia,2527.3,2759.0,17474.62,4,True
+2024-04-19,San Diego,Philadelphia,4500.0,2004.4,15175.79,9,True
+2024-04-19,Philadelphia,Los Angeles,4500.0,457.9,3978.98,9,True
+2024-04-19,Phoenix,Houston,1898.7,4376.8,16474.85,3,True
+2024-04-20,New York,Philadelphia,154.2,2826.3,1123.87,2,True
+2024-04-20,Philadelphia,Dallas,2527.3,545.5,3229.5,4,True
+2024-04-21,San Antonio,Philadelphia,2841.4,4442.9,25678.62,5,True
+2024-04-21,Phoenix,Houston,1898.7,1845.8,7126.19,4,True
+2024-04-21,Phoenix,Los Angeles,681.5,4332.1,5775.09,1,True
+2024-04-22,New York,San Diego,4500.0,545.9,4496.39,9,True
+2024-04-22,Dallas,San Diego,2264.4,325.0,1314.87,3,True
+2024-04-23,New York,Dallas,2678.4,3753.8,24672.6,6,True
+2024-04-24,Philadelphia,Los Angeles,4500.0,1137.4,10823.13,6,True
+2024-04-24,San Jose,Phoenix,1170.8,4262.2,10907.06,4,True
+2024-04-24,San Antonio,Phoenix,1573.5,2102.3,5533.99,3,True
+2024-04-24,Los Angeles,San Jose,543.0,655.5,732.18,2,True
+2024-04-24,Dallas,Philadelphia,2527.3,1078.3,6603.11,5,True
+2024-04-25,Phoenix,Los Angeles,681.5,4376.7,5548.41,2,True
+2024-04-25,Houston,Chicago,1607.3,4649.0,15043.79,5,True
+2024-04-25,San Diego,Houston,2442.6,3453.7,15547.58,5,True
+2024-04-26,Phoenix,San Diego,571.4,2328.8,3075.13,2,True
+2024-04-26,Houston,San Jose,3060.1,1614.5,10108.05,5,True
+2024-04-27,San Diego,Chicago,3440.6,3164.7,27229.63,5,True
+2024-04-27,Houston,Phoenix,1898.7,1856.2,7802.59,2,True
+2024-04-27,Dallas,Los Angeles,2379.8,2230.6,11370.18,4,True
+2024-04-28,Los Angeles,New York,4500.0,4495.6,43310.95,6,True
+2024-04-28,Philadelphia,New York,154.2,4678.4,1199.35,1,True
+2024-04-29,Chicago,Los Angeles,3505.2,2991.0,17561.21,5,True
+2024-04-29,Los Angeles,New York,4500.0,4959.1,53458.29,8,True
+2024-04-30,Houston,Chicago,1607.3,3376.9,12494.64,2,True
+2024-04-30,Chicago,San Diego,3440.6,2841.6,16250.48,7,True
+2024-04-30,Phoenix,Los Angeles,681.5,787.2,1092.69,3,True
+2024-05-01,Houston,San Diego,2442.6,2899.1,16134.85,6,True
+2024-05-01,Los Angeles,Philadelphia,4500.0,4878.9,37303.72,9,True
+2024-05-01,Dallas,San Diego,2264.4,2824.8,13865.94,4,True
+2024-05-02,San Antonio,Houston,345.7,1653.0,1386.49,1,True
+2024-05-02,Phoenix,San Diego,571.4,3970.2,5017.29,4,True
+2024-05-03,San Diego,San Antonio,2107.8,235.1,1021.25,6,True
+2024-05-03,Los Angeles,New York,4500.0,2508.8,21902.55,9,True
+2024-05-03,San Antonio,Los Angeles,2248.1,1560.2,6238.56,5,True
+2024-05-04,New York,Philadelphia,154.2,2810.5,1209.07,3,True
+2024-05-04,Los Angeles,New York,4500.0,1970.7,21570.53,9,True
+2024-05-04,Chicago,New York,1515.5,2314.0,7734.35,4,True
+2024-05-04,Dallas,Chicago,1436.4,848.3,2256.18,2,True
+2024-05-05,Philadelphia,San Jose,4500.0,4966.9,42885.4,9,True
+2024-05-05,Los Angeles,Houston,2577.5,1810.2,7647.36,6,True
+2024-05-06,Dallas,Phoenix,1699.6,3092.8,8581.08,2,True
+2024-05-06,New York,Phoenix,4306.0,776.5,6641.71,6,True
+2024-05-08,San Diego,Phoenix,571.4,3955.8,4803.62,3,True
+2024-05-08,Philadelphia,Chicago,1392.5,3612.3,10284.0,4,True
+2024-05-09,San Antonio,Houston,345.7,3975.8,2511.76,2,True
+2024-05-09,Philadelphia,San Diego,4500.0,4610.0,47027.79,9,True
+2024-05-10,Los Angeles,San Jose,543.0,1294.5,1646.6,1,True
+2024-05-10,San Antonio,San Jose,2741.4,4100.8,27948.22,4,True
+2024-05-10,Los Angeles,San Diego,191.0,2046.7,911.53,1,True
+2024-05-10,San Diego,Phoenix,571.4,2927.9,4134.62,1,True
+2024-05-10,Phoenix,Houston,1898.7,1727.3,7793.44,4,True
+2024-05-11,Dallas,San Diego,2264.4,3348.0,15254.81,3,True
+2024-05-11,Phoenix,Dallas,1699.6,2844.0,8130.07,2,True
+2024-05-11,Houston,San Jose,3060.1,585.5,4367.97,6,True
+2024-05-12,New York,Philadelphia,154.2,33.0,52.72,2,True
+2024-05-12,Chicago,Los Angeles,3505.2,922.2,6867.37,6,True
+2024-05-12,Dallas,Philadelphia,2527.3,946.2,3960.22,3,True
+2024-05-13,San Antonio,Los Angeles,2248.1,3633.6,14694.05,6,True
+2024-05-13,San Jose,Dallas,2830.5,1049.8,6310.99,6,True
+2024-05-13,Chicago,New York,1515.5,3405.3,10849.59,5,True
+2024-05-13,Phoenix,San Antonio,1573.5,888.9,2974.58,2,True
+2024-05-13,Phoenix,Dallas,1699.6,3641.9,13890.43,4,True
+2024-05-13,Chicago,Dallas,1436.4,3893.0,12821.65,4,True
+2024-05-13,San Antonio,Los Angeles,2248.1,189.1,974.66,4,True
+2024-05-13,Phoenix,Philadelphia,4160.9,2436.1,20057.72,6,True
+2024-05-13,Chicago,Houston,1607.3,4827.4,13715.69,5,True
+2024-05-14,San Diego,Dallas,2264.4,1746.0,9650.5,6,True
+2024-05-15,San Diego,Chicago,3440.6,2408.2,15579.75,6,True
+2024-05-15,Chicago,Los Angeles,3505.2,947.6,8344.85,7,True
+2024-05-15,Dallas,New York,2678.4,637.8,3541.7,3,True
+2024-05-16,Los Angeles,New York,4500.0,2006.3,18547.51,6,True
+2024-05-18,Los Angeles,Dallas,2379.8,3400.8,14969.06,4,True
+2024-05-18,San Diego,Los Angeles,191.0,3719.9,1540.53,3,True
+2024-05-18,Dallas,San Diego,2264.4,2314.5,12140.41,5,True
+2024-05-18,Chicago,Los Angeles,3505.2,4880.9,34611.84,6,True
+2024-05-18,Phoenix,Philadelphia,4160.9,1411.7,12988.41,6,True
+2024-05-19,Houston,Los Angeles,2577.5,1069.3,5034.72,3,True
+2024-05-19,Chicago,Houston,1607.3,1189.4,3593.15,4,True
+2024-05-20,San Diego,Dallas,2264.4,1968.5,8173.38,6,True
+2024-05-20,San Jose,Dallas,2830.5,4189.0,27192.57,7,True
+2024-05-20,New York,Chicago,1515.5,2664.1,8342.35,3,True
+2024-05-20,Phoenix,San Diego,571.4,1103.8,1560.15,1,True
+2024-05-20,San Jose,Los Angeles,543.0,4212.4,5594.71,1,True
+2024-05-21,Los Angeles,San Antonio,2248.1,3271.2,14522.24,3,True
+2024-05-21,San Diego,Phoenix,571.4,2525.9,3389.31,2,True
+2024-05-21,New York,Houston,2670.8,860.0,5838.88,6,True
+2024-05-21,San Antonio,New York,2994.8,2677.7,15817.23,7,True
+2024-05-21,New York,San Jose,4500.0,2414.0,19003.8,7,True
+2024-05-22,Chicago,Houston,1607.3,1383.0,4241.57,5,True
+2024-05-22,Phoenix,Philadelphia,4160.9,2817.7,25456.52,6,True
+2024-05-23,Phoenix,San Jose,1170.8,1598.4,3777.04,4,True
+2024-05-23,Chicago,Dallas,1436.4,2498.2,6283.56,3,True
+2024-05-23,San Diego,Los Angeles,191.0,2614.4,1176.51,1,True
+2024-05-23,Dallas,Chicago,1436.4,2334.1,6877.04,4,True
+2024-05-24,Philadelphia,San Diego,4500.0,2699.3,21999.17,9,True
+2024-05-24,Houston,San Diego,2442.6,1101.3,5550.48,5,True
+2024-05-24,San Antonio,Los Angeles,2248.1,4765.1,26912.67,4,True
+2024-05-24,Houston,Philadelphia,2516.9,1626.4,7409.36,4,True
+2024-05-24,Los Angeles,Dallas,2379.8,2776.5,11959.59,6,True
+2024-05-25,Houston,Chicago,1607.3,3901.6,10239.84,5,True
+2024-05-25,Philadelphia,Chicago,1392.5,3434.0,8526.27,3,True
+2024-05-25,Houston,San Jose,3060.1,3165.1,22611.15,6,True
+2024-05-25,Phoenix,San Antonio,1573.5,4304.5,12789.24,5,True
+2024-05-25,New York,Los Angeles,4500.0,1294.7,13392.1,8,True
+2024-05-25,San Jose,Philadelphia,4500.0,1083.7,12014.95,9,True
+2024-05-26,San Antonio,San Jose,2741.4,4717.5,27177.67,6,True
+2024-05-27,Houston,San Antonio,345.7,2707.0,1957.0,2,True
+2024-05-27,Houston,San Jose,3060.1,1208.7,6634.7,6,True
+2024-05-27,Philadelphia,Phoenix,4160.9,142.4,1319.34,6,True
+2024-05-28,San Diego,Philadelphia,4500.0,1963.6,14617.79,7,True
+2024-05-28,Houston,Los Angeles,2577.5,326.0,1568.15,3,True
+2024-05-29,Chicago,Los Angeles,3505.2,2310.9,18502.29,7,True
+2024-05-29,Philadelphia,Dallas,2527.3,4960.3,24707.54,5,True
+2024-05-29,Houston,Los Angeles,2577.5,603.4,3782.7,5,True
+2024-05-29,New York,Chicago,1515.5,493.1,1479.68,4,True
+2024-05-29,Dallas,Los Angeles,2379.8,47.5,390.9,3,True
+2024-05-30,San Antonio,San Diego,2107.8,4952.0,21543.06,6,True
+2024-05-30,San Diego,New York,4500.0,2715.0,26655.27,7,True
+2024-05-30,San Jose,Chicago,3841.4,2187.2,16535.5,6,True
+2024-05-30,San Diego,Chicago,3440.6,568.1,4064.48,7,True
+2024-05-31,Chicago,Los Angeles,3505.2,596.3,4453.05,5,True
+2024-05-31,San Antonio,Dallas,421.9,4305.4,4352.67,3,True
+2024-05-31,Phoenix,San Diego,571.4,983.7,1398.97,2,True
+2024-06-01,San Jose,Chicago,3841.4,3238.9,25416.3,8,True
+2024-06-01,San Jose,San Antonio,2741.4,1951.6,11669.35,4,True
+2024-06-01,Chicago,San Diego,3440.6,2287.7,13877.2,6,True
+2024-06-01,Los Angeles,New York,4500.0,4117.4,43928.61,6,True
+2024-06-02,Dallas,Houston,377.6,2355.1,1813.29,2,True
+2024-06-02,Dallas,San Antonio,421.9,2607.1,2065.15,1,True
+2024-06-02,New York,Phoenix,4306.0,701.9,5969.83,5,True
+2024-06-02,Phoenix,Dallas,1699.6,185.5,821.02,2,True
+2024-06-02,Philadelphia,Dallas,2527.3,255.1,1336.34,6,True
+2024-06-02,San Diego,Dallas,2264.4,4190.2,23047.21,4,True
+2024-06-03,San Jose,Phoenix,1170.8,339.7,994.22,4,True
+2024-06-03,Houston,Dallas,377.6,2311.4,1774.19,1,True
+2024-06-03,Philadelphia,Phoenix,4160.9,4879.7,35896.74,6,True
+2024-06-03,Chicago,Los Angeles,3505.2,4729.0,39254.82,7,True
+2024-06-04,New York,Los Angeles,4500.0,1998.5,18585.8,6,True
+2024-06-04,Houston,San Antonio,345.7,1793.3,1458.23,3,True
+2024-06-05,Philadelphia,San Antonio,2841.4,770.1,4442.8,7,True
+2024-06-05,San Antonio,Houston,345.7,1437.4,1046.07,1,True
+2024-06-06,Dallas,Houston,377.6,1228.6,1184.77,3,True
+2024-06-06,Philadelphia,Phoenix,4160.9,125.9,1116.81,6,True
+2024-06-07,San Diego,New York,4500.0,4883.6,54689.56,9,True
+2024-06-07,San Diego,New York,4500.0,2323.7,19515.67,7,True
+2024-06-08,Houston,Phoenix,1898.7,1296.5,4879.04,4,True
+2024-06-08,Houston,San Antonio,345.7,4515.9,3810.09,2,True
+2024-06-09,San Diego,Philadelphia,4500.0,3939.4,30000.31,6,True
+2024-06-10,Phoenix,Los Angeles,681.5,346.9,595.2,3,True
+2024-06-11,New York,San Jose,4500.0,954.9,9345.83,6,True
+2024-06-11,New York,Chicago,1515.5,2817.7,9797.5,3,True
+2024-06-12,Phoenix,Houston,1898.7,4097.8,12865.28,3,True
+2024-06-13,Phoenix,Philadelphia,4160.9,2732.9,24999.31,6,True
+2024-06-13,Los Angeles,Dallas,2379.8,4859.3,28563.88,3,True
+2024-06-14,Houston,New York,2670.8,3386.5,19974.8,5,True
+2024-06-14,Philadelphia,New York,154.2,3873.9,1216.61,1,True
+2024-06-15,New York,San Antonio,2994.8,3297.2,18645.42,5,True
+2024-06-15,San Jose,Philadelphia,4500.0,1331.4,13058.73,8,True
+2024-06-15,Dallas,Chicago,1436.4,2161.1,6509.19,2,True
+2024-06-15,Houston,San Jose,3060.1,587.4,4549.12,7,True
+2024-06-15,San Jose,San Antonio,2741.4,4728.1,21886.87,5,True
+2024-06-16,San Jose,Phoenix,1170.8,1617.9,3503.66,3,True
+2024-06-16,Dallas,Houston,377.6,4117.4,3654.11,2,True
+2024-06-16,Dallas,San Jose,2830.5,21.5,195.49,7,True
+2024-06-16,Los Angeles,San Antonio,2248.1,1720.1,9374.74,6,True
+2024-06-16,San Diego,Philadelphia,4500.0,776.1,6136.27,8,True
+2024-06-16,Houston,New York,2670.8,3695.2,17189.05,3,True
+2024-06-16,New York,Houston,2670.8,4197.5,26296.62,4,True
+2024-06-16,New York,Chicago,1515.5,4681.5,12996.55,2,True
+2024-06-17,Houston,Chicago,1607.3,3430.3,9046.31,2,True
+2024-06-17,Los Angeles,San Antonio,2248.1,2473.4,13169.66,6,True
+2024-06-17,New York,Chicago,1515.5,997.1,2823.27,5,True
+2024-06-17,Philadelphia,San Diego,4500.0,3618.3,34194.96,6,True
+2024-06-18,New York,Philadelphia,154.2,3773.8,1143.21,1,True
+2024-06-18,Houston,New York,2670.8,4604.1,20377.65,4,True
+2024-06-18,Dallas,San Antonio,421.9,514.5,395.73,1,True
+2024-06-18,San Diego,Houston,2442.6,3876.8,19237.88,3,True
+2024-06-20,San Diego,Houston,2442.6,4854.7,25267.19,6,True
+2024-06-20,Philadelphia,Chicago,1392.5,1580.6,4223.67,5,True
+2024-06-20,San Antonio,New York,2994.8,4008.9,27960.27,4,True
+2024-06-20,Phoenix,New York,4306.0,1878.6,18311.67,8,True
+2024-06-21,Los Angeles,San Jose,543.0,3303.4,4092.57,3,True
+2024-06-21,San Antonio,San Diego,2107.8,1034.9,4635.36,4,True
+2024-06-21,San Diego,Los Angeles,191.0,1429.1,610.13,3,True
+2024-06-22,Philadelphia,Chicago,1392.5,3227.6,7556.32,4,True
+2024-06-22,New York,Chicago,1515.5,1838.0,5725.23,3,True
+2024-06-22,Chicago,San Jose,3841.4,2829.7,22149.19,8,True
+2024-06-22,San Antonio,New York,2994.8,4983.4,36337.44,5,True
+2024-06-22,Phoenix,San Diego,571.4,230.4,360.78,2,True
+2024-06-22,San Antonio,San Jose,2741.4,4452.4,20188.72,6,True
+2024-06-23,Phoenix,San Jose,1170.8,2235.9,5341.63,3,True
+2024-06-23,Philadelphia,Los Angeles,4500.0,3281.0,28519.87,8,True
+2024-06-23,Philadelphia,Chicago,1392.5,1677.2,5595.66,2,True
+2024-06-24,Dallas,Houston,377.6,4943.1,3826.68,3,True
+2024-06-24,Chicago,San Jose,3841.4,4046.8,38706.85,6,True
+2024-06-24,San Jose,Chicago,3841.4,4117.3,28740.66,5,True
+2024-06-24,Philadelphia,San Antonio,2841.4,1067.7,7017.78,4,True
+2024-06-24,New York,San Diego,4500.0,2583.6,25022.07,8,True
+2024-06-25,San Antonio,San Diego,2107.8,4231.6,21969.75,6,True
+2024-06-26,Houston,New York,2670.8,1978.5,9983.3,5,True
+2024-06-26,New York,Philadelphia,154.2,396.4,246.88,3,True
+2024-06-26,San Diego,Dallas,2264.4,4684.0,20028.67,6,True
+2024-06-27,Los Angeles,Houston,2577.5,2093.9,10669.28,4,True
+2024-06-27,New York,Phoenix,4306.0,2587.1,26583.04,6,True
+2024-06-29,Dallas,San Jose,2830.5,3531.9,17288.3,4,True
+2024-06-29,Phoenix,San Diego,571.4,4893.4,4746.1,4,True
+2024-06-29,New York,Dallas,2678.4,2008.3,13565.01,4,True
+2024-06-29,Chicago,Houston,1607.3,3815.3,12951.23,4,True
+2024-06-29,Houston,Chicago,1607.3,2679.1,9485.12,4,True

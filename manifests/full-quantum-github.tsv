@@ -1,0 +1,78 @@
+# CATEGORY|NAME|URL|PURPOSE
+
+architecture|qiskit-serverless|https://github.com/Qiskit/qiskit-serverless.git|distributed quantum-classical workload architecture
+architecture|qfaas|https://github.com/Cloudslab/qfaas.git|quantum function as a service reference architecture
+architecture|iquantum|https://github.com/Cloudslab/iQuantum.git|quantum datacenter scheduling capacity architecture
+
+hybrid|cuda-quantum|https://github.com/NVIDIA/cuda-quantum.git|CPU GPU QPU programming compiler runtime
+hybrid|catalyst|https://github.com/PennyLaneAI/catalyst.git|hybrid quantum classical JIT compiler
+
+compiler|bqskit|https://github.com/BQSKit/bqskit.git|quantum synthesis compiler optimization
+compiler|mqt-qmap|https://github.com/munich-quantum-toolkit/qmap.git|mapping routing compilation
+compiler|tket|https://github.com/CQCL/tket.git|cross platform quantum compiler
+compiler|pyqir|https://github.com/qir-alliance/pyqir.git|QIR generation parsing
+compiler|qir-spec|https://github.com/qir-alliance/qir-spec.git|QIR specification
+compiler|qiskit-addon-cutting|https://github.com/Qiskit/qiskit-addon-cutting.git|circuit cutting
+compiler|pyzx|https://github.com/zxcalc/pyzx.git|ZX calculus optimization equivalence
+compiler|quil|https://github.com/quil-lang/quil.git|quantum instruction language reference
+
+simulation|qulacs|https://github.com/qulacs/qulacs.git|high speed statevector noisy parametric simulator
+simulation|qsim|https://github.com/quantumlib/qsim.git|high performance Cirq simulator
+simulation|quest|https://github.com/quest-kit/QuEST.git|CPU GPU MPI quantum simulator
+simulation|quimb|https://github.com/jcmgray/quimb.git|tensor networks many body simulation
+simulation|mqt-ddsim|https://github.com/munich-quantum-toolkit/ddsim.git|decision diagram simulator
+simulation|mqt-yaqs|https://github.com/munich-quantum-toolkit/yaqs.git|tensor network open system noisy simulation
+simulation|pennylane-lightning|https://github.com/PennyLaneAI/pennylane-lightning.git|fast CPU GPU tensor simulator
+
+testing|mqt-bench|https://github.com/munich-quantum-toolkit/bench.git|quantum circuit benchmark suite
+testing|mqt-qcec|https://github.com/munich-quantum-toolkit/qcec.git|quantum circuit equivalence checking
+testing|qiskit-experiments|https://github.com/qiskit-community/qiskit-experiments.git|hardware characterization experiments
+testing|pygsti|https://github.com/sandialabs/pyGSTi.git|GST RB RPE drift characterization
+
+qec|stim|https://github.com/quantumlib/Stim.git|stabilizer QEC simulator
+qec|pymatching|https://github.com/oscarhiggott/PyMatching.git|MWPM decoder
+qec|qualtran|https://github.com/quantumlib/Qualtran.git|fault tolerant algorithm resource analysis
+qec|qecsim|https://github.com/qecsim/qecsim.git|QEC simulation
+qec|panqec|https://github.com/panqec/panqec.git|QEC code simulation
+qec|microsoft-qdk|https://github.com/microsoft/qdk.git|QSharp resource estimation
+qec|mitiq|https://github.com/unitaryfund/mitiq.git|quantum error mitigation
+
+qml|qiskit-machine-learning|https://github.com/qiskit-community/qiskit-machine-learning.git|quantum kernels QNN VQC
+qml|torchquantum|https://github.com/mit-han-lab/torchquantum.git|PyTorch GPU QML
+qml|tensorflow-quantum|https://github.com/tensorflow/quantum.git|TensorFlow Cirq hybrid QML
+qml|qml-benchmarks|https://github.com/XanaduAI/qml-benchmarks.git|quantum versus classical ML benchmarks
+
+optimization|qiskit-addon-opt-mapper|https://github.com/Qiskit/qiskit-addon-opt-mapper.git|QUBO HUBO optimization mapping
+optimization|dwave-ocean-sdk|https://github.com/dwavesystems/dwave-ocean-sdk.git|QUBO Ising annealing optimization
+
+hardware|qibolab|https://github.com/qiboteam/qibolab.git|hardware drivers pulse execution
+hardware|qibocal|https://github.com/qiboteam/qibocal.git|calibration characterization validation
+hardware|qibosoq|https://github.com/qiboteam/qibosoq.git|QICK server integration
+hardware|qick|https://github.com/openquantumhardware/qick.git|RFSoC quantum control electronics
+hardware|scqubits|https://github.com/scqubits/scqubits.git|superconducting circuit modeling
+hardware|simcats|https://github.com/f-hader/SimCATS.git|spin qubit charge stability simulation
+
+network|sequence|https://github.com/sequence-toolbox/SeQUeNCe.git|quantum network repeater simulator
+network|simqn|https://github.com/QNLab-USTC/SimQN.git|quantum network simulator
+network|qunetsim|https://github.com/tqsd/QuNetSim.git|quantum network protocol simulator
+network|requsim|https://github.com/jwallnoefer/requsim.git|quantum repeater strategy simulator
+network|qnpack|https://github.com/qlbnl/qnpack.git|repeater memory all photonic models
+network|quisp|https://github.com/sfc-aqua/quisp.git|large quantum internet simulator
+
+analog|pulser|https://github.com/pasqal-io/Pulser.git|neutral atom pulse and analog simulation
+visualization|mqt-naviz|https://github.com/munich-quantum-toolkit/naviz.git|neutral atom movement visualizer
+
+photonic|perceval|https://github.com/Quandela/Perceval.git|photonic quantum programming and simulation
+
+data|qdataset|https://github.com/eperrier/QDataSet.git|quantum ML control tomography simulated datasets
+data|qcschema|https://github.com/MolSSI/QCSchema.git|quantum chemistry schema
+data|qcelemental|https://github.com/MolSSI/QCElemental.git|molecule constants schema validation
+data|dvc|https://github.com/treeverse/dvc.git|data versioning
+data|mlflow|https://github.com/mlflow/mlflow.git|experiment tracking
+
+materials|matbench|https://github.com/materialsproject/matbench.git|materials benchmark datasets
+materials|pymatgen|https://github.com/materialsproject/pymatgen.git|materials structures analysis
+materials|mp-api|https://github.com/materialsproject/api.git|Materials Project API client
+
+graph|rustworkx|https://github.com/Qiskit/rustworkx.git|high performance graph algorithms
+

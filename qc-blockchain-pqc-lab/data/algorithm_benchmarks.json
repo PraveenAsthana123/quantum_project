@@ -1,0 +1,46 @@
+{
+  "benchmarks": {
+    "ECDSA-P256": {
+      "keygen_ms": 0.05,
+      "sign_ms": 0.06,
+      "verify_ms": 0.12,
+      "key_size_bytes": 64,
+      "sig_size_bytes": 72,
+      "quantum_safe": false,
+      "security_bits": 128,
+      "pq_security_bits": 0
+    },
+    "ML-DSA-65": {
+      "keygen_ms": 0.35,
+      "sign_ms": 0.8,
+      "verify_ms": 0.3,
+      "key_size_bytes": 1952,
+      "sig_size_bytes": 3309,
+      "quantum_safe": true,
+      "security_bits": 178,
+      "pq_security_bits": 178
+    },
+    "SLH-DSA-128f": {
+      "keygen_ms": 4.2,
+      "sign_ms": 7.5,
+      "verify_ms": 1.8,
+      "key_size_bytes": 32,
+      "sig_size_bytes": 17088,
+      "quantum_safe": true,
+      "security_bits": 128,
+      "pq_security_bits": 128
+    },
+    "FALCON-512": {
+      "keygen_ms": 8.0,
+      "sign_ms": 0.3,
+      "verify_ms": 0.1,
+      "key_size_bytes": 897,
+      "sig_size_bytes": 666,
+      "quantum_safe": true,
+      "security_bits": 103,
+      "pq_security_bits": 103
+    }
+  },
+  "generated_at": "2026-10-06T21:03:11.006578Z",
+  "platform": "simulated-x86_64"
+}

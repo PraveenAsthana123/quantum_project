@@ -1,0 +1,5 @@
+# Q18 Fabrication Requirements
+numpy>=1.24.0
+scipy>=1.10.0
+matplotlib>=3.6.0
+gdspy>=1.6.0  # GDS layout (optional, from github/fabrication)

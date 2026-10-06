@@ -1,0 +1,14 @@
+# Q02 — Error Mitigation
+# Core quantum frameworks
+qiskit>=1.3.0
+qiskit-aer>=0.15.0
+pennylane>=0.40.0
+
+# Error mitigation (note: mitiq on this system is a stub 0.0.0;
+# ZNE and PEC are implemented manually in src/)
+# mitiq>=0.38.0  # uncomment when a full mitiq wheel is available
+
+# Numerics
+numpy>=1.26.0
+scipy>=1.12.0
+matplotlib>=3.8.0

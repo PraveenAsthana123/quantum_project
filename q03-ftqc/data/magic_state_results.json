@@ -1,0 +1,35 @@
+{
+  "protocol": "15-to-1 Reed-Muller magic state distillation",
+  "magic_state": "|A> = T|+> = (|0> + exp(i*pi/4)|1>)/sqrt(2)",
+  "input_fidelity": 0.95,
+  "output_fidelity_15to1": 0.995625,
+  "output_fidelity_5to1": 0.975,
+  "input_error_rate": 0.05,
+  "output_error_rate_analytic": 0.004375,
+  "output_error_rate_mc": 0.00797983,
+  "distillation_overhead": 15,
+  "mc_acceptance_rate": 0.60277,
+  "formula": "eps_out = 35 * eps_in^3",
+  "fidelity_improvement_sweep": [
+    {
+      "epsilon_in": 0.01,
+      "epsilon_out": 3.5e-05,
+      "improvement_factor": 285.71
+    },
+    {
+      "epsilon_in": 0.02,
+      "epsilon_out": 0.00028,
+      "improvement_factor": 71.43
+    },
+    {
+      "epsilon_in": 0.05,
+      "epsilon_out": 0.004375,
+      "improvement_factor": 11.43
+    },
+    {
+      "epsilon_in": 0.1,
+      "epsilon_out": 0.035,
+      "improvement_factor": 2.86
+    }
+  ]
+}

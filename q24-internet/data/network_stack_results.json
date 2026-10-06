@@ -1,0 +1,44 @@
+{
+  "nodes": [
+    "Alice",
+    "Bob",
+    "Charlie"
+  ],
+  "links": [
+    {
+      "nodes": [
+        "Alice",
+        "Bob"
+      ],
+      "distance_km": 100.0,
+      "generation_rate_Hz": 585.225,
+      "fidelity": 0.9057,
+      "propagation_delay_ms": 0.5
+    },
+    {
+      "nodes": [
+        "Bob",
+        "Charlie"
+      ],
+      "distance_km": 100.0,
+      "generation_rate_Hz": 585.225,
+      "fidelity": 0.9057,
+      "propagation_delay_ms": 0.5
+    }
+  ],
+  "end_to_end": {
+    "path": [
+      "Alice",
+      "Bob",
+      "Charlie"
+    ],
+    "fidelity": 0.8233,
+    "entanglement_rate_Hz": 263.3512
+  },
+  "entanglement_rate_Hz": 263.3512,
+  "key_rate_bps": 188.8542,
+  "latency_ms": 1.0,
+  "protocol_overhead": 2.0,
+  "teleportation_fidelity": 0.8822,
+  "qber": 0.02
+}

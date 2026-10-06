@@ -1,0 +1,33 @@
+{
+  "target_gate": "CZ",
+  "n_time_steps": 50,
+  "total_time_ns": 100.0,
+  "achieved_fidelity": 0.9921073370265455,
+  "iterations": 52,
+  "convergence": true,
+  "initial_fidelity": 0.03135391,
+  "fidelity_history": [
+    0.03135391,
+    0.00526651,
+    0.00216203,
+    0.50216765,
+    0.55893228,
+    0.52174342
+  ],
+  "control_channels": [
+    "XI",
+    "IX",
+    "YI",
+    "IY",
+    "ZZ"
+  ],
+  "control_rms_MHz": 0.1141751730401425,
+  "optimized_controls_mean": [
+    0.09301772369214689,
+    0.08668938741884162,
+    0.09402531955663626,
+    0.07305120614755536,
+    0.11536176950843928
+  ],
+  "grape_description": "GRAPE iteratively updates control amplitudes using the analytical gradient of the gate fidelity with respect to each control at each time step."
+}

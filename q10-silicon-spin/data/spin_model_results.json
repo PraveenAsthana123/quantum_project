@@ -1,0 +1,30 @@
+{
+  "qubit_freq_GHz": 10.0,
+  "coupling_MHz": 50.0,
+  "T1_us": 1000.0,
+  "T2_us": 20.0,
+  "T1_target_us": 1000.0,
+  "T2_target_us": 20.0,
+  "gate_fidelity": 0.999667,
+  "gate_time_ns": 20.0,
+  "h1q_eigenvalues_rad_per_ns": [
+    -31.41592653589793,
+    31.41592653589793
+  ],
+  "h2q_eigenvalues_rad_per_ns": [
+    -62.58052565950868,
+    -0.9456115737750702,
+    0.3172930430571116,
+    63.20884419022664
+  ],
+  "lindblad_simulation": {
+    "t1_fitted_us": 1000.0,
+    "t2_fitted_us": 20.0,
+    "t1_target_us": 1000.0,
+    "t2_target_us": 20.0,
+    "population_1_final": 0.502,
+    "coherence_final": 3.1386819990076253e+28
+  },
+  "material": "Si/SiGe",
+  "qubit_type": "electron spin"
+}

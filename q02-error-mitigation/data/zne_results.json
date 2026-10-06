@@ -1,0 +1,23 @@
+{
+  "circuit": "4-qubit GHZ",
+  "observable": "ZZZZ",
+  "base_depolarizing_p": 0.02,
+  "ideal_value": 1.0,
+  "noisy_value": 0.88584238,
+  "zne_value": 0.99912355,
+  "scale_factors": [
+    1,
+    2,
+    3
+  ],
+  "expvals_at_scales": [
+    0.88584238,
+    0.78275779,
+    0.68986978
+  ],
+  "improvement_pct": 99.232,
+  "noisy_error": 0.11415762,
+  "zne_error": 0.00087645,
+  "extrapolation_method": "Richardson",
+  "reference": "/mnt/deepa/quantum/github/mitiq/mitiq/zne/zne.py"
+}

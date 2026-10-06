@@ -1,0 +1,170 @@
+{
+  "n_pairs": [
+    1,
+    4,
+    16,
+    64,
+    256,
+    1024,
+    4096
+  ],
+  "classical_accuracy_ns": 2.0,
+  "classical_fiber_accuracy_ns": 2.0,
+  "quantum_accuracy_ps": [
+    0.0025,
+    0.00125,
+    0.000625,
+    0.000313,
+    0.000156,
+    7.8e-05,
+    3.9e-05
+  ],
+  "improvement_factor": [
+    800000.0,
+    1600000.0,
+    3200000.0,
+    6400000.0,
+    12800000.0,
+    25600000.0,
+    51200000.0
+  ],
+  "entanglement_overhead": [
+    {
+      "n_pairs": 1,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 0.1384,
+      "fiber_transmission": 0.01
+    },
+    {
+      "n_pairs": 4,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 0.5536,
+      "fiber_transmission": 0.01
+    },
+    {
+      "n_pairs": 16,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 2.2145,
+      "fiber_transmission": 0.01
+    },
+    {
+      "n_pairs": 64,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 8.8581,
+      "fiber_transmission": 0.01
+    },
+    {
+      "n_pairs": 256,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 35.4325,
+      "fiber_transmission": 0.01
+    },
+    {
+      "n_pairs": 1024,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 141.7301,
+      "fiber_transmission": 0.01
+    },
+    {
+      "n_pairs": 4096,
+      "effective_rate_Hz": 7.225,
+      "time_to_distribute_s": 566.9204,
+      "fiber_transmission": 0.01
+    }
+  ],
+  "distance_km": 100.0,
+  "coherence_time_us": 100.0,
+  "sweep": [
+    {
+      "n_pairs": 1,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 0.0025,
+      "improvement_factor": 800000.0,
+      "distribution_time_s": 0.1384,
+      "entanglement_overhead": {
+        "n_pairs": 1,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 0.1384,
+        "fiber_transmission": 0.01
+      }
+    },
+    {
+      "n_pairs": 4,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 0.00125,
+      "improvement_factor": 1600000.0,
+      "distribution_time_s": 0.5536,
+      "entanglement_overhead": {
+        "n_pairs": 4,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 0.5536,
+        "fiber_transmission": 0.01
+      }
+    },
+    {
+      "n_pairs": 16,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 0.000625,
+      "improvement_factor": 3200000.0,
+      "distribution_time_s": 2.2145,
+      "entanglement_overhead": {
+        "n_pairs": 16,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 2.2145,
+        "fiber_transmission": 0.01
+      }
+    },
+    {
+      "n_pairs": 64,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 0.000313,
+      "improvement_factor": 6400000.0,
+      "distribution_time_s": 8.8581,
+      "entanglement_overhead": {
+        "n_pairs": 64,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 8.8581,
+        "fiber_transmission": 0.01
+      }
+    },
+    {
+      "n_pairs": 256,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 0.000156,
+      "improvement_factor": 12800000.0,
+      "distribution_time_s": 35.4325,
+      "entanglement_overhead": {
+        "n_pairs": 256,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 35.4325,
+        "fiber_transmission": 0.01
+      }
+    },
+    {
+      "n_pairs": 1024,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 7.8e-05,
+      "improvement_factor": 25600000.0,
+      "distribution_time_s": 141.7301,
+      "entanglement_overhead": {
+        "n_pairs": 1024,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 141.7301,
+        "fiber_transmission": 0.01
+      }
+    },
+    {
+      "n_pairs": 4096,
+      "classical_accuracy_ns": 2.0,
+      "quantum_accuracy_ps": 3.9e-05,
+      "improvement_factor": 51200000.0,
+      "distribution_time_s": 566.9204,
+      "entanglement_overhead": {
+        "n_pairs": 4096,
+        "effective_rate_Hz": 7.225,
+        "time_to_distribute_s": 566.9204,
+        "fiber_transmission": 0.01
+      }
+    }
+  ]
+}

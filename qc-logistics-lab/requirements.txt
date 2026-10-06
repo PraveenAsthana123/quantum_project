@@ -1,0 +1,11 @@
+dwave-ocean-sdk>=9.0.0
+networkx>=3.0.0
+numpy>=2.0.0
+ortools>=9.7.0
+pandas>=2.0.0
+pennylane>=0.45.0
+plotly>=5.0.0
+qiskit-algorithms>=0.4.0
+qiskit-optimization>=0.7.0
+qiskit>=2.0.0
+streamlit>=1.40.0

@@ -1,0 +1,118 @@
+{
+  "task": "wine-quality-binary",
+  "n_samples_train": 5197,
+  "n_samples_test": 1300,
+  "n_features": 12,
+  "best_model": "RandomForest",
+  "best_roc_auc": 0.9077593607271042,
+  "results": [
+    {
+      "model": "SVM-RBF",
+      "accuracy": 0.7776923076923077,
+      "f1": 0.8286899822169532,
+      "roc_auc": 0.837927406762089,
+      "confusion_matrix": [
+        [
+          312,
+          165
+        ],
+        [
+          124,
+          699
+        ]
+      ],
+      "predict_time_s": 0.1686,
+      "classification_report": {
+        "0": {
+          "precision": 0.7155963302752294,
+          "recall": 0.6540880503144654,
+          "f1-score": 0.683461117196057,
+          "support": 477.0
+        },
+        "1": {
+          "precision": 0.8090277777777778,
+          "recall": 0.8493317132442284,
+          "f1-score": 0.8286899822169532,
+          "support": 823.0
+        },
+        "accuracy": 0.7776923076923077,
+        "macro avg": {
+          "precision": 0.7623120540265036,
+          "recall": 0.7517098817793468,
+          "f1-score": 0.756075549706505,
+          "support": 1300.0
+        },
+        "weighted avg": {
+          "precision": 0.7747456235787659,
+          "recall": 0.7776923076923077,
+          "f1-score": 0.7754021602054397,
+          "support": 1300.0
+        }
+      },
+      "train_time_s": 9.1436,
+      "cv_accuracy_mean": 0.6846096997690531,
+      "cv_accuracy_std": 0.12833568221962563
+    },
+    {
+      "model": "RandomForest",
+      "accuracy": 0.8269230769230769,
+      "f1": 0.8674130819092516,
+      "roc_auc": 0.9077593607271042,
+      "confusion_matrix": [
+        [
+          339,
+          138
+        ],
+        [
+          87,
+          736
+        ]
+      ],
+      "predict_time_s": 0.0454,
+      "classification_report": {
+        "0": {
+          "precision": 0.795774647887324,
+          "recall": 0.710691823899371,
+          "f1-score": 0.7508305647840532,
+          "support": 477.0
+        },
+        "1": {
+          "precision": 0.8421052631578947,
+          "recall": 0.8942891859052248,
+          "f1-score": 0.8674130819092516,
+          "support": 823.0
+        },
+        "accuracy": 0.8269230769230769,
+        "macro avg": {
+          "precision": 0.8189399555226093,
+          "recall": 0.8024905049022979,
+          "f1-score": 0.8091218233466524,
+          "support": 1300.0
+        },
+        "weighted avg": {
+          "precision": 0.8251054912470775,
+          "recall": 0.8269230769230769,
+          "f1-score": 0.8246362660102365,
+          "support": 1300.0
+        }
+      },
+      "train_time_s": 0.6728,
+      "cv_accuracy_mean": 0.6753687451886067,
+      "cv_accuracy_std": 0.14309567130005693,
+      "feature_importances": {
+        "type": 0.0037260736159674956,
+        "fixed acidity": 0.06499057548248978,
+        "volatile acidity": 0.1113641615705604,
+        "citric acid": 0.07524442747573927,
+        "residual sugar": 0.0748595231543123,
+        "chlorides": 0.08127862326388656,
+        "free sulfur dioxide": 0.08285804903456334,
+        "total sulfur dioxide": 0.08139068855326462,
+        "density": 0.11085326086151369,
+        "pH": 0.07122616898796773,
+        "sulphates": 0.07566535527089006,
+        "alcohol": 0.16654309272884474
+      }
+    }
+  ]
+}

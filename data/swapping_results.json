@@ -1,0 +1,16 @@
+{
+  "nodes": [
+    "Alice",
+    "Repeater",
+    "Bob"
+  ],
+  "segment_length_km": 50.0,
+  "segment_fidelity": 0.925,
+  "bsm_success_prob": 0.45,
+  "end_to_end_fidelity": 0.3713,
+  "effective_rate_Hz": 293.43,
+  "n_trials": 20000,
+  "successes": 9045,
+  "seg_generation_rate_Hz": 652.06,
+  "memory_t2_us": 1000.0
+}

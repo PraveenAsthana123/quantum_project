@@ -1,0 +1,10 @@
+{
+  "SchemaVersion": 2,
+  "Trivy": {
+    "Version": "0.70.0"
+  },
+  "ReportID": "01a0f8a0-48a4-7245-8495-06f4b99c8b50",
+  "CreatedAt": "2026-10-01T12:00:49.060149965-06:00",
+  "ArtifactName": "/mnt/deepa/quantum/quantum-portal-web/package.json",
+  "ArtifactType": "filesystem"
+}

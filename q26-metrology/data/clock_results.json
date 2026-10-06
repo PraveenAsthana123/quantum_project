@@ -1,0 +1,128 @@
+{
+  "species": "Sr / Al+",
+  "wavelength_nm": {
+    "Sr": 698.0,
+    "Al+": 267.4
+  },
+  "quality_factor": {
+    "Sr": 2.4e+17,
+    "Al+": 6.7e+17
+  },
+  "systematic_shifts": {
+    "Cs_fountain": {
+      "bbr_fractional": -1.7e-14,
+      "stark_fractional": 0.0,
+      "micromotion_fractional": 0.0,
+      "gravitational_fractional": 1e-16
+    },
+    "Sr_optical": {
+      "bbr_fractional": -5.1e-17,
+      "stark_fractional": -2e-18,
+      "micromotion_fractional": 0.0,
+      "gravitational_fractional": 2e-18
+    },
+    "Al_plus": {
+      "bbr_fractional": -9e-20,
+      "stark_fractional": -1.4e-18,
+      "micromotion_fractional": 3e-19,
+      "gravitational_fractional": 1e-18
+    },
+    "Yb_optical": {
+      "bbr_fractional": -2.7e-16,
+      "stark_fractional": -5e-18,
+      "micromotion_fractional": 0.0,
+      "gravitational_fractional": 3e-18
+    }
+  },
+  "total_uncertainty": {
+    "Cs_fountain": 1.70029409e-14,
+    "Sr_optical": 5.12348e-17,
+    "Al_plus": 2.80546e-17,
+    "Yb_optical": 2.70248e-16
+  },
+  "precision_s": {
+    "Cs_fountain": 1.84962711e-24,
+    "Sr_optical": 1.2e-31,
+    "Al_plus": 3e-32,
+    "Yb_optical": 5.2e-31
+  },
+  "clock_hierarchy": {
+    "Cs_fountain": 2e-16,
+    "Sr_optical": 2e-18,
+    "Al_plus": 9.4e-19
+  },
+  "full_metrics": {
+    "Cs_fountain": {
+      "species": "133Cs",
+      "frequency_Hz": 9192631770.0,
+      "wavelength_nm": 32600000.0,
+      "quality_factor": 10000000000.0,
+      "systematic_shifts": {
+        "bbr_fractional": -1.7e-14,
+        "stark_fractional": 0.0,
+        "micromotion_fractional": 0.0,
+        "gravitational_fractional": 1e-16
+      },
+      "total_systematic": 1.70002941e-14,
+      "statistical_at_avg_time": 3e-16,
+      "total_uncertainty": 1.70029409e-14,
+      "precision_s": 1.84962711e-24,
+      "instability_1s": 3e-14,
+      "accuracy": 2e-16
+    },
+    "Sr_optical": {
+      "species": "87Sr",
+      "frequency_Hz": 429228000000000.0,
+      "wavelength_nm": 698.0,
+      "quality_factor": 2.4e+17,
+      "systematic_shifts": {
+        "bbr_fractional": -5.1e-17,
+        "stark_fractional": -2e-18,
+        "micromotion_fractional": 0.0,
+        "gravitational_fractional": 2e-18
+      },
+      "total_systematic": 5.10784e-17,
+      "statistical_at_avg_time": 4e-18,
+      "total_uncertainty": 5.12348e-17,
+      "precision_s": 1.2e-31,
+      "instability_1s": 4e-16,
+      "accuracy": 2e-18
+    },
+    "Al_plus": {
+      "species": "27Al+",
+      "frequency_Hz": 1121000000000000.0,
+      "wavelength_nm": 267.4,
+      "quality_factor": 6.7e+17,
+      "systematic_shifts": {
+        "bbr_fractional": -9e-20,
+        "stark_fractional": -1.4e-18,
+        "micromotion_fractional": 3e-19,
+        "gravitational_fractional": 1e-18
+      },
+      "total_systematic": 1.7487e-18,
+      "statistical_at_avg_time": 2.8e-17,
+      "total_uncertainty": 2.80546e-17,
+      "precision_s": 3e-32,
+      "instability_1s": 2.8e-15,
+      "accuracy": 9.4e-19
+    },
+    "Yb_optical": {
+      "species": "171Yb",
+      "frequency_Hz": 518295000000000.0,
+      "wavelength_nm": 578.4,
+      "quality_factor": 1.8e+17,
+      "systematic_shifts": {
+        "bbr_fractional": -2.7e-16,
+        "stark_fractional": -5e-18,
+        "micromotion_fractional": 0.0,
+        "gravitational_fractional": 3e-18
+      },
+      "total_systematic": 2.70063e-16,
+      "statistical_at_avg_time": 1e-17,
+      "total_uncertainty": 2.70248e-16,
+      "precision_s": 5.2e-31,
+      "instability_1s": 1e-15,
+      "accuracy": 1.4e-18
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "ground_state_energy": -1.33952277,
+  "excited_state_energy": -0.74320498,
+  "excitation_energy_eV": 16.226642,
+  "excitation_wavelength_nm": 76.41,
+  "exact_ground_energy": -1.33953246,
+  "exact_excited_energy": -0.7432,
+  "exact_excitation_eV": 16.227041,
+  "vqd_error_vs_exact_mHa": 0.0147,
+  "gs_ex_overlap": 1.5e-05,
+  "n_qubits": 2,
+  "method": "VQD (Variational Quantum Deflation)",
+  "beta_penalty": 2.0,
+  "ansatz": "RY_CNOT_RY",
+  "hamiltonian_coefficients": {
+    "I": -0.81054,
+    "Z0": 0.17218,
+    "Z1": -0.22575,
+    "Z0Z1": 0.12091,
+    "X0X1": -0.04523,
+    "Y0Y1": -0.04523
+  },
+  "reference": "Higgott et al., Quantum 3, 156 (2019)"
+}

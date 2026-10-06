@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-10-06T20:59:48.028588Z",
+  "n_jobs": 500,
+  "months": {
+    "2026-02": {
+      "jobs": 50,
+      "total_cost_usd": 11037.5495,
+      "success_count": 43,
+      "providers": {
+        "IBM": 11,
+        "AWS": 14,
+        "Google": 17,
+        "Azure": 8
+      },
+      "avg_cost_usd": 220.751,
+      "success_rate": 0.86
+    },
+    "2026-01": {
+      "jobs": 49,
+      "total_cost_usd": 23560.63,
+      "success_count": 38,
+      "providers": {
+        "IBM": 11,
+        "Azure": 14,
+        "Google": 13,
+        "AWS": 11
+      },
+      "avg_cost_usd": 480.8292,
+      "success_rate": 0.7755
+    },
+    "2026-07": {
+      "jobs": 52,
+      "total_cost_usd": 13210.1763,
+      "success_count": 50,
+      "providers": {
+        "Google": 16,
+        "AWS": 8,
+        "Azure": 13,
+        "IBM": 15
+      },
+      "avg_cost_usd": 254.0419,
+      "success_rate": 0.9615
+    },
+    "2026-05": {
+      "jobs": 47,
+      "total_cost_usd": 16882.3018,
+      "success_count": 42,
+      "providers": {
+        "IBM": 9,
+        "Azure": 16,
+        "Google": 12,
+        "AWS": 10
+      },
+      "avg_cost_usd": 359.1979,
+      "success_rate": 0.8936
+    },
+    "2026-06": {
+      "jobs": 59,
+      "total_cost_usd": 32692.9048,
+      "success_count": 55,
+      "providers": {
+        "IBM": 14,
+        "Google": 14,
+        "Azure": 17,
+        "AWS": 14
+      },
+      "avg_cost_usd": 554.117,
+      "success_rate": 0.9322
+    },
+    "2026-03": {
+      "jobs": 52,
+      "total_cost_usd": 11505.0546,
+      "success_count": 50,
+      "providers": {
+        "Google": 12,
+        "IBM": 20,
+        "Azure": 7,
+        "AWS": 13
+      },
+      "avg_cost_usd": 221.251,
+      "success_rate": 0.9615
+    },
+    "2026-09": {
+      "jobs": 42,
+      "total_cost_usd": 20493.2232,
+      "success_count": 38,
+      "providers": {
+        "IBM": 15,
+        "AWS": 9,
+        "Azure": 11,
+        "Google": 7
+      },
+      "avg_cost_usd": 487.9339,
+      "success_rate": 0.9048
+    },
+    "2026-08": {
+      "jobs": 49,
+      "total_cost_usd": 22173.4462,
+      "success_count": 44,
+      "providers": {
+        "Azure": 10,
+        "AWS": 9,
+        "Google": 17,
+        "IBM": 13
+      },
+      "avg_cost_usd": 452.5193,
+      "success_rate": 0.898
+    },
+    "2026-04": {
+      "jobs": 49,
+      "total_cost_usd": 21678.2949,
+      "success_count": 40,
+      "providers": {
+        "IBM": 11,
+        "Azure": 16,
+        "Google": 12,
+        "AWS": 10
+      },
+      "avg_cost_usd": 442.4142,
+      "success_rate": 0.8163
+    },
+    "2026-10": {
+      "jobs": 51,
+      "total_cost_usd": 17201.8298,
+      "success_count": 48,
+      "providers": {
+        "AWS": 12,
+        "Azure": 12,
+        "Google": 15,
+        "IBM": 12
+      },
+      "avg_cost_usd": 337.2908,
+      "success_rate": 0.9412
+    }
+  }
+}

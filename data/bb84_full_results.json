@@ -1,0 +1,11 @@
+{
+  "raw_bits": 10000,
+  "sifted_bits": 5036,
+  "qber_pct": 4.374,
+  "corrected_bits": 4533,
+  "residual_errors": 100,
+  "final_key_bits": 256,
+  "key_rate_bps": 25600000.0,
+  "security_level": "256 bits, h(QBER)=0.259",
+  "bits_disclosed_ec": 699
+}

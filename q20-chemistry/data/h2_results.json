@@ -1,0 +1,79 @@
+{
+  "bond_length_angstrom": 0.74,
+  "vqe_energy_hartree": -1.33951286,
+  "fci_energy_hartree": -1.1373,
+  "hf_energy": -1.11671,
+  "error_millihartree": 202.2129,
+  "n_qubits": 2,
+  "n_parameters": 4,
+  "potential_energy_surface": [
+    {
+      "bond_length_angstrom": 0.5,
+      "vqe_energy_hartree": -1.30142682,
+      "fci_energy_hartree": -1.30144501,
+      "hf_energy_hartree": -1.11671,
+      "exact_model_energy_hartree": -1.30144501,
+      "error_millihartree": 0.0182,
+      "n_qubits": 2,
+      "n_parameters": 4,
+      "ansatz": "RY_CNOT_RY"
+    },
+    {
+      "bond_length_angstrom": 0.74,
+      "vqe_energy_hartree": -1.33951286,
+      "fci_energy_hartree": -1.1373,
+      "hf_energy_hartree": -1.11671,
+      "exact_model_energy_hartree": -1.33953246,
+      "error_millihartree": 202.2129,
+      "n_qubits": 2,
+      "n_parameters": 4,
+      "ansatz": "RY_CNOT_RY"
+    },
+    {
+      "bond_length_angstrom": 1.0,
+      "vqe_energy_hartree": -1.38077275,
+      "fci_energy_hartree": -1.38079387,
+      "hf_energy_hartree": -1.11671,
+      "exact_model_energy_hartree": -1.38079387,
+      "error_millihartree": 0.0211,
+      "n_qubits": 2,
+      "n_parameters": 4,
+      "ansatz": "RY_CNOT_RY"
+    },
+    {
+      "bond_length_angstrom": 1.5,
+      "vqe_energy_hartree": -1.46011868,
+      "fci_energy_hartree": -1.46014274,
+      "hf_energy_hartree": -1.11671,
+      "exact_model_energy_hartree": -1.46014274,
+      "error_millihartree": 0.0241,
+      "n_qubits": 2,
+      "n_parameters": 4,
+      "ansatz": "RY_CNOT_RY"
+    },
+    {
+      "bond_length_angstrom": 2.0,
+      "vqe_energy_hartree": -1.53946461,
+      "fci_energy_hartree": -1.53949161,
+      "hf_energy_hartree": -1.11671,
+      "exact_model_energy_hartree": -1.53949161,
+      "error_millihartree": 0.027,
+      "n_qubits": 2,
+      "n_parameters": 4,
+      "ansatz": "RY_CNOT_RY"
+    }
+  ],
+  "library_info": {
+    "source": "openfermion_only",
+    "note": "No module named 'openfermionpyscf'"
+  },
+  "hamiltonian_coefficients": {
+    "I": -0.81054,
+    "Z0": 0.17218,
+    "Z1": -0.22575,
+    "Z0Z1": 0.12091,
+    "X0X1": -0.04523,
+    "Y0Y1": -0.04523
+  },
+  "reference": "O'Malley et al., PRX 6, 031007 (2016)"
+}

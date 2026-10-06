@@ -1,0 +1,227 @@
+{
+  "n_qubits": 5,
+  "topology": "cross",
+  "chip_size_mm": {
+    "width": 7.0,
+    "height": 7.0
+  },
+  "qubit_positions": [
+    {
+      "label": "Q0",
+      "x_mm": 1.5,
+      "y_mm": 3.5
+    },
+    {
+      "label": "Q1",
+      "x_mm": 3.5,
+      "y_mm": 5.5
+    },
+    {
+      "label": "Q2",
+      "x_mm": 3.5,
+      "y_mm": 3.5
+    },
+    {
+      "label": "Q3",
+      "x_mm": 3.5,
+      "y_mm": 1.5
+    },
+    {
+      "label": "Q4",
+      "x_mm": 5.5,
+      "y_mm": 3.5
+    }
+  ],
+  "qubit_frequencies_GHz": [
+    4.8,
+    5.2,
+    5.0,
+    4.85,
+    5.15
+  ],
+  "coupling_strengths_MHz": [
+    5.0,
+    10.0,
+    5.0,
+    10.0,
+    5.0,
+    10.0,
+    10.0,
+    5.0
+  ],
+  "coupling_pairs": [
+    [
+      "Q0",
+      "Q1"
+    ],
+    [
+      "Q0",
+      "Q2"
+    ],
+    [
+      "Q0",
+      "Q3"
+    ],
+    [
+      "Q1",
+      "Q2"
+    ],
+    [
+      "Q1",
+      "Q4"
+    ],
+    [
+      "Q2",
+      "Q3"
+    ],
+    [
+      "Q2",
+      "Q4"
+    ],
+    [
+      "Q3",
+      "Q4"
+    ]
+  ],
+  "readout_freqs_GHz": [
+    5.05,
+    5.5,
+    5.28,
+    5.12,
+    5.41
+  ],
+  "qubit_details": [
+    {
+      "id": 0,
+      "label": "Q0",
+      "x_mm": 1.5,
+      "y_mm": 3.5,
+      "role": "data",
+      "frequency_GHz": 4.8,
+      "anharmonicity_MHz": -300.0
+    },
+    {
+      "id": 1,
+      "label": "Q1",
+      "x_mm": 3.5,
+      "y_mm": 5.5,
+      "role": "data",
+      "frequency_GHz": 5.2,
+      "anharmonicity_MHz": -300.0
+    },
+    {
+      "id": 2,
+      "label": "Q2",
+      "x_mm": 3.5,
+      "y_mm": 3.5,
+      "role": "center_coupler",
+      "frequency_GHz": 5.0,
+      "anharmonicity_MHz": -300.0
+    },
+    {
+      "id": 3,
+      "label": "Q3",
+      "x_mm": 3.5,
+      "y_mm": 1.5,
+      "role": "data",
+      "frequency_GHz": 4.85,
+      "anharmonicity_MHz": -300.0
+    },
+    {
+      "id": 4,
+      "label": "Q4",
+      "x_mm": 5.5,
+      "y_mm": 3.5,
+      "role": "data",
+      "frequency_GHz": 5.15,
+      "anharmonicity_MHz": -300.0
+    }
+  ],
+  "coupling_details": [
+    {
+      "qubit_i": "Q0",
+      "qubit_j": "Q1",
+      "coupling_MHz": 5.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q0",
+      "qubit_j": "Q2",
+      "coupling_MHz": 10.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q0",
+      "qubit_j": "Q3",
+      "coupling_MHz": 5.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q1",
+      "qubit_j": "Q2",
+      "coupling_MHz": 10.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q1",
+      "qubit_j": "Q4",
+      "coupling_MHz": 5.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q2",
+      "qubit_j": "Q3",
+      "coupling_MHz": 10.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q2",
+      "qubit_j": "Q4",
+      "coupling_MHz": 10.0,
+      "connected": true
+    },
+    {
+      "qubit_i": "Q3",
+      "qubit_j": "Q4",
+      "coupling_MHz": 5.0,
+      "connected": true
+    }
+  ],
+  "resonator_details": [
+    {
+      "qubit_id": 0,
+      "resonator_freq_GHz": 5.05,
+      "coupling_g_MHz": 80.0,
+      "dispersive_shift_MHz": 1.0,
+      "readout_fidelity_pct": 99.0
+    },
+    {
+      "qubit_id": 1,
+      "resonator_freq_GHz": 5.5,
+      "coupling_g_MHz": 80.0,
+      "dispersive_shift_MHz": 1.0,
+      "readout_fidelity_pct": 99.0
+    },
+    {
+      "qubit_id": 2,
+      "resonator_freq_GHz": 5.28,
+      "coupling_g_MHz": 80.0,
+      "dispersive_shift_MHz": 1.0,
+      "readout_fidelity_pct": 99.0
+    },
+    {
+      "qubit_id": 3,
+      "resonator_freq_GHz": 5.12,
+      "coupling_g_MHz": 80.0,
+      "dispersive_shift_MHz": 1.0,
+      "readout_fidelity_pct": 99.0
+    },
+    {
+      "qubit_id": 4,
+      "resonator_freq_GHz": 5.41,
+      "coupling_g_MHz": 80.0,
+      "dispersive_shift_MHz": 1.0,
+      "readout_fidelity_pct": 99.0
+    }
+  ]
+}

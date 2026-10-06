@@ -1,0 +1,75 @@
+{
+  "ec_GHz": 0.3,
+  "ej_ec_ratios": [
+    1.0,
+    10.0,
+    50.0,
+    100.0
+  ],
+  "qubit_freqs_GHz": [
+    1.230286,
+    2.369852,
+    5.682576,
+    8.173541
+  ],
+  "anharmonicities_MHz": [
+    -1193.773,
+    -764.9572,
+    -344.7669,
+    -328.6483
+  ],
+  "charge_dispersions_MHz": [
+    931.452682,
+    75.371498,
+    0.011889,
+    8e-06
+  ],
+  "regimes": [
+    "Cooper Pair Box",
+    "intermediate",
+    "transmon",
+    "transmon"
+  ],
+  "full_sweep": [
+    {
+      "Ec_GHz": 0.3,
+      "Ej_GHz": 0.3,
+      "Ej_Ec_ratio": 1.0,
+      "qubit_freq_GHz_exact": 1.230286,
+      "qubit_freq_GHz_approx": 0.548528,
+      "anharmonicity_MHz": -1193.773,
+      "charge_dispersion_MHz": 931.452682,
+      "regime": "Cooper Pair Box"
+    },
+    {
+      "Ec_GHz": 0.3,
+      "Ej_GHz": 3.0,
+      "Ej_Ec_ratio": 10.0,
+      "qubit_freq_GHz_exact": 2.369852,
+      "qubit_freq_GHz_approx": 2.383282,
+      "anharmonicity_MHz": -764.9572,
+      "charge_dispersion_MHz": 75.371498,
+      "regime": "intermediate"
+    },
+    {
+      "Ec_GHz": 0.3,
+      "Ej_GHz": 15.0,
+      "Ej_Ec_ratio": 50.0,
+      "qubit_freq_GHz_exact": 5.682576,
+      "qubit_freq_GHz_approx": 5.7,
+      "anharmonicity_MHz": -344.7669,
+      "charge_dispersion_MHz": 0.011889,
+      "regime": "transmon"
+    },
+    {
+      "Ec_GHz": 0.3,
+      "Ej_GHz": 30.0,
+      "Ej_Ec_ratio": 100.0,
+      "qubit_freq_GHz_exact": 8.173541,
+      "qubit_freq_GHz_approx": 8.185281,
+      "anharmonicity_MHz": -328.6483,
+      "charge_dispersion_MHz": 8e-06,
+      "regime": "transmon"
+    }
+  ]
+}

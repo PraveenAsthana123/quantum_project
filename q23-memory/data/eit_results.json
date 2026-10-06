@@ -1,0 +1,82 @@
+{
+  "optical_depth": 100.0,
+  "storage_efficiency": 0.9901,
+  "retrieval_efficiency": 0.901,
+  "t1_us": 159.15,
+  "t2_us": 106.1,
+  "max_storage_time_us": 243.26,
+  "efficiency_vs_time": [
+    {
+      "storage_time_us": 0,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.9901
+    },
+    {
+      "storage_time_us": 10,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.901
+    },
+    {
+      "storage_time_us": 50,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.618
+    },
+    {
+      "storage_time_us": 100,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.3858
+    },
+    {
+      "storage_time_us": 200,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.1503
+    },
+    {
+      "storage_time_us": 500,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.0089
+    },
+    {
+      "storage_time_us": 1000,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.0001
+    }
+  ],
+  "od_sweep": [
+    {
+      "optical_depth": 10,
+      "storage_efficiency": 0.9091,
+      "retrieval_efficiency": 0.8273
+    },
+    {
+      "optical_depth": 20,
+      "storage_efficiency": 0.9524,
+      "retrieval_efficiency": 0.8667
+    },
+    {
+      "optical_depth": 50,
+      "storage_efficiency": 0.9804,
+      "retrieval_efficiency": 0.8922
+    },
+    {
+      "optical_depth": 100,
+      "storage_efficiency": 0.9901,
+      "retrieval_efficiency": 0.901
+    },
+    {
+      "optical_depth": 200,
+      "storage_efficiency": 0.995,
+      "retrieval_efficiency": 0.9055
+    },
+    {
+      "optical_depth": 500,
+      "storage_efficiency": 0.998,
+      "retrieval_efficiency": 0.9082
+    },
+    {
+      "optical_depth": 1000,
+      "storage_efficiency": 0.999,
+      "retrieval_efficiency": 0.9091
+    }
+  ]
+}

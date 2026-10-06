@@ -1,0 +1,9 @@
+path,asset_type,algorithm,key_size,subject,issuer,expiry,quantum_safe,harvest_now_risk,migration_priority,notes
+web/server.crt,certificate,RSA,2048,CN=example.com,CN=Let's Encrypt,2025-03-15,False,True,P1,
+web/api.crt,certificate,ECDSA,256,CN=api.example.com,CN=DigiCert,2026-01-10,False,True,P1,
+ssh/id_rsa,ssh_key,RSA,4096,SSH Key,Local,,False,True,P1,
+ssh/id_ed25519,ssh_key,ED25519,256,SSH Key,Local,,False,False,P2,
+code_sign/release.crt,code_signing,ECDSA,384,CN=Release,CN=Corp CA,2027-06-01,False,True,P1,
+vault/config.crt,certificate,RSA,2048,CN=vault.internal,CN=Internal CA,2025-09-01,False,True,P1,
+pqc/kyber.cer,certificate,ML-KEM,768,CN=pqc.example.com,CN=PQC CA,2030-01-01,True,False,P3,
+pqc/dilithium.cer,certificate,ML-DSA,2,CN=pqc-sign,CN=PQC CA,2030-01-01,True,False,P3,

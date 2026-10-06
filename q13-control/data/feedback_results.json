@@ -1,0 +1,57 @@
+{
+  "protocol": "Quantum teleportation with Bell measurement + classical feedforward",
+  "fidelity_with_feedback": 1.0,
+  "fidelity_without_feedback": 0.496583,
+  "feedback_latency_ns": 100.0,
+  "n_shots": 300,
+  "test_states": [
+    {
+      "state_name": "|+\u27e9",
+      "theta": 1.5707963267948966,
+      "phi": 0.0,
+      "fidelity_with_feedback": 1.0,
+      "fidelity_without_feedback": 0.53,
+      "fidelity_gain": 0.47
+    },
+    {
+      "state_name": "|0\u27e9",
+      "theta": 0.0,
+      "phi": 0.0,
+      "fidelity_with_feedback": 1.0,
+      "fidelity_without_feedback": 0.47,
+      "fidelity_gain": 0.53
+    },
+    {
+      "state_name": "|1\u27e9",
+      "theta": 3.141592653589793,
+      "phi": 0.0,
+      "fidelity_with_feedback": 1.0,
+      "fidelity_without_feedback": 0.47,
+      "fidelity_gain": 0.53
+    },
+    {
+      "state_name": "|y+\u27e9",
+      "theta": 1.5707963267948966,
+      "phi": 1.5707963267948966,
+      "fidelity_with_feedback": 1.0,
+      "fidelity_without_feedback": 0.506667,
+      "fidelity_gain": 0.493333
+    },
+    {
+      "state_name": "general",
+      "theta": 1.0471975511965976,
+      "phi": 0.7853981633974483,
+      "fidelity_with_feedback": 1.0,
+      "fidelity_without_feedback": 0.50625,
+      "fidelity_gain": 0.49375
+    }
+  ],
+  "protocol_steps": [
+    "1. Initialize |\u03c8\u27e9\u2297|00\u27e9",
+    "2. Create Bell pair on qubits 1,2 (H + CNOT)",
+    "3. Bell measurement: CNOT(0\u21921), H(0), measure 0 and 1",
+    "4. Classical communication of 2 bits to receiver",
+    "5. Feedforward: apply X if m_x=1, apply Z if m_z=1",
+    "6. Qubit 2 holds teleported state |\u03c8\u27e9"
+  ]
+}

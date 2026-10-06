@@ -1,0 +1,23 @@
+{
+  "circuit": "4-qubit mixed gate circuit",
+  "n_qubits": 4,
+  "qiskit_gates": {
+    "cx": 4,
+    "h": 2,
+    "rz": 2,
+    "rx": 1
+  },
+  "pennylane_ops": {
+    "Hadamard": 2,
+    "CNOT": 4,
+    "RZ": 2,
+    "RX": 1,
+    "total": 9
+  },
+  "statevector_fidelity_native": 1.0,
+  "statevector_fidelity_translated": 1.0,
+  "translation_verified": true,
+  "tolerance": 1e-06,
+  "translation_method": "pennylane_qiskit.from_qiskit / qml.from_qiskit",
+  "reference": "/mnt/deepa/quantum/github/pennylane-demos/how_to_use_qiskit1_with_pennylane"
+}
