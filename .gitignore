@@ -57,3 +57,7 @@ SESSION_HANDOFF.md
 !.continuity/.gitattributes
 !.continuity/SESSION_NOTES.md
 !.continuity/INSTRUCTIONS.md
+
+# Large data files (>100MB — exceed GitHub limit)
+data/creditcardfraud/creditcard.csv
+data/**/*.csv.gz
