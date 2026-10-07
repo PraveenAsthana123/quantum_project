@@ -64,3 +64,4 @@ data/**/*.csv.gz
 qc-banking-lab/data/creditcard.csv
 datasets/
 .backups/
+labs/domain/qc-banking-lab/data/creditcard.csv
