@@ -11,7 +11,8 @@ import random
 import sqlite3
 import statistics
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
+from uuid import uuid4
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
@@ -786,3 +787,503 @@ async def papers_scenario_map():
         "papers_only": sum(1 for v in scenario_map.values() if v["status"] == "papers_only"),
         "no_papers": sum(1 for v in scenario_map.values() if v["status"] == "no_papers"),
     }
+
+
+# ---------------------------------------------------------------------------
+# Attack Engine — in-memory state
+# ---------------------------------------------------------------------------
+
+_ATTACK_JOBS: Dict[str, Any] = {}
+_ATTACK_SCHEDULES: List[Dict[str, Any]] = []
+_INCIDENTS: Dict[str, Any] = {}
+
+# ---------------------------------------------------------------------------
+# Attack catalogue: (name, severity, mitre_id, cve)
+# ---------------------------------------------------------------------------
+
+LAYER_ATTACKS: Dict[str, Dict[str, List[tuple]]] = {
+    "L01": {
+        "classical": [
+            ("Physical Tap", "HIGH", "T1040", None),
+            ("MAC Flooding", "HIGH", "T1049", None),
+            ("ARP Spoofing", "MEDIUM", "T1557.002", None),
+        ],
+        "ai": [
+            ("AI Network Fingerprinting", "MEDIUM", "T1040", None),
+            ("Adversarial Traffic Classification", "LOW", None, None),
+        ],
+        "quantum": [
+            ("HNDL Physical Link Capture", "CRITICAL", "T1040", None),
+        ],
+    },
+    "L04": {
+        "classical": [
+            ("POODLE SSLv3 Downgrade", "HIGH", "T1573.002", "CVE-2014-3566"),
+            ("BEAST CBC Attack", "HIGH", "T1573.002", "CVE-2011-3389"),
+            ("ROBOT PKCS1v1.5", "HIGH", "T1573.002", "CVE-2017-13099"),
+            ("HNDL Traffic Harvest", "CRITICAL", "T1040", None),
+        ],
+        "ai": [
+            ("AI Protocol Fuzzing", "HIGH", "T1573", None),
+            ("Neural Cipher Distinguisher", "HIGH", None, None),
+            ("ML TLS Fingerprint", "MEDIUM", "T1040", None),
+        ],
+        "quantum": [
+            ("Shor breaks ECDH KEX", "CRITICAL", None, None),
+            ("Grover weakens AES-128", "HIGH", None, None),
+        ],
+    },
+    "L06": {
+        "classical": [
+            ("Bleichenbacher PKCS1v1.5", "HIGH", "T1553.004", None),
+            ("CA Compromise", "CRITICAL", "T1553.004", None),
+            ("Cert Pinning Bypass", "MEDIUM", "T1553", None),
+        ],
+        "ai": [
+            ("AI Cert Forgery Detection Evasion", "HIGH", None, None),
+            ("GAN X.509 Cert Generation", "MEDIUM", None, None),
+        ],
+        "quantum": [
+            ("Shor breaks RSA-4096 Root CA", "CRITICAL", None, None),
+            ("ML-DSA not deployed — new CA issue", "CRITICAL", None, None),
+        ],
+    },
+    "L08": {
+        "classical": [
+            ("alg:none JWT bypass", "CRITICAL", "T1550.001", "CVE-2015-9235"),
+            ("RS256→HS256 confusion", "CRITICAL", "T1550.001", None),
+            ("JWT secret brute-force", "HIGH", "T1110", None),
+        ],
+        "ai": [
+            ("AI JWT secret inference", "HIGH", "T1550", None),
+            ("ML token pattern analysis", "MEDIUM", None, None),
+        ],
+        "quantum": [
+            ("Shor breaks RS256 signing key", "CRITICAL", None, None),
+            ("Grover brute-forces HS256", "HIGH", None, None),
+        ],
+    },
+    "L10": {
+        "classical": [
+            ("Terrapin SSH prefix truncation", "HIGH", "T1557", "CVE-2023-48795"),
+            ("ECDH KEX downgrade", "HIGH", "T1557.002", None),
+            ("SSH host key spoofing", "HIGH", "T1557", None),
+        ],
+        "ai": [
+            ("AI SSH pattern extraction", "MEDIUM", "T1557", None),
+        ],
+        "quantum": [
+            ("Shor breaks ECDH SSH KEX", "CRITICAL", None, None),
+        ],
+    },
+    "L14": {
+        "classical": [
+            ("HSM side-channel timing", "HIGH", "T1552.004", None),
+            ("RSA-OAEP padding oracle", "HIGH", "T1552.004", None),
+            ("Key escrow attack", "CRITICAL", "T1552.004", None),
+        ],
+        "ai": [
+            ("Deep learning power analysis", "HIGH", "T1552", None),
+            ("AI EM side-channel", "HIGH", None, None),
+        ],
+        "quantum": [
+            ("Quantum side-channel amplification", "HIGH", None, None),
+            ("Shor breaks RSA-wrapped DEKs", "CRITICAL", None, None),
+        ],
+    },
+    "L15": {
+        "classical": [
+            ("Kerberos Golden Ticket", "CRITICAL", "T1558.001", None),
+            ("DCSync AD Replication", "CRITICAL", "T1003.006", None),
+            ("Pass-the-Hash", "CRITICAL", "T1550.002", None),
+        ],
+        "ai": [
+            ("AI credential stuffing", "HIGH", "T1110.004", None),
+            ("ML anomaly evasion", "MEDIUM", None, None),
+        ],
+        "quantum": [
+            ("Grover breaks short-lived tokens", "HIGH", None, None),
+        ],
+    },
+}
+
+# Generic fallback catalogue keyed by attack_type
+_GENERIC_ATTACKS: Dict[str, List[tuple]] = {
+    "classical": [
+        ("Replay Attack", "MEDIUM", "T1550", None),
+        ("Man-in-the-Middle", "HIGH", "T1557", None),
+        ("Credential Brute-Force", "HIGH", "T1110", None),
+        ("Protocol Downgrade", "HIGH", "T1573", None),
+        ("Side-Channel Timing", "MEDIUM", "T1552", None),
+    ],
+    "ai": [
+        ("Adversarial Input Injection", "HIGH", "T1059", None),
+        ("Model Inversion Attack", "MEDIUM", None, None),
+        ("Membership Inference", "MEDIUM", None, None),
+        ("Prompt Injection via API", "HIGH", "T1059", None),
+        ("AI-Assisted Recon", "LOW", "T1040", None),
+    ],
+    "quantum": [
+        ("Grover Search Acceleration", "HIGH", None, None),
+        ("Shor Algorithm Key Break", "CRITICAL", None, None),
+        ("HNDL Harvest Now Decrypt Later", "CRITICAL", "T1040", None),
+        ("Quantum Tunneling Side-Channel", "MEDIUM", None, None),
+        ("BB84 Intercept-Resend", "HIGH", None, None),
+    ],
+}
+
+_RECOMMENDATIONS_BY_ATTACK_TYPE: Dict[str, List[str]] = {
+    "classical": [
+        "Patch all known CVEs within 30 days of disclosure.",
+        "Enforce TLS 1.3 minimum; disable legacy cipher suites.",
+        "Deploy WAF rules for protocol downgrade and replay vectors.",
+    ],
+    "ai": [
+        "Apply adversarial robustness training to all ML inference pipelines.",
+        "Rate-limit API endpoints to reduce model inversion surface.",
+        "Monitor for anomalous query patterns indicating model extraction attempts.",
+    ],
+    "quantum": [
+        "Migrate key exchange to ML-KEM-768 or higher (NIST FIPS 203).",
+        "Replace RSA/ECDSA signatures with ML-DSA-65 (NIST FIPS 204).",
+        "Implement crypto-agility to allow rapid algorithm rotation.",
+    ],
+}
+
+
+def _get_layer_name(layer_id: str) -> str:
+    """Return layer name from _LAYERS catalogue; fall back to layer_id."""
+    for la in _LAYERS:
+        if la["id"] == layer_id:
+            return la["name"]
+    return layer_id
+
+
+def _severity_weight(severity: str) -> float:
+    return {"CRITICAL": 10.0, "HIGH": 7.0, "MEDIUM": 4.0, "LOW": 1.5}.get(severity.upper(), 3.0)
+
+
+def _make_recommendation(attack_type: str, name: str, severity: str) -> str:
+    base = _RECOMMENDATIONS_BY_ATTACK_TYPE.get(attack_type, _RECOMMENDATIONS_BY_ATTACK_TYPE["classical"])
+    if severity.upper() == "CRITICAL":
+        return f"Immediate remediation required: {base[0]}"
+    if severity.upper() == "HIGH":
+        return f"High-priority fix: {base[1 % len(base)]}"
+    return f"Scheduled remediation: {base[2 % len(base)]}"
+
+
+def _build_findings(layer_id: str, attack_types: List[str]) -> List[Dict[str, Any]]:
+    """Build finding dicts for the given layer and attack types."""
+    findings: List[Dict[str, Any]] = []
+    idx = 0
+    rng = random.Random(layer_id)  # deterministic per layer for reproducibility within a run
+
+    catalogue = LAYER_ATTACKS.get(layer_id, {})
+
+    for atype in attack_types:
+        if catalogue and atype in catalogue:
+            candidates = catalogue[atype]
+        else:
+            # Generic pool — seed variety from layer_id hash
+            pool = _GENERIC_ATTACKS.get(atype, _GENERIC_ATTACKS["classical"])
+            offset = abs(hash(layer_id)) % len(pool)
+            # pick 3 entries cycling from offset
+            candidates = [pool[(offset + i) % len(pool)] for i in range(3)]
+
+        for (name, severity, mitre_id, cve) in candidates:
+            detected = rng.random() < 0.80
+            pqc_prevents = (atype == "quantum") or (atype == "classical" and rng.random() < 0.55)
+            findings.append({
+                "finding_id": f"F-{idx + 1:03d}",
+                "name": name,
+                "severity": severity,
+                "attack_type": atype,
+                "mitre_id": mitre_id,
+                "cve": cve,
+                "detected": detected,
+                "pqc_prevents": pqc_prevents,
+                "recommendation": _make_recommendation(atype, name, severity),
+                "layer_id": layer_id,
+            })
+            idx += 1
+
+    return findings
+
+
+def _build_summary(findings: List[Dict[str, Any]]) -> Dict[str, Any]:
+    counts: Dict[str, int] = {"CRITICAL": 0, "HIGH": 0, "MEDIUM": 0, "LOW": 0}
+    detected = 0
+    pqc_count = 0
+    for f in findings:
+        sev = f["severity"].upper()
+        counts[sev] = counts.get(sev, 0) + 1
+        if f["detected"]:
+            detected += 1
+        if f["pqc_prevents"]:
+            pqc_count += 1
+    return {
+        "total_findings": len(findings),
+        "critical": counts["CRITICAL"],
+        "high": counts["HIGH"],
+        "medium": counts["MEDIUM"],
+        "low": counts["LOW"],
+        "detected": detected,
+        "undetected": len(findings) - detected,
+        "pqc_prevents": pqc_count,
+    }
+
+
+def _compute_risk_score(findings: List[Dict[str, Any]]) -> float:
+    if not findings:
+        return 0.0
+    total_weight = sum(_severity_weight(f["severity"]) for f in findings)
+    max_possible = len(findings) * 10.0
+    raw = (total_weight / max_possible) * 100.0
+    return round(min(raw, 100.0), 1)
+
+
+def _top_recommendations(findings: List[Dict[str, Any]], attack_types: List[str]) -> List[str]:
+    """Return the top 3 unique recommendations, prioritising critical/high findings."""
+    seen: set = set()
+    recs: List[str] = []
+    priority_order = sorted(
+        findings,
+        key=lambda f: ({"CRITICAL": 0, "HIGH": 1, "MEDIUM": 2, "LOW": 3}.get(f["severity"].upper(), 4)),
+    )
+    for f in priority_order:
+        r = f["recommendation"]
+        if r not in seen:
+            seen.add(r)
+            recs.append(r)
+        if len(recs) >= 3:
+            break
+    # Pad with generic recommendations if fewer than 3
+    for atype in attack_types:
+        for r in _RECOMMENDATIONS_BY_ATTACK_TYPE.get(atype, []):
+            if r not in seen and len(recs) < 3:
+                seen.add(r)
+                recs.append(r)
+    return recs[:3]
+
+
+# ---------------------------------------------------------------------------
+# Request/response models (inline Pydantic via BaseModel-free approach)
+# We use plain dicts from FastAPI body for simplicity, consistent with the
+# existing router pattern in this file which uses Query params only.
+# For POST bodies we use explicit Pydantic models.
+# ---------------------------------------------------------------------------
+
+from pydantic import BaseModel, Field  # noqa: E402 — after stdlib imports above
+
+
+class AttackRunRequest(BaseModel):
+    layer_id: str
+    attack_types: List[str] = Field(..., description="Subset of ['classical','ai','quantum']")
+
+
+class AttackScheduleRequest(BaseModel):
+    layer_id: str
+    attack_types: List[str]
+    schedule: str = Field(..., description="'daily' | 'weekly' | 'on_demand'")
+
+
+class IncidentCreateRequest(BaseModel):
+    layer_id: str
+    title: str
+    severity: str
+    source: str
+    description: str
+    attack_type: str
+
+
+class IncidentUpdateRequest(BaseModel):
+    status: Optional[str] = None
+    notes: Optional[str] = None
+    assigned_to: Optional[str] = None
+    resolved_at: Optional[str] = None
+
+
+# ---------------------------------------------------------------------------
+# Attack Engine Endpoints
+# ---------------------------------------------------------------------------
+
+
+@router.post("/attack/run")
+def attack_run(req: AttackRunRequest) -> Dict[str, Any]:
+    """Run a simulated attack job synchronously for the given layer and attack types."""
+    valid_types = {"classical", "ai", "quantum"}
+    bad = [t for t in req.attack_types if t not in valid_types]
+    if bad:
+        raise HTTPException(status_code=422, detail=f"Unknown attack_types: {bad}. Valid: {sorted(valid_types)}")
+    if not req.attack_types:
+        raise HTTPException(status_code=422, detail="attack_types must not be empty.")
+
+    job_id = f"JOB-{uuid4().hex[:8].upper()}"
+    now = datetime.now(timezone.utc)
+    started_at = now.isoformat()
+    # Simulate a short processing window (deterministic, not a real sleep)
+    completed_at = (now + timedelta(seconds=random.randint(1, 5))).isoformat()
+
+    findings = _build_findings(req.layer_id, req.attack_types)
+    summary = _build_summary(findings)
+    risk_score = _compute_risk_score(findings)
+    recommendations = _top_recommendations(findings, req.attack_types)
+
+    report: Dict[str, Any] = {
+        "job_id": job_id,
+        "layer_id": req.layer_id,
+        "layer_name": _get_layer_name(req.layer_id),
+        "status": "completed",
+        "started_at": started_at,
+        "completed_at": completed_at,
+        "attack_types": req.attack_types,
+        "summary": summary,
+        "findings": findings,
+        "recommendations": recommendations,
+        "risk_score": risk_score,
+        "report_url": f"/security/attack/report/{job_id}",
+    }
+
+    _ATTACK_JOBS[job_id] = report
+    return report
+
+
+@router.post("/attack/schedule")
+def attack_schedule(req: AttackScheduleRequest) -> Dict[str, Any]:
+    """Store an attack schedule and return its metadata."""
+    valid_schedules = {"daily", "weekly", "on_demand"}
+    if req.schedule not in valid_schedules:
+        raise HTTPException(
+            status_code=422,
+            detail=f"Invalid schedule '{req.schedule}'. Valid: {sorted(valid_schedules)}",
+        )
+
+    schedule_id = f"SCH-{uuid4().hex[:8].upper()}"
+    now = datetime.now(timezone.utc)
+
+    delta_map = {"daily": timedelta(days=1), "weekly": timedelta(weeks=1), "on_demand": timedelta(seconds=0)}
+    next_run = (now + delta_map[req.schedule]).isoformat()
+
+    entry: Dict[str, Any] = {
+        "schedule_id": schedule_id,
+        "layer_id": req.layer_id,
+        "attack_types": req.attack_types,
+        "schedule": req.schedule,
+        "next_run": next_run,
+        "created_at": now.isoformat(),
+        "status": "active",
+    }
+    _ATTACK_SCHEDULES.append(entry)
+    return entry
+
+
+@router.get("/attack/jobs")
+def attack_jobs(
+    layer_id: Optional[str] = Query(default=None, description="Filter by layer ID, e.g. L04"),
+    status: Optional[str] = Query(default=None, description="Filter by status, e.g. 'completed'"),
+) -> Dict[str, Any]:
+    """Return all attack jobs and schedules, with optional filters."""
+    jobs: List[Dict[str, Any]] = list(_ATTACK_JOBS.values())
+    schedules: List[Dict[str, Any]] = list(_ATTACK_SCHEDULES)
+
+    if layer_id:
+        jobs = [j for j in jobs if j.get("layer_id") == layer_id]
+        schedules = [s for s in schedules if s.get("layer_id") == layer_id]
+
+    if status:
+        jobs = [j for j in jobs if j.get("status") == status]
+        schedules = [s for s in schedules if s.get("status") == status]
+
+    return {
+        "jobs": jobs,
+        "schedules": schedules,
+        "total_jobs": len(jobs),
+        "total_schedules": len(schedules),
+    }
+
+
+@router.get("/attack/report/{job_id}")
+def attack_report(job_id: str) -> Dict[str, Any]:
+    """Return the full attack report for a completed job."""
+    report = _ATTACK_JOBS.get(job_id)
+    if report is None:
+        raise HTTPException(status_code=404, detail=f"Job '{job_id}' not found.")
+    return report
+
+
+@router.delete("/attack/schedule/{schedule_id}")
+def attack_schedule_delete(schedule_id: str) -> Dict[str, Any]:
+    """Delete an attack schedule by ID."""
+    for i, s in enumerate(_ATTACK_SCHEDULES):
+        if s.get("schedule_id") == schedule_id:
+            _ATTACK_SCHEDULES.pop(i)
+            return {"deleted": True, "schedule_id": schedule_id}
+    raise HTTPException(status_code=404, detail=f"Schedule '{schedule_id}' not found.")
+
+
+# ---------------------------------------------------------------------------
+# Incident Management Endpoints
+# ---------------------------------------------------------------------------
+
+
+@router.post("/incident/create")
+def incident_create(req: IncidentCreateRequest) -> Dict[str, Any]:
+    """Create a new security incident."""
+    incident_id = f"INC-{uuid4().hex[:8].upper()}"
+    now = datetime.now(timezone.utc).isoformat()
+
+    incident: Dict[str, Any] = {
+        "incident_id": incident_id,
+        "layer_id": req.layer_id,
+        "title": req.title,
+        "severity": req.severity,
+        "source": req.source,
+        "description": req.description,
+        "attack_type": req.attack_type,
+        "status": "Open",
+        "created_at": now,
+        "notes": None,
+        "assigned_to": None,
+        "resolved_at": None,
+    }
+    _INCIDENTS[incident_id] = incident
+    return incident
+
+
+@router.get("/incident/list")
+def incident_list(
+    layer_id: Optional[str] = Query(default=None, description="Filter by layer ID"),
+    status: Optional[str] = Query(default=None, description="Filter by status, e.g. 'Open'"),
+    severity: Optional[str] = Query(default=None, description="Filter by severity, e.g. 'CRITICAL'"),
+) -> Dict[str, Any]:
+    """Return all incidents with optional filters."""
+    incidents: List[Dict[str, Any]] = list(_INCIDENTS.values())
+
+    if layer_id:
+        incidents = [i for i in incidents if i.get("layer_id") == layer_id]
+    if status:
+        incidents = [i for i in incidents if i.get("status") == status]
+    if severity:
+        incidents = [i for i in incidents if (i.get("severity") or "").upper() == severity.upper()]
+
+    return {"incidents": incidents, "total": len(incidents)}
+
+
+@router.patch("/incident/{incident_id}")
+def incident_update(incident_id: str, req: IncidentUpdateRequest) -> Dict[str, Any]:
+    """Partially update an existing incident."""
+    incident = _INCIDENTS.get(incident_id)
+    if incident is None:
+        raise HTTPException(status_code=404, detail=f"Incident '{incident_id}' not found.")
+
+    if req.status is not None:
+        incident["status"] = req.status
+    if req.notes is not None:
+        incident["notes"] = req.notes
+    if req.assigned_to is not None:
+        incident["assigned_to"] = req.assigned_to
+    if req.resolved_at is not None:
+        incident["resolved_at"] = req.resolved_at
+
+    _INCIDENTS[incident_id] = incident
+    return incident
