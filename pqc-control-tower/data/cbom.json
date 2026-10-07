@@ -1,0 +1,124 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-10-06T00:00:00Z",
+    "tools": [{ "vendor": "QuantumPortal", "name": "cbom-scanner", "version": "1.0.0" }],
+    "component": { "type": "application", "name": "quantum-portal", "version": "0.1.0" }
+  },
+  "total_assets": 9,
+  "quantum_vulnerable": 4,
+  "quantum_safe": 5,
+  "harvest_now_risk": 3,
+  "assets": [
+    {
+      "path": "api/main.py",
+      "asset_type": "source_code",
+      "algorithm": "RSA-2048",
+      "key_size": 2048,
+      "quantum_safe": false,
+      "harvest_now_risk": true,
+      "priority": "P1",
+      "usage": "JWT token signing (RS256) — python-jose library",
+      "layer": "L08 JWT",
+      "fips_replacement": "ML-DSA-44 (FIPS 204)"
+    },
+    {
+      "path": "api/security_routes.py",
+      "asset_type": "source_code",
+      "algorithm": "ECDSA-P256",
+      "key_size": 256,
+      "quantum_safe": false,
+      "harvest_now_risk": true,
+      "priority": "P1",
+      "usage": "API endpoint signature verification",
+      "layer": "L09 Auth",
+      "fips_replacement": "ML-DSA-44 (FIPS 204)"
+    },
+    {
+      "path": "api/main.py",
+      "asset_type": "source_code",
+      "algorithm": "AES-256-GCM",
+      "key_size": 256,
+      "quantum_safe": true,
+      "harvest_now_risk": false,
+      "priority": "P3",
+      "usage": "Symmetric encryption for data at rest (cryptography lib)",
+      "layer": "L10 Storage",
+      "fips_replacement": "AES-256-GCM (retain — NIST SP 800-131A Rev.2)"
+    },
+    {
+      "path": "api/main.py",
+      "asset_type": "source_code",
+      "algorithm": "SHA-256",
+      "key_size": 256,
+      "quantum_safe": true,
+      "harvest_now_risk": false,
+      "priority": "P2",
+      "usage": "Integrity hashing — passlib password hashing chain",
+      "layer": "L11 Integrity",
+      "fips_replacement": "SHA-384 / SHA3-256 (FIPS 180-4)"
+    },
+    {
+      "path": "api/main.py",
+      "asset_type": "source_code",
+      "algorithm": "SHA-384",
+      "key_size": 384,
+      "quantum_safe": true,
+      "harvest_now_risk": false,
+      "priority": "P3",
+      "usage": "HMAC-SHA-384 session token integrity",
+      "layer": "L08 JWT",
+      "fips_replacement": "SHA-384 (retain — FIPS 180-4)"
+    },
+    {
+      "path": "shared-modules/security/pqc_utils.py",
+      "asset_type": "source_code",
+      "algorithm": "ML-KEM-768",
+      "key_size": 768,
+      "quantum_safe": true,
+      "harvest_now_risk": false,
+      "priority": "P3",
+      "usage": "Post-quantum key encapsulation (FIPS 203) — liboqs/pyoqs",
+      "layer": "L12 PQC",
+      "fips_replacement": "ML-KEM-768 (already FIPS 203 compliant)"
+    },
+    {
+      "path": "shared-modules/security/pqc_utils.py",
+      "asset_type": "source_code",
+      "algorithm": "ML-DSA-65",
+      "key_size": 1952,
+      "quantum_safe": true,
+      "harvest_now_risk": false,
+      "priority": "P3",
+      "usage": "Post-quantum digital signatures (FIPS 204) — liboqs/pyoqs",
+      "layer": "L12 PQC",
+      "fips_replacement": "ML-DSA-65 (already FIPS 204 compliant)"
+    },
+    {
+      "path": "api/main.py",
+      "asset_type": "source_code",
+      "algorithm": "TLS-1.3",
+      "key_size": 256,
+      "quantum_safe": false,
+      "harvest_now_risk": true,
+      "priority": "P1",
+      "usage": "HTTPS transport — uvicorn SSL context, httpx client TLS",
+      "layer": "L07 Transport",
+      "fips_replacement": "Hybrid TLS: X25519MLKEM768 (IETF draft-ietf-tls-hybrid-design)"
+    },
+    {
+      "path": "api/main.py",
+      "asset_type": "source_code",
+      "algorithm": "HMAC-SHA256",
+      "key_size": 256,
+      "quantum_safe": true,
+      "harvest_now_risk": false,
+      "priority": "P3",
+      "usage": "Cache integrity HMAC — shared security layer cache_integrity.py",
+      "layer": "L13 Integrity",
+      "fips_replacement": "HMAC-SHA256 (retain — FIPS 198-1)"
+    }
+  ]
+}
