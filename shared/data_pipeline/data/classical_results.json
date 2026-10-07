@@ -1,0 +1,212 @@
+{
+  "dataset": "features_8.csv",
+  "n_features": 8,
+  "feature_names": [
+    "PC1",
+    "PC2",
+    "PC3",
+    "PC4",
+    "PC5",
+    "PC6",
+    "PC7",
+    "PC8"
+  ],
+  "n_train": 700,
+  "n_val": 150,
+  "n_test": 150,
+  "best_model": "LogisticRegression",
+  "best_test_auc": 0.7653,
+  "best_test_accuracy": 0.6733,
+  "models": [
+    {
+      "model": "LogisticRegression",
+      "training_time_s": 0.01,
+      "val": {
+        "accuracy": 0.6,
+        "auc": 0.6761,
+        "f1": 0.3878,
+        "precision": 0.2794,
+        "recall": 0.6333,
+        "confusion_matrix": [
+          [
+            71,
+            49
+          ],
+          [
+            11,
+            19
+          ]
+        ]
+      },
+      "test": {
+        "accuracy": 0.6733,
+        "auc": 0.7653,
+        "f1": 0.4731,
+        "precision": 0.3492,
+        "recall": 0.7333,
+        "confusion_matrix": [
+          [
+            79,
+            41
+          ],
+          [
+            8,
+            22
+          ]
+        ]
+      }
+    },
+    {
+      "model": "RandomForestClassifier",
+      "training_time_s": 0.5,
+      "val": {
+        "accuracy": 0.8133,
+        "auc": 0.6251,
+        "f1": 0.125,
+        "precision": 1.0,
+        "recall": 0.0667,
+        "confusion_matrix": [
+          [
+            120,
+            0
+          ],
+          [
+            28,
+            2
+          ]
+        ]
+      },
+      "test": {
+        "accuracy": 0.8133,
+        "auc": 0.7085,
+        "f1": 0.1765,
+        "precision": 0.75,
+        "recall": 0.1,
+        "confusion_matrix": [
+          [
+            119,
+            1
+          ],
+          [
+            27,
+            3
+          ]
+        ]
+      }
+    },
+    {
+      "model": "XGBClassifier",
+      "training_time_s": 135.45,
+      "val": {
+        "accuracy": 0.7733,
+        "auc": 0.6083,
+        "f1": 0.32,
+        "precision": 0.4,
+        "recall": 0.2667,
+        "confusion_matrix": [
+          [
+            108,
+            12
+          ],
+          [
+            22,
+            8
+          ]
+        ]
+      },
+      "test": {
+        "accuracy": 0.72,
+        "auc": 0.6853,
+        "f1": 0.2222,
+        "precision": 0.25,
+        "recall": 0.2,
+        "confusion_matrix": [
+          [
+            102,
+            18
+          ],
+          [
+            24,
+            6
+          ]
+        ]
+      }
+    },
+    {
+      "model": "SVC_rbf",
+      "training_time_s": 0.1,
+      "val": {
+        "accuracy": 0.58,
+        "auc": 0.6289,
+        "f1": 0.3368,
+        "precision": 0.2462,
+        "recall": 0.5333,
+        "confusion_matrix": [
+          [
+            71,
+            49
+          ],
+          [
+            14,
+            16
+          ]
+        ]
+      },
+      "test": {
+        "accuracy": 0.6867,
+        "auc": 0.7181,
+        "f1": 0.4598,
+        "precision": 0.3509,
+        "recall": 0.6667,
+        "confusion_matrix": [
+          [
+            83,
+            37
+          ],
+          [
+            10,
+            20
+          ]
+        ]
+      }
+    },
+    {
+      "model": "StackingClassifier",
+      "training_time_s": 5.58,
+      "val": {
+        "accuracy": 0.8133,
+        "auc": 0.6678,
+        "f1": 0.1765,
+        "precision": 0.75,
+        "recall": 0.1,
+        "confusion_matrix": [
+          [
+            119,
+            1
+          ],
+          [
+            27,
+            3
+          ]
+        ]
+      },
+      "test": {
+        "accuracy": 0.8267,
+        "auc": 0.7567,
+        "f1": 0.2778,
+        "precision": 0.8333,
+        "recall": 0.1667,
+        "confusion_matrix": [
+          [
+            119,
+            1
+          ],
+          [
+            25,
+            5
+          ]
+        ]
+      }
+    }
+  ]
+}

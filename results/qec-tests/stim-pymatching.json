@@ -1,0 +1,8 @@
+{
+  "distance": 5,
+  "rounds": 5,
+  "shots": 3000,
+  "detector_count": 24,
+  "logical_errors": 0,
+  "logical_error_rate": 0.0
+}

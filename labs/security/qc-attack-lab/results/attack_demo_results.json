@@ -1,0 +1,1 @@
+{"generated":"2026-10-06","attacks_simulated":8,"grover_aes128":"2^64 effective","shor_rsa2048_qubits":4099,"hndl_risk_years":7,"attacks_blocked_by_pqc":["Shor RSA","Shor ECC","Grover AES weakening"]}

@@ -1,0 +1,60 @@
+version: "3.9"
+
+services:
+  triton:
+    image: nvcr.io/nvidia/tritonserver:24.01-py3
+    container_name: quantum-triton
+    restart: unless-stopped
+    ports:
+      - "8000:8000"   # HTTP inference
+      - "8001:8001"   # gRPC inference
+      - "8002:8002"   # Prometheus metrics
+    volumes:
+      - ./model_repository:/models
+      - ./logs:/var/log/triton
+    command: >
+      tritonserver
+      --model-repository=/models
+      --log-verbose=1
+      --log-file=/var/log/triton/triton.log
+      --strict-model-config=false
+      --exit-on-error=false
+      --model-control-mode=explicit
+      --load-model=xgboost_fraud
+      --load-model=quantum_vqc
+      --load-model=transformer_ts
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/v2/health/ready"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    environment:
+      - TRITON_SERVER_CPU_MEMORY_POOL_BYTE_SIZE=134217728   # 128 MB CPU pool
+      - CUDA_VISIBLE_DEVICES=0
+
+  # Prometheus — scrapes Triton metrics
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: quantum-triton-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+      - "--storage.tsdb.retention.time=7d"
+    depends_on:
+      - triton
+
+volumes:
+  prometheus_data:

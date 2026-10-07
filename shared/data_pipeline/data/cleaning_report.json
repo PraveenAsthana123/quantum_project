@@ -1,0 +1,11 @@
+{
+  "rows_before": 1023,
+  "rows_after": 1000,
+  "cols_before": 1001,
+  "cols_after": 999,
+  "duplicates_removed": 23,
+  "cols_dropped_null": 2,
+  "nulls_imputed": 258433,
+  "outliers_capped": 91472,
+  "categorical_encoded": 0
+}

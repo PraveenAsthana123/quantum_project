@@ -1,0 +1,20 @@
+# Quantum Data Pipeline — Requirements
+# Install with: pip install -r requirements.txt
+
+# Quantum ML
+pennylane>=0.36.0
+
+# Classical ML
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.11.0
+
+# Visualization (optional, for notebook exploration)
+matplotlib>=3.7.0
+
+# Utilities
+joblib>=1.3.0

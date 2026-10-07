@@ -1,0 +1,6 @@
+{
+  "parquet": "/mnt/deepa/quantum/datasets/generated/transpiler-benchmarks/benchmark.parquet",
+  "duckdb_avg_depth": 3.3333333333333335,
+  "hdf5": "/mnt/deepa/quantum/results/data-engineering-tests/state-data.h5",
+  "zarr": "/mnt/deepa/quantum/results/data-engineering-tests/sweep.zarr"
+}

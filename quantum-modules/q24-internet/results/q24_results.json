@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q24-internet",
+  "demo_passed": true,
+  "protocol": "BB84",
+  "alice_bits": 10000,
+  "sifted": 4800,
+  "final_key": 4200,
+  "qber": 0.02
+}

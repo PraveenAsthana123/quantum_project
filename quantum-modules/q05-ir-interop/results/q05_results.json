@@ -1,0 +1,12 @@
+{
+  "generated": "2026-10-06",
+  "module": "q05-ir-interop",
+  "demo_passed": true,
+  "formats_supported": [
+    "OpenQASM 3.0",
+    "QIR",
+    "Quil"
+  ],
+  "circuits_converted": 5,
+  "equivalence_pass": 5
+}

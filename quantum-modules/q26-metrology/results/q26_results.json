@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q26-metrology",
+  "demo_passed": true,
+  "n_qubits": 10,
+  "phase_estimated": 0.3,
+  "classical_prec": 0.316,
+  "quantum_prec": 0.1,
+  "enhancement": "3.16x"
+}

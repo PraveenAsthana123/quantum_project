@@ -1,0 +1,18 @@
+{
+  "mqt_ddsim": {
+    "status": "FAIL",
+    "error": "ModuleNotFoundError(\"No module named 'mqt'\")"
+  },
+  "mqt_yaqs": {
+    "status": "FAIL",
+    "error": "ModuleNotFoundError(\"No module named 'mqt'\")"
+  },
+  "mqt_bench": {
+    "status": "FAIL",
+    "error": "ModuleNotFoundError(\"No module named 'mqt'\")"
+  },
+  "qcec": {
+    "status": "FAIL",
+    "error": "ModuleNotFoundError(\"No module named 'mqt'\")"
+  }
+}

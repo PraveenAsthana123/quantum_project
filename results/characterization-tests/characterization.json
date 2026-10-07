@@ -1,0 +1,16 @@
+{
+  "pygsti": {
+    "status": "PASS",
+    "version": "0.10.2",
+    "capabilities": [
+      "gate-set-tomography",
+      "randomized-benchmarking",
+      "robust-phase-estimation",
+      "drift-analysis"
+    ]
+  },
+  "qiskit_experiments": {
+    "status": "PASS",
+    "version": "0.14.2"
+  }
+}

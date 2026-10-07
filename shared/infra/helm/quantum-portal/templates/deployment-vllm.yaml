@@ -1,0 +1,104 @@
+{{- if .Values.vllm.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-vllm
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: vllm
+spec:
+  replicas: {{ .Values.vllm.replicas }}
+  selector:
+    matchLabels:
+      {{- include "quantum-portal.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: vllm
+  # Recreate strategy: GPU containers cannot run rolling updates with 1 GPU/node
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "quantum-portal.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: vllm
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      runtimeClassName: nvidia  # use NVIDIA container runtime
+      {{- with .Values.vllm.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.vllm.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: vllm
+          image: {{ .Values.vllm.image }}
+          imagePullPolicy: {{ .Values.vllm.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.vllm.service.port }}
+              protocol: TCP
+          command:
+            - python
+            - -m
+            - vllm.entrypoints.openai.api_server
+          args:
+            - --model={{ .Values.vllm.model }}
+            - --quantization={{ .Values.vllm.quantization }}
+            - --gpu-memory-utilization={{ .Values.vllm.gpuMemoryUtilization }}
+            - --max-model-len={{ .Values.vllm.maxModelLen | toString }}
+            - --tensor-parallel-size={{ .Values.vllm.tensorParallelSize | toString }}
+            - --port={{ .Values.vllm.service.port | toString }}
+            {{- range .Values.vllm.extraArgs }}
+            - {{ . }}
+            {{- end }}
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-secrets
+                  key: huggingface_token
+                  optional: true
+            - name: NCCL_DEBUG
+              value: "WARN"
+          resources:
+            {{- toYaml .Values.vllm.resources | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.vllm.readinessProbe | nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.vllm.livenessProbe | nindent 12 }}
+          volumeMounts:
+            - name: model-cache
+              mountPath: /root/.cache/huggingface
+            - name: shm
+              mountPath: /dev/shm
+      volumes:
+        # Persistent model cache — avoids re-downloading on pod restart
+        - name: model-cache
+          persistentVolumeClaim:
+            claimName: {{ include "quantum-portal.fullname" . }}-vllm-model-cache
+        # Shared memory for tensor parallel / NCCL
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 8Gi
+      terminationGracePeriodSeconds: 120
+
+---
+# PVC for model cache (~15 GB for Gemma-2 9B AWQ)
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-vllm-model-cache
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: {{ .Values.global.storageClass }}
+  resources:
+    requests:
+      storage: 50Gi  # enough for Gemma-2 9B AWQ + Llama-3.1 8B GPTQ
+
+{{- end }}

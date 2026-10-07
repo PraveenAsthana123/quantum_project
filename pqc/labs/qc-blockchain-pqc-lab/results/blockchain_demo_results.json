@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "transactions_processed": 100,
+  "avg_sign_ms": 0.5,
+  "signature_algorithm": "ML-DSA-65",
+  "cbdc_mint_ok": true,
+  "cbdc_transfer_ok": true,
+  "double_spend_blocked": true,
+  "ntt_multiplications": 400
+}

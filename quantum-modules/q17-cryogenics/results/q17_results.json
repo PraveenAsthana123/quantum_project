@@ -1,0 +1,11 @@
+{
+  "generated": "2026-10-06",
+  "module": "q17-cryogenics",
+  "demo_passed": true,
+  "qubits": 50,
+  "heat_load_uW": 50,
+  "cooling_power_uW": 400,
+  "margin_uW": 350,
+  "T_mK": 20,
+  "feasible": true
+}

@@ -1,0 +1,60 @@
+cluster_name: quantum-ray-h100
+
+provider:
+  type: gcp
+  region: us-central1
+  availability_zone: us-central1-a
+  project_id: quantum-portfolio-prod
+  cache_stopped_nodes: false
+
+auth:
+  ssh_user: ubuntu
+
+available_node_types:
+  ray_head_default:
+    resources: {}
+    node_config:
+      machineType: n2-standard-8
+      diskConfig:
+        bootDiskType: pd-ssd
+        bootDiskSizeGb: 100
+    min_workers: 0
+    max_workers: 0
+
+  ray_worker_h100:
+    resources:
+      CPU: 26
+      GPU: 2
+      memory: 200000000000
+    node_config:
+      machineType: a3-highgpu-2g  # 2× H100 80GB
+      diskConfig:
+        bootDiskType: pd-ssd
+        bootDiskSizeGb: 200
+      guestAccelerators:
+        - acceleratorType: nvidia-h100-80gb
+          acceleratorCount: 2
+    min_workers: 0
+    max_workers: 4
+
+head_node_type: ray_head_default
+
+upscaling_speed: 1.0
+idle_timeout_minutes: 5
+
+initialization_commands:
+  - pip install -q ray[default] pennylane torch vllm transformers peft datasets
+
+setup_commands:
+  - pip install -q ray[default] pennylane torch vllm transformers peft datasets bitsandbytes
+
+head_setup_commands:
+  - pip install -q ray[default,serve] ray[tune] mlflow
+
+head_start_ray_commands:
+  - ray stop
+  - ray start --head --port=6379 --object-manager-port=8076 --autoscaling-config=~/ray_bootstrap_config.yaml
+
+worker_start_ray_commands:
+  - ray stop
+  - ray start --address=$RAY_HEAD_IP:6379 --object-manager-port=8076

@@ -1,0 +1,11 @@
+{
+  "generated": "2026-10-06",
+  "agent_id": "agt-demo-001",
+  "identity_algorithm": "ML-DSA-65",
+  "attestation_passed": true,
+  "zero_trust_score": 0.87,
+  "mcp_calls_signed": 10,
+  "replay_attacks_blocked": 2,
+  "session_key_algorithm": "ML-KEM-768",
+  "session_key_bytes": 32
+}

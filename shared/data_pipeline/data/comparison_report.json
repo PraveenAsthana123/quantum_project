@@ -1,0 +1,41 @@
+{
+  "classical_best_model": "LogisticRegression",
+  "classical_best_accuracy": 0.6733,
+  "classical_best_auc": 0.7653,
+  "classical_best_f1": 0.4731,
+  "quantum_model": "VQC_4q_2L",
+  "quantum_accuracy": 0.6,
+  "quantum_auc": 0.5108,
+  "quantum_f1": 0.2727,
+  "gap_pct": -10.8867,
+  "quantum_advantage": "NO \u2014 classical superior",
+  "recommended_approach": "classical",
+  "quantum_advantage_scenarios": [
+    {
+      "scenario": "Quantum kernel methods on structured quantum data",
+      "reason": "Quantum kernels can efficiently compute inner products in an exponentially large Hilbert space \u2014 a genuine computational advantage for data that is naturally quantum (e.g. molecular states).",
+      "reference": "Havl\u00ed\u010dek et al., Nature 2019"
+    },
+    {
+      "scenario": "Molecular simulation (drug discovery, materials science)",
+      "reason": "Variational Quantum Eigensolver (VQE) and QAOA on molecules/Hamiltonians are the clearest near-term quantum advantage applications. Classical exact simulation is exponential; quantum is polynomial.",
+      "reference": "Peruzzo et al., Nature Comm. 2014"
+    },
+    {
+      "scenario": "Optimization over discrete combinatorial spaces",
+      "reason": "QAOA provides a quantum-native ansatz for MaxCut, portfolio optimization, and logistics routing where classical branch-and-bound scales poorly.",
+      "reference": "Farhi et al., arXiv 2014"
+    },
+    {
+      "scenario": "Privacy-preserving quantum ML (quantum homomorphic enc.)",
+      "reason": "Quantum circuits with appropriate noise models can encode data in ways that are information-theoretically hard to invert \u2014 relevant for federated learning scenarios.",
+      "reference": "Broadbent & Islam, TCC 2020"
+    },
+    {
+      "scenario": "Feature maps on non-Euclidean / graph data",
+      "reason": "Quantum graph neural networks leverage quantum walk unitaries that map naturally onto graph topology \u2014 no known efficient classical simulation.",
+      "reference": "Verdon et al., arXiv 2019"
+    }
+  ],
+  "interpretation": "For generic 1000\u00d71000 tabular binary classification, classical ML (especially ensemble methods) significantly outperforms a 4-qubit VQC with 16 parameters. Quantum advantage is real but domain-specific: molecular simulation, combinatorial optimisation, and quantum kernels on quantum-structured data."
+}

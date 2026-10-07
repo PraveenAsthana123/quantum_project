@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q10-silicon-spin",
+  "demo_passed": true,
+  "qubit_type": "silicon-spin",
+  "T1_ms": 100,
+  "T2_ms": 10,
+  "fidelity_1q": 0.9995,
+  "fidelity_2q": 0.995
+}

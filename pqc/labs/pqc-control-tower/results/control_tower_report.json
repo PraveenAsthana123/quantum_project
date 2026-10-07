@@ -1,0 +1,16 @@
+{
+  "generated": "2026-10-06",
+  "overall_pqc_health": 34,
+  "layers_total": 29,
+  "layers_done": 3,
+  "layers_in_progress": 8,
+  "layers_planning": 12,
+  "layers_not_started": 6,
+  "critical_hndl_systems": 5,
+  "cnsa_2030_on_track": false,
+  "top_risks": [
+    "TLS termination HNDL exposure",
+    "HSM firmware blocking PKI",
+    "Root CA ceremony not scheduled"
+  ]
+}

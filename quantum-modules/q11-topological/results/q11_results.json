@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q11-topological",
+  "demo_passed": true,
+  "qubit_type": "topological",
+  "error_per_gate": 1e-09,
+  "protection": "topological",
+  "status": "experimental"
+}

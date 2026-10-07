@@ -1,0 +1,72 @@
+# =============================================================================
+# Quantum Portal — Next.js 14 Production Dockerfile
+# Multi-stage: build (pnpm install + next build) → slim runtime
+# Output: standalone Next.js server (~150 MB image vs ~1 GB with node_modules)
+# =============================================================================
+
+# ---- Stage 1: deps ----
+# Install only production dependencies first (cache layer)
+FROM node:22-alpine AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Copy package manifests only — this layer is cached until lockfile changes
+COPY quantum-portal-web/package.json quantum-portal-web/pnpm-lock.yaml* ./
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Install all deps (including devDeps needed for build)
+RUN pnpm install --frozen-lockfile
+
+# ---- Stage 2: builder ----
+FROM node:22-alpine AS builder
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY quantum-portal-web/ .
+
+# Build-time env vars (not secrets — baked into static JS bundles)
+ARG NEXT_PUBLIC_API_BASE_URL=""
+ARG NEXT_PUBLIC_APP_ENV="production"
+
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_ENV=production
+
+# next build with standalone output mode (set in next.config.js: output: 'standalone')
+RUN pnpm build
+
+# ---- Stage 3: runner ----
+FROM node:22-alpine AS runner
+WORKDIR /app
+
+RUN apk add --no-cache dumb-init
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3001
+ENV HOSTNAME="0.0.0.0"
+
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 --ingroup nodejs nextjs
+
+# Copy standalone output — includes only the minimal server + required modules
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/public ./public
+
+USER nextjs
+
+EXPOSE 3001
+
+# dumb-init ensures proper signal forwarding (SIGTERM → graceful Next.js shutdown)
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["node", "server.js"]
+
+# Health check — k8s readinessProbe also handles this, but useful for docker compose
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD wget -qO- http://localhost:3001/api/health || exit 1

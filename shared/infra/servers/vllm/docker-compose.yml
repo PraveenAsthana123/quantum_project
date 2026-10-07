@@ -1,0 +1,94 @@
+version: "3.9"
+
+# vLLM LLM Gateway — Quantum Portal
+# Runs Gemma-2-9B (AWQ 4-bit) by default on L4 GPU.
+# For a different model, override VLLM_MODEL and VLLM_QUANTIZATION
+# via environment variables or a .env file.
+
+services:
+  vllm:
+    image: vllm/vllm-openai:latest
+    container_name: quantum-vllm
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      # HuggingFace model cache — persisted across container restarts
+      - ~/.cache/huggingface:/root/.cache/huggingface
+      # vLLM config (read-only mount)
+      - ./config:/app/config:ro
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      # Model to serve — override at deploy time via .env or -e flag
+      - VLLM_MODEL=${VLLM_MODEL:-google/gemma-2-9b-it}
+      - VLLM_QUANTIZATION=${VLLM_QUANTIZATION:-awq}
+      - VLLM_SERVED_NAME=${VLLM_SERVED_NAME:-gemma-2-9b}
+      - VLLM_PORT=8080
+      - VLLM_GPU_MEMORY_UTILIZATION=0.85
+      - VLLM_MAX_MODEL_LEN=4096
+      - VLLM_MAX_NUM_SEQS=256
+      - HF_HOME=/root/.cache/huggingface
+      # Set HF_TOKEN if the model requires it (Llama gated repo)
+      - HF_TOKEN=${HF_TOKEN:-}
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+        --model ${VLLM_MODEL:-google/gemma-2-9b-it}
+        --quantization ${VLLM_QUANTIZATION:-awq}
+        --served-model-name ${VLLM_SERVED_NAME:-gemma-2-9b}
+        --port 8080
+        --host 0.0.0.0
+        --gpu-memory-utilization 0.85
+        --max-model-len 4096
+        --max-num-seqs 256
+        --tensor-parallel-size 1
+        --dtype float16
+        --enable-metrics
+        --swap-space 4
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 20s
+      timeout: 10s
+      retries: 6
+      start_period: 120s   # Model loading takes time
+
+  # Optional second instance for Llama-3.1-8B on a different port
+  # Uncomment and run: docker-compose --profile llama up -d
+  vllm-llama:
+    profiles: ["llama"]
+    image: vllm/vllm-openai:latest
+    container_name: quantum-vllm-llama
+    restart: unless-stopped
+    ports:
+      - "8081:8081"
+    volumes:
+      - ~/.cache/huggingface:/root/.cache/huggingface
+    environment:
+      - CUDA_VISIBLE_DEVICES=0
+      - HF_TOKEN=${HF_TOKEN:-}
+    command: >
+      python -m vllm.entrypoints.openai.api_server
+        --model meta-llama/Llama-3.1-8B-Instruct
+        --quantization gptq
+        --served-model-name llama-3.1-8b
+        --port 8081
+        --host 0.0.0.0
+        --gpu-memory-utilization 0.85
+        --max-model-len 8192
+        --max-num-seqs 256
+        --tensor-parallel-size 1
+        --dtype float16
+        --enable-metrics
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]

@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q02-error-mitigation",
+  "demo_passed": true,
+  "zne_noise_reduction": "45%",
+  "cdr_accuracy_improvement": "23%",
+  "pec_overhead_factor": 10,
+  "best_method": "ZNE"
+}

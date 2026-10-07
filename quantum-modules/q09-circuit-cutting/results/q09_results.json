@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q09-circuit-cutting",
+  "demo_passed": true,
+  "gates_cut": 2,
+  "sampling_overhead": 16,
+  "classical_ms": 45,
+  "fidelity": 0.97
+}

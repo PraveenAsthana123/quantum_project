@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q25-sensing",
+  "demo_passed": true,
+  "probes": 100,
+  "sql": 0.1,
+  "hl": 0.01,
+  "improvement": "10x",
+  "technology": "NV-centers"
+}

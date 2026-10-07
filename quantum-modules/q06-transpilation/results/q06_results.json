@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q06-transpilation",
+  "demo_passed": true,
+  "input_cnots": 6,
+  "swaps_inserted": 3,
+  "depth_increase": "40%",
+  "fidelity_loss": 0.03
+}

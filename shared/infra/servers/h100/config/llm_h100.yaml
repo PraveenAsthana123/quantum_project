@@ -1,0 +1,28 @@
+# vLLM configuration for H100 — large model serving
+
+# Primary: Llama-3.1-70B-Instruct (requires H100 80GB)
+model: "meta-llama/Llama-3.1-70B-Instruct"
+quantization: "fp8"                  # H100 Transformer Engine native FP8
+tensor_parallel_size: 2              # split across 2× H100 GPUs
+gpu_memory_utilization: 0.88
+max_model_len: 8192
+max_num_seqs: 512
+dtype: "float16"
+served_model_name: "llama-3.1-70b"
+port: 8080
+
+# H100-specific optimizations
+enable_chunked_prefill: true
+max_chunked_prefill_tokens: 512
+enable_prefix_caching: true          # cache KV for common system prompts
+
+# Swap space for overflow (H100 has fast NVLink to CPU)
+swap_space: 8                        # GB, used when KV cache overflows
+
+---
+# Secondary: CodeLlama-34B for quantum circuit code generation
+# model: "codellama/CodeLlama-34b-Instruct-hf"
+# quantization: "fp8"
+# tensor_parallel_size: 1             # fits in single H100 80GB
+# max_model_len: 16384                # code needs long context
+# served_model_name: "codellama-34b"

@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q16-ctrl-electronics",
+  "demo_passed": true,
+  "pulse_duration_ns": 50,
+  "pulse_area_rad": 3.14,
+  "awg_rate_GSps": 2.4,
+  "fpga_latency_ns": 100
+}

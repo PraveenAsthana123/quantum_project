@@ -1,0 +1,41 @@
+{
+  "strategy_used": "robust",
+  "feature_range": [
+    "varies"
+  ],
+  "mean_after": 0.0015,
+  "std_after": 0.9634,
+  "n_features_scaled": 998,
+  "n_rows": 1000,
+  "recommended_file": "normalized_robust.csv",
+  "all_strategies": [
+    {
+      "strategy": "minmax",
+      "mean_after": 0.5,
+      "std_after": 0.2408,
+      "min_after": 0.0,
+      "max_after": 1.0,
+      "output_file": "normalized_minmax.csv",
+      "elapsed_s": 1.79
+    },
+    {
+      "strategy": "standard",
+      "mean_after": 0.0,
+      "std_after": 1.0,
+      "min_after": -2.3515,
+      "max_after": 2.3384,
+      "output_file": "normalized_standard.csv",
+      "elapsed_s": 1.87
+    },
+    {
+      "strategy": "robust",
+      "mean_after": 0.0015,
+      "std_after": 0.9634,
+      "min_after": -2.0898,
+      "max_after": 2.0924,
+      "output_file": "normalized_robust.csv",
+      "elapsed_s": 2.08
+    }
+  ],
+  "selection_reason": "RobustScaler preferred: data contains IQR-capped outliers at boundary values; robust scaling is insensitive to those."
+}

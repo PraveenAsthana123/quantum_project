@@ -1,0 +1,35 @@
+{
+  "generated": "2026-10-06",
+  "algorithms_benchmarked": 20,
+  "quantum_safe_count": 8,
+  "quantum_vulnerable_count": 12,
+  "fastest_pqc_sign": {
+    "algorithm": "ML-DSA-44",
+    "sign_ms": 0.3
+  },
+  "slowest_pqc_sign": {
+    "algorithm": "SLH-DSA-128f",
+    "sign_ms": 35.0
+  },
+  "size_overhead_vs_ecdsa": {
+    "ML-DSA-65_sig": "51x",
+    "SLH-DSA-128f_sig": "779x",
+    "ML-KEM-768_pk": "37x"
+  },
+  "nist_recommended": {
+    "kem": "ML-KEM-768",
+    "signature": "ML-DSA-65",
+    "hash_signature": "SLH-DSA-128f"
+  },
+  "pqc_overhead_summary": {
+    "ml_dsa_65_keygen_faster_than_rsa2048": true,
+    "ml_dsa_65_verify_faster_than_ecdsa_p256": true,
+    "main_pqc_cost": "larger key and signature sizes"
+  },
+  "vulnerability_scan_summary": {
+    "total_systems": 20,
+    "critical_priority": 8,
+    "medium_priority": 5,
+    "low_priority": 7
+  }
+}

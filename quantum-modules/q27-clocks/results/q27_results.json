@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q27-clocks",
+  "demo_passed": true,
+  "clock": "Sr-optical",
+  "freq_Hz": 429000000000000.0,
+  "uncertainty": 2e-18,
+  "stability_1s": 1e-16,
+  "vs_Cs": "100x better"
+}

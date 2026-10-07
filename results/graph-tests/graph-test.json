@@ -1,0 +1,12 @@
+{
+  "nodes": 6,
+  "edges": 5,
+  "shortest_0_to_5": [
+    0,
+    1,
+    4,
+    5
+  ],
+  "rustworkx_nodes": 6,
+  "rustworkx_edges": 5
+}

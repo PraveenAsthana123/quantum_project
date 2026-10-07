@@ -1,0 +1,90 @@
+{{- if .Values.triton.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-triton
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: triton
+spec:
+  replicas: {{ .Values.triton.replicas }}
+  selector:
+    matchLabels:
+      {{- include "quantum-portal.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: triton
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        {{- include "quantum-portal.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: triton
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      runtimeClassName: nvidia
+      {{- with .Values.triton.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.triton.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      # Init container downloads model repo from GCS/S3 before Triton starts
+      initContainers:
+        - name: model-sync
+          image: google/cloud-sdk:slim
+          command:
+            - sh
+            - -c
+            - |
+              gsutil -m rsync -r {{ .Values.triton.modelRepository }} /models/
+          volumeMounts:
+            - name: model-store
+              mountPath: /models
+          # For AWS, replace with:
+          # image: amazon/aws-cli
+          # command: ["aws", "s3", "sync", "MODEL_REPO", "/models/"]
+      containers:
+        - name: triton
+          image: {{ .Values.triton.image }}
+          imagePullPolicy: {{ .Values.triton.pullPolicy }}
+          args:
+            - tritonserver
+            - --model-repository=/models
+            - --strict-model-config=false
+            - --allow-metrics=true
+            - --metrics-port={{ .Values.triton.service.metricsPort | toString }}
+            - --log-verbose=0
+          ports:
+            - name: http
+              containerPort: {{ .Values.triton.service.httpPort }}
+            - name: grpc
+              containerPort: {{ .Values.triton.service.grpcPort }}
+            - name: metrics
+              containerPort: {{ .Values.triton.service.metricsPort }}
+          resources:
+            {{- toYaml .Values.triton.resources | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.triton.readinessProbe | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /v2/health/live
+              port: {{ .Values.triton.service.httpPort }}
+            initialDelaySeconds: 90
+            periodSeconds: 30
+          volumeMounts:
+            - name: model-store
+              mountPath: /models
+            - name: shm
+              mountPath: /dev/shm
+      volumes:
+        - name: model-store
+          emptyDir:
+            sizeLimit: 20Gi
+        - name: shm
+          emptyDir:
+            medium: Memory
+            sizeLimit: 4Gi
+      terminationGracePeriodSeconds: 60
+{{- end }}

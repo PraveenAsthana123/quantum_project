@@ -1,0 +1,56 @@
+{
+  "generated": "2026-10-06",
+  "standard": "CNSA 2.0 / NIST SP 800-208",
+  "total_assets": 50,
+  "quantum_vulnerable": 43,
+  "quantum_safe": 7,
+  "hndl_exposed": 18,
+  "migration_phases": [
+    {
+      "phase": 1,
+      "name": "Discovery",
+      "status": "complete",
+      "assets_inventoried": 50
+    },
+    {
+      "phase": 2,
+      "name": "Hybrid Mode",
+      "status": "in_progress",
+      "assets_migrated": 12
+    },
+    {
+      "phase": 3,
+      "name": "PQC Primary",
+      "status": "planned",
+      "assets_migrated": 0
+    },
+    {
+      "phase": 4,
+      "name": "Full Deprecation",
+      "status": "not_started",
+      "assets_migrated": 0
+    }
+  ],
+  "protocol_status": {
+    "TLS": "hybrid",
+    "PKI": "planning",
+    "SSH": "hybrid",
+    "JWT": "in_progress"
+  },
+  "cnsa_2030_readiness": "23%",
+  "top_risks": [
+    "18 HNDL-exposed assets still using RSA/ECDH in transit",
+    "HSM firmware upgrade blocking PKI migration",
+    "Root CA ceremony not scheduled — blocks PKI phase 3",
+    "SLH-DSA code signing performance overhead requires hw upgrade",
+    "JWT service migration blocked on library vendor support"
+  ],
+  "algorithm_breakdown": {
+    "RSA-2048":   {"count": 20, "quantum_safe": false, "status": "migration_required"},
+    "RSA-4096":   {"count":  5, "quantum_safe": false, "status": "migration_required"},
+    "ECDSA-P256": {"count": 10, "quantum_safe": false, "status": "migration_required"},
+    "ECDH-P256":  {"count":  8, "quantum_safe": false, "status": "migration_required"},
+    "AES-256":    {"count":  5, "quantum_safe": true,  "status": "retain_monitor"},
+    "SHA-256":    {"count":  2, "quantum_safe": true,  "status": "retain_monitor"}
+  }
+}

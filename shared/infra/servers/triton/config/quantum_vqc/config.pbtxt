@@ -1,0 +1,38 @@
+name: "quantum_vqc"
+backend: "python"
+max_batch_size: 64
+
+input [
+  {
+    name: "input__0"
+    data_type: TYPE_FP32
+    dims: [ 4 ]
+  }
+]
+
+output [
+  {
+    name: "output__0"
+    data_type: TYPE_FP32
+    dims: [ 2 ]
+  }
+]
+
+dynamic_batching {
+  preferred_batch_size: [ 1, 8, 32, 64 ]
+  max_queue_delay_microseconds: 100
+}
+
+instance_group [
+  {
+    kind: KIND_CPU
+    count: 2
+  }
+]
+
+parameters [
+  {
+    key: "EXECUTION_ENV_PATH"
+    value: { string_value: "/opt/tritonserver/backends/python" }
+  }
+]

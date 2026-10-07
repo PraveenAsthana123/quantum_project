@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q22-repeaters",
+  "demo_passed": true,
+  "nodes": 3,
+  "distance_km": 200,
+  "F_raw": 0.7,
+  "F_purified": 0.95,
+  "memory_ms": 10
+}

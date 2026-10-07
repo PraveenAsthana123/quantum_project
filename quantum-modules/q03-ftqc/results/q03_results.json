@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q03-ftqc",
+  "demo_passed": true,
+  "code_distance": 3,
+  "physical_per_logical": 9,
+  "threshold": 0.01,
+  "logical_error_rate": 1e-06
+}

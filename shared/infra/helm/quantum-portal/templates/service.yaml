@@ -1,0 +1,104 @@
+{{- if .Values.portal.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-portal
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: portal
+spec:
+  type: {{ .Values.portal.service.type }}
+  selector:
+    {{- include "quantum-portal.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: portal
+  ports:
+    - name: http
+      port: {{ .Values.portal.service.port }}
+      targetPort: http
+      protocol: TCP
+{{- end }}
+
+{{- if .Values.api.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-api
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+  annotations:
+    # Expose Prometheus metrics endpoint
+    prometheus.io/scrape: "true"
+    prometheus.io/port: "8000"
+    prometheus.io/path: "/metrics"
+spec:
+  type: {{ .Values.api.service.type }}
+  selector:
+    {{- include "quantum-portal.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+  ports:
+    - name: http
+      port: {{ .Values.api.service.port }}
+      targetPort: http
+      protocol: TCP
+{{- end }}
+
+{{- if .Values.vllm.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-vllm
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: vllm
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: {{ .Values.vllm.service.port | quote }}
+    prometheus.io/path: "/metrics"
+spec:
+  type: {{ .Values.vllm.service.type }}
+  selector:
+    {{- include "quantum-portal.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: vllm
+  ports:
+    - name: http
+      port: {{ .Values.vllm.service.port }}
+      targetPort: http
+      protocol: TCP
+{{- end }}
+
+{{- if .Values.triton.enabled }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-triton
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: triton
+  annotations:
+    prometheus.io/scrape: "true"
+    prometheus.io/port: {{ .Values.triton.service.metricsPort | quote }}
+    prometheus.io/path: "/metrics"
+spec:
+  type: ClusterIP
+  selector:
+    {{- include "quantum-portal.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: triton
+  ports:
+    - name: http
+      port: {{ .Values.triton.service.httpPort }}
+      targetPort: http
+      protocol: TCP
+    - name: grpc
+      port: {{ .Values.triton.service.grpcPort }}
+      targetPort: grpc
+      protocol: TCP
+    - name: metrics
+      port: {{ .Values.triton.service.metricsPort }}
+      targetPort: metrics
+      protocol: TCP
+{{- end }}

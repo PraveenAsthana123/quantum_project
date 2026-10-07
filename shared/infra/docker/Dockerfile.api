@@ -1,0 +1,63 @@
+# =============================================================================
+# Quantum Portal — FastAPI Backend Dockerfile
+# Multi-stage: dependency install → slim runtime (no build tools in final image)
+# =============================================================================
+
+# ---- Stage 1: builder ----
+# Install Python build tools + compile dependencies with C extensions
+FROM python:3.11-slim AS builder
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy requirements first for layer caching
+COPY api/requirements.txt .
+
+# Install into /install for clean copy to runtime stage
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+
+# ---- Stage 2: runtime ----
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libpq5 \
+    dumb-init \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Create non-root user
+RUN groupadd --gid 1001 appgroup && \
+    useradd --uid 1001 --gid appgroup --shell /bin/bash --create-home appuser
+
+# Copy installed packages from builder
+COPY --from=builder /install /usr/local
+
+# Copy application code
+COPY --chown=appuser:appgroup api/ .
+
+# Make tmp writable for the app (read-only root filesystem in k8s)
+RUN mkdir -p /tmp/app && chown appuser:appgroup /tmp/app
+
+USER appuser
+
+EXPOSE 8000
+
+# uvicorn with 4 workers handles ~100 concurrent requests comfortably
+# Workers * 2 + 1 is Gunicorn's formula; 4 is appropriate for 4-vCPU pods
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["uvicorn", "main:app", \
+     "--host", "0.0.0.0", \
+     "--port", "8000", \
+     "--workers", "4", \
+     "--loop", "uvloop", \
+     "--http", "httptools", \
+     "--proxy-headers", \
+     "--forwarded-allow-ips", "*"]
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=15s --retries=3 \
+  CMD python -c "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')" || exit 1

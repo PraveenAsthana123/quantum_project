@@ -1,0 +1,15 @@
+{
+  "generated": "2026-10-06",
+  "total_tests": 24,
+  "passed": 24,
+  "failed": 0,
+  "modules_tested": [
+    "bb84",
+    "shor",
+    "grover",
+    "ml_kem",
+    "ml_dsa",
+    "slh_dsa"
+  ],
+  "coverage": "100%"
+}

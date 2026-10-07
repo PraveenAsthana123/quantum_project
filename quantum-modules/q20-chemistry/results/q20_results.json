@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q20-chemistry",
+  "demo_passed": true,
+  "molecule": "H2",
+  "qubits": 4,
+  "vqe_energy": -1.137,
+  "fci_energy": -1.1373,
+  "error_mH": 0.3
+}

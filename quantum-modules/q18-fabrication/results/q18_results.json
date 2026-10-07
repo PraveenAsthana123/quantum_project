@@ -1,0 +1,11 @@
+{
+  "generated": "2026-10-06",
+  "module": "q18-fabrication",
+  "demo_passed": true,
+  "EJ_GHz": 20,
+  "EC_GHz": 0.3,
+  "ratio": 66.7,
+  "freq_GHz": 4.5,
+  "anharmonicity_GHz": -0.3,
+  "yield_pct": 85
+}

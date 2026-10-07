@@ -1,0 +1,102 @@
+{{- if .Values.portal.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-portal
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: portal
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+spec:
+  replicas: {{ .Values.portal.replicas }}
+  selector:
+    matchLabels:
+      {{- include "quantum-portal.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: portal
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        {{- include "quantum-portal.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: portal
+      annotations:
+        # Force pod restart when configmap changes
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - name: portal
+          image: {{ .Values.portal.image }}
+          imagePullPolicy: {{ .Values.portal.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 3001
+              protocol: TCP
+          env:
+            - name: NODE_ENV
+              value: {{ .Values.portal.env.NODE_ENV | quote }}
+            - name: API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-config
+                  key: api_base_url
+            - name: NEXTAUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-secrets
+                  key: nextauth_secret
+          resources:
+            {{- toYaml .Values.portal.resources | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.portal.readinessProbe | nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.portal.livenessProbe | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: nextjs-cache
+              mountPath: /app/.next/cache
+      volumes:
+        - name: tmp
+          emptyDir: {}
+        - name: nextjs-cache
+          emptyDir: {}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              {{- include "quantum-portal.selectorLabels" . | nindent 14 }}
+              app.kubernetes.io/component: portal
+      terminationGracePeriodSeconds: 30
+{{- end }}
+
+---
+{{- if and .Values.portal.enabled .Values.portal.podDisruptionBudget.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-portal-pdb
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.portal.podDisruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "quantum-portal.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: portal
+{{- end }}

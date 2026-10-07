@@ -1,0 +1,18 @@
+{
+  "ideal": {
+    "11": 1512,
+    "00": 1488
+  },
+  "noisy": {
+    "01": 81,
+    "10": 104,
+    "00": 1395,
+    "11": 1420
+  },
+  "noise_types_tested": [
+    "depolarizing",
+    "readout",
+    "amplitude_damping_available",
+    "phase_damping_available"
+  ]
+}

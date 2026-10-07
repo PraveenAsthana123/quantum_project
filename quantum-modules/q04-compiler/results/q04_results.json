@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q04-compiler",
+  "demo_passed": true,
+  "input_gates": 50,
+  "output_gates": 35,
+  "gate_reduction": "30%",
+  "depth_reduction": "25%",
+  "target": "IBM Eagle"
+}

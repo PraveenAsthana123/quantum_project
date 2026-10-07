@@ -1,0 +1,221 @@
+# =============================================================================
+# Quantum Portal — Supported Open-Source LLM Catalogue
+# Used by: vllm_server.sh, LLM cost tracker, RAG pipeline model selection
+# =============================================================================
+
+models:
+
+  # ---------------------------------------------------------------------------
+  # L4 GPU models (~24 GB VRAM) — primary inference tier
+  # ---------------------------------------------------------------------------
+
+  - name: gemma-2-9b-it
+    hf_repo: google/gemma-2-9b-it
+    provider: google
+    params: 9B
+    quantization: awq
+    precision: int4
+    vram_gb: 6.5          # AWQ quantized — fits in L4 with room for KV cache
+    gpu: L4
+    tensor_parallel: 1
+    max_context: 8192
+    throughput_tokens_per_sec: ~600  # approximate on L4
+    latency_ttft_ms: ~300            # approximate TTFT
+    license: gemma-terms-of-use
+    gated: true                       # requires HF token + Google license accept
+    use_case:
+      - fraud_explanation            # explain why a transaction was flagged
+      - quantum_summary              # summarise circuit benchmark results
+      - code_gen                     # generate quantum circuit code snippets
+      - rag                          # RAG over fraud cases + quantum results
+    notes: |
+      Best balance of quality and VRAM efficiency on L4. AWQ reduces to ~6.5 GB.
+      Enable prefix caching for repeated system-prompt prefixes (RAG, fraud explanation).
+
+  - name: llama-3.1-8b-instruct
+    hf_repo: meta-llama/Meta-Llama-3.1-8B-Instruct
+    provider: meta
+    params: 8B
+    quantization: gptq
+    precision: int4
+    vram_gb: 5.5
+    gpu: L4
+    tensor_parallel: 1
+    max_context: 128000               # 128K context window (full)
+    throughput_tokens_per_sec: ~700
+    latency_ttft_ms: ~250
+    license: meta-llama-3
+    gated: true
+    use_case:
+      - general
+      - rag
+      - tool_use
+      - long_context_analysis        # 128K context for full fraud report analysis
+    notes: |
+      Strong general-purpose model. Tool use / function calling is well-supported.
+      Use for: agent tool calling, structured output (JSON mode), long-document RAG.
+
+  - name: qwen-2.5-7b-instruct
+    hf_repo: Qwen/Qwen2.5-7B-Instruct
+    provider: alibaba
+    params: 7B
+    quantization: awq
+    precision: int4
+    vram_gb: 5.0
+    gpu: L4
+    tensor_parallel: 1
+    max_context: 32768
+    throughput_tokens_per_sec: ~750
+    latency_ttft_ms: ~220
+    license: apache-2.0
+    gated: false
+    use_case:
+      - multilingual
+      - coding
+      - analysis
+      - math                         # strong math reasoning for quantum formulas
+    notes: |
+      Apache 2.0 — no license gate. Strong on coding and mathematical reasoning.
+      Good choice for quantum circuit analysis tasks. Multilingual for global users.
+
+  - name: mistral-7b-instruct-v0.3
+    hf_repo: mistralai/Mistral-7B-Instruct-v0.3
+    provider: mistral
+    params: 7B
+    quantization: gptq
+    precision: int4
+    vram_gb: 4.5
+    gpu: L4
+    tensor_parallel: 1
+    max_context: 32768
+    throughput_tokens_per_sec: ~800
+    latency_ttft_ms: ~200
+    license: apache-2.0
+    gated: false
+    use_case:
+      - fast_inference               # lowest latency on L4
+      - instruction_following
+      - summarization
+    notes: |
+      Fastest inference on L4 of the L4-tier models. Use for real-time user
+      queries where latency matters more than reasoning depth.
+
+  - name: phi-3.5-mini-instruct
+    hf_repo: microsoft/Phi-3.5-mini-instruct
+    provider: microsoft
+    params: 3.8B
+    quantization: none              # runs in bfloat16 at ~8 GB VRAM
+    precision: bfloat16
+    vram_gb: 8.0
+    gpu: L4
+    tensor_parallel: 1
+    max_context: 128000
+    throughput_tokens_per_sec: ~1200
+    latency_ttft_ms: ~150
+    license: mit
+    gated: false
+    use_case:
+      - ultra_fast_inference
+      - mobile_edge                 # edge deployment alternative
+      - batch_classification        # fast batch labeling of fraud features
+    notes: |
+      MIT license, 128K context, extremely fast. Best for bulk classification
+      tasks or edge/embedded inference scenarios.
+
+  # ---------------------------------------------------------------------------
+  # H100 GPU models (~80 GB VRAM) — burst training / complex reasoning tier
+  # ---------------------------------------------------------------------------
+
+  - name: llama-3.1-70b-instruct
+    hf_repo: meta-llama/Meta-Llama-3.1-70B-Instruct
+    provider: meta
+    params: 70B
+    quantization: fp8
+    precision: fp8
+    vram_gb: 42           # fp8 on H100 (native tensor core support)
+    gpu: H100
+    tensor_parallel: 2    # 2x H100 for comfortable headroom
+    max_context: 128000
+    throughput_tokens_per_sec: ~400  # 2x H100, fp8
+    latency_ttft_ms: ~500
+    license: meta-llama-3
+    gated: true
+    use_case:
+      - complex_reasoning
+      - scientific_analysis          # deep quantum physics explanations
+      - dissertation_drafting        # long-form academic writing
+      - multi_step_agent             # complex multi-tool agent chains
+    notes: |
+      Reserved for complex reasoning tasks that smaller models handle poorly.
+      H100 fp8 gives ~1.5x throughput vs bfloat16. Requires 2x H100 at fp8
+      or 4x at bfloat16. H100 node (a3-highgpu-8g) has 8x H100 — can run
+      multiple large model instances simultaneously.
+
+  - name: qwen-2.5-72b-instruct
+    hf_repo: Qwen/Qwen2.5-72B-Instruct
+    provider: alibaba
+    params: 72B
+    quantization: fp8
+    precision: fp8
+    vram_gb: 44
+    gpu: H100
+    tensor_parallel: 2
+    max_context: 128000
+    throughput_tokens_per_sec: ~380
+    latency_ttft_ms: ~520
+    license: apache-2.0
+    gated: false
+    use_case:
+      - complex_reasoning
+      - coding
+      - math
+      - multilingual
+    notes: |
+      Apache 2.0 at 72B scale — no license gate for commercial/research use.
+      Extremely strong at coding and math. Best open choice for quantum
+      algorithm explanation and circuit optimization reasoning.
+
+  # ---------------------------------------------------------------------------
+  # Embedding models (used by RAG pipeline, not vLLM)
+  # ---------------------------------------------------------------------------
+
+  - name: text-embedding-004
+    hf_repo: N/A
+    provider: google
+    params: N/A
+    quantization: N/A
+    precision: N/A
+    vram_gb: 0             # cloud API, no local GPU required
+    gpu: none
+    max_context: 2048
+    embedding_dims: 768
+    license: google-cloud-terms
+    gated: false
+    use_case:
+      - fraud_case_retrieval
+      - circuit_similarity_search
+      - rag_embedding
+    notes: |
+      Google Cloud Vertex AI Embeddings API. Used as the default embedder for
+      the RAG pipeline. 768-dim vectors stored in Vertex AI Vector Search.
+      Alternative: nomic-embed-text (local, 768-dim, Apache 2.0).
+
+  - name: nomic-embed-text-v1.5
+    hf_repo: nomic-ai/nomic-embed-text-v1.5
+    provider: nomic
+    params: 137M
+    quantization: none
+    precision: float32
+    vram_gb: 1.0           # CPU-capable too
+    gpu: optional
+    max_context: 8192
+    embedding_dims: 768
+    license: apache-2.0
+    gated: false
+    use_case:
+      - local_rag_embedding          # offline / air-gapped environments
+      - fraud_case_retrieval
+    notes: |
+      Apache 2.0, Matryoshka dims (768/512/256/128), 8K context.
+      Best local alternative to text-embedding-004 for air-gapped or
+      cost-sensitive deployments.

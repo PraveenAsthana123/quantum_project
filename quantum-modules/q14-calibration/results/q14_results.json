@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q14-calibration",
+  "demo_passed": true,
+  "error_per_clifford": 0.001,
+  "T1_us": 150,
+  "T2_us": 80,
+  "fidelity_1q": 0.9995,
+  "drift_per_hour": 5e-05
+}

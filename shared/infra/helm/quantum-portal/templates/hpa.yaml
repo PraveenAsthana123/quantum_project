@@ -1,0 +1,70 @@
+{{- if and .Values.api.enabled .Values.hpa.api.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-api
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "quantum-portal.fullname" . }}-api
+  minReplicas: {{ .Values.hpa.api.minReplicas }}
+  maxReplicas: {{ .Values.hpa.api.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.api.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.api.targetMemoryUtilizationPercentage }}
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+        - type: Pods
+          value: 2
+          periodSeconds: 60
+    scaleDown:
+      stabilizationWindowSeconds: 300  # don't scale down too aggressively
+      policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 60
+{{- end }}
+
+---
+{{- if and .Values.portal.enabled .Values.hpa.portal.enabled }}
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-portal
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: portal
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "quantum-portal.fullname" . }}-portal
+  minReplicas: {{ .Values.hpa.portal.minReplicas }}
+  maxReplicas: {{ .Values.hpa.portal.maxReplicas }}
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: {{ .Values.hpa.portal.targetCPUUtilizationPercentage }}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 300
+{{- end }}

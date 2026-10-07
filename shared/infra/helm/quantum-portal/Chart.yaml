@@ -1,0 +1,32 @@
+apiVersion: v2
+name: quantum-portal
+description: |
+  Helm chart for the Quantum Portal platform. Deploys the Next.js frontend portal,
+  FastAPI backend, vLLM inference server, Triton Inference Server, and optional
+  Ray cluster for distributed training. Used by all 30 quantum lab projects.
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+
+keywords:
+  - quantum
+  - machine-learning
+  - nextjs
+  - fastapi
+  - vllm
+  - triton
+
+maintainers:
+  - name: Quantum Platform Team
+    email: temp.genai18@gmail.com
+
+dependencies:
+  - name: postgresql
+    version: "15.5.0"
+    repository: https://charts.bitnami.com/bitnami
+    condition: postgresql.enabled
+
+  - name: redis
+    version: "19.0.0"
+    repository: https://charts.bitnami.com/bitnami
+    condition: redis.enabled

@@ -1,0 +1,109 @@
+# vLLM Model Registry — Quantum Portal
+# ======================================
+# All models available for the quantum portal LLM gateway.
+# "tier" indicates which GPU tier runs this model (l4 = always-on, h100 = burst-only).
+
+models:
+
+  - id: gemma-2-9b
+    hf_repo: "google/gemma-2-9b-it"
+    quantization: awq
+    awq_repo: "google/gemma-2-9b-it-awq"     # Pre-quantized AWQ checkpoint
+    gpu_tier: l4
+    vram_gb: 4.5
+    context_len: 4096
+    max_num_seqs: 256
+    tensor_parallel: 1
+    dtype: float16
+    port: 8080
+    purpose: "Fraud explanation — primary model for portal AI Explainability tab"
+    notes: >
+      AWQ 4-bit achieves ~80 tokens/sec on L4.
+      Instruction-tuned variant (gemma-2-9b-it) is required for chat completions.
+
+  - id: llama-3.1-8b
+    hf_repo: "meta-llama/Llama-3.1-8B-Instruct"
+    quantization: gptq
+    gptq_repo: "meta-llama/Llama-3.1-8B-Instruct-GPTQ-INT4"
+    gpu_tier: l4
+    vram_gb: 4.0
+    context_len: 8192
+    max_num_seqs: 256
+    tensor_parallel: 1
+    dtype: float16
+    port: 8081
+    purpose: "Quantum result summarization — converts VQC/circuit output to natural language"
+    notes: >
+      GPTQ INT4 group-size 128.
+      8K context allows full circuit description + result in one prompt.
+
+  - id: qwen-2.5-7b
+    hf_repo: "Qwen/Qwen2.5-7B-Instruct"
+    quantization: awq
+    awq_repo: "Qwen/Qwen2.5-7B-Instruct-AWQ"
+    gpu_tier: l4
+    vram_gb: 3.5
+    context_len: 8192
+    max_num_seqs: 256
+    tensor_parallel: 1
+    dtype: float16
+    port: 8082
+    purpose: "Code generation — quantum circuit Python snippets, PennyLane code, API examples"
+    notes: >
+      Qwen-2.5 has strong code performance.
+      trust_remote_code: true required.
+
+  - id: mistral-7b
+    hf_repo: "mistralai/Mistral-7B-Instruct-v0.3"
+    quantization: gptq
+    gptq_repo: "TheBloke/Mistral-7B-Instruct-v0.3-GPTQ"
+    gpu_tier: l4
+    vram_gb: 3.5
+    context_len: 4096
+    max_num_seqs: 256
+    tensor_parallel: 1
+    dtype: float16
+    port: 8083
+    purpose: "General Q&A — portal chatbot, FAQ, quantum concept explanations"
+    notes: >
+      Mistral sliding-window attention (SWA) gives efficient long-context handling.
+      Good general reasoning at 7B class.
+
+  - id: llama-3.1-70b
+    hf_repo: "meta-llama/Llama-3.1-70B-Instruct"
+    quantization: fp8
+    gpu_tier: h100                            # H100 burst only — not always-on
+    vram_gb: 35.0
+    context_len: 8192
+    max_num_seqs: 1024
+    tensor_parallel: 2                        # 2× H100 SXM5 @ 80GB each
+    dtype: float8_e4m3fn
+    port: 8090
+    purpose: >
+      Complex reasoning — multi-hop fraud chain analysis, regulatory compliance explanations,
+      large-batch quantum report generation
+    notes: >
+      FP8 (e4m3fn) reduces VRAM from ~140 GB (BF16) to ~35 GB.
+      Requires tensor_parallel=2 on H100 80GB pair.
+      Only activated via Cloud Run burst job or GKE node-pool scale-up.
+      Monthly usage: ~10 hours (burst).
+
+# ---------------------------------------------------------------------------
+# Routing rules (for the nginx reverse proxy / API gateway)
+# ---------------------------------------------------------------------------
+routing:
+  # Default model when none specified
+  default_model: gemma-2-9b
+
+  # Keyword-based auto-routing (applied by the portal backend before calling vLLM)
+  rules:
+    - if_prompt_contains: ["code", "pennylane", "circuit", "qml", "python"]
+      route_to: qwen-2.5-7b
+    - if_prompt_contains: ["summarize", "quantum result", "expectation value", "circuit output"]
+      route_to: llama-3.1-8b
+    - if_prompt_contains: ["fraud", "transaction", "anomaly", "explain prediction"]
+      route_to: gemma-2-9b
+    - if_prompt_contains: ["what is", "how does", "explain", "define"]
+      route_to: mistral-7b
+    - if_prompt_contains: ["complex", "multi-step", "regulation", "compliance"]
+      route_to: llama-3.1-70b          # triggers H100 burst if not running

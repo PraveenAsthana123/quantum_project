@@ -1,0 +1,40 @@
+# vLLM Server Configuration — Primary (Gemma-2-9B, L4 GPU)
+# ============================================================
+# This file is loaded by scripts/start_server.sh when starting
+# the default fraud-explanation model.
+
+model: "google/gemma-2-9b-it"
+quantization: "awq"               # AWQ 4-bit: ~4.5 GB VRAM on L4
+
+# Memory management
+gpu_memory_utilization: 0.85      # Reserve 15% for CUDA overhead
+max_model_len: 4096               # Context window (tokens)
+kv_cache_dtype: "auto"            # Match model dtype
+
+# Batching
+max_num_seqs: 256                  # Max concurrent sequences in the engine
+max_num_batched_tokens: 8192       # Max tokens processed per forward pass
+
+# Hardware
+tensor_parallel_size: 1           # Single L4 GPU
+dtype: "float16"                  # Activations in FP16; weights stay AWQ INT4
+
+# Serving
+served_model_name: "gemma-2-9b"   # Name exposed via /v1/models
+port: 8080
+host: "0.0.0.0"
+
+# Generation defaults
+max_tokens: 512
+temperature: 0.2
+top_p: 0.95
+
+# Logging / observability
+enable_metrics: true              # Expose /metrics for Prometheus
+log_level: "info"
+
+# Trust remote code (required for some HuggingFace models)
+trust_remote_code: false
+
+# Swap space (CPU offload for KV cache overflow)
+swap_space: 4                     # GB of CPU RAM for KV swap

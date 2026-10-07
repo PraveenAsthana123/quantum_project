@@ -1,0 +1,141 @@
+{
+  "passed": 27,
+  "failed": 0,
+  "results": [
+    {
+      "test": "unitary:I",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:X",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:Y",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:Z",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:H",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:S",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:T",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:SX",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:P",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:U",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:RX",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:RY",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:RZ",
+      "passed": true,
+      "detail": "dimension=2"
+    },
+    {
+      "test": "unitary:CX",
+      "passed": true,
+      "detail": "dimension=4"
+    },
+    {
+      "test": "unitary:CZ",
+      "passed": true,
+      "detail": "dimension=4"
+    },
+    {
+      "test": "unitary:SWAP",
+      "passed": true,
+      "detail": "dimension=4"
+    },
+    {
+      "test": "unitary:iSWAP",
+      "passed": true,
+      "detail": "dimension=4"
+    },
+    {
+      "test": "unitary:ECR",
+      "passed": true,
+      "detail": "dimension=4"
+    },
+    {
+      "test": "unitary:CCX",
+      "passed": true,
+      "detail": "dimension=8"
+    },
+    {
+      "test": "X|0> -> |1>",
+      "passed": true,
+      "detail": "[0.+0.j 1.+0.j]"
+    },
+    {
+      "test": "H superposition",
+      "passed": true,
+      "detail": "[0.5 0.5]"
+    },
+    {
+      "test": "H.H identity",
+      "passed": true,
+      "detail": "[1.+0.j 0.+0.j]"
+    },
+    {
+      "test": "Bell state",
+      "passed": true,
+      "detail": "{np.str_('00'): np.float64(0.4999999999999999), np.str_('11'): np.float64(0.4999999999999999)}"
+    },
+    {
+      "test": "GHZ state",
+      "passed": true,
+      "detail": "{np.str_('000'): np.float64(0.4999999999999999), np.str_('111'): np.float64(0.4999999999999999)}"
+    },
+    {
+      "test": "QFT-like circuit unitary",
+      "passed": true,
+      "detail": "depth=5"
+    },
+    {
+      "test": "transpile state fidelity",
+      "passed": true,
+      "detail": "fidelity=1.000000000000"
+    },
+    {
+      "test": "transpile metrics",
+      "passed": true,
+      "detail": "depth=6->8, gates=6->8"
+    }
+  ]
+}

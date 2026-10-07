@@ -1,0 +1,355 @@
+# =============================================================================
+# Quantum Portal — Helm values
+# Override per environment: helm upgrade --install -f values-prod.yaml
+# =============================================================================
+
+global:
+  imageRegistry: "gcr.io/PROJECT"
+  imagePullSecrets: []
+  storageClass: "standard"
+  env: "prod"
+
+# ---------------------------------------------------------------------------
+# Next.js Portal
+# ---------------------------------------------------------------------------
+portal:
+  enabled: true
+  image: gcr.io/PROJECT/quantum-portal:latest
+  pullPolicy: IfNotPresent
+  replicas: 2
+
+  service:
+    type: ClusterIP
+    port: 3001
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "2"
+      memory: 4Gi
+
+  env:
+    NODE_ENV: production
+    # API_BASE_URL: injected via configmap or secret
+
+  # Health probes
+  readinessProbe:
+    httpGet:
+      path: /api/health
+      port: 3001
+    initialDelaySeconds: 10
+    periodSeconds: 10
+
+  livenessProbe:
+    httpGet:
+      path: /api/health
+      port: 3001
+    initialDelaySeconds: 30
+    periodSeconds: 30
+
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 1
+
+# ---------------------------------------------------------------------------
+# FastAPI Backend
+# ---------------------------------------------------------------------------
+api:
+  enabled: true
+  image: gcr.io/PROJECT/quantum-api:latest
+  pullPolicy: IfNotPresent
+  replicas: 3
+
+  service:
+    type: ClusterIP
+    port: 8000
+
+  resources:
+    requests:
+      cpu: 500m
+      memory: 1Gi
+    limits:
+      cpu: "4"
+      memory: 4Gi
+
+  env:
+    ENV: production
+    LOG_LEVEL: info
+    WORKERS: "4"
+
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 8000
+    initialDelaySeconds: 15
+    periodSeconds: 10
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 8000
+    initialDelaySeconds: 30
+    periodSeconds: 30
+
+  podDisruptionBudget:
+    enabled: true
+    minAvailable: 2
+
+# ---------------------------------------------------------------------------
+# vLLM — open-source LLM inference server
+# Requires GPU node with taint: nvidia.com/gpu=present:NoSchedule
+# ---------------------------------------------------------------------------
+vllm:
+  enabled: true
+  image: vllm/vllm-openai:latest
+  pullPolicy: IfNotPresent
+  replicas: 1
+
+  model: google/gemma-2-9b-it
+  quantization: awq          # AWQ halves GPU memory: 9B → ~5 GB VRAM
+  gpuMemoryUtilization: "0.90"
+  maxModelLen: 8192
+  tensorParallelSize: 1
+  gpuCount: 1
+
+  service:
+    type: ClusterIP
+    port: 8080
+
+  resources:
+    requests:
+      cpu: "4"
+      memory: 16Gi
+      nvidia.com/gpu: "1"
+    limits:
+      cpu: "8"
+      memory: 32Gi
+      nvidia.com/gpu: "1"
+
+  nodeSelector:
+    accelerator-type: l4
+
+  tolerations:
+    - key: "nvidia.com/gpu"
+      operator: "Equal"
+      value: "present"
+      effect: "NoSchedule"
+
+  readinessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 120   # model load takes ~90s for 9B AWQ
+    periodSeconds: 15
+    failureThreshold: 10
+
+  livenessProbe:
+    httpGet:
+      path: /health
+      port: 8080
+    initialDelaySeconds: 180
+    periodSeconds: 30
+
+  extraArgs:
+    - "--served-model-name=quantum-llm"
+    - "--enable-prefix-caching"
+    - "--max-num-seqs=256"
+
+# ---------------------------------------------------------------------------
+# Triton Inference Server — classical ML + ONNX models
+# ---------------------------------------------------------------------------
+triton:
+  enabled: true
+  image: nvcr.io/nvidia/tritonserver:24.01-py3
+  pullPolicy: IfNotPresent
+  replicas: 1
+
+  modelRepository: gs://quantum-models/triton-repo/
+  # For AWS: s3://quantum-models/triton-repo/
+  # For Azure: az://quantum-models/triton-repo/
+
+  service:
+    type: ClusterIP
+    httpPort: 8000
+    grpcPort: 8001
+    metricsPort: 8002
+
+  resources:
+    requests:
+      cpu: "2"
+      memory: 8Gi
+      nvidia.com/gpu: "1"
+    limits:
+      cpu: "8"
+      memory: 16Gi
+      nvidia.com/gpu: "1"
+
+  nodeSelector:
+    accelerator-type: l4
+
+  tolerations:
+    - key: "nvidia.com/gpu"
+      operator: "Equal"
+      value: "present"
+      effect: "NoSchedule"
+
+  readinessProbe:
+    httpGet:
+      path: /v2/health/ready
+      port: 8000
+    initialDelaySeconds: 60
+    periodSeconds: 10
+
+# ---------------------------------------------------------------------------
+# Ray Cluster — distributed quantum circuit training (optional)
+# ---------------------------------------------------------------------------
+ray:
+  enabled: false  # enable for distributed training runs
+  image: rayproject/ray:2.20.0-py311-gpu
+  pullPolicy: IfNotPresent
+
+  head:
+    resources:
+      requests:
+        cpu: "4"
+        memory: 8Gi
+      limits:
+        cpu: "8"
+        memory: 16Gi
+
+  workerReplicas: 2
+  worker:
+    resources:
+      requests:
+        cpu: "4"
+        memory: 8Gi
+        nvidia.com/gpu: "1"
+      limits:
+        cpu: "8"
+        memory: 16Gi
+        nvidia.com/gpu: "1"
+
+    tolerations:
+      - key: "nvidia.com/gpu"
+        operator: "Equal"
+        value: "present"
+        effect: "NoSchedule"
+
+# ---------------------------------------------------------------------------
+# Quantum Worker — circuit execution (CPU-only)
+# ---------------------------------------------------------------------------
+quantumWorker:
+  enabled: true
+  image: gcr.io/PROJECT/quantum-worker:latest
+  pullPolicy: IfNotPresent
+  replicas: 3
+
+  resources:
+    requests:
+      cpu: "2"
+      memory: 4Gi
+    limits:
+      cpu: "8"
+      memory: 16Gi
+
+# ---------------------------------------------------------------------------
+# Ingress
+# ---------------------------------------------------------------------------
+ingress:
+  enabled: true
+  className: "gke"
+  annotations:
+    kubernetes.io/ingress.class: "gce"
+    kubernetes.io/ingress.global-static-ip-name: "quantum-portal-ip"
+    networking.gke.io/managed-certificates: "quantum-portal-cert"
+    # Cloud Armor security policy
+    networking.gke.io/v1beta1.FrontendConfig: "quantum-portal-frontend-config"
+
+  hosts:
+    - host: quantum.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          service: portal
+          port: 3001
+        - path: /api
+          pathType: Prefix
+          service: api
+          port: 8000
+
+  tls:
+    - secretName: quantum-portal-tls
+      hosts:
+        - quantum.example.com
+
+# ---------------------------------------------------------------------------
+# HPA — Horizontal Pod Autoscaler
+# ---------------------------------------------------------------------------
+hpa:
+  api:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 70
+    targetMemoryUtilizationPercentage: 80
+
+  portal:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 8
+    targetCPUUtilizationPercentage: 70
+
+# ---------------------------------------------------------------------------
+# Bundled PostgreSQL (for local dev; use Cloud SQL/RDS/Azure PostgreSQL in prod)
+# ---------------------------------------------------------------------------
+postgresql:
+  enabled: false  # set true for dev/staging without external DB
+  auth:
+    postgresPassword: "change-me-dev-only"
+    database: quantum_results
+  primary:
+    resources:
+      limits:
+        cpu: "2"
+        memory: 4Gi
+
+# ---------------------------------------------------------------------------
+# Bundled Redis (for local dev; use Memorystore/ElastiCache in prod)
+# ---------------------------------------------------------------------------
+redis:
+  enabled: false  # set true for dev/staging without external Redis
+  auth:
+    enabled: false
+  master:
+    resources:
+      limits:
+        cpu: "1"
+        memory: 2Gi
+
+# ---------------------------------------------------------------------------
+# Service Account
+# ---------------------------------------------------------------------------
+serviceAccount:
+  create: true
+  name: quantum-portal
+  annotations:
+    # GCP Workload Identity
+    iam.gke.io/gcp-service-account: "quantum-api-sa-prod@PROJECT.iam.gserviceaccount.com"
+    # AWS IRSA
+    # eks.amazonaws.com/role-arn: arn:aws:iam::ACCOUNT:role/quantum-api-role
+
+# ---------------------------------------------------------------------------
+# Pod Security
+# ---------------------------------------------------------------------------
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop: ["ALL"]

@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q15-readout",
+  "demo_passed": true,
+  "readout_fidelity_raw": 0.95,
+  "readout_fidelity_mitigated": 0.99,
+  "iq_separation": 2.4,
+  "shots": 1000
+}

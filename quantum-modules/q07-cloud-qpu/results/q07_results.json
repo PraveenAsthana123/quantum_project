@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q07-cloud-qpu",
+  "demo_passed": true,
+  "providers": 4,
+  "cheapest": "Azure",
+  "jobs_simulated": 10,
+  "avg_queue_min": 15
+}

@@ -1,0 +1,694 @@
+#!/usr/bin/env python3
+"""
+qlab — Quantum Lab CLI
+Manage all quantum projects in /mnt/deepa/quantum/
+
+Usage:
+  qlab list                  List all projects
+  qlab status                Show project status summary
+  qlab info <project>        Show details for a project
+  qlab setup <project>       Install requirements for a project
+  qlab data <project>        Download Kaggle data for a project
+  qlab run <project>         Launch project UI
+  qlab portal                Launch global portal
+  qlab install-all           Install requirements for all projects
+  qlab notebooks <project>   Open Jupyter notebooks for a project
+"""
+
+import os
+import sys
+import subprocess
+import json
+from pathlib import Path
+from typing import Optional
+
+# ANSI colors
+RESET  = "\033[0m"
+BOLD   = "\033[1m"
+RED    = "\033[91m"
+GREEN  = "\033[92m"
+YELLOW = "\033[93m"
+BLUE   = "\033[94m"
+CYAN   = "\033[96m"
+MAGENTA= "\033[95m"
+WHITE  = "\033[97m"
+DIM    = "\033[2m"
+
+QUANTUM_ROOT = Path(__file__).parent.resolve()
+
+# ---------------------------------------------------------------------------
+# Project registry
+# ---------------------------------------------------------------------------
+
+PROJECTS = [
+    {
+        "id": "pqc-control-tower",
+        "title": "Enterprise PQC & Crypto-Agility Control Tower",
+        "short": "PQC cryptographic modernization platform",
+        "sdks": ["cryptography", "liboqs", "cyclonedx-python-lib"],
+        "kaggle": ["mlg-ulb/creditcardfraud"],
+        "github": [],
+        "ui": "streamlit",
+        "role": "PQC Architect / Cryptographic Modernization Lead",
+        "category": "security",
+    },
+    {
+        "id": "qc-banking-lab",
+        "title": "Hybrid Quantum-Classical Banking Platform",
+        "short": "Portfolio optimization, fraud detection with QAOA/VQE",
+        "sdks": ["qiskit", "qiskit-finance", "qiskit-optimization", "pennylane"],
+        "kaggle": ["mlg-ulb/creditcardfraud"],
+        "github": ["qiskit-community/qiskit-finance"],
+        "ui": "streamlit",
+        "role": "Quantum Solution Architect / Quantum Platform Architect",
+        "category": "applications",
+    },
+    {
+        "id": "qc-logistics-lab",
+        "title": "Hybrid CPU/GPU/QPU Logistics Optimization",
+        "short": "VRP/TSP with QAOA, annealing, classical comparison",
+        "sdks": ["qiskit", "qiskit-optimization", "dwave-ocean-sdk"],
+        "kaggle": ["gaborfodor/tsplib-benchmark"],
+        "github": ["BrunoRosendo/vrp-quantum-solver"],
+        "ui": "streamlit",
+        "role": "Quantum Optimization Engineer / Hybrid Classical-Quantum Architect",
+        "category": "applications",
+    },
+    {
+        "id": "q01-algorithms",
+        "title": "Quantum Algorithm Assessment & Benchmark Platform",
+        "short": "Grover, Shor, QFT, QAOA, VQE benchmarked against classical",
+        "sdks": ["qiskit", "qiskit-algorithms", "pennylane", "cirq"],
+        "kaggle": ["mlg-ulb/creditcardfraud"],
+        "github": ["Qiskit/qiskit-algorithms"],
+        "ui": "streamlit",
+        "role": "Quantum Solutions Scientist / Applied Quantum Consultant",
+        "category": "algorithms",
+    },
+    {
+        "id": "q02-error-mitigation",
+        "title": "NISQ Error-Mitigation Lab",
+        "short": "ZNE, PEC, readout mitigation on noisy QAOA circuits",
+        "sdks": ["qiskit", "qiskit-aer", "mitiq", "pennylane"],
+        "kaggle": ["mlg-ulb/creditcardfraud"],
+        "github": ["unitaryfund/mitiq"],
+        "ui": "streamlit",
+        "role": "Quantum Software Engineer / QEC-Aware Algorithm Developer",
+        "category": "algorithms",
+    },
+    {
+        "id": "q03-ftqc",
+        "title": "Fault-Tolerant QC Resource & Architecture Platform",
+        "short": "Logical circuits, QEC overhead, physical qubit estimation",
+        "sdks": ["qiskit", "stim", "cirq"],
+        "kaggle": [],
+        "github": ["google/Qualtran", "quantumlib/cirq"],
+        "ui": "streamlit",
+        "role": "Fault-Tolerant QC Architect / QEC Lead",
+        "category": "hardware",
+    },
+    {
+        "id": "q04-compiler",
+        "title": "Hardware-Aware Quantum Compiler & Validation Platform",
+        "short": "Circuit compilation, routing, basis translation, optimization",
+        "sdks": ["qiskit", "cirq"],
+        "kaggle": ["gaborfodor/tsplib-benchmark"],
+        "github": ["Qiskit/qiskit"],
+        "ui": "streamlit",
+        "role": "Quantum Compiler Engineer / Quantum Software Platform Architect",
+        "category": "platform",
+    },
+    {
+        "id": "q05-ir-interop",
+        "title": "Quantum IR & Interoperability Gateway",
+        "short": "Multi-SDK circuit conversion: Qiskit ↔ OpenQASM ↔ Cirq ↔ QIR",
+        "sdks": ["qiskit", "cirq", "pyqasm"],
+        "kaggle": [],
+        "github": ["openqasm/openqasm"],
+        "ui": "streamlit",
+        "role": "Quantum Platform Architect / Principal Developer Platform Architect",
+        "category": "platform",
+    },
+    {
+        "id": "q06-transpilation",
+        "title": "Calibration-Aware Quantum Transpilation Control Tower",
+        "short": "SWAP-optimal routing, noise-aware layout, fidelity tracking",
+        "sdks": ["qiskit"],
+        "kaggle": ["gaborfodor/tsplib-benchmark"],
+        "github": ["cda-tum/mqt-bench"],
+        "ui": "streamlit",
+        "role": "Quantum Systems Architect / Compiler Engineer",
+        "category": "platform",
+    },
+    {
+        "id": "q07-cloud-qpu",
+        "title": "Multi-Cloud Quantum Workload Router & QPU Control Tower",
+        "short": "IBM/AWS/Azure backend routing by fidelity, cost, availability",
+        "sdks": ["qiskit-ibm-runtime"],
+        "kaggle": [],
+        "github": ["Qiskit/qiskit-ibm-runtime"],
+        "ui": "streamlit",
+        "role": "Quantum Cloud Architect / Senior Quantum Software Platform Architect",
+        "category": "platform",
+    },
+    {
+        "id": "q08-distributed-qc",
+        "title": "Distributed Multi-QPU Quantum Computing Platform",
+        "short": "Circuit knitting, multi-QPU execution, classical reconstruction",
+        "sdks": ["qiskit"],
+        "kaggle": [],
+        "github": ["Qiskit/qiskit-addon-cutting"],
+        "ui": "streamlit",
+        "role": "Distributed Quantum Computing Architect",
+        "category": "platform",
+    },
+    {
+        "id": "q09-circuit-cutting",
+        "title": "Automated Circuit Cutting & Reconstruction Platform",
+        "short": "Wire/gate cuts, quasiprobability decomposition, reconstruction",
+        "sdks": ["qiskit"],
+        "kaggle": [],
+        "github": ["Qiskit/qiskit-addon-cutting"],
+        "ui": "streamlit",
+        "role": "Quantum Software Engineer / Circuit Architect",
+        "category": "platform",
+    },
+    {
+        "id": "q10-silicon-spin",
+        "title": "Silicon Spin-Qubit Digital Twin & Auto-Tuning Platform",
+        "short": "Quantum dot simulation, charge stability, spin control, auto-tune",
+        "sdks": ["qiskit", "scqubits", "qutip"],
+        "kaggle": [],
+        "github": ["microsoft/qdarts"],
+        "ui": "streamlit",
+        "role": "Quantum System Architecture / Silicon-Spin Technology Architect",
+        "category": "hardware",
+    },
+    {
+        "id": "q11-topological",
+        "title": "Topological QC Digital Twin: Anyons & Braiding",
+        "short": "Fibonacci anyons, Majorana braiding, topological gates",
+        "sdks": ["qiskit", "stim"],
+        "kaggle": [],
+        "github": ["Constantine-Quantum-Tech/tqsim"],
+        "ui": "streamlit",
+        "role": "Quantum Research Scientist / FTQC Architecture Lead",
+        "category": "hardware",
+    },
+    {
+        "id": "q12-analog-qc",
+        "title": "Neutral-Atom Analog Quantum Optimization Lab",
+        "short": "Pulse-level Hamiltonian programming, Rydberg blockade, QUBO",
+        "sdks": ["pennylane", "pulser"],
+        "kaggle": ["gaborfodor/tsplib-benchmark"],
+        "github": ["pasqal-io/pulser"],
+        "ui": "streamlit",
+        "role": "Quantum Algorithm Developer / Analog Quantum Architect",
+        "category": "hardware",
+    },
+    {
+        "id": "q13-control",
+        "title": "Quantum Pulse Control & Optimal Control Platform",
+        "short": "GRAPE/CRAB optimal control, QuTiP-QOC, pulse-level simulation",
+        "sdks": ["qiskit", "qutip"],
+        "kaggle": [],
+        "github": ["qutip/qutip-qoc"],
+        "ui": "streamlit",
+        "role": "Quantum Control Engineer / Quantum Hardware Architect",
+        "category": "hardware",
+    },
+    {
+        "id": "q14-calibration",
+        "title": "Autonomous Quantum Calibration & Drift Detection Tower",
+        "short": "Rabi/Ramsey/T1/T2, gate calibration, closed-loop recalibration",
+        "sdks": ["qiskit", "qutip"],
+        "kaggle": [],
+        "github": ["qiboteam/qibocal"],
+        "ui": "streamlit",
+        "role": "Quantum Calibration Engineer / Quantum Systems Architect",
+        "category": "hardware",
+    },
+    {
+        "id": "q15-readout",
+        "title": "Quantum Readout & Measurement Fidelity Platform",
+        "short": "IQ discrimination, assignment matrices, readout mitigation",
+        "sdks": ["qiskit", "qutip"],
+        "kaggle": [],
+        "github": ["qiboteam/qibocal"],
+        "ui": "streamlit",
+        "role": "Quantum Hardware Engineer / Quantum Systems Architect",
+        "category": "hardware",
+    },
+    {
+        "id": "q16-ctrl-electronics",
+        "title": "Quantum Control Electronics & RFSoC Digital Twin",
+        "short": "AWG/RFSoC simulation, pulse timing, DAC/ADC, FPGA feedback",
+        "sdks": ["qiskit", "qutip"],
+        "kaggle": [],
+        "github": ["openquantumhardware/qick"],
+        "ui": "streamlit",
+        "role": "Quantum Control Electronics Engineer / Hardware Architect",
+        "category": "hardware",
+    },
+    {
+        "id": "q17-cryogenics",
+        "title": "Quantum Cryogenic Infrastructure & Thermal Digital Twin",
+        "short": "Dilution fridge thermal model, heat load, PID control simulation",
+        "sdks": ["scipy", "numpy", "matplotlib"],
+        "kaggle": [],
+        "github": ["Ummar-456/PID-Control-Simulation-for-Superconducting-Qubit-Cryogenic-Environment"],
+        "ui": "streamlit",
+        "role": "Quantum Systems Engineer / Cryogenics Architect",
+        "category": "infrastructure",
+    },
+    {
+        "id": "q18-fabrication",
+        "title": "Quantum Chip Fabrication Digital Twin & Yield Control Tower",
+        "short": "Device design, GDSII, DRC/LVS, process variation, yield analytics",
+        "sdks": ["gdsfactory", "numpy", "scipy"],
+        "kaggle": [],
+        "github": ["gdsfactory/gdsfactory"],
+        "ui": "streamlit",
+        "role": "Quantum Device Architect / Silicon Technology Architect",
+        "category": "infrastructure",
+    },
+    {
+        "id": "q19-packaging",
+        "title": "Quantum Packaging & Interconnect Digital Twin",
+        "short": "Flip-chip, wirebond, signal integrity, cryogenic thermal analysis",
+        "sdks": ["gdsfactory", "scipy"],
+        "kaggle": [],
+        "github": ["iqm-finland/KQCircuits"],
+        "ui": "streamlit",
+        "role": "Quantum Packaging Engineer / Systems Integration Architect",
+        "category": "infrastructure",
+    },
+    {
+        "id": "q20-chemistry",
+        "title": "Hybrid Quantum-Classical Molecular Simulation Platform",
+        "short": "VQE/QPE on molecular Hamiltonians, PySCF baseline, resource estimation",
+        "sdks": ["qiskit-nature", "openfermion"],
+        "kaggle": [],
+        "github": ["Qiskit/qiskit-nature", "quantumlib/OpenFermion"],
+        "ui": "streamlit",
+        "role": "Quantum Algorithm Scientist / Quantum Chemistry Researcher",
+        "category": "science",
+    },
+    {
+        "id": "q21-many-body",
+        "title": "Many-Body Quantum Simulation & Tensor-Network Platform",
+        "short": "Spin chains, Hubbard/Ising, ED, DMRG, neural quantum states",
+        "sdks": ["pennylane", "netket"],
+        "kaggle": [],
+        "github": ["weinbe4/QuSpin", "tenpy/tenpy"],
+        "ui": "streamlit",
+        "role": "Quantum Research Scientist / Many-Body Physics Specialist",
+        "category": "science",
+    },
+    {
+        "id": "q22-repeaters",
+        "title": "Quantum Repeater Network & Entanglement Routing Tower",
+        "short": "Entanglement generation, swapping, purification, repeater chains",
+        "sdks": ["numpy", "scipy"],
+        "kaggle": [],
+        "github": ["sequence-toolbox/SeQUeNCe"],
+        "ui": "streamlit",
+        "role": "Quantum Network Architect / Quantum Internet Engineer",
+        "category": "networking",
+    },
+    {
+        "id": "q23-memory",
+        "title": "Quantum Memory Digital Twin & Fidelity Control Tower",
+        "short": "Memory types, T2 storage, write/read fidelity, scheduler",
+        "sdks": ["qutip", "numpy"],
+        "kaggle": [],
+        "github": [],
+        "ui": "streamlit",
+        "role": "Quantum Hardware Architect / Quantum Network Engineer",
+        "category": "networking",
+    },
+    {
+        "id": "q24-internet",
+        "title": "Quantum Internet Architecture & Entanglement Service Mesh",
+        "short": "QDP/QCP architecture, entanglement routing, RFC 9340, hybrid network",
+        "sdks": ["numpy", "scipy"],
+        "kaggle": [],
+        "github": ["sequence-toolbox/SeQUeNCe"],
+        "ui": "streamlit",
+        "role": "Principal Architect Network R&D / Quantum Internet Architect",
+        "category": "networking",
+    },
+    {
+        "id": "q25-sensing",
+        "title": "NV-Center Quantum Magnetometry & Sensing Control Tower",
+        "short": "ODMR, Ramsey sensing, photon counts, SNR, spatial imaging",
+        "sdks": ["qutip", "numpy", "scipy"],
+        "kaggle": [],
+        "github": ["Ulm-IQO/qudi-core"],
+        "ui": "streamlit",
+        "role": "Quantum Sensing Scientist / Quantum Technologies Specialist",
+        "category": "science",
+    },
+    {
+        "id": "q26-metrology",
+        "title": "Quantum Metrology & Fisher-Information Precision Platform",
+        "short": "QFI, Cramér-Rao bounds, squeezing, adaptive estimation",
+        "sdks": ["pennylane", "scipy"],
+        "kaggle": [],
+        "github": ["qucontrol/quanestimation"],
+        "ui": "streamlit",
+        "role": "Quantum Metrology Scientist / Quantum Sensing Architect",
+        "category": "science",
+    },
+    {
+        "id": "q27-clocks",
+        "title": "Hybrid Optical Atomic Clock Digital Twin & Timescale Tower",
+        "short": "Allan deviation, clock holdover, PNT, time transfer simulation",
+        "sdks": ["scipy", "numpy", "allantools"],
+        "kaggle": [],
+        "github": ["ashfordeOU/kshana", "aewallin/allantools"],
+        "ui": "streamlit",
+        "role": "Quantum Technologies Specialist / Quantum PNT Architect",
+        "category": "science",
+    },
+]
+
+CATEGORY_COLORS = {
+    "security":       MAGENTA,
+    "applications":   GREEN,
+    "algorithms":     CYAN,
+    "platform":       BLUE,
+    "hardware":       YELLOW,
+    "infrastructure": RED,
+    "science":        WHITE,
+    "networking":     MAGENTA,
+}
+
+# ---------------------------------------------------------------------------
+# Helpers
+# ---------------------------------------------------------------------------
+
+def project_dir(proj_id: str) -> Path:
+    return QUANTUM_ROOT / proj_id
+
+def find_project(query: str) -> Optional[dict]:
+    q = query.lower()
+    for p in PROJECTS:
+        if p["id"].lower() == q or q in p["id"].lower():
+            return p
+    return None
+
+def project_status(proj_id: str) -> str:
+    pd = project_dir(proj_id)
+    src_files = list((pd / "src").glob("*.py")) if (pd / "src").exists() else []
+    data_files = list((pd / "data").glob("*")) if (pd / "data").exists() else []
+    ui_files   = list((pd / "ui").glob("*.py")) if (pd / "ui").exists() else []
+    if not src_files and not ui_files:
+        return f"{YELLOW}scaffold{RESET}"
+    if src_files and ui_files:
+        return f"{GREEN}ready{RESET}"
+    return f"{CYAN}partial{RESET}"
+
+def box(text: str, color: str = BLUE) -> str:
+    lines = text.split("\n")
+    width = max(len(l) for l in lines) + 4
+    top = color + "┌" + "─" * (width - 2) + "┐" + RESET
+    bot = color + "└" + "─" * (width - 2) + "┘" + RESET
+    mid = "\n".join(color + "│ " + RESET + l.ljust(width - 4) + color + " │" + RESET for l in lines)
+    return f"{top}\n{mid}\n{bot}"
+
+# ---------------------------------------------------------------------------
+# Commands
+# ---------------------------------------------------------------------------
+
+def cmd_list():
+    print(f"\n{BOLD}{CYAN}{'='*70}")
+    print(f"  Quantum Lab — Project Registry  ({len(PROJECTS)} projects)")
+    print(f"{'='*70}{RESET}\n")
+    cats: dict = {}
+    for p in PROJECTS:
+        cats.setdefault(p["category"], []).append(p)
+
+    for cat, projs in cats.items():
+        color = CATEGORY_COLORS.get(cat, WHITE)
+        print(f"  {BOLD}{color}[{cat.upper()}]{RESET}")
+        for p in projs:
+            status = project_status(p["id"])
+            sdks_str = ", ".join(p["sdks"][:3])
+            print(f"    {color}{p['id']:30}{RESET} {status:25}  {DIM}{sdks_str}{RESET}")
+        print()
+
+    print(f"  {DIM}Use: qlab info <project-id>  |  qlab run <id>  |  qlab setup <id>{RESET}\n")
+
+
+def cmd_status():
+    total = len(PROJECTS)
+    ready = sum(1 for p in PROJECTS if "ready" in project_status(p["id"]))
+    partial = sum(1 for p in PROJECTS if "partial" in project_status(p["id"]))
+    scaffold = total - ready - partial
+    print(f"\n{BOLD}{CYAN}Quantum Lab Status{RESET}  ({QUANTUM_ROOT})\n")
+    print(f"  Total projects : {BOLD}{total}{RESET}")
+    print(f"  {GREEN}Ready{RESET}          : {ready}")
+    print(f"  {CYAN}Partial{RESET}        : {partial}")
+    print(f"  {YELLOW}Scaffold only{RESET}  : {scaffold}")
+    print()
+    for p in PROJECTS:
+        st = project_status(p["id"])
+        print(f"  {p['id']:30} {st}")
+    print()
+
+
+def cmd_info(proj_id: str):
+    p = find_project(proj_id)
+    if not p:
+        print(f"{RED}Project not found: {proj_id}{RESET}")
+        print(f"Use 'qlab list' to see all project IDs.")
+        sys.exit(1)
+
+    color = CATEGORY_COLORS.get(p["category"], WHITE)
+    print(f"\n{BOLD}{color}{'═'*60}{RESET}")
+    print(f"  {BOLD}{p['title']}{RESET}")
+    print(f"  {DIM}{p['id']}  |  {p['category']}{RESET}")
+    print(f"{BOLD}{color}{'═'*60}{RESET}\n")
+    print(f"  {BOLD}Description :{RESET} {p['short']}")
+    print(f"  {BOLD}Role Target  :{RESET} {p['role']}")
+    print(f"  {BOLD}SDKs         :{RESET} {', '.join(p['sdks'])}")
+    print(f"  {BOLD}UI           :{RESET} {p['ui']}")
+    if p["kaggle"]:
+        print(f"  {BOLD}Kaggle Data  :{RESET}")
+        for ds in p["kaggle"]:
+            print(f"    • {ds}")
+    if p["github"]:
+        print(f"  {BOLD}GitHub Refs  :{RESET}")
+        for gh in p["github"]:
+            print(f"    • https://github.com/{gh}")
+    pd = project_dir(p["id"])
+    status = project_status(p["id"])
+    print(f"  {BOLD}Status       :{RESET} {status}")
+    print(f"  {BOLD}Path         :{RESET} {pd}")
+    print()
+    print(f"  {DIM}qlab setup {p['id']}    # install requirements")
+    print(f"  qlab data  {p['id']}    # download kaggle data")
+    print(f"  qlab run   {p['id']}    # launch UI{RESET}\n")
+
+
+def cmd_setup(proj_id: str):
+    p = find_project(proj_id)
+    if not p:
+        print(f"{RED}Project not found: {proj_id}{RESET}")
+        sys.exit(1)
+    req_file = project_dir(p["id"]) / "requirements.txt"
+    if not req_file.exists():
+        print(f"{YELLOW}No requirements.txt found for {proj_id}. Using shared requirements.{RESET}")
+        req_file = QUANTUM_ROOT / "shared" / "requirements.txt"
+    print(f"{CYAN}Installing requirements for {BOLD}{p['title']}{RESET}...")
+    result = subprocess.run([sys.executable, "-m", "pip", "install", "-r", str(req_file)],
+                            capture_output=False)
+    if result.returncode == 0:
+        print(f"{GREEN}Setup complete for {proj_id}{RESET}")
+    else:
+        print(f"{RED}Setup failed — check pip output above{RESET}")
+        sys.exit(1)
+
+
+def cmd_data(proj_id: str):
+    p = find_project(proj_id)
+    if not p:
+        print(f"{RED}Project not found: {proj_id}{RESET}")
+        sys.exit(1)
+    if not p["kaggle"]:
+        print(f"{YELLOW}No Kaggle datasets registered for {proj_id}{RESET}")
+        return
+    dest = project_dir(p["id"]) / "data"
+    dest.mkdir(parents=True, exist_ok=True)
+    for ds in p["kaggle"]:
+        print(f"{CYAN}Downloading: {ds}{RESET}")
+        result = subprocess.run(
+            ["kaggle", "datasets", "download", "-d", ds, "-p", str(dest), "--unzip"],
+            capture_output=False
+        )
+        if result.returncode == 0:
+            print(f"{GREEN}Downloaded {ds} → {dest}{RESET}")
+        else:
+            print(f"{RED}Failed to download {ds}{RESET}")
+
+
+def cmd_run(proj_id: str):
+    p = find_project(proj_id)
+    if not p:
+        print(f"{RED}Project not found: {proj_id}{RESET}")
+        sys.exit(1)
+    ui_dir = project_dir(p["id"]) / "ui"
+    app_file = ui_dir / "app.py"
+    if not app_file.exists():
+        print(f"{YELLOW}No UI found at {app_file}{RESET}")
+        print(f"Try: qlab notebooks {proj_id}")
+        sys.exit(1)
+    print(f"{CYAN}Launching {BOLD}{p['title']}{RESET}...")
+    os.chdir(project_dir(p["id"]))
+    os.execvp("streamlit", ["streamlit", "run", str(app_file)])
+
+
+def cmd_portal():
+    portal_app = QUANTUM_ROOT / "portal" / "app.py"
+    if not portal_app.exists():
+        print(f"{YELLOW}Portal app not found at {portal_app}. Building minimal portal...{RESET}")
+        _create_minimal_portal(portal_app)
+    print(f"{CYAN}Launching Quantum Lab Portal...{RESET}")
+    os.execvp("streamlit", ["streamlit", "run", str(portal_app), "--server.port", "8501"])
+
+
+def _create_minimal_portal(app_file: Path):
+    app_file.parent.mkdir(parents=True, exist_ok=True)
+    app_file.write_text("""
+import streamlit as st
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent / "shared"))
+from quantum_utils import PROJECTS  # type: ignore
+
+# Inline project list for portal
+import json, subprocess
+
+st.set_page_config(page_title="Quantum Lab Portal", layout="wide", page_icon="⚛️")
+st.title("⚛️ Quantum Lab Portal")
+st.caption("Praveen Asthana — Enterprise Architect → Quantum Computing")
+
+projects = json.loads(subprocess.check_output(
+    ["python3", str(Path(__file__).parent.parent / "qlab"), "_json"]
+).decode())
+
+categories = {}
+for p in projects:
+    categories.setdefault(p["category"], []).append(p)
+
+for cat, projs in categories.items():
+    st.subheader(f"{'🔐' if cat=='security' else '⚛️'} {cat.title()}")
+    cols = st.columns(3)
+    for i, p in enumerate(projs):
+        with cols[i % 3]:
+            st.markdown(f"**{p['title']}**")
+            st.caption(p["short"])
+            st.markdown(f"`{p['id']}`")
+            sdks = ", ".join(p["sdks"][:3])
+            st.markdown(f"*SDKs: {sdks}*")
+            st.divider()
+""")
+
+
+def cmd_install_all():
+    print(f"{CYAN}Installing requirements for all projects...{RESET}\n")
+    shared_req = QUANTUM_ROOT / "shared" / "requirements.txt"
+    print(f"{BOLD}Installing shared requirements...{RESET}")
+    subprocess.run([sys.executable, "-m", "pip", "install", "-r", str(shared_req)])
+    for p in PROJECTS:
+        req = project_dir(p["id"]) / "requirements.txt"
+        if req.exists():
+            print(f"\n{CYAN}→ {p['id']}{RESET}")
+            subprocess.run([sys.executable, "-m", "pip", "install", "-r", str(req)])
+    print(f"\n{GREEN}All done.{RESET}")
+
+
+def cmd_notebooks(proj_id: str):
+    p = find_project(proj_id)
+    if not p:
+        print(f"{RED}Project not found: {proj_id}{RESET}")
+        sys.exit(1)
+    nb_dir = project_dir(p["id"]) / "notebooks"
+    print(f"{CYAN}Opening Jupyter in {nb_dir}...{RESET}")
+    os.execvp("jupyter", ["jupyter", "lab", "--notebook-dir", str(nb_dir)])
+
+
+def cmd_json():
+    """Internal: emit project list as JSON for portal."""
+    import json
+    print(json.dumps(PROJECTS))
+
+
+# ---------------------------------------------------------------------------
+# Entry point
+# ---------------------------------------------------------------------------
+
+def main():
+    args = sys.argv[1:]
+
+    # Banner
+    if not args or args[0] in ("-h", "--help", "help"):
+        print(f"""
+{BOLD}{CYAN}
+ ██████  ██       █████  ██████
+██    ██ ██      ██   ██ ██   ██
+██    ██ ██      ███████ ██████
+██ ▄▄ ██ ██      ██   ██ ██   ██
+ ██████  ███████ ██   ██ ██████
+    ▀▀
+{RESET}{DIM}  Quantum Lab CLI  |  /mnt/deepa/quantum/{RESET}
+
+{BOLD}Commands:{RESET}
+  {CYAN}qlab list{RESET}                 List all quantum projects
+  {CYAN}qlab status{RESET}               Show project status overview
+  {CYAN}qlab info  <id>{RESET}           Show details for a project
+  {CYAN}qlab setup <id>{RESET}           Install requirements
+  {CYAN}qlab data  <id>{RESET}           Download Kaggle datasets
+  {CYAN}qlab run   <id>{RESET}           Launch project UI
+  {CYAN}qlab portal{RESET}               Launch global portal (port 8501)
+  {CYAN}qlab install-all{RESET}          Install all project requirements
+  {CYAN}qlab notebooks <id>{RESET}       Open Jupyter Lab for a project
+
+{DIM}Example:
+  qlab info qc-banking-lab
+  qlab data qc-banking-lab && qlab run qc-banking-lab{RESET}
+""")
+        return
+
+    cmd = args[0]
+    rest = args[1:]
+
+    if cmd == "list":         cmd_list()
+    elif cmd == "status":     cmd_status()
+    elif cmd == "info":
+        if not rest: print(f"{RED}Usage: qlab info <project-id>{RESET}"); sys.exit(1)
+        cmd_info(rest[0])
+    elif cmd == "setup":
+        if not rest: print(f"{RED}Usage: qlab setup <project-id>{RESET}"); sys.exit(1)
+        cmd_setup(rest[0])
+    elif cmd == "data":
+        if not rest: print(f"{RED}Usage: qlab data <project-id>{RESET}"); sys.exit(1)
+        cmd_data(rest[0])
+    elif cmd == "run":
+        if not rest: print(f"{RED}Usage: qlab run <project-id>{RESET}"); sys.exit(1)
+        cmd_run(rest[0])
+    elif cmd == "portal":     cmd_portal()
+    elif cmd == "install-all": cmd_install_all()
+    elif cmd == "notebooks":
+        if not rest: print(f"{RED}Usage: qlab notebooks <project-id>{RESET}"); sys.exit(1)
+        cmd_notebooks(rest[0])
+    elif cmd == "_json":      cmd_json()
+    else:
+        print(f"{RED}Unknown command: {cmd}{RESET}")
+        print("Run 'qlab' for help.")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

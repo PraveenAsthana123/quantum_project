@@ -1,0 +1,10 @@
+{
+  "generated": "2026-10-06",
+  "module": "q19-packaging",
+  "demo_passed": true,
+  "resonance_GHz": 12.5,
+  "qubit_GHz": 5.0,
+  "isolation_dB": 40,
+  "crosstalk_dB": -35,
+  "package": "flip-chip"
+}

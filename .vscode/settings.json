@@ -1,0 +1,113 @@
+{
+  // ════════════════════════════════════════════════════════════════════════
+  // QUANTUM WORKSPACE — LANGUAGE SERVER SUPPRESSION POLICY
+  //
+  // This workspace contains Python quantum scripts, shell scripts, and
+  // data files. No Java/Kotlin/Gradle project lives here.
+  // The JetBrains plugin project is at:
+  //   /mnt/deepa/quantum-github-repos/metrology/kshana/ide/jetbrains/
+  // Open that folder separately in VS Code when working on the plugin.
+  //
+  // Rule: nothing auto-initializes in this workspace.
+  // ════════════════════════════════════════════════════════════════════════
+
+  // ── Java / Gradle — completely disabled ─────────────────────────────────
+  // vscjava.vscode-gradle has its own daemon that ignores java.import.gradle.enabled
+  // Must ALSO set gradle.enable=false to kill the Kotlin-based Gradle language server
+  "gradle.enable": false,
+  "gradle.autoDetect": "off",
+  "gradle.focusTaskInExplorer": false,
+  "java.import.gradle.enabled": false,
+  "java.import.maven.enabled": false,
+  "java.autobuild.enabled": false,
+  "java.jdt.ls.vmargs": "",
+  "java.server.launchMode": "LightWeight",
+  // Empty folder list = no Gradle project imported in this workspace
+  "java.import.gradle.projectRootFolders": [],
+  "java.configuration.runtimes": [],
+  "java.project.sourcePaths": [],
+
+  // ── Kotlin language server — disabled ───────────────────────────────────
+  "kotlin.languageServer.enabled": false,
+
+  // ── TypeScript / JS server — disable for non-JS workspace ───────────────
+  "typescript.disableAutomaticTypeAcquisition": true,
+
+  // ── File-watcher exclusions ──────────────────────────────────────────────
+  // Keep VS Code from watching large data dirs and caches.
+  // venvs/ = 25 GB across 15 venvs — was missing, caused terminal/OOM crash
+  // .cache/ = 9.7 GB — was missing from watcher (was only in analysis.exclude)
+  // quantum-portal-web/.next/ = Next.js build cache, rebuilds constantly
+  "files.watcherExclude": {
+    "**/.gradle/**": true,
+    "**/build/**": true,
+    "data/**": true,
+    "datasets/**": true,
+    "qc-banking-lab/data/**": true,
+    "qc-banking-lab/results/**": true,
+    "qc-finance-lab/**": true,
+    "qc-healthcare-lab/**": true,
+    "qc-logistics-lab/**": true,
+    "qc-security-lab/**": true,
+    "**/__pycache__/**": true,
+    "**/.cache/**": true,
+    "**/node_modules/**": true,
+    "**/*.pyc": true,
+    "**/*.db": true,
+    "api/chromadb/**": true,
+    "venvs/**": true,
+    "quantum-portal-web/.next/**": true,
+    "**/.next/**": true,
+    "**/results/**": true,
+    "projects/**": true
+  },
+
+  "search.exclude": {
+    "**/.gradle/**": true,
+    "**/build/**": true,
+    "data/**": true,
+    "datasets/**": true,
+    "**/__pycache__/**": true,
+    "**/node_modules/**": true,
+    "api/chromadb/**": true,
+    "venvs/**": true,
+    "**/.next/**": true,
+    "**/results/**": true
+  },
+
+  // ── Git — single repo only, no nested repo discovery ────────────────────
+  "git.autoRepositoryDetection": false,
+  "git.scanRepositories": ["."],
+
+  // ── Python — quantum workspace venv ─────────────────────────────────────
+  // Was wrongly set to venv-ardupilot (ArduPilot project — unrelated).
+  // Default to qml venv; switch per-file with Ctrl+Shift+P > Python: Select Interpreter
+  "python.defaultInterpreterPath": "/mnt/deepa/quantum/venvs/qml/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "python.terminal.activateEnvInCurrentTerminal": true,
+  "python.analysis.autoImportCompletions": false,
+  "python.analysis.typeCheckingMode": "off",
+
+  // ── Pylance — limit analysis scope to avoid OOM/crash on large workspace ─
+  "python.analysis.indexing": false,
+  "python.analysis.exclude": [
+    "data/**",
+    "datasets/**",
+    "qc-banking-lab/data/**",
+    "qc-banking-lab/results/**",
+    "qc-finance-lab/**",
+    "qc-healthcare-lab/**",
+    "qc-logistics-lab/**",
+    "qc-security-lab/**",
+    "api/chromadb/**",
+    "**/__pycache__/**",
+    "**/.cache/**",
+    "venvs/**",
+    "projects/**",
+    "**/results/**",
+    "quantum-portal-web/**"
+  ],
+
+  // ── Suppress unwanted extension recommendations ──────────────────────────
+  "extensions.ignoreRecommendations": true
+}

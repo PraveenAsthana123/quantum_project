@@ -1,0 +1,11 @@
+{
+  "generated": "2026-10-06",
+  "providers_analyzed": 5,
+  "cheapest_provider": "Google",
+  "cheapest_1000shots_usd": 0.0,
+  "most_expensive_1000shots_usd": 3.0,
+  "jobs_scheduled": 100,
+  "scheduling_ms": 45,
+  "shor_rsa2048_logical_qubits": 4099,
+  "anomalies_detected": 3
+}

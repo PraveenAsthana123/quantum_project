@@ -1,0 +1,155 @@
+# =============================================================================
+# Quantum Portal — OpenTelemetry Collector Configuration
+# Receives OTLP traces/metrics/logs from portal + API + workers,
+# exports to Google Cloud Observability (prod) and Prometheus/Tempo (dev)
+# =============================================================================
+
+extensions:
+  health_check:
+    endpoint: "0.0.0.0:13133"
+  pprof:
+    endpoint: "0.0.0.0:1777"
+  zpages:
+    endpoint: "0.0.0.0:55679"
+
+receivers:
+  # OTLP gRPC — primary ingestion (FastAPI, Next.js, quantum workers)
+  otlp:
+    protocols:
+      grpc:
+        endpoint: "0.0.0.0:4317"
+        max_recv_msg_size_mib: 16
+      http:
+        endpoint: "0.0.0.0:4318"
+        cors:
+          allowed_origins: ["*"]
+
+  # Prometheus scrape — pull metrics from services that don't push
+  prometheus:
+    config:
+      scrape_configs:
+        - job_name: otel-collector-self
+          scrape_interval: 30s
+          static_configs:
+            - targets: ["localhost:8889"]
+
+  # Host metrics — CPU, memory, disk, network
+  hostmetrics:
+    collection_interval: 30s
+    scrapers:
+      cpu:
+        metrics:
+          system.cpu.utilization:
+            enabled: true
+      memory:
+        metrics:
+          system.memory.utilization:
+            enabled: true
+      disk: {}
+      network: {}
+      load: {}
+
+processors:
+  # Batch: reduces export requests by aggregating spans/metrics
+  batch:
+    timeout: 1s
+    send_batch_size: 512
+    send_batch_max_size: 1024
+
+  # Memory limiter: prevents OOM when ingest spikes
+  memory_limiter:
+    check_interval: 1s
+    limit_percentage: 75
+    spike_limit_percentage: 15
+
+  # Resource attributes — add cluster/env/service labels
+  resource:
+    attributes:
+      - key: deployment.environment
+        value: "${OTEL_ENV:-dev}"
+        action: upsert
+      - key: k8s.cluster.name
+        value: "${CLUSTER_NAME:-quantum-portal}"
+        action: upsert
+
+  # Tail sampling — keep 100% of error traces, 10% of success traces
+  tail_sampling:
+    decision_wait: 10s
+    num_traces: 50000
+    expected_new_traces_per_sec: 1000
+    policies:
+      - name: errors-policy
+        type: status_code
+        status_code:
+          status_codes: [ERROR]
+      - name: slow-traces-policy
+        type: latency
+        latency:
+          threshold_ms: 500
+      - name: probabilistic-policy
+        type: probabilistic
+        probabilistic:
+          sampling_percentage: 10  # sample 10% of healthy fast traces
+
+  # Filter: drop health check spans to reduce noise
+  filter:
+    traces:
+      span:
+        - 'attributes["http.url"] == "/health"'
+        - 'attributes["http.url"] == "/api/health"'
+
+exporters:
+  # Google Cloud — prod exporter (traces → Cloud Trace, metrics → Cloud Monitoring)
+  googlecloud:
+    project: "${GCP_PROJECT}"
+    retry_on_failure:
+      enabled: true
+      initial_interval: 5s
+      max_interval: 30s
+      max_elapsed_time: 120s
+
+  # Prometheus — local metrics endpoint (scraped by Prometheus server)
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+    namespace: "quantum"
+    send_timestamps: true
+    metric_expiration: 3m
+
+  # Jaeger / Tempo compatible OTLP export (dev/staging)
+  otlp/tempo:
+    endpoint: "tempo:4317"
+    tls:
+      insecure: true
+
+  # Logging exporter — human-readable debug output
+  logging:
+    verbosity: basic
+    sampling_initial: 5
+    sampling_thereafter: 100
+
+service:
+  extensions: [health_check, pprof, zpages]
+
+  pipelines:
+
+    traces:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource, tail_sampling, filter]
+      exporters: [googlecloud, otlp/tempo, logging]
+
+    metrics:
+      receivers: [otlp, prometheus, hostmetrics]
+      processors: [memory_limiter, batch, resource]
+      exporters: [googlecloud, prometheus, logging]
+
+    logs:
+      receivers: [otlp]
+      processors: [memory_limiter, batch, resource]
+      exporters: [googlecloud, logging]
+
+  telemetry:
+    logs:
+      level: "warn"
+    metrics:
+      address: "0.0.0.0:8888"
+      level: basic

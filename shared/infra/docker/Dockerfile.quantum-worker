@@ -1,0 +1,83 @@
+# =============================================================================
+# Quantum Portal — Quantum Circuit Worker Dockerfile
+# Runs PennyLane + Qiskit + Mitiq circuit execution jobs from the job queue
+# CPU-only: quantum simulators use CPU; QPU hardware accessed via cloud SDK
+# =============================================================================
+
+FROM python:3.11-slim AS builder
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    gfortran \
+    libopenblas-dev \
+    liblapack-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Separate requirements for better layer caching
+COPY --chown=root:root <<'EOF' /tmp/quantum-requirements.txt
+# Quantum frameworks
+pennylane==0.37.0
+pennylane-lightning==0.37.0       # CPU-optimized PennyLane simulator
+qiskit==1.1.0
+qiskit-aer==0.14.2                # GPU-enabled Aer simulator (uses CPU fallback here)
+qiskit-ibm-runtime==0.24.0       # IBM QPU access
+mitiq==0.38.0                     # Error mitigation: ZNE, CDR, DDD
+
+# Classical ML
+numpy==1.26.4
+scipy==1.13.0
+scikit-learn==1.5.0
+xgboost==2.0.3
+
+# Data + serialization
+pandas==2.2.2
+pyarrow==16.1.0
+
+# Infrastructure
+redis==5.0.5                      # Job queue client
+psycopg2-binary==2.9.9            # Results DB
+google-cloud-bigquery==3.25.0    # BigQuery result logging
+google-cloud-storage==2.17.0      # GCS dataset access
+EOF
+
+RUN pip install --no-cache-dir --prefix=/install -r /tmp/quantum-requirements.txt
+
+# ---- Runtime stage ----
+FROM python:3.11-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libopenblas0 \
+    libgomp1 \
+    dumb-init \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+RUN groupadd --gid 1001 qworker && \
+    useradd --uid 1001 --gid qworker --shell /bin/bash --create-home qworker
+
+COPY --from=builder /install /usr/local
+
+# Copy shared data pipeline + worker code
+COPY --chown=qworker:qworker shared/data_pipeline/ /app/pipeline/
+COPY --chown=qworker:qworker shared/ /app/shared/
+
+# Create runtime dirs
+RUN mkdir -p /tmp/circuits /tmp/results && chown qworker:qworker /tmp/circuits /tmp/results
+
+USER qworker
+
+# OMP threads = CPU limit / 2 to avoid over-subscription on shared nodes
+ENV OMP_NUM_THREADS=4
+ENV OPENBLAS_NUM_THREADS=4
+ENV MKL_NUM_THREADS=4
+
+ENTRYPOINT ["dumb-init", "--"]
+CMD ["python", "-m", "worker.main"]
+
+# Worker-specific health check: check job queue connection
+HEALTHCHECK --interval=60s --timeout=10s --start-period=30s --retries=3 \
+  CMD python -c "import redis, os; r = redis.from_url(os.environ.get('REDIS_URL', 'redis://localhost:6379')); r.ping()" || exit 1

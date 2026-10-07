@@ -1,0 +1,11 @@
+{
+  "generated": "2026-10-06",
+  "module": "q21-many-body",
+  "demo_passed": true,
+  "model": "TFIM",
+  "spins": 4,
+  "J": 1.0,
+  "h": 0.5,
+  "ground_energy": -4.123,
+  "phase": "ferromagnetic"
+}

@@ -1,0 +1,12 @@
+{
+  "generated": "2026-10-06",
+  "module": "q01-algorithms",
+  "demo_passed": true,
+  "shor_n15": [
+    3,
+    5
+  ],
+  "grover_speedup": "sqrt(N)",
+  "vqe_h2_energy": -1.137,
+  "qaoa_ratio": 0.88
+}

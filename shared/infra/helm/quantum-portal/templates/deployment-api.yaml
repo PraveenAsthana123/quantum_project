@@ -1,0 +1,114 @@
+{{- if .Values.api.enabled }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-api
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+spec:
+  replicas: {{ .Values.api.replicas }}
+  selector:
+    matchLabels:
+      {{- include "quantum-portal.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        {{- include "quantum-portal.selectorLabels" . | nindent 8 }}
+        app.kubernetes.io/component: api
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+    spec:
+      serviceAccountName: {{ .Values.serviceAccount.name }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: api
+          image: {{ .Values.api.image }}
+          imagePullPolicy: {{ .Values.api.pullPolicy }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: ENV
+              value: {{ .Values.api.env.ENV | quote }}
+            - name: LOG_LEVEL
+              value: {{ .Values.api.env.LOG_LEVEL | quote }}
+            - name: WORKERS
+              value: {{ .Values.api.env.WORKERS | quote }}
+            - name: REDIS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-config
+                  key: redis_host
+            - name: REDIS_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-config
+                  key: redis_port
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-config
+                  key: db_host
+            - name: DB_NAME
+              value: quantum_results
+            - name: DB_USER
+              value: quantum_api
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-secrets
+                  key: db_password
+            - name: QPU_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "quantum-portal.fullname" . }}-secrets
+                  key: qpu_api_key
+          resources:
+            {{- toYaml .Values.api.resources | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.api.readinessProbe | nindent 12 }}
+          livenessProbe:
+            {{- toYaml .Values.api.livenessProbe | nindent 12 }}
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}
+      topologySpreadConstraints:
+        - maxSkew: 1
+          topologyKey: kubernetes.io/hostname
+          whenUnsatisfiable: DoNotSchedule
+          labelSelector:
+            matchLabels:
+              {{- include "quantum-portal.selectorLabels" . | nindent 14 }}
+              app.kubernetes.io/component: api
+      terminationGracePeriodSeconds: 60  # allow in-flight requests to complete
+{{- end }}
+
+---
+{{- if and .Values.api.enabled .Values.api.podDisruptionBudget.enabled }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "quantum-portal.fullname" . }}-api-pdb
+  labels:
+    {{- include "quantum-portal.labels" . | nindent 4 }}
+spec:
+  minAvailable: {{ .Values.api.podDisruptionBudget.minAvailable }}
+  selector:
+    matchLabels:
+      {{- include "quantum-portal.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: api
+{{- end }}

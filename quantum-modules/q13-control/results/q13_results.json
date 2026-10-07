@@ -1,0 +1,9 @@
+{
+  "generated": "2026-10-06",
+  "module": "q13-control",
+  "demo_passed": true,
+  "rabi_freq_MHz": 10,
+  "pi_pulse_ns": 50,
+  "gate_fidelity": 0.9998,
+  "awg_rate_GSps": 2.4
+}
