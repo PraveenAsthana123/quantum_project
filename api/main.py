@@ -3319,11 +3319,22 @@ async def security_cbom_scan():
         if _CBOM_CACHE.exists():
             with open(_CBOM_CACHE) as f:
                 data = json.load(f)
+            # Normalise: return flat structure so frontend can access data.assets directly
+            assets = data.get("assets", [])
+            # Ensure every asset has a top-level `priority` field (alias migration_priority)
+            for a in assets:
+                if "priority" not in a and "migration_priority" in a:
+                    a["priority"] = a["migration_priority"]
+                if "key_size" not in a:
+                    a["key_size"] = 0
             return {
                 "cached": True,
                 "source": str(_CBOM_CACHE),
                 "timestamp": _now(),
-                "cbom": data,
+                "total": data.get("total_assets", len(assets)),
+                "quantum_vulnerable": data.get("quantum_vulnerable", 0),
+                "quantum_safe": data.get("quantum_safe", 0),
+                "assets": assets,
             }
 
         # Fallback: minimal pattern scan of the api/ directory
@@ -3355,29 +3366,116 @@ async def security_cbom_scan():
                         "path": str(py_file.relative_to(api_dir)),
                         "asset_type": "source_code",
                         "algorithm": algo_name,
+                        "key_size": 0,
                         "quantum_safe": algo_name in ("AES", "SHA", "ML-KEM", "ML-DSA", "Falcon"),
                         "harvest_now_risk": algo_name in ("RSA", "ECDSA"),
-                        "migration_priority": (
+                        "priority": (
                             "P1" if algo_name in ("RSA", "ECDSA") else
                             "P2" if algo_name in ("SHA",) else "P3"
                         ),
                     })
 
-        cbom_inline = {
-            "cbom_version": "1.4-inline",
-            "generated": _now(),
-            "scan_root": str(api_dir),
-            "total_assets": len(found_assets),
-            "quantum_vulnerable": sum(1 for a in found_assets if not a["quantum_safe"]),
-            "quantum_safe": sum(1 for a in found_assets if a["quantum_safe"]),
-            "harvest_now_risk": sum(1 for a in found_assets if a["harvest_now_risk"]),
-            "assets": found_assets,
-        }
         return {
             "cached": False,
             "source": "inline_api_scan",
             "timestamp": _now(),
-            "cbom": cbom_inline,
+            "total": len(found_assets),
+            "quantum_vulnerable": sum(1 for a in found_assets if not a["quantum_safe"]),
+            "quantum_safe": sum(1 for a in found_assets if a["quantum_safe"]),
+            "assets": found_assets,
+        }
+    except Exception as exc:
+        return {"error": str(exc), "status": "error"}
+
+
+@app.get("/security/sbom/scan", tags=["security"])
+async def security_sbom_scan():
+    """
+    Return a Software Bill of Materials (SBOM) in a CycloneDX-inspired flat format.
+    Parses api/requirements.txt (Python deps) and quantum-portal-web/package.json
+    (JS/TS deps) and annotates crypto-relevant packages.
+    """
+    try:
+        import re as _re
+
+        repo_root = Path(__file__).parent.parent
+        req_file   = repo_root / "api" / "requirements.txt"
+        pkg_file   = repo_root / "quantum-portal-web" / "package.json"
+
+        # Crypto-relevant packages and their dependency notes
+        CRYPTO_KNOWN: dict = {
+            "cryptography":  "RSA/ECDSA/AES/HMAC — pyca/cryptography",
+            "openssl":       "OpenSSL C library — TLS/certs",
+            "paramiko":      "SSH transport — RSA/ECDSA host keys",
+            "python-jose":   "JWT RS256/ES256 signing — RSA/ECDSA",
+            "passlib":       "bcrypt/argon2 KDF",
+            "httpx":         "TLS via OpenSSL (client-side HTTPS)",
+            "pyoqs":         "liboqs post-quantum (ML-KEM, ML-DSA, Falcon)",
+            "liboqs":        "Open Quantum Safe C library",
+        }
+
+        def risk_level(name: str) -> str:
+            n = name.lower()
+            if n in ("cryptography", "openssl", "python-jose"):
+                return "high"
+            if n in ("paramiko", "httpx", "pyoqs", "liboqs"):
+                return "medium"
+            return "low"
+
+        components: list = []
+
+        # --- Python packages from requirements.txt ---
+        if req_file.exists():
+            for line in req_file.read_text().splitlines():
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                m = _re.match(r"^([A-Za-z0-9_.\-]+)([>=<!\^~]+)([\d.]+\S*)?", line)
+                if not m:
+                    continue
+                name    = m.group(1).lower()
+                version = m.group(3) or "unknown"
+                components.append({
+                    "name":          name,
+                    "version":       version,
+                    "language":      "Python",
+                    "license":       "see PyPI",
+                    "purl":          f"pkg:pypi/{name}@{version}",
+                    "type":          "library",
+                    "crypto_deps":   CRYPTO_KNOWN.get(name, "none"),
+                    "risk":          risk_level(name),
+                    "has_known_cve": name in ("cryptography", "openssl"),
+                })
+
+        # --- JS/TS packages from package.json ---
+        if pkg_file.exists():
+            import json as _json
+            pkg_data = _json.loads(pkg_file.read_text())
+            all_js_deps = {**pkg_data.get("dependencies", {}), **pkg_data.get("devDependencies", {})}
+            for pkg_name, ver_spec in all_js_deps.items():
+                version = ver_spec.lstrip("^~>=<")
+                name    = pkg_name.lower()
+                crypto_dep = "none"
+                if "next" in name or "react" in name:
+                    crypto_dep = "none"
+                if name == "next":
+                    crypto_dep = "TLS (node:crypto / OpenSSL via Node.js runtime)"
+                components.append({
+                    "name":          pkg_name,
+                    "version":       version,
+                    "language":      "TypeScript/JavaScript",
+                    "license":       "see npm",
+                    "purl":          f"pkg:npm/{pkg_name}@{version}",
+                    "type":          "library",
+                    "crypto_deps":   crypto_dep,
+                    "risk":          "low",
+                    "has_known_cve": False,
+                })
+
+        return {
+            "generated":        _now(),
+            "total_components": len(components),
+            "components":       components,
         }
     except Exception as exc:
         return {"error": str(exc), "status": "error"}
